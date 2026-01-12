@@ -1,0 +1,60 @@
+/* 全局背景與文字 */
+body {
+  background: linear-gradient(135deg, #0d1b2a, #1b263b); /* 深藍到黑藍漸層 */
+  color: #e0e0e0;
+}
+
+/* 側邊欄覆蓋顏色 */
+.sidebar {
+  background: #162447;   /* 深藍色 */
+  box-shadow: 3px 0 15px rgba(0,0,0,0.3);
+  border-right: 1px solid #1f4068;
+}
+
+.sidebar h2 {
+  color: #4fc3f7;
+}
+
+.sidebar a {
+  color: #cfd8dc;
+}
+
+.sidebar a:hover {
+  background: #4fc3f7;
+  color: #0d1b2a;
+}
+
+.sidebar a.active,
+.sidebar a:focus {
+  background: #ff9800;
+  color: #0d1b2a;
+}
+
+/* 主內容背景透明卡片風 */
+.content {
+  background: transparent;
+  margin-left: 280px;
+  padding: 40px;
+}
+
+.mechanic {
+  border-left: 4px solid #f44336;
+  padding-left: 16px;
+  margin: 20px 0;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: rgba(20, 30, 50, 0.85); /* 半透明深藍 */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.mechanic.red { border-color: #ff4c4c; }
+.mechanic.blue { border-color: #2196f3; }
+.mechanic.yellow { border-color: #ffeb3b; color: #111; background: rgba(255, 235, 128, 0.2); }
+
+img, video {
+  display: block;
+  margin: 10px 0;
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
