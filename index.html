@@ -1,51 +1,88 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8" />
-  <title>我的 GitHub Pages 網站</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <title>Lost Ark 副本機制攻略</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <aside class="sidebar">
-      <h2>Contents</h2>
-      <ul id="toc">
-        <li><a href="#intro">介紹</a></li>
-        <li><a href="#features">功能</a></li>
-        <li><a href="#usage">使用方式</a></li>
-        <li><a href="#summary">總結</a></li>
-      </ul>
-    </aside>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>副本機制</h2>
+            <ul id="toc">
+                <li><a href="#overview">總覽</a></li>
+                <li><a href="#gate1">Gate 1</a></li>
+                <li><a href="#gate2">Gate 2</a></li>
+                <li><a href="#wipe">常見滅團點</a></li>
+            </ul>
+        </aside>
 
-    <main class="content">
-      <section id="intro">
-        <h1>介紹</h1>
-        <p>這是一個可直接部署到 GitHub Pages 的靜態網站。</p>
-        <p>左側 Contents 會隨著你捲動自動高亮。</p>
-      </section>
+        <main class="content">
+            <section id="overview">
+                <h1>副本總覽</h1>
+                <ul class="info">
+                    <li>👥 人數：8 人</li>
+                    <li>❗ 重點：站位、集合、顏色判斷</li>
+                    <li>⏱ 需記憶機制時間點</li>
+                </ul>
+            </section>
 
-      <section id="features">
-        <h1>功能</h1>
-        <ul>
-          <li>📌 固定目錄（Contents）</li>
-          <li>📍 Scroll Spy（追蹤目前章節）</li>
-          <li>⚡ 純 HTML / CSS / JS</li>
-        </ul>
-      </section>
+            <section id="gate1">
+                <h1>Gate 1｜主要機制</h1>
 
-      <section id="usage">
-        <h1>使用方式</h1>
-        <p>把這個專案上傳到 GitHub，開啟 Pages 即可。</p>
-        <p>非常適合文件、說明頁、作品集。</p>
-      </section>
+                <div class="mechanic">
+                    <h3>🔴 紅圈集合</h3>
+                    <p>王血量約 80%，場地出現紅色圓圈。</p>
+                    <ul>
+                        <li>所有人進圈集合</li>
+                        <li>少於 6 人 → 全滅</li>
+                    </ul>
+                </div>
 
-      <section id="summary">
-        <h1>總結</h1>
-        <p>這是 ASPX 展示用途的最佳靜態替代方案。</p>
-      </section>
-    </main>
-  </div>
+                <div class="mechanic">
+                    <h3>🔵 藍標分散</h3>
+                    <p>隨機點名 4 人出現藍標。</p>
+                    <ul>
+                        <li>彼此距離需拉開</li>
+                        <li>重疊會造成連鎖爆炸</li>
+                    </ul>
+                </div>
+            </section>
 
-  <script src="script.js"></script>
+            <section id="gate2">
+                <h1>Gate 2｜主要機制</h1>
+
+                <div class="mechanic">
+                    <h3>🧭 方位安全區</h3>
+                    <p>王跳至中央，地板顯示方向提示。</p>
+                    <ul>
+                        <li>依箭頭方向移動</li>
+                        <li>站錯方向直接死亡</li>
+                    </ul>
+                </div>
+
+                <div class="mechanic">
+                    <h3>💣 計時炸彈</h3>
+                    <p>玩家身上出現倒數 debuff。</p>
+                    <ul>
+                        <li>倒數結束前遠離隊友</li>
+                        <li>未拉開 → 大範圍秒殺</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="wipe">
+                <h1>常見滅團原因</h1>
+                <ul class="wipe">
+                    <li>❌ 紅圈沒全到</li>
+                    <li>❌ 分散機制站太近</li>
+                    <li>❌ 沒看方向提示</li>
+                    <li>❌ 計時炸彈沒拉開</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
