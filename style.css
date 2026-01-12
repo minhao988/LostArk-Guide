@@ -94,21 +94,6 @@ img, video {
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
-/* ===== 全站連結顏色重置（藍黑頁必備） ===== */
-a:link,
-a:visited {
-  color: #4fc3f7;        /* 淺藍色，藍黑背景清楚 */
-  text-decoration: none;
-}
 
-a:hover {
-  color: #ffffff;
-  text-decoration: underline;
-}
-
-a:active,
-a:focus {
-  color: #ffcc80;
-}
 
 
