@@ -1,17 +1,27 @@
 const sections = document.querySelectorAll("section");
 const links = document.querySelectorAll(".sidebar a");
 
-let isScrollingByClick = false; // 判斷是否是點擊造成的滾動
+let isScrollingByClick = false;
 
-// 初始化 active
-if (links.length > 0) links[0].classList.add("active");
+// 初始化：第一個 section active
+window.addEventListener("load", () => {
+  if (sections.length === 0) return;
 
-// 滾動自動高亮
+  const firstId = sections[0].id;
+  links.forEach(link => {
+    link.classList.toggle(
+      "active",
+      link.getAttribute("href") === "#" + firstId
+    );
+  });
+});
+
+// scroll spy
 window.addEventListener("scroll", () => {
-  if (isScrollingByClick) return; // 點擊滾動時暫時忽略 scroll 更新
+  if (isScrollingByClick) return;
 
-  let scrollPos = window.scrollY + 120;
-  let currentId = sections[0].id;
+  const scrollPos = window.scrollY + 120;
+  let currentId = sections[0]?.id;
 
   sections.forEach(sec => {
     if (scrollPos >= sec.offsetTop) {
@@ -20,34 +30,39 @@ window.addEventListener("scroll", () => {
   });
 
   links.forEach(link => {
-    link.classList.remove("active");
-    if (link.getAttribute("href") === "#" + currentId) {
-      link.classList.add("active");
-    }
+    link.classList.toggle(
+      "active",
+      link.getAttribute("href") === "#" + currentId
+    );
   });
 });
 
-// 點擊平滑滾動
+// click handling
 links.forEach(link => {
-  link.addEventListener("click", (e) => {
+  link.addEventListener("click", e => {
+    const href = link.getAttribute("href");
+
+    // ✅ 不是頁內錨點 → 讓瀏覽器正常 redirect
+    if (!href.startsWith("#")) {
+      return;
+    }
+
+    // ✅ 是頁內錨點才攔截
     e.preventDefault();
 
-    const target = document.querySelector(link.getAttribute("href"));
+    const target = document.querySelector(href);
     if (!target) return;
 
-    // 清除其他 active
+    isScrollingByClick = true;
+
     links.forEach(l => l.classList.remove("active"));
     link.classList.add("active");
 
-    // 暫停 scroll 判斷
-    isScrollingByClick = true;
-
     window.scrollTo({
       top: target.offsetTop - 100,
-      behavior: 'smooth'
+      behavior: "smooth"
     });
 
-    // 大約 500ms 後恢復 scroll 判斷
     setTimeout(() => {
       isScrollingByClick = false;
     }, 500);
