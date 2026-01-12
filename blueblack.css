@@ -38,7 +38,7 @@ body {
 }
 
 .sidebar ul li a {
-  color: #cfd8dc !important;          /* 亮灰色，看得清楚 */
+  color: #cfd8dc;          /* 亮灰色，看得清楚 */
   text-decoration: none;
   display: block;
   padding: 8px 12px;
@@ -95,3 +95,39 @@ img, video {
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
+/* ===== 全站連結顏色重置（藍黑頁必備） ===== */
+a:link,
+a:visited {
+  color: #4fc3f7;        /* 淺藍色，藍黑背景清楚 */
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+a:active,
+a:focus {
+  color: #ffcc80;
+}
+/* sidebar 連結（優先級更高） */
+.sidebar ul li a {
+  color: #cfd8dc;
+  padding: 8px 12px;
+  border-radius: 6px;
+  display: block;
+}
+
+.sidebar ul li a:hover {
+  background: #4fc3f7;
+  color: #0d1b2a;
+}
+
+.sidebar ul li a.active,
+.sidebar ul li a:focus {
+  background: #ff9800;
+  color: #0d1b2a;
+  font-weight: bold;
+}
+
