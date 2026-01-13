@@ -16,9 +16,9 @@ const allRaids = {
                     { name: '紫圈擴散 (Purple Wave)', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif' }
                 ],
                 mechanics: [
-                    { hp: '900', title: '抓人', desc: 'Boss 產生球追蹤玩家並抓起來 隨後出現反制。', details: '失敗反制, 造成被抓的玩家們死亡。', type: 'mech', video:'https://www.youtube.com/embed/DZ6vfIyhbIA' },
+                    { hp: '900', title: '抓人', desc: 'Boss 產生球追蹤玩家並抓起來 隨後出現反制。', details: '失敗反制, 造成被抓的玩家們死亡。', type: 'mech' },
                     { hp: 'x700', title: '團隊癱瘓', desc: '戰場變成1打1的局面 所有玩家要在1分鐘内把紫條癱瘓打掉。', details: '反制能提升癱瘓值。', type: 'mech' },
-                    { hp: 'x500', title: '接劍', desc: '王突然消失 真和假幻象同時出現在1/5/7/11位置 需要在真身位置接劍', details: '失敗團滅，接劍后要躲避後續鈎鎖', type: 'warning' }
+                    { hp: 'x500', title: '接劍', desc: '王突然消失 真和假幻象同時出現在1/5/7/11位置 需要在真身位置接劍', details: '失敗團滅，接劍后要躲避後續鈎鎖', type: 'mech' }
                 ]
             },
             2: {
@@ -148,21 +148,14 @@ function switchGate(gateId) {
     if (activeTab) activeTab.classList.add('active');
 
     let html = `
-      <div class="rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative group">
-    <iframe class="w-full h-full"
-        src="https://www.youtube.com/embed/6aRbQi-Odyc?si=YHIQ8ct7HqUcntkE"
-        title="YouTube video"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-    </iframe>
-
-    <div id="overlay" class="absolute inset-0 flex items-center justify-center bg-slate-900/80 pointer-events-none">
-        <div class="text-center">
-            <i class="fab fa-youtube text-6xl text-red-600 mb-4"></i>
-            <p class="text-slate-200 font-bold">此處載入 ${gate.name} 完整攻略影片</p>
+        <div class="rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative group">
+            <div class="absolute inset-0 flex items-center justify-center bg-slate-900/80">
+                <div class="text-center">
+                    <i class="fab fa-youtube text-6xl text-red-600 mb-4"></i>
+                    <p class="text-slate-200 font-bold">此處載入 ${gate.name} 完整攻略影片</p>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
         <section>
             <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
@@ -217,18 +210,8 @@ function switchGate(gateId) {
             </div>
         </section>
     `;
-
     document.getElementById('gate-content').innerHTML = html;
 }
-const overlay = document.getElementById('overlay');
-overlay.addEventListener('click', () => {
-    // 移除遮罩
-    overlay.remove();
-
-    // 可選：點擊後自動播放影片
-    const iframe = overlay.previousElementSibling;
-    iframe.src = iframe.src.replace("autoplay=0", "autoplay=1");
-});
 
 document.addEventListener('DOMContentLoaded', () => {
     initSidebar();
