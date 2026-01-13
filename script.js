@@ -199,7 +199,7 @@ function switchGate(gateId) {
             </div>
         `).join('')}
     </div>
-</section>
+
 
         <section>
             <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
