@@ -103,13 +103,23 @@ const raidData = {
             document.getElementById('gate-content').innerHTML = html;
         }
 
-        // 側邊欄開關邏輯
-        const menuBtn = document.getElementById('menu-toggle');
-        const closeBtn = document.getElementById('menu-close');
-        const sidebar = document.getElementById('sidebar');
+     document.addEventListener('DOMContentLoaded', () => {
+    const menuBtn = document.getElementById('menu-toggle');
+    const closeBtn = document.getElementById('menu-close');
+    const sidebar = document.getElementById('sidebar');
 
-        menuBtn.addEventListener('click', () => sidebar.classList.remove('-translate-x-full'));
-        closeBtn.addEventListener('click', () => sidebar.classList.add('-translate-x-full'));
+    if (menuBtn) {
+        menuBtn.addEventListener('click', () => {
+            sidebar.classList.remove('-translate-x-full');
+        });
+    }
 
-        // 初始化
-        window.onload = () => switchGate(1);
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+        });
+    }
+
+    // 初始化 gate 內容
+    switchGate(1);
+});
