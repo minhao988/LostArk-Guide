@@ -148,20 +148,21 @@ function switchGate(gateId) {
     if (activeTab) activeTab.classList.add('active');
 
     let html = `
-        <div class="rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative group">
-         <iframe class="w-full h-full"
+      <div class="rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative group">
+    <iframe class="w-full h-full"
         src="https://www.youtube.com/embed/6aRbQi-Odyc?si=YHIQ8ct7HqUcntkE"
         title="YouTube video"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen>
     </iframe>
-            <div class="absolute inset-0 flex items-center justify-center bg-slate-900/80">
-                <div class="text-center">
-                    <i class="fab fa-youtube text-6xl text-red-600 mb-4"></i>
-                    <p class="text-slate-200 font-bold">此處載入 ${gate.name} 完整攻略影片</p>
-                </div>
-            </div>
+
+    <div class="absolute inset-0 flex items-center justify-center bg-slate-900/80 pointer-events-none">
+        <div class="text-center">
+            <i class="fab fa-youtube text-6xl text-red-600 mb-4"></i>
+            <p class="text-slate-200 font-bold">此處載入 ${gate.name} 完整攻略影片</p>
         </div>
+    </div>
+</div>
 
         <section>
             <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
