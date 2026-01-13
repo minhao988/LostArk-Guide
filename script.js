@@ -1,14 +1,14 @@
 
 const allRaids = {
     final_day: {
-        title: '卡澤羅斯終章：終結之日',
+        title: '卡澤羅斯終幕',
         short: '終結之日',
         category: '卡澤羅斯討伐戰 (Kazeros)',
         desc: '與深淵大惡魔卡澤羅斯的最後決戰。這場戰鬥要求極高的輸出壓力和極致的機制執行力。',
         theme: 'raid-gradient-final',
         gates: {
             1: {
-                name: '深淵之主：阿勃萊修 (Gate 1)',
+                name: '深淵之主：卡傑羅斯 (Gate 1)',
                 patterns: [
                     { name: '暗影突襲 (Shadow Strike)', desc: 'Boss 消失並鎖定一名玩家，隨後從其背後出現進行重擊。', tips: '被點名者頭上有紅眼標記，閃避動作需在 Boss 顯形的一瞬間施放。', gif: 'shadow_strike.gif' },
                     { name: '深淵反制 (Counter Rush)', desc: 'Boss 全身閃爍藍光，向前方連續衝刺三次。', tips: '第一次衝刺後即可準備反制。若錯過第一次，可在第二或第三次閃紅光時反擊。', gif: 'counter_rush.gif', isCounter: true },
@@ -16,8 +16,9 @@ const allRaids = {
                     { name: '紫圈擴散 (Purple Wave)', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif' }
                 ],
                 mechanics: [
-                    { hp: 'x280', title: '深淵凝視', desc: 'Boss 瞬移到中心，放出紅光。', details: '必須「背對」Boss，否則會被石化。', type: 'mech' },
-                    { hp: 'x200', title: '雙界隔離', desc: '戰場分裂成影界與實體。', details: '奇數隊員影界打癱，偶數隊員實體引球。', type: 'wipe' }
+                    { hp: '900', title: '抓人', desc: 'Boss 產生球追蹤玩家並抓起來 隨後出現反制。', details: '失敗反制, 造成被抓的玩家們死亡。', type: 'mech' },
+                    { hp: 'x700', title: '團隊癱瘓', desc: '戰場變成1打1的局面 所有玩家要在1分鐘内把紫條癱瘓打掉。', details: '反制能提升癱瘓值。', type: 'mech' },
+                    { hp: 'x500', title: '接劍', desc: '王突然消失 真和假幻象同時出現在1/5/7/11位置 需要在真身位置接劍', details: '失敗團滅，接劍后要躲避後續鈎鎖', type: 'mech' }
                 ]
             },
             2: {
