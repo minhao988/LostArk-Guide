@@ -149,6 +149,12 @@ function switchGate(gateId) {
 
     let html = `
         <div class="rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative group">
+         <iframe class="w-full h-full"
+        src="https://www.youtube.com/embed/6aRbQi-Odyc?si=YHIQ8ct7HqUcntkE"
+        title="YouTube video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+    </iframe>
             <div class="absolute inset-0 flex items-center justify-center bg-slate-900/80">
                 <div class="text-center">
                     <i class="fab fa-youtube text-6xl text-red-600 mb-4"></i>
