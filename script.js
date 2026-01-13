@@ -1,79 +1,78 @@
 // 攻略數據中心
- const allRaids = {
-            final_day: {
-                title: '卡澤羅斯終章：終結之日',
-                short: '終結之日',
-                category: '卡澤羅斯討伐戰 (Kazeros)',
-                desc: '與深淵大惡魔卡澤羅斯的最後決戰。這場戰鬥要求極高的輸出壓力和極致的機制執行力。',
-                theme: 'raid-gradient-final',
-                gates: {
-                    1: {
-                        name: '深淵之主：阿勃萊修 (Gate 1)',
-                        patterns: [
-                            { name: '暗影突襲 (Shadow Strike)', desc: 'Boss 消失並鎖定一名玩家，隨後從其背後出現進行重擊。', tips: '被點名者頭上有紅眼標記，閃避動作需在 Boss 顯形的一瞬間施放。', gif: 'shadow_strike.gif' },
-                            { name: '深淵反制 (Counter Rush)', desc: 'Boss 全身閃爍藍光，向前方連續衝刺三次。', tips: '第一次衝刺後即可準備反制。若錯過第一次，可在第二或第三次閃紅光時反擊。', gif: 'counter_rush.gif', isCounter: true },
-                            { name: '引力坍縮 (Gravity Well)', desc: 'Boss 召喚巨大的黑暗黑洞，吸引所有玩家向中心移動並引爆。', tips: '往外圍跑，或使用具備「強霸體 (Super Armor)」的技能免疫吸引效果。', gif: 'gravity_well.gif' },
-                            { name: '紫圈擴散 (Purple Wave)', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif' }
-                        ],
-                        mechanics: [
-                            { hp: 'x280', title: '深淵凝視', desc: 'Boss 瞬移到中心，放出紅光。', details: '必須「背對」Boss，否則會被石化。', type: 'mech' },
-                            { hp: 'x200', title: '雙界隔離', desc: '戰場分裂成影界與實體。', details: '奇數隊員影界打癱，偶數隊員實體引球。', type: 'wipe' }
-                        ]
-                    },
-                    2: {
-                        name: '復活的魔皇：卡澤羅斯 (Gate 2)',
-                        patterns: [
-                            { name: '魔皇紅黑波', desc: 'Boss 手中出現紅/黑兩種能量旋渦。', tips: '紅內安全，黑外安全。觀察 Boss 腳下旋轉的光環顏色。', gif: 'red_black.gif' },
-                            { name: '魔箭雨 (Demon Rain)', desc: 'Boss 向天空射箭，隨後場地落下大量帶有「眩暈」效果的箭矢。', tips: '地面的紅圈會預告落點，箭雨有兩波，第一波結束後不要立刻回位。', gif: 'demon_rain.gif' },
-                            { name: '抓人連打 (Grab & Slam)', desc: 'Boss 伸出手向前抓取。若抓到玩家，會進行連續重摔。', tips: '看到 Boss 手向後蓄力並發出黑煙時，立刻向側邊位移。被抓者需要隊友給予癱瘓。', gif: 'grab_slam.gif' }
-                        ],
-                        mechanics: [
-                            { hp: 'x350', title: '反制風暴', desc: '全體 8 人必須在 6 點鐘位置站成一排進行連續 5 次完美反制。', type: 'wipe' }
-                        ]
-                    }
-                }
+const allRaids = {
+    final_day: {
+        title: '卡澤羅斯終章：終結之日',
+        short: '終結之日',
+        category: '卡澤羅斯討伐戰 (Kazeros)',
+        desc: '與深淵大惡魔卡澤羅斯的最後決戰。這場戰鬥要求極高的輸出壓力和極致的機制執行力。',
+        theme: 'raid-gradient-final',
+        gates: {
+            1: {
+                name: '深淵之主：阿勃萊修 (Gate 1)',
+                patterns: [
+                    { name: '暗影突襲 (Shadow Strike)', desc: 'Boss 消失並鎖定一名玩家，隨後從其背後出現進行重擊。', tips: '被點名者頭上有紅眼標記，閃避動作需在 Boss 顯形的一瞬間施放。', gif: 'shadow_strike.gif' },
+                    { name: '深淵反制 (Counter Rush)', desc: 'Boss 全身閃爍藍光，向前方連續衝刺三次。', tips: '第一次衝刺後即可準備反制。若錯過第一次，可在第二或第三次閃紅光時反擊。', gif: 'counter_rush.gif', isCounter: true },
+                    { name: '引力坍縮 (Gravity Well)', desc: 'Boss 召喚巨大的黑暗黑洞，吸引所有玩家向中心移動並引爆。', tips: '往外圍跑，或使用具備「強霸體 (Super Armor)」的技能免疫吸引效果。', gif: 'gravity_well.gif' },
+                    { name: '紫圈擴散 (Purple Wave)', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif' }
+                ],
+                mechanics: [
+                    { hp: 'x280', title: '深淵凝視', desc: 'Boss 瞬移到中心，放出紅光。', details: '必須「背對」Boss，否則會被石化。', type: 'mech' },
+                    { hp: 'x200', title: '雙界隔離', desc: '戰場分裂成影界與實體。', details: '奇數隊員影界打癱，偶數隊員實體引球。', type: 'wipe' }
+                ]
             },
-            act4: {
-                title: '第四幕：天災之始',
-                short: '第四幕',
-                category: '卡澤羅斯討伐戰 (Kazeros)',
-                desc: '混沌裂縫被強行撕開，這是一個考驗團隊協作移動與屬性相克的副本。',
-                theme: 'raid-gradient-act4',
-                gates: {
-                    1: {
-                        name: '裂縫守護者 (Gate 1)',
-                        patterns: [
-                            { name: '混沌踐踏', desc: '全場地板變紅，隨機出現三處安全區。', tips: '注意 Boss 踩地第三下是全場擊飛，必須在安全區內。', gif: 'stomp.gif' }
-                        ],
-                        mechanics: [
-                            { hp: 'x120', title: '元素共鳴', desc: '根據 Boss 翅膀顏色選擇對應門進入。', type: 'mech' }
-                        ]
-                    }
-                }
-            },
-            serca: {
-                title: '深淵之主：賽爾卡',
-                short: '賽爾卡',
-                category: '深淵副本系列 (Abyss)',
-                desc: '沉睡在寂靜海洋底部的巨獸。氧氣條管理與水流推進是本關的核心。',
-                theme: 'raid-gradient-serca',
-                gates: {
-                    1: {
-                        name: '海潮祭壇 (Gate 1)',
-                        patterns: [
-                            { name: '急流噴射', desc: 'Boss 向隨機玩家噴射高速水柱，帶有強制擊退。', tips: '若背靠地圖邊緣會被推入海中秒殺。', gif: 'water_jet.gif' }
-                        ],
-                        mechanics: [
-                            { hp: '全程', title: '氧氣瓶系統', desc: '氧氣歸零會持續扣血，尋找泡泡點回氧。', type: 'warning' }
-                        ]
-                    }
-                }
+            2: {
+                name: '復活的魔皇：卡澤羅斯 (Gate 2)',
+                patterns: [
+                    { name: '魔皇紅黑波', desc: 'Boss 手中出現紅/黑兩種能量旋渦。', tips: '紅內安全，黑外安全。觀察 Boss 腳下旋轉的光環顏色。', gif: 'red_black.gif' },
+                    { name: '魔箭雨 (Demon Rain)', desc: 'Boss 向天空射箭，隨後場地落下大量帶有「眩暈」效果的箭矢。', tips: '地面的紅圈會預告落點，箭雨有兩波，第一波結束後不要立刻回位。', gif: 'demon_rain.gif' },
+                    { name: '抓人連打 (Grab & Slam)', desc: 'Boss 伸出手向前抓取。若抓到玩家，會進行連續重摔。', tips: '看到 Boss 手向後蓄力並發出黑煙時，立刻向側邊位移。被抓者需要隊友給予癱瘓。', gif: 'grab_slam.gif' }
+                ],
+                mechanics: [
+                    { hp: 'x350', title: '反制風暴', desc: '全體 8 人必須在 6 點鐘位置站成一排進行連續 5 次完美反制。', type: 'wipe' }
+                ]
             }
-        };
+        }
+    },
+    act4: {
+        title: '第四幕：天災之始',
+        short: '第四幕',
+        category: '卡澤羅斯討伐戰 (Kazeros)',
+        desc: '混沌裂縫被強行撕開，這是一個考驗團隊協作移動與屬性相克的副本。',
+        theme: 'raid-gradient-act4',
+        gates: {
+            1: {
+                name: '裂縫守護者 (Gate 1)',
+                patterns: [
+                    { name: '混沌踐踏', desc: '全場地板變紅，隨機出現三處安全區。', tips: '注意 Boss 踩地第三下是全場擊飛，必須在安全區內。', gif: 'stomp.gif' }
+                ],
+                mechanics: [
+                    { hp: 'x120', title: '元素共鳴', desc: '根據 Boss 翅膀顏色選擇對應門進入。', type: 'mech' }
+                ]
+            }
+        }
+    },
+    serca: {
+        title: '深淵之主：賽爾卡',
+        short: '賽爾卡',
+        category: '深淵副本系列 (Abyss)',
+        desc: '沉睡在寂靜海洋底部的巨獸。氧氣條管理與水流推進是本關的核心。',
+        theme: 'raid-gradient-serca',
+        gates: {
+            1: {
+                name: '海潮祭壇 (Gate 1)',
+                patterns: [
+                    { name: '急流噴射', desc: 'Boss 向隨機玩家噴射高速水柱，帶有強制擊退。', tips: '若背靠地圖邊緣會被推入海中秒殺。', gif: 'water_jet.gif' }
+                ],
+                mechanics: [
+                    { hp: '全程', title: '氧氣瓶系統', desc: '氧氣歸零會持續扣血，尋找泡泡點回氧。', type: 'warning' }
+                ]
+            }
+        }
+    }
+};
 
 let currentRaidId = 'final_day';
 
-// 小圖示對應
 function getIcon(type) {
     const icons = {
         wipe: '<i class="fas fa-skull-crossbones text-red-500"></i>',
@@ -85,7 +84,6 @@ function getIcon(type) {
     return icons[type] || '<i class="fas fa-info-circle text-gray-400"></i>';
 }
 
-// 初始化側邊欄
 function initSidebar() {
     const container = document.getElementById('sidebar-content');
     if (!container) return;
@@ -109,7 +107,6 @@ function initSidebar() {
     });
 }
 
-// 選擇副本
 function selectRaid(raidId) {
     if (!allRaids[raidId]) return;
     currentRaidId = raidId;
@@ -140,7 +137,6 @@ function selectRaid(raidId) {
     if (window.innerWidth < 768) document.getElementById('sidebar').classList.add('-translate-x-full');
 }
 
-// 切換關卡
 function switchGate(gateId) {
     const raid = allRaids[currentRaidId];
     const gate = raid.gates[gateId];
@@ -151,7 +147,6 @@ function switchGate(gateId) {
     if (activeTab) activeTab.classList.add('active');
 
     let html = `
-        <!-- 影片區 -->
         <div class="rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative group">
             <div class="absolute inset-0 flex items-center justify-center bg-slate-900/80">
                 <div class="text-center">
@@ -161,7 +156,6 @@ function switchGate(gateId) {
             </div>
         </div>
 
-        <!-- 核心機制 -->
         <section>
             <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                 <span class="w-1.5 h-8 bg-yellow-500 rounded-full"></span>
@@ -188,7 +182,6 @@ function switchGate(gateId) {
             </div>
         </section>
 
-        <!-- 招式解析 -->
         <section>
             <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                 <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span>
@@ -219,7 +212,6 @@ function switchGate(gateId) {
     document.getElementById('gate-content').innerHTML = html;
 }
 
-// 初始化
 document.addEventListener('DOMContentLoaded', () => {
     initSidebar();
     selectRaid('final_day');
