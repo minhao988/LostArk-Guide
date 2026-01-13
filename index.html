@@ -3,81 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>失落的方舟攻略站 - 多副本整合版</title>
+    <title>失落的方舟全副本攻略站</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body id="main-body" class="raid-gradient-final min-h-screen transition-all duration-500">
 
-    <!-- 手機版 Header -->
+    <!-- Mobile Header -->
     <div class="md:hidden p-4 bg-black/50 flex items-center justify-between border-b border-white/10">
-        <span id="mobile-title" class="font-bold text-lg">終結之日</span>
+        <span id="mobile-title" class="font-bold text-lg">攻略首頁</span>
         <button id="menu-toggle" class="text-white">
             <i class="fas fa-bars text-xl"></i>
         </button>
     </div>
 
     <div class="flex h-screen overflow-hidden">
-        <!-- 側邊欄 -->
-        <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-black/90 backdrop-blur-md transform -translate-x-full transition-transform duration-300 border-r border-white/10 md:relative md:translate-x-0">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-72 bg-black/90 backdrop-blur-md transform -translate-x-full transition-transform duration-300 border-r border-white/10 md:relative md:translate-x-0">
             <div class="p-4 flex items-center justify-between border-b border-white/10">
                 <h1 class="text-xl font-bold flex items-center gap-2 text-yellow-500">
-                    <i class="fas fa-book-open"></i> 方舟攻略站
+                    <i class="fas fa-crown"></i>
+                    方舟攻略百科
                 </h1>
                 <button id="menu-close" class="md:hidden text-gray-400">
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
-
+            
             <div class="py-4 space-y-4 overflow-y-auto custom-scrollbar h-[calc(100vh-70px)]">
-                <!-- 卡澤羅斯系列 -->
                 <div>
-                    <div class="px-6 py-2 text-xs font-bold text-slate-500 uppercase tracking-wider">卡澤羅斯系列</div>
+                    <div class="px-6 py-2 text-xs font-bold text-slate-500 uppercase tracking-wider">卡澤羅斯討伐戰 (Kazeros)</div>
                     <button onclick="selectRaid('final_day')" id="btn-final_day" class="sidebar-btn w-full text-left px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white flex items-center justify-between transition-all">
-                        <span class="font-medium">終結之日</span>
+                        <span class="font-medium">終結之日 (Final Day)</span>
                         <i class="fas fa-chevron-right text-xs"></i>
                     </button>
                     <button onclick="selectRaid('act4')" id="btn-act4" class="sidebar-btn w-full text-left px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white flex items-center justify-between transition-all">
-                        <span class="font-medium">第四幕：天災</span>
+                        <span class="font-medium">第四幕：天災之始</span>
                         <i class="fas fa-chevron-right text-xs"></i>
                     </button>
                 </div>
 
-                <!-- 深淵討伐系列 -->
                 <div>
-                    <div class="px-6 py-2 text-xs font-bold text-slate-500 uppercase tracking-wider">深淵討伐系列</div>
+                    <div class="px-6 py-2 text-xs font-bold text-slate-500 uppercase tracking-wider">深淵副本系列 (Abyss)</div>
                     <button onclick="selectRaid('serca')" id="btn-serca" class="sidebar-btn w-full text-left px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white flex items-center justify-between transition-all">
-                        <span class="font-medium">賽爾卡</span>
+                        <span class="font-medium">深淵之主：賽爾卡</span>
                         <i class="fas fa-chevron-right text-xs"></i>
                     </button>
                 </div>
             </div>
         </aside>
 
-        <!-- 主內容區 -->
+        <!-- Main Content -->
         <main class="flex-1 flex flex-col h-screen overflow-hidden">
             <header class="p-6 md:p-10 pb-4 bg-black/20">
-                <div class="max-w-4xl mx-auto">
-                    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
-                        <div>
-                            <h2 id="raid-title" class="text-3xl md:text-4xl font-bold mb-2">載入中...</h2>
-                            <p id="raid-desc" class="text-slate-300 opacity-80">請稍後。</p>
+                <div class="max-w-5xl mx-auto">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                        <div class="flex-1">
+                            <nav class="text-sm text-slate-400 mb-2">攻略站 / <span id="breadcrumb">卡澤羅斯</span></nav>
+                            <h2 id="raid-title" class="text-3xl md:text-5xl font-extrabold mb-3">載入中...</h2>
+                            <p id="raid-desc" class="text-slate-300 text-lg opacity-80 max-w-2xl">載入內容中，請稍候。</p>
                         </div>
-                        <a id="video-link" href="#" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-red-600/80 hover:bg-red-600 text-white rounded-lg text-sm font-bold transition-colors w-fit">
-                            <i class="fab fa-youtube"></i> 觀看攻略影片
-                        </a>
                     </div>
 
-                    <div id="gate-tabs" class="flex flex-wrap items-center gap-3 mt-6">
-                        <!-- 由 JS 填充按鈕 -->
+                    <div id="gate-tabs" class="flex flex-wrap items-center gap-3 mt-8">
+                        <!-- JS Dynamic Tabs -->
                     </div>
                 </div>
             </header>
 
             <div class="flex-1 overflow-y-auto p-6 md:p-10 pt-2 custom-scrollbar">
-                <div id="gate-content" class="max-w-4xl mx-auto space-y-8 pb-20">
-                    <!-- 由 JS 填充內容 -->
+                <div id="gate-content" class="max-w-5xl mx-auto space-y-12 pb-24">
+                    <!-- JS Dynamic Content -->
                 </div>
             </div>
         </main>
