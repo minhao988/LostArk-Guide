@@ -156,7 +156,7 @@ function switchGate(gateId) {
         allowfullscreen>
     </iframe>
 
-    <div class="absolute inset-0 flex items-center justify-center bg-slate-900/80 pointer-events-none">
+    <div id="overlay" class="absolute inset-0 flex items-center justify-center bg-slate-900/80 pointer-events-none">
         <div class="text-center">
             <i class="fab fa-youtube text-6xl text-red-600 mb-4"></i>
             <p class="text-slate-200 font-bold">此處載入 ${gate.name} 完整攻略影片</p>
@@ -217,8 +217,18 @@ function switchGate(gateId) {
             </div>
         </section>
     `;
+
     document.getElementById('gate-content').innerHTML = html;
 }
+const overlay = document.getElementById('overlay');
+overlay.addEventListener('click', () => {
+    // 移除遮罩
+    overlay.remove();
+
+    // 可選：點擊後自動播放影片
+    const iframe = overlay.previousElementSibling;
+    iframe.src = iframe.src.replace("autoplay=0", "autoplay=1");
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     initSidebar();
