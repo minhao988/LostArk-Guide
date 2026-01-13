@@ -121,7 +121,8 @@ function switchGate(gateId) {
     const activeTab = document.getElementById(`gate-tab-${gateId}`);
     if (activeTab) activeTab.classList.add('active');
 
-    let html = `<div class="rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative group">
+    // 影片區塊
+    let html = `<div class="rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative group mb-8">
                     <div class="absolute inset-0 flex items-center justify-center bg-slate-900/80">
                         <div class="text-center">
                             <i class="fab fa-youtube text-6xl text-red-600 mb-4"></i>
@@ -130,8 +131,31 @@ function switchGate(gateId) {
                     </div>
                 </div>`;
 
-    // 機制與小招解析
-    // 這裡可照之前 html 生成邏輯
+    // Patterns 小招解析
+    html += `<div class="space-y-6">`;
+    gate.patterns.forEach(p => {
+        html += `
+        <div class="info-card p-6 rounded-2xl border border-white/10 shadow-md bg-black/60">
+            <h3 class="text-xl font-bold mb-2">${p.name} ${p.isCounter ? '<span class="text-red-400">(反制)</span>' : ''}</h3>
+            <p class="text-slate-300 mb-2">${p.desc}</p>
+            <p class="text-slate-400 italic mb-2">小技巧：${p.tips}</p>
+            ${p.gif ? `<img src="images/${p.gif}" alt="${p.name}" class="rounded-lg border border-white/10">` : ''}
+        </div>`;
+    });
+    html += `</div>`;
+
+    // Mechanics
+    html += `<div class="space-y-6 mt-8">`;
+    gate.mechanics.forEach(m => {
+        html += `
+        <div class="info-card p-6 rounded-2xl border border-white/10 shadow-md bg-black/60">
+            <h3 class="text-xl font-bold mb-2">${getIcon(m.type)} ${m.title} ${m.hp ? '('+m.hp+')' : ''}</h3>
+            <p class="text-slate-300 mb-2">${m.desc}</p>
+            ${m.details ? `<p class="text-slate-400 italic">詳細：${m.details}</p>` : ''}
+        </div>`;
+    });
+    html += `</div>`;
+
     document.getElementById('gate-content').innerHTML = html;
 }
 
