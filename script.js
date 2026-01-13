@@ -164,31 +164,42 @@ function switchGate(gateId) {
     </div>
 </div>
 
-        <section>
-            <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                <span class="w-1.5 h-8 bg-yellow-500 rounded-full"></span>
-                核心機制詳解 (Major Mechanics)
-            </h3>
-            <div class="space-y-6">
-                ${gate.mechanics.map(m => `
-                    <div class="info-card rounded-xl p-6 shadow-lg border-l-4 ${m.type === 'wipe' ? 'border-l-red-600' : 'border-l-yellow-500'}">
-                        <div class="flex flex-col md:flex-row gap-6">
-                            <div class="flex-shrink-0">
-                                <div class="text-2xl font-black text-yellow-500 mb-1">${m.hp}</div>
-                                <div class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-bold text-center uppercase tracking-tighter">${m.type}</div>
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex items-center gap-2 mb-3">
-                                    ${getIcon(m.type)}
-                                    <h4 class="text-xl font-bold text-slate-100">${m.title}</h4>
-                                </div>
-                                <p class="text-slate-400 text-sm leading-relaxed">${m.desc}</p>
-                            </div>
-                        </div>
+  <section>
+    <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+        <span class="w-1.5 h-8 bg-yellow-500 rounded-full"></span>
+        核心機制詳解 (Major Mechanics)
+    </h3>
+    <div class="space-y-6">
+        ${gate.mechanics.map(m => `
+            <div class="info-card rounded-xl p-6 shadow-lg border-l-4 ${m.type === 'wipe' ? 'border-l-red-600' : 'border-l-yellow-500'}">
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex-shrink-0">
+                        <div class="text-2xl font-black text-yellow-500 mb-1">${m.hp}</div>
+                        <div class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-bold text-center uppercase tracking-tighter">${m.type}</div>
                     </div>
-                `).join('')}
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2 mb-3">
+                            ${getIcon(m.type)}
+                            <h4 class="text-xl font-bold text-slate-100">${m.title}</h4>
+                        </div>
+                        <p class="text-slate-400 text-sm leading-relaxed">${m.desc}</p>
+
+                        ${m.video ? `
+                        <div class="mt-4 aspect-video rounded-2xl overflow-hidden">
+                            <iframe class="w-full h-full"
+                                src="${m.video}?rel=0&autoplay=0"
+                                title="${m.title} 影片"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                        </div>` : ''}
+
+                    </div>
+                </div>
             </div>
-        </section>
+        `).join('')}
+    </div>
+</section>
 
         <section>
             <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
