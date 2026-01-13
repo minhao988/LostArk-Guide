@@ -1,38 +1,46 @@
+/* 基礎背景漸層變換 */
 body {
     background-color: #0f172a;
     color: #f1f5f9;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
+
 .raid-gradient-final { background: linear-gradient(135deg, #450a0a 0%, #000000 100%); }
 .raid-gradient-act4 { background: linear-gradient(135deg, #1e1b4b 0%, #000000 100%); }
 .raid-gradient-serca { background: linear-gradient(135deg, #064e3b 0%, #020617 100%); }
 
+/* 自定義捲軸 */
 .custom-scrollbar::-webkit-scrollbar { width: 6px; }
 .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
 .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
 
+/* 交互組件樣式 */
 .gate-btn.active {
     background-color: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.5);
     color: white;
 }
+
 .sidebar-btn.active {
     background-color: rgba(255, 255, 255, 0.1);
     border-right: 4px solid #eab308;
     color: #eab308;
 }
+
 .info-card {
     background: rgba(15, 23, 42, 0.6);
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
+
 .pattern-gif-placeholder {
     background: linear-gradient(45deg, #1e293b, #334155);
     position: relative;
     overflow: hidden;
+    min-height: 160px;
 }
+
 .pattern-gif-placeholder::after {
-    content: "GIF / Video Preview";
+    content: "動畫展示載入中";
     position: absolute;
     font-size: 10px;
     color: rgba(255,255,255,0.2);
