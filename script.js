@@ -158,7 +158,7 @@ function switchGate(gateId) {
         allowfullscreen>
     </iframe>
 
-            <div class="absolute inset-0 flex items-center justify-center bg-slate-900/80 pointer-events-none">
+<div class="video-overlay absolute inset-0 flex items-center justify-center bg-slate-900/80 cursor-pointer">
 
                 <div class="text-center">
                     <i class="fab fa-youtube text-6xl text-red-600 mb-4"></i>
@@ -222,6 +222,9 @@ function switchGate(gateId) {
     `;
     document.getElementById('gate-content').innerHTML = html;
 }
+document.querySelector('.video-overlay').addEventListener('click', function () {
+  this.remove()
+})
 
 document.addEventListener('DOMContentLoaded', () => {
     initSidebar();
