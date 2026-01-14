@@ -171,8 +171,9 @@ function switchGate(gateId) {
         </div>
         </div>
 
-       <section class="mb-12 md:mb-16 lg:mb-20">
-            <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+       <section>
+            <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
+
                 <span class="w-1.5 h-8 bg-yellow-500 rounded-full"></span>
                 核心機制詳解 (Major Mechanics)
             </h3>
@@ -197,8 +198,9 @@ function switchGate(gateId) {
             </div>
         </section>
 
-        <section class="mb-12 md:mb-16 lg:mb-20">
-            <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+        <section>
+            <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
+
                 <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span>
                 招式動作解析 (Action Guide)
             </h3>
