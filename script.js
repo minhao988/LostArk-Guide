@@ -239,12 +239,7 @@ if (overlay) {
     });
 }
 }
-document.addEventListener('click', function (e) {
-  const overlay = e.target.closest('.video-overlay')
-  if (overlay) {
-    overlay.remove()
-  }
-})
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
