@@ -179,21 +179,25 @@ function switchGate(gateId) {
             </h3>
             <div class="space-y-6">
                 ${gate.mechanics.map(m => `
-                    <div class="info-card rounded-xl p-6 shadow-lg border-l-4 ${m.type === 'wipe' ? 'border-l-red-600' : 'border-l-yellow-500'}">
-                    <div class="flex flex-col sm:flex-row gap-4">
-  <div class="flex-shrink-0 sm:flex-shrink">
-                                <div class="text-2xl font-black text-yellow-500 mb-1">${m.hp}</div>
-                                <div class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-bold text-center uppercase tracking-tighter">${m.type}</div>
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex items-center gap-2 mb-3">
-                                    ${getIcon(m.type)}
-                                    <h4 class="text-xl font-bold text-slate-100">${m.title}</h4>
-                                </div>
-                                <p class="text-slate-400 text-sm leading-relaxed">${m.desc}</p>
-                            </div>
-                        </div>
-                    </div>
+                  <div class="info-card rounded-xl p-6 shadow-lg border-l-4
+            ${m.type === 'wipe' ? 'border-l-red-600' : 'border-l-yellow-500'} 
+            break-words">
+    <div class="flex flex-col sm:flex-row gap-4">
+        <div class="flex-shrink sm:flex-shrink-0 w-full sm:w-auto">
+            <div class="text-2xl font-black text-yellow-500 mb-1">${m.hp}</div>
+            <div class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-bold text-center uppercase tracking-tighter">
+                ${m.type}
+            </div>
+        </div>
+        <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 mb-3">
+                ${getIcon(m.type)}
+                <h4 class="text-xl font-bold text-slate-100 truncate">${m.title}</h4>
+            </div>
+            <p class="text-slate-400 text-sm leading-relaxed break-words">${m.desc}</p>
+        </div>
+    </div>
+</div>
                 `).join('')}
             </div>
         </section>
