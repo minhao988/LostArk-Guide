@@ -1,3 +1,4 @@
+
 const allRaids = {
     final_day: {
         title: '卡澤羅斯終幕',
@@ -76,128 +77,182 @@ const allRaids = {
 let currentRaidId = 'final_day';
 
 function getIcon(type) {
-    const map = {
-        wipe: 'fa-skull-crossbones text-red-500',
-        mech: 'fa-cog text-yellow-400',
-        warning: 'fa-exclamation-circle text-orange-400'
+    const icons = {
+        wipe: '<i class="fas fa-skull-crossbones text-red-500"></i>',
+        mech: '<i class="fas fa-cog text-yellow-400"></i>',
+        warning: '<i class="fas fa-exclamation-circle text-orange-400"></i>',
+        dps: '<i class="fas fa-fire text-orange-600"></i>',
+        survival: '<i class="fas fa-heartbeat text-green-400"></i>'
     };
-    return `<i class="fas ${map[type] || 'fa-info-circle text-gray-400'}"></i>`;
+    return icons[type] || '<i class="fas fa-info-circle text-gray-400"></i>';
 }
 
-/* Sidebar */
 function initSidebar() {
     const container = document.getElementById('sidebar-content');
+    if (!container) return;
     container.innerHTML = '';
+    const categories = [...new Set(Object.values(allRaids).map(r => r.category))];
 
-    Object.entries(allRaids).forEach(([id, r]) => {
-        const btn = document.createElement('button');
-        btn.id = `btn-${id}`;
-        btn.className =
-            'sidebar-btn w-full text-left px-6 py-3 text-slate-400 hover:bg-white/5';
-        btn.textContent = r.short;
-        btn.onclick = () => selectRaid(id);
-        container.appendChild(btn);
+    categories.forEach(cat => {
+        const catDiv = document.createElement('div');
+        catDiv.innerHTML = `<div class="px-6 py-2 text-xs font-bold text-slate-500 uppercase tracking-wider">${cat}</div>`;
+        Object.entries(allRaids).forEach(([id, data]) => {
+            if (data.category === cat) {
+                const btn = document.createElement('button');
+                btn.id = `btn-${id}`;
+                btn.className = 'sidebar-btn w-full text-left px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white flex items-center justify-between transition-all';
+                btn.innerHTML = `<span class="font-medium">${data.short}</span><i class="fas fa-chevron-right text-xs"></i>`;
+                btn.onclick = () => selectRaid(id);
+                catDiv.appendChild(btn);
+            }
+        });
+        container.appendChild(catDiv);
     });
 }
 
-/* Select Raid */
-function selectRaid(id) {
-    currentRaidId = id;
-    const raid = allRaids[id];
+function selectRaid(raidId) {
+    if (!allRaids[raidId]) return;
+    currentRaidId = raidId;
 
-    document.querySelectorAll('.sidebar-btn')
-        .forEach(b => b.classList.remove('active'));
-    document.getElementById(`btn-${id}`)?.classList.add('active');
+    document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+    const activeBtn = document.getElementById(`btn-${raidId}`);
+    if (activeBtn) activeBtn.classList.add('active');
 
-    document.getElementById('main-body').className =
-        raid.theme + ' min-h-screen transition-all duration-500';
-
+    const raid = allRaids[raidId];
+    document.getElementById('main-body').className = raid.theme + ' min-h-screen transition-all duration-500';
     document.getElementById('raid-title').innerText = raid.title;
     document.getElementById('raid-desc').innerText = raid.desc;
-    document.getElementById('breadcrumb').innerText = raid.short;
     document.getElementById('mobile-title').innerText = raid.short;
+    document.getElementById('breadcrumb').innerText = raid.short;
 
-    const tabs = document.getElementById('gate-tabs');
-    tabs.innerHTML = '';
-
-    Object.keys(raid.gates).forEach(gid => {
+    const tabsContainer = document.getElementById('gate-tabs');
+    tabsContainer.innerHTML = '';
+    Object.keys(raid.gates).forEach(gId => {
         const btn = document.createElement('button');
-        btn.className =
-            'gate-btn px-5 py-2 rounded-lg border border-white/10 text-slate-400';
-        btn.textContent = `Gate ${gid}`;
-        btn.onclick = () => switchGate(parseInt(gid));
-        btn.id = `gate-tab-${gid}`;
-        tabs.appendChild(btn);
+        btn.id = `gate-tab-${gId}`;
+        btn.className = 'gate-btn px-6 py-2.5 rounded-lg font-bold transition-all duration-300 border border-white/10 text-slate-400 hover:bg-white/10 hover:text-white';
+        btn.innerText = `關卡 G${gId}`;
+        btn.onclick = () => switchGate(parseInt(gId));
+        tabsContainer.appendChild(btn);
     });
 
     switchGate(1);
-
-    if (window.innerWidth < 768) {
-        document.getElementById('sidebar').classList.add('-translate-x-full');
-    }
+    if (window.innerWidth < 768) document.getElementById('sidebar').classList.add('-translate-x-full');
 }
 
-/* Switch Gate */
-function switchGate(gid) {
-    const gate = allRaids[currentRaidId].gates[gid];
+function switchGate(gateId) {
+    const raid = allRaids[currentRaidId];
+    const gate = raid.gates[gateId];
     if (!gate) return;
 
-    document.querySelectorAll('.gate-btn')
-        .forEach(b => b.classList.remove('active'));
-    document.getElementById(`gate-tab-${gid}`)?.classList.add('active');
+    document.querySelectorAll('.gate-btn').forEach(btn => btn.classList.remove('active'));
+    const activeTab = document.getElementById(`gate-tab-${gateId}`);
+    if (activeTab) activeTab.classList.add('active');
 
-    const html = `
-<div class="rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 relative">
-    <div class="video-overlay absolute inset-0 flex items-center justify-center bg-black/70 cursor-pointer">
-        <div class="text-center">
-            <i class="fab fa-youtube text-6xl text-red-600 mb-4"></i>
-            <p class="text-white font-bold">點擊播放 ${gate.name}</p>
-        </div>
-    </div>
-</div>
+    let html = `
+        <div class="rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative group">
+          <iframe
+        class="w-full h-full"
+        src="https://www.youtube.com/embed/${gate.youtubeId}"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+    </iframe>
 
-<section>
-    <h3 class="text-2xl font-bold mb-4 text-white">核心機制</h3>
-    ${gate.mechanics.map(m => `
-        <div class="p-5 rounded-xl bg-slate-800/40 border-l-4 border-yellow-500">
-            <div class="flex items-center gap-2 mb-2">
-                ${getIcon(m.type)}
-                <strong class="text-white">${m.title}</strong>
+<div class="video-overlay absolute inset-0 flex items-center justify-center bg-slate-900/80 cursor-pointer">
+
+                <div class="text-center">
+                    <i class="fab fa-youtube text-6xl text-red-600 mb-4"></i>
+                    <p class="text-slate-200 font-bold">此處載入 ${gate.name} 完整攻略影片</p>
+                </div>
             </div>
-            <p class="text-slate-400 text-sm">${m.desc}</p>
         </div>
-    `).join('')}
-</section>
-`;
 
-    const container = document.getElementById('gate-content');
-    container.innerHTML = html;
+        <section>
+            <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                <span class="w-1.5 h-8 bg-yellow-500 rounded-full"></span>
+                核心機制詳解 (Major Mechanics)
+            </h3>
+            <div class="space-y-6">
+                ${gate.mechanics.map(m => `
+                    <div class="info-card rounded-xl p-6 shadow-lg border-l-4 ${m.type === 'wipe' ? 'border-l-red-600' : 'border-l-yellow-500'}">
+                        <div class="flex flex-col md:flex-row gap-6">
+                            <div class="flex-shrink-0">
+                                <div class="text-2xl font-black text-yellow-500 mb-1">${m.hp}</div>
+                                <div class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-bold text-center uppercase tracking-tighter">${m.type}</div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center gap-2 mb-3">
+                                    ${getIcon(m.type)}
+                                    <h4 class="text-xl font-bold text-slate-100">${m.title}</h4>
+                                </div>
+                                <p class="text-slate-400 text-sm leading-relaxed">${m.desc}</p>
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </section>
 
-    /* Video click */
-    const overlay = container.querySelector('.video-overlay');
-    overlay.addEventListener('click', () => {
+        <section>
+            <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span>
+                招式動作解析 (Action Guide)
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                ${gate.patterns.map(p => `
+                    <div class="bg-slate-800/40 border border-white/10 rounded-2xl overflow-hidden hover:bg-slate-800/60 transition-all">
+                        <div class="h-40 pattern-gif-placeholder flex items-center justify-center">
+                            <p class="text-[10px] text-slate-500 italic">[動畫示意圖佔位]</p>
+                        </div>
+                        <div class="p-5">
+                            <h4 class="font-bold text-blue-300 mb-2 flex items-center gap-2">
+                                ${p.isCounter ? '<span class="bg-blue-600 text-[8px] px-1.5 py-0.5 rounded text-white">COUNTER</span>' : ''}
+                                ${p.name}
+                            </h4>
+                            <p class="text-slate-300 text-xs mb-4 min-h-[32px]">${p.desc}</p>
+                            <div class="bg-blue-950/30 border border-blue-500/30 rounded-lg p-3">
+                                <p class="text-blue-400 text-[10px] font-black uppercase mb-1">應對方案</p>
+                                <p class="text-slate-400 text-xs italic">${p.tips}</p>
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </section>
+    `;
+    document.getElementById('gate-content').innerHTML = html;
+const overlay = document.querySelector('.video-overlay');
+if (overlay) {
+    overlay.addEventListener('click', function() {
+        const container = this.parentElement; // 這是保持 aspect-video 的父元素
         const iframe = document.createElement('iframe');
-        iframe.src =
-            `https://www.youtube.com/embed/${gate.youtubeId}?autoplay=1&mute=1`;
-        iframe.className = 'w-full h-full absolute inset-0';
-        iframe.allow =
-            'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        iframe.src = `https://www.youtube.com/embed/${gate.youtubeId}?autoplay=1&mute=1`;
+        iframe.className = "w-full h-full absolute top-0 left-0"; // 撐滿父容器
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
         iframe.allowFullscreen = true;
-        overlay.parentElement.appendChild(iframe);
-        overlay.remove();
+        container.appendChild(iframe);
+        this.remove(); // 移除 overlay
     });
-
-    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
+}
+document.addEventListener('click', function (e) {
+  const overlay = e.target.closest('.video-overlay')
+  if (overlay) {
+    overlay.remove()
+  }
+})
 
-/* Init */
+
 document.addEventListener('DOMContentLoaded', () => {
     initSidebar();
     selectRaid('final_day');
 
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuClose = document.getElementById('menu-close');
     const sidebar = document.getElementById('sidebar');
-    document.getElementById('menu-toggle').onclick =
-        () => sidebar.classList.remove('-translate-x-full');
-    document.getElementById('menu-close').onclick =
-        () => sidebar.classList.add('-translate-x-full');
+
+    if (menuToggle) menuToggle.onclick = () => sidebar.classList.remove('-translate-x-full');
+    if (menuClose) menuClose.onclick = () => sidebar.classList.add('-translate-x-full');
 });
