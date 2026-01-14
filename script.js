@@ -222,13 +222,17 @@ function switchGate(gateId) {
             </div>
         </section>
     `;
-    document.getElementById('gate-content').innerHTML = html;
-    const iframe = document.createElement('iframe');
-iframe.src = `https://www.youtube.com/embed/${gate.youtubeId}?autoplay=1`;
-iframe.className = "w-full h-full";
-iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-iframe.allowFullscreen = true;
-overlay.replaceWith(iframe);
+    const overlay = document.querySelector('.video-overlay');
+if (overlay) {
+    overlay.addEventListener('click', function() {
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${gate.youtubeId}?autoplay=1&mute=1`; // mute 可以保證自動播放
+        iframe.className = "w-full h-full";
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        iframe.allowFullscreen = true;
+        this.parentElement.replaceWith(iframe);
+    });
+}
 }
 document.addEventListener('click', function (e) {
   const overlay = e.target.closest('.video-overlay')
