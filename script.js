@@ -9,6 +9,7 @@ const allRaids = {
         gates: {
             1: {
                 name: '深淵之主：卡傑羅斯 (Gate 1)',
+                youtubeId: "y8wsk0oEWWQ",
                 patterns: [
                     { name: '暗影突襲 (Shadow Strike)', desc: 'Boss 消失並鎖定一名玩家，隨後從其背後出現進行重擊。', tips: '被點名者頭上有紅眼標記，閃避動作需在 Boss 顯形的一瞬間施放。', gif: 'shadow_strike.gif' },
                     { name: '深淵反制 (Counter Rush)', desc: 'Boss 全身閃爍藍光，向前方連續衝刺三次。', tips: '第一次衝刺後即可準備反制。若錯過第一次，可在第二或第三次閃紅光時反擊。', gif: 'counter_rush.gif', isCounter: true },
@@ -23,6 +24,7 @@ const allRaids = {
             },
             2: {
                 name: '復活的魔皇：卡澤羅斯 (Gate 2)',
+                youtubeId: "abc123XYZ", 
                 patterns: [
                     { name: '魔皇紅黑波', desc: 'Boss 手中出現紅/黑兩種能量旋渦。', tips: '紅內安全，黑外安全。觀察 Boss 腳下旋轉的光環顏色。', gif: 'red_black.gif' },
                     { name: '魔箭雨 (Demon Rain)', desc: 'Boss 向天空射箭，隨後場地落下大量帶有「眩暈」效果的箭矢。', tips: '地面的紅圈會預告落點，箭雨有兩波，第一波結束後不要立刻回位。', gif: 'demon_rain.gif' },
@@ -151,7 +153,7 @@ function switchGate(gateId) {
         <div class="rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative group">
           <iframe
         class="w-full h-full"
-        src="https://www.youtube.com/embed/y8wsk0oEWWQ?si=aobXPhgibsvO0-pE"
+        src="https://www.youtube.com/embed/${gate.youtubeId}"
         title="YouTube video player"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -228,6 +230,16 @@ document.addEventListener('click', function (e) {
     overlay.remove()
   }
 })
+const overlay = container.querySelector('.video-overlay');
+overlay.addEventListener('click', function() {
+  const iframe = document.createElement('iframe');
+  iframe.src = "https://www.youtube.com/embed/" + gate.youtubeId + "?autoplay=1";
+  iframe.className = "w-full h-full";
+  iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+  iframe.allowFullscreen = true;
+  
+  this.replaceWith(iframe); // overlay 替換成 iframe
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     initSidebar();
