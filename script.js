@@ -222,7 +222,8 @@ function switchGate(gateId) {
             </div>
         </section>
     `;
-    const overlay = document.querySelector('.video-overlay');
+    document.getElementById('gate-content').innerHTML = html;
+const overlay = document.querySelector('.video-overlay');
 if (overlay) {
     overlay.addEventListener('click', function() {
         const iframe = document.createElement('iframe');
