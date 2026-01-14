@@ -24,7 +24,7 @@ const allRaids = {
             },
             2: {
                 name: '復活的魔皇：卡澤羅斯 (Gate 2)',
-                youtubeId: "abc123XYZ", 
+                youtubeId: "99ZhXs-SAx0", 
                 patterns: [
                     { name: '魔皇紅黑波', desc: 'Boss 手中出現紅/黑兩種能量旋渦。', tips: '紅內安全，黑外安全。觀察 Boss 腳下旋轉的光環顏色。', gif: 'red_black.gif' },
                     { name: '魔箭雨 (Demon Rain)', desc: 'Boss 向天空射箭，隨後場地落下大量帶有「眩暈」效果的箭矢。', tips: '地面的紅圈會預告落點，箭雨有兩波，第一波結束後不要立刻回位。', gif: 'demon_rain.gif' },
