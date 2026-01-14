@@ -222,8 +222,11 @@ function switchGate(gateId) {
     `;
     document.getElementById('gate-content').innerHTML = html;
 }
-document.querySelector('.video-overlay').addEventListener('click', function () {
-  this.remove()
+document.addEventListener('click', function (e) {
+  const overlay = e.target.closest('.video-overlay')
+  if (overlay) {
+    overlay.remove()
+  }
 })
 
 document.addEventListener('DOMContentLoaded', () => {
