@@ -239,7 +239,7 @@ overlay.addEventListener('click', function() {
   iframe.allowFullscreen = true;
   
   this.replaceWith(iframe); // overlay 替換成 iframe
-});
+})
 
 document.addEventListener('DOMContentLoaded', () => {
     initSidebar();
