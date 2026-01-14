@@ -180,8 +180,8 @@ function switchGate(gateId) {
             <div class="space-y-6">
                 ${gate.mechanics.map(m => `
                     <div class="info-card rounded-xl p-6 shadow-lg border-l-4 ${m.type === 'wipe' ? 'border-l-red-600' : 'border-l-yellow-500'}">
-                        <div class="flex flex-col md:flex-row gap-6">
-                            <div class="flex-shrink-0">
+                    <div class="flex flex-col sm:flex-row gap-4">
+  <div class="flex-shrink-0 sm:flex-shrink">
                                 <div class="text-2xl font-black text-yellow-500 mb-1">${m.hp}</div>
                                 <div class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-bold text-center uppercase tracking-tighter">${m.type}</div>
                             </div>
