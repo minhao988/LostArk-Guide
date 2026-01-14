@@ -1,81 +1,6 @@
-
-const allRaids = {
-    final_day: {
-        title: '卡澤羅斯終幕',
-        short: '終結之日',
-        category: '卡澤羅斯討伐戰 (Kazeros)',
-        desc: '與深淵大惡魔卡澤羅斯的最後決戰。這場戰鬥要求極高的輸出壓力和極致的機制執行力。',
-        theme: 'raid-gradient-final',
-        gates: {
-            1: {
-                name: '深淵之主：卡傑羅斯 (Gate 1)',
-                youtubeId: "y8wsk0oEWWQ",
-                patterns: [
-                    { name: '暗影突襲 (Shadow Strike)', desc: 'Boss 消失並鎖定一名玩家，隨後從其背後出現進行重擊。', tips: '被點名者頭上有紅眼標記，閃避動作需在 Boss 顯形的一瞬間施放。', gif: 'shadow_strike.gif' },
-                    { name: '深淵反制 (Counter Rush)', desc: 'Boss 全身閃爍藍光，向前方連續衝刺三次。', tips: '第一次衝刺後即可準備反制。若錯過第一次，可在第二或第三次閃紅光時反擊。', gif: 'counter_rush.gif', isCounter: true },
-                    { name: '引力坍縮 (Gravity Well)', desc: 'Boss 召喚巨大的黑暗黑洞，吸引所有玩家向中心移動並引爆。', tips: '往外圍跑，或使用具備「強霸體 (Super Armor)」的技能免疫吸引效果。', gif: 'gravity_well.gif' },
-                    { name: '紫圈擴散 (Purple Wave)', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif' }
-                ],
-                mechanics: [
-                    { hp: '900', title: '抓人', desc: 'Boss 產生球追蹤玩家並抓起來 隨後出現反制。', details: '失敗反制, 造成被抓的玩家們死亡。', type: 'mech' },
-                    { hp: 'x700', title: '團隊癱瘓', desc: '戰場變成1打1的局面 所有玩家要在1分鐘内把紫條癱瘓打掉。', details: '反制能提升癱瘓值。', type: 'mech' },
-                    { hp: 'x500', title: '接劍', desc: '王突然消失 真和假幻象同時出現在1/5/7/11位置 需要在真身位置接劍', details: '失敗團滅，接劍后要躲避後續鈎鎖', type: 'mech' }
-                ]
-            },
-            2: {
-                name: '復活的魔皇：卡澤羅斯 (Gate 2)',
-                youtubeId: "99ZhXs-SAx0", 
-                patterns: [
-                    { name: '魔皇紅黑波', desc: 'Boss 手中出現紅/黑兩種能量旋渦。', tips: '紅內安全，黑外安全。觀察 Boss 腳下旋轉的光環顏色。', gif: 'red_black.gif' },
-                    { name: '魔箭雨 (Demon Rain)', desc: 'Boss 向天空射箭，隨後場地落下大量帶有「眩暈」效果的箭矢。', tips: '地面的紅圈會預告落點，箭雨有兩波，第一波結束後不要立刻回位。', gif: 'demon_rain.gif' },
-                    { name: '抓人連打 (Grab & Slam)', desc: 'Boss 伸出手向前抓取。若抓到玩家，會進行連續重摔。', tips: '看到 Boss 手向後蓄力並發出黑煙時，立刻向側邊位移。被抓者需要隊友給予癱瘓。', gif: 'grab_slam.gif' }
-                ],
-                mechanics: [
-                    { hp: 'x350', title: '反制風暴', desc: '全體 8 人必須在 6 點鐘位置站成一排進行連續 5 次完美反制。', type: 'wipe' }
-                ]
-            }
-        }
-    },
-    act4: {
-        title: '第四幕：天災之始',
-        short: '第四幕',
-        category: '卡澤羅斯討伐戰 (Kazeros)',
-        desc: '混沌裂縫被強行撕開，這是一個考驗團隊協作移動與屬性相克的副本。',
-        theme: 'raid-gradient-act4',
-        gates: {
-            1: {
-                name: '裂縫守護者 (Gate 1)',
-                patterns: [
-                    { name: '混沌踐踏', desc: '全場地板變紅，隨機出現三處安全區。', tips: '注意 Boss 踩地第三下是全場擊飛，必須在安全區內。', gif: 'stomp.gif' }
-                ],
-                mechanics: [
-                    { hp: 'x120', title: '元素共鳴', desc: '根據 Boss 翅膀顏色選擇對應門進入。', type: 'mech' }
-                ]
-            }
-        }
-    },
-    serca: {
-        title: '深淵之主：賽爾卡',
-        short: '賽爾卡',
-        category: '深淵副本系列 (Abyss)',
-        desc: '沉睡在寂靜海洋底部的巨獸。氧氣條管理與水流推進是本關的核心。',
-        theme: 'raid-gradient-serca',
-        gates: {
-            1: {
-                name: '海潮祭壇 (Gate 1)',
-                patterns: [
-                    { name: '急流噴射', desc: 'Boss 向隨機玩家噴射高速水柱，帶有強制擊退。', tips: '若背靠地圖邊緣會被推入海中秒殺。', gif: 'water_jet.gif' }
-                ],
-                mechanics: [
-                    { hp: '全程', title: '氧氣瓶系統', desc: '氧氣歸零會持續扣血，尋找泡泡點回氧。', type: 'warning' }
-                ]
-            }
-        }
-    }
-};
-
 let currentRaidId = 'final_day';
 
+/* ---------- ICON ---------- */
 function getIcon(type) {
     const icons = {
         wipe: '<i class="fas fa-skull-crossbones text-red-500"></i>',
@@ -87,172 +12,176 @@ function getIcon(type) {
     return icons[type] || '<i class="fas fa-info-circle text-gray-400"></i>';
 }
 
+/* ---------- SIDEBAR ---------- */
 function initSidebar() {
     const container = document.getElementById('sidebar-content');
-    if (!container) return;
     container.innerHTML = '';
+
     const categories = [...new Set(Object.values(allRaids).map(r => r.category))];
 
     categories.forEach(cat => {
         const catDiv = document.createElement('div');
-        catDiv.innerHTML = `<div class="px-6 py-2 text-xs font-bold text-slate-500 uppercase tracking-wider">${cat}</div>`;
-        Object.entries(allRaids).forEach(([id, data]) => {
-            if (data.category === cat) {
-                const btn = document.createElement('button');
-                btn.id = `btn-${id}`;
-                btn.className = 'sidebar-btn w-full text-left px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white flex items-center justify-between transition-all';
-                btn.innerHTML = `<span class="font-medium">${data.short}</span><i class="fas fa-chevron-right text-xs"></i>`;
-                btn.onclick = () => selectRaid(id);
-                catDiv.appendChild(btn);
-            }
+        catDiv.innerHTML =
+            `<div class="px-6 py-2 text-xs font-bold text-slate-500 uppercase">${cat}</div>`;
+
+        Object.entries(allRaids).forEach(([id, raid]) => {
+            if (raid.category !== cat) return;
+
+            const btn = document.createElement('button');
+            btn.id = `btn-${id}`;
+            btn.className =
+                'sidebar-btn w-full px-6 py-3 text-left text-slate-400 hover:text-white hover:bg-white/5 flex justify-between items-center transition';
+            btn.innerHTML = `<span>${raid.short}</span><i class="fas fa-chevron-right text-xs"></i>`;
+            btn.onclick = () => selectRaid(id);
+            catDiv.appendChild(btn);
         });
+
         container.appendChild(catDiv);
     });
 }
 
+/* ---------- RAID ---------- */
 function selectRaid(raidId) {
-    if (!allRaids[raidId]) return;
+    const raid = allRaids[raidId];
+    if (!raid) return;
+
     currentRaidId = raidId;
 
     document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
-    const activeBtn = document.getElementById(`btn-${raidId}`);
-    if (activeBtn) activeBtn.classList.add('active');
+    document.getElementById(`btn-${raidId}`)?.classList.add('active');
 
-    const raid = allRaids[raidId];
-    document.getElementById('main-body').className = raid.theme + ' min-h-screen transition-all duration-500';
+    document.getElementById('main-body').className =
+        `${raid.theme} min-h-screen transition-all duration-500`;
+
     document.getElementById('raid-title').innerText = raid.title;
     document.getElementById('raid-desc').innerText = raid.desc;
-    document.getElementById('mobile-title').innerText = raid.short;
     document.getElementById('breadcrumb').innerText = raid.short;
+    document.getElementById('mobile-title').innerText = raid.short;
 
-    const tabsContainer = document.getElementById('gate-tabs');
-    tabsContainer.innerHTML = '';
+    const tabs = document.getElementById('gate-tabs');
+    tabs.innerHTML = '';
+
     Object.keys(raid.gates).forEach(gId => {
         const btn = document.createElement('button');
         btn.id = `gate-tab-${gId}`;
-        btn.className = 'gate-btn px-6 py-2.5 rounded-lg font-bold transition-all duration-300 border border-white/10 text-slate-400 hover:bg-white/10 hover:text-white';
+        btn.className =
+            'gate-btn px-5 py-2 rounded-lg font-bold border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition';
         btn.innerText = `關卡 G${gId}`;
-        btn.onclick = () => switchGate(parseInt(gId));
-        tabsContainer.appendChild(btn);
+        btn.onclick = () => switchGate(+gId);
+        tabs.appendChild(btn);
     });
 
     switchGate(1);
-    if (window.innerWidth < 768) document.getElementById('sidebar').classList.add('-translate-x-full');
+
+    if (window.innerWidth < 768) {
+        document.getElementById('sidebar').classList.add('-translate-x-full');
+    }
 }
 
+/* ---------- GATE ---------- */
 function switchGate(gateId) {
-    const raid = allRaids[currentRaidId];
-    const gate = raid.gates[gateId];
+    const gate = allRaids[currentRaidId].gates[gateId];
     if (!gate) return;
 
-    document.querySelectorAll('.gate-btn').forEach(btn => btn.classList.remove('active'));
-    const activeTab = document.getElementById(`gate-tab-${gateId}`);
-    if (activeTab) activeTab.classList.add('active');
+    document.querySelectorAll('.gate-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(`gate-tab-${gateId}`)?.classList.add('active');
 
-    let html = `
-        <div class="rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative group">
-          <iframe
-        class="w-full h-full"
-        src="https://www.youtube.com/embed/${gate.youtubeId}"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-    </iframe>
-
-<div class="video-overlay absolute inset-0 flex items-center justify-center bg-slate-900/80 cursor-pointer">
-
-                <div class="text-center">
-                    <i class="fab fa-youtube text-6xl text-red-600 mb-4"></i>
-                    <p class="text-slate-200 font-bold">此處載入 ${gate.name} 完整攻略影片</p>
-                </div>
+    const html = `
+    <!-- VIDEO -->
+    <div class="rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative">
+        <div class="video-overlay absolute inset-0 flex items-center justify-center bg-slate-900/80 cursor-pointer">
+            <div class="text-center">
+                <i class="fab fa-youtube text-6xl text-red-600 mb-4"></i>
+                <p class="text-slate-200 font-bold">此處載入 ${gate.name} 完整攻略影片</p>
             </div>
         </div>
+    </div>
 
-        <section>
-            <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                <span class="w-1.5 h-8 bg-yellow-500 rounded-full"></span>
-                核心機制詳解 (Major Mechanics)
-            </h3>
-            <div class="space-y-6">
-                ${gate.mechanics.map(m => `
-                    <div class="info-card rounded-xl p-6 shadow-lg border-l-4 ${m.type === 'wipe' ? 'border-l-red-600' : 'border-l-yellow-500'}">
-                        <div class="flex flex-col md:flex-row gap-6">
-                            <div class="flex-shrink-0">
-                                <div class="text-2xl font-black text-yellow-500 mb-1">${m.hp}</div>
-                                <div class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-bold text-center uppercase tracking-tighter">${m.type}</div>
+    <!-- MECHANICS -->
+    <section>
+        <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+            <span class="w-1.5 h-8 bg-yellow-500 rounded"></span>
+            核心機制詳解
+        </h3>
+
+        <div class="space-y-6">
+            ${gate.mechanics.map(m => `
+                <div class="info-card rounded-xl p-6 border-l-4 ${m.type === 'wipe' ? 'border-red-600' : 'border-yellow-500'}">
+                    <div class="flex gap-6">
+                        <div>
+                            <div class="text-2xl font-black text-yellow-500">${m.hp}</div>
+                            <div class="text-[10px] uppercase">${m.type}</div>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                ${getIcon(m.type)}
+                                <h4 class="font-bold">${m.title}</h4>
                             </div>
-                            <div class="flex-1">
-                                <div class="flex items-center gap-2 mb-3">
-                                    ${getIcon(m.type)}
-                                    <h4 class="text-xl font-bold text-slate-100">${m.title}</h4>
-                                </div>
-                                <p class="text-slate-400 text-sm leading-relaxed">${m.desc}</p>
-                            </div>
+                            <p class="text-sm text-slate-400">${m.desc}</p>
                         </div>
                     </div>
-                `).join('')}
-            </div>
-        </section>
+                </div>
+            `).join('')}
+        </div>
+    </section>
 
-        <section>
-            <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span>
-                招式動作解析 (Action Guide)
-            </h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                ${gate.patterns.map(p => `
-                    <div class="bg-slate-800/40 border border-white/10 rounded-2xl overflow-hidden hover:bg-slate-800/60 transition-all">
-                        <div class="h-40 pattern-gif-placeholder flex items-center justify-center">
-                            <p class="text-[10px] text-slate-500 italic">[動畫示意圖佔位]</p>
-                        </div>
-                        <div class="p-5">
-                            <h4 class="font-bold text-blue-300 mb-2 flex items-center gap-2">
-                                ${p.isCounter ? '<span class="bg-blue-600 text-[8px] px-1.5 py-0.5 rounded text-white">COUNTER</span>' : ''}
-                                ${p.name}
-                            </h4>
-                            <p class="text-slate-300 text-xs mb-4 min-h-[32px]">${p.desc}</p>
-                            <div class="bg-blue-950/30 border border-blue-500/30 rounded-lg p-3">
-                                <p class="text-blue-400 text-[10px] font-black uppercase mb-1">應對方案</p>
-                                <p class="text-slate-400 text-xs italic">${p.tips}</p>
-                            </div>
+    <!-- PATTERNS -->
+    <section>
+        <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+            <span class="w-1.5 h-8 bg-blue-500 rounded"></span>
+            招式動作解析
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            ${gate.patterns.map(p => `
+                <div class="rounded-2xl border border-white/10 bg-slate-800/40 overflow-hidden">
+                    <div class="h-40 flex items-center justify-center text-xs text-slate-500">
+                        [動畫示意圖]
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-blue-300 mb-2">
+                            ${p.isCounter ? '<span class="mr-2 text-[10px] bg-blue-600 px-2 py-0.5 rounded">COUNTER</span>' : ''}
+                            ${p.name}
+                        </h4>
+                        <p class="text-xs text-slate-300 mb-3">${p.desc}</p>
+                        <div class="bg-blue-950/30 p-3 rounded text-xs text-slate-400">
+                            ${p.tips}
                         </div>
                     </div>
-                `).join('')}
-            </div>
-        </section>
+                </div>
+            `).join('')}
+        </div>
+    </section>
     `;
-    document.getElementById('gate-content').innerHTML = html;
-const overlay = document.querySelector('.video-overlay');
-if (overlay) {
-    overlay.addEventListener('click', function() {
-        const container = this.parentElement; // 這是保持 aspect-video 的父元素
+
+    const content = document.getElementById('gate-content');
+    content.innerHTML = html;
+
+    /* VIDEO CLICK */
+    const overlay = content.querySelector('.video-overlay');
+    overlay?.addEventListener('click', () => {
+        const container = overlay.parentElement;
         const iframe = document.createElement('iframe');
         iframe.src = `https://www.youtube.com/embed/${gate.youtubeId}?autoplay=1&mute=1`;
-        iframe.className = "w-full h-full absolute top-0 left-0"; // 撐滿父容器
-        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        iframe.className = 'absolute inset-0 w-full h-full';
+        iframe.allow =
+            'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
         iframe.allowFullscreen = true;
         container.appendChild(iframe);
-        this.remove(); // 移除 overlay
+        overlay.remove();
     });
-}
-}
-document.addEventListener('click', function (e) {
-  const overlay = e.target.closest('.video-overlay')
-  if (overlay) {
-    overlay.remove()
-  }
-})
 
+    content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 
+/* ---------- INIT ---------- */
 document.addEventListener('DOMContentLoaded', () => {
     initSidebar();
     selectRaid('final_day');
 
-    const menuToggle = document.getElementById('menu-toggle');
-    const menuClose = document.getElementById('menu-close');
     const sidebar = document.getElementById('sidebar');
-
-    if (menuToggle) menuToggle.onclick = () => sidebar.classList.remove('-translate-x-full');
-    if (menuClose) menuClose.onclick = () => sidebar.classList.add('-translate-x-full');
+    document.getElementById('menu-toggle')?.addEventListener('click',
+        () => sidebar.classList.remove('-translate-x-full'));
+    document.getElementById('menu-close')?.addEventListener('click',
+        () => sidebar.classList.add('-translate-x-full'));
 });
