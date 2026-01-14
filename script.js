@@ -150,6 +150,7 @@ function switchGate(gateId) {
     if (activeTab) activeTab.classList.add('active');
 
     let html = `
+    <div class="max-w-4xl xl:max-w-5xl mx-auto">
         <div class="rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative group">
           <iframe
         class="w-full h-full"
@@ -167,6 +168,7 @@ function switchGate(gateId) {
                     <p class="text-slate-200 font-bold">此處載入 ${gate.name} 完整攻略影片</p>
                 </div>
             </div>
+        </div>
         </div>
 
         <section>
