@@ -223,6 +223,12 @@ function switchGate(gateId) {
         </section>
     `;
     document.getElementById('gate-content').innerHTML = html;
+    const iframe = document.createElement('iframe');
+iframe.src = `https://www.youtube.com/embed/${gate.youtubeId}?autoplay=1`;
+iframe.className = "w-full h-full";
+iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+iframe.allowFullscreen = true;
+overlay.replaceWith(iframe);
 }
 document.addEventListener('click', function (e) {
   const overlay = e.target.closest('.video-overlay')
@@ -230,12 +236,7 @@ document.addEventListener('click', function (e) {
     overlay.remove()
   }
 })
-const iframe = document.createElement('iframe');
-iframe.src = `https://www.youtube.com/embed/${gate.youtubeId}?autoplay=1`;
-iframe.className = "w-full h-full";
-iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-iframe.allowFullscreen = true;
-overlay.replaceWith(iframe);
+
 
 document.addEventListener('DOMContentLoaded', () => {
     initSidebar();
