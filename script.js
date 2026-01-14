@@ -151,7 +151,7 @@ function switchGate(gateId) {
         <div class="rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative group">
           <iframe
         class="w-full h-full"
-        src="https://www.youtube.com/embed/y8wsk0oEWWQ"
+        src="https://www.youtube.com/embed/y8wsk0oEWWQ?si=aobXPhgibsvO0-pE"
         title="YouTube video player"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
