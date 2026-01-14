@@ -150,7 +150,7 @@ function switchGate(gateId) {
     if (activeTab) activeTab.classList.add('active');
 
     let html = `
-    <div class="max-w-4xl xl:max-w-5xl mx-auto">
+    <div class="max-w-4xl xl:max-w-5xl mx-auto mb-12 md:mb-16">
         <div class="rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative group">
           <iframe
         class="w-full h-full"
