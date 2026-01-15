@@ -226,14 +226,14 @@ function switchGate(gateId) {
         >
           <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
             <i class="fab fa-youtube text-4xl text-red-600 opacity-80"></i>
-            <span class="mt-2 text-[10px] text-slate-300">
+            <span class="mt-2 text-[30px] text-slate-300">
               點擊觀看招式影片
             </span>
           </div>
         </div>
 
         <!-- 文字区（同一张卡里面） -->
-        <div class="p-5 text-sm">
+        <div class="p-5 text-lg">
           <h4 class="font-bold text-blue-300 mb-2 flex items-center gap-2">
             ${p.isCounter ? '<span class="bg-blue-600 text-[8px] px-1.5 py-0.5 rounded text-white">COUNTER</span>' : ''}
             ${p.name}
