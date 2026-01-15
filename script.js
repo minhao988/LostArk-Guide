@@ -12,7 +12,7 @@ const allRaids = {
                 youtubeId: "y8wsk0oEWWQ",
                 patterns: [
                     { name: '刀劍 (blade line)', desc: 'Boss 揮刀 > 前方甩3條綫 > 砸後方分綫 > 砸前後', tips: '側擊沒什麽問題 打頭背適當躲避前後', gif: 'shadow_strike.gif', videoId: 'Q4ewwMjSQHI' },
-                    { name: '4槍連擊 (4 Spear)', desc: 'Boss 往前方射出兩次槍矛 > 往前方丟出大球 > 後續各小地板槍矛', tips: '背後安全', gif: 'counter_rush.gif', isCounter: false, videoId: 'POgWxytwOAA' },
+                    { name: '4槍連擊 (4 Spear)', desc: 'Boss 往前方射出兩次槍矛 > 往前方丟出大球 > 後續各小地板槍矛', tips: '背後安全', gif: 'counter_rush.gif', isCounter: true, videoId: 'POgWxytwOAA' },
                     { name: '引力坍縮 (Gravity Well)', desc: 'Boss 召喚巨大的黑暗黑洞，吸引所有玩家向中心移動並引爆。', tips: '往外圍跑，或使用具備「強霸體 (Super Armor)」的技能免疫吸引效果。', gif: 'gravity_well.gif', videoId: 'AbCdEf12345' },
                     { name: '紫圈擴散 (Purple Wave)', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' }
                 ],
@@ -233,13 +233,13 @@ function switchGate(gateId) {
         </div>
 
         <!-- 文字区（同一张卡里面） -->
-        <div class="p-5 text-lg">
+        <div class="p-5">
           <h4 class="font-bold text-blue-300 mb-2 flex items-center gap-2">
-            ${p.isCounter ? '<span class="bg-blue-600 text-[8px] px-1.5 py-0.5 rounded text-white">COUNTER</span>' : ''}
+            ${p.isCounter ? '<span class="bg-blue-600 text-[16px] px-1.5 py-0.5 rounded text-white">COUNTER</span>' : ''}
             ${p.name}
           </h4>
 
-          <p class="text-slate-300 text-xs mb-4 min-h-[32px]">
+          <p class="text-slate-300 text-sm mb-4 min-h-[32px]">
             ${p.desc}
           </p>
 
