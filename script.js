@@ -217,16 +217,17 @@ function switchGate(gateId) {
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 ${gate.patterns.map(p => `
                     <div class="bg-slate-800/40 border border-white/10 rounded-2xl overflow-hidden hover:bg-slate-800/60 transition-all">
-                        <div class="relative w-full aspect-video cursor-pointer group bg-black/40 overflow-hidden"
-                        data-video="${p.videoId || ''}"
+                      <div
+                          class="relative w-full aspect-video max-h-[180px] md:max-h-[200px]
+                                 cursor-pointer group bg-black/40 overflow-hidden"
+                          data-video="${p.videoId || ''}"
                         >
-                        <!-- 👇 這一層專門負責「置中 icon + 文字」 -->
-                            <div class="absolute inset-0 flex flex-col items-center justify-center">
-                            <i class="fab fa-youtube text-5xl text-red-600 opacity-80 group-hover:scale-110 transition"></i>
+                          <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <i class="fab fa-youtube text-4xl text-red-600 opacity-80"></i>
                             <span class="mt-2 text-[10px] text-slate-300">
-                            點擊觀看招式影片
+                              點擊觀看招式影片
                             </span>
-                            </div>
+                          </div>
                         </div>
                     </div>
                         <div class="p-5">
