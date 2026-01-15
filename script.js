@@ -26,9 +26,9 @@ const allRaids = {
                     { name: '紫圈擴散 (Purple Wave)', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' }
                 ],
                 mechanics: [
-                    { hp: '900', title: '抓人', desc: 'Boss 產生球追蹤玩家並抓起來 隨後出現反制。', details: '失敗反制, 造成被抓的玩家們死亡。', type: 'mech' },
-                    { hp: 'x700', title: '團隊癱瘓', desc: '戰場變成1打1的局面 所有玩家要在1分鐘内把紫條癱瘓打掉。', details: '反制能提升癱瘓值。', type: 'mech' },
-                    { hp: 'x500', title: '接劍', desc: '王突然消失 真和假幻象同時出現在1/5/7/11位置 需要在真身位置接劍', details: '失敗團滅，接劍后要躲避後續鈎鎖', type: 'mech' }
+                    { hp: '900', title: '抓人', desc: 'Boss 產生球追蹤玩家並抓起來 隨後出現反制。', details: '失敗反制, 造成被抓的玩家們死亡。', type: 'mech', videoId: 'POgWxytwOAA' },
+                    { hp: 'x700', title: '團隊癱瘓', desc: '戰場變成1打1的局面 所有玩家要在1分鐘内把紫條癱瘓打掉。', details: '反制能提升癱瘓值。', type: 'mech', videoId: 'POgWxytwOAA' },
+                    { hp: 'x500', title: '接劍', desc: '王突然消失 真和假幻象同時出現在1/5/7/11位置 需要在真身位置接劍', details: '失敗團滅，接劍后要躲避後續鈎鎖', type: 'mech', videoId: 'POgWxytwOAA' }
                 ]
             },
             2: {
@@ -180,7 +180,7 @@ function switchGate(gateId) {
         </div>
         </div>
 
-   <section>
+  <section>
     <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
         <span class="w-1.5 h-8 bg-yellow-500 rounded-full"></span>
         核心機制詳解 (Major Mechanics)
@@ -202,13 +202,24 @@ function switchGate(gateId) {
                     </div>
                 </div>
 
-                <!-- 右側標題 + 描述 -->
+                <!-- 右側標題 + 描述 + 影片 -->
                 <div class="flex-1 min-w-0">
                     <div class="flex items-center gap-2 mb-2">
                         ${getIcon(m.type)}
                         <h4 class="text-xl font-bold text-slate-100 truncate">${m.title}</h4>
                     </div>
-                    <p class="text-slate-400 text-sm leading-relaxed break-words">${m.desc}</p>
+                    <p class="text-slate-400 text-sm leading-relaxed break-words mb-3">${m.desc}</p>
+
+                    <!-- 影片區塊 -->
+                    ${m.videoId ? `
+                    <div class="relative w-full aspect-video cursor-pointer group bg-black/40 overflow-hidden mb-3" data-video="${m.videoId}">
+                        <!-- 置中 overlay icon + 文字 -->
+                        <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                            <i class="fab fa-youtube text-4xl text-red-600 opacity-80"></i>
+                            <span class="mt-2 text-[10px] text-slate-300">點擊觀看影片</span>
+                        </div>
+                    </div>
+                    ` : ''}
                 </div>
 
             </div>
