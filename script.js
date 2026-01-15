@@ -180,7 +180,7 @@ function switchGate(gateId) {
         </div>
         </div>
 
-  <section>
+ <section>
     <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
         <span class="w-1.5 h-8 bg-yellow-500 rounded-full"></span>
         核心機制詳解 (Major Mechanics)
@@ -210,16 +210,15 @@ function switchGate(gateId) {
                     </div>
                     <p class="text-slate-400 text-sm leading-relaxed break-words mb-3">${m.desc}</p>
 
-                 <div
-  class="relative w-full aspect-video max-h-[160px] md:max-h-[180px]
-         cursor-pointer group bg-black/40 overflow-hidden mb-3"
-  data-video="${m.videoId}"
->
-  <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-    <i class="fab fa-youtube text-3xl text-red-600 opacity-80"></i>
-    <span class="mt-1 text-[10px] text-slate-300">點擊觀看影片</span>
-  </div>
-</div>
+                    <!-- 影片區塊 -->
+                    ${m.videoId ? `
+                    <div class="relative w-full aspect-video cursor-pointer group bg-black/40 overflow-hidden mb-3" data-video="${m.videoId}">
+                        <!-- 置中 overlay icon + 文字 -->
+                        <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                            <i class="fab fa-youtube text-4xl text-red-600 opacity-80"></i>
+                            <span class="mt-2 text-[10px] text-slate-300">點擊觀看影片</span>
+                        </div>
+                    </div>
                     ` : ''}
                 </div>
 
@@ -228,6 +227,7 @@ function switchGate(gateId) {
         `).join('')}
     </div>
 </section>
+
 
        <section>
   <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
