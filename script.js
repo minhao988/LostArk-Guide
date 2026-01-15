@@ -11,10 +11,10 @@ const allRaids = {
                 name: '深淵之主：卡傑羅斯 (Gate 1)',
                 youtubeId: "y8wsk0oEWWQ",
                 patterns: [
-                    { name: '暗影突襲 (Shadow Strike)', desc: 'Boss 消失並鎖定一名玩家，隨後從其背後出現進行重擊。', tips: '被點名者頭上有紅眼標記，閃避動作需在 Boss 顯形的一瞬間施放。', gif: 'shadow_strike.gif' },
-                    { name: '深淵反制 (Counter Rush)', desc: 'Boss 全身閃爍藍光，向前方連續衝刺三次。', tips: '第一次衝刺後即可準備反制。若錯過第一次，可在第二或第三次閃紅光時反擊。', gif: 'counter_rush.gif', isCounter: true },
-                    { name: '引力坍縮 (Gravity Well)', desc: 'Boss 召喚巨大的黑暗黑洞，吸引所有玩家向中心移動並引爆。', tips: '往外圍跑，或使用具備「強霸體 (Super Armor)」的技能免疫吸引效果。', gif: 'gravity_well.gif' },
-                    { name: '紫圈擴散 (Purple Wave)', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif' }
+                    { name: '暗影突襲 (Shadow Strike)', desc: 'Boss 消失並鎖定一名玩家，隨後從其背後出現進行重擊。', tips: '被點名者頭上有紅眼標記，閃避動作需在 Boss 顯形的一瞬間施放。', gif: 'shadow_strike.gif', videoId: 'AbCdEf12345' },
+                    { name: '深淵反制 (Counter Rush)', desc: 'Boss 全身閃爍藍光，向前方連續衝刺三次。', tips: '第一次衝刺後即可準備反制。若錯過第一次，可在第二或第三次閃紅光時反擊。', gif: 'counter_rush.gif', isCounter: true, videoId: 'AbCdEf12345' },
+                    { name: '引力坍縮 (Gravity Well)', desc: 'Boss 召喚巨大的黑暗黑洞，吸引所有玩家向中心移動並引爆。', tips: '往外圍跑，或使用具備「強霸體 (Super Armor)」的技能免疫吸引效果。', gif: 'gravity_well.gif', videoId: 'AbCdEf12345' },
+                    { name: '紫圈擴散 (Purple Wave)', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' }
                 ],
                 mechanics: [
                     { hp: '900', title: '抓人', desc: 'Boss 產生球追蹤玩家並抓起來 隨後出現反制。', details: '失敗反制, 造成被抓的玩家們死亡。', type: 'mech' },
@@ -217,9 +217,13 @@ function switchGate(gateId) {
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 ${gate.patterns.map(p => `
                     <div class="bg-slate-800/40 border border-white/10 rounded-2xl overflow-hidden hover:bg-slate-800/60 transition-all">
-                        <div class="h-40 pattern-gif-placeholder flex items-center justify-center">
-                            <p class="text-[10px] text-slate-500 italic">[動畫示意圖佔位]</p>
-                        </div>
+                     <div class="h-40 relative cursor-pointer group bg-black/40 flex items-center justify-center"
+                      data-video="${p.videoId || ''}">
+                      <i class="fab fa-youtube text-4xl text-red-600 opacity-80 group-hover:scale-110 transition"></i>
+                      <span class="absolute bottom-2 text-[10px] text-slate-300">
+                      點擊觀看招式影片
+                      </span>
+                    </div>
                         <div class="p-5">
                             <h4 class="font-bold text-blue-300 mb-2 flex items-center gap-2">
                                 ${p.isCounter ? '<span class="bg-blue-600 text-[8px] px-1.5 py-0.5 rounded text-white">COUNTER</span>' : ''}
@@ -250,6 +254,22 @@ if (overlay) {
         this.remove(); // 移除 overlay
     });
 }
+    document.querySelectorAll('[data-video]').forEach(el => {
+    el.addEventListener('click', function () {
+        const videoId = this.dataset.video;
+        if (!videoId) return;
+
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;
+        iframe.className = 'w-full h-full absolute inset-0';
+        iframe.allow =
+          'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        iframe.allowFullscreen = true;
+
+        this.innerHTML = '';
+        this.appendChild(iframe);
+    });
+});
 }
 
 
