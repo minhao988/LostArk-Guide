@@ -226,12 +226,11 @@ function switchGate(gateId) {
 
             ${m.videoId ? `
               <!-- 攻略頁適中尺寸影片 -->
-             <div
-  class="relative aspect-video
-         w-full sm:w-[420px] md:w-[480px] lg:w-[520px]
-         max-h-[190px] md:max-h-[220px] lg:max-h-[240px]
-         cursor-pointer group bg-black/40 overflow-hidden
-         sm:mx-0"
+       <div
+  class="relative w-full aspect-video
+         sm:w-[480px] lg:w-[560px]
+         sm:h-[270px] lg:h-[315px]
+         cursor-pointer group bg-black/40 overflow-hidden"
   data-video="${m.videoId}"
 >
   <div
