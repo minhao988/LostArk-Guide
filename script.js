@@ -217,7 +217,7 @@ function switchGate(gateId) {
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 ${gate.patterns.map(p => `
                     <div class="bg-slate-800/40 border border-white/10 rounded-2xl overflow-hidden hover:bg-slate-800/60 transition-all">
-                     <div class="h-40 relative cursor-pointer group bg-black/40 flex items-center justify-center"
+                     <div class="relative w-full aspect-video cursor-pointer group bg-black/40 overflow-hidden"
                       data-video="${p.videoId || ''}">
                       <i class="fab fa-youtube text-4xl text-red-600 opacity-80 group-hover:scale-110 transition"></i>
                       <span class="absolute bottom-2 text-[10px] text-slate-300">
@@ -261,7 +261,7 @@ if (overlay) {
 
         const iframe = document.createElement('iframe');
         iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;
-        iframe.className = 'w-full h-full absolute inset-0';
+        iframe.className = 'absolute inset-0 w-full h-full';
         iframe.allow =
           'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
         iframe.allowFullscreen = true;
