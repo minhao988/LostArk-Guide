@@ -235,11 +235,11 @@ function switchGate(gateId) {
         <!-- 文字区（同一张卡里面） -->
         <div class="p-5">
           <h4 class="font-bold text-blue-300 mb-2 flex items-center gap-2">
-            ${p.isCounter ? '<span class="bg-blue-600 text-[16px] px-1.5 py-0.5 rounded text-white">COUNTER</span>' : ''}
+            ${p.isCounter ? '<span class="bg-blue-600 text-[8px] px-1.5 py-0.5 rounded text-white">COUNTER</span>' : ''}
             ${p.name}
           </h4>
 
-          <p class="text-slate-300 text-sm mb-4 min-h-[32px]">
+          <p class="text-slate-300 text-xs mb-4 min-h-[32px] text-[12px]">
             ${p.desc}
           </p>
 
