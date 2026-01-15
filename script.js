@@ -217,11 +217,18 @@ function switchGate(gateId) {
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 ${gate.patterns.map(p => `
                     <div class="bg-slate-800/40 border border-white/10 rounded-2xl overflow-hidden hover:bg-slate-800/60 transition-all">
-                     <div class="relative w-full aspect-video cursor-pointer group bg-black/40 overflow-hidden" data-video="${p.videoId || ''}"> 
-                     <i class="fab fa-youtube text-4xl text-red-600 opacity-80 group-hover:scale-110 transition"></i> 
-                     <span 
-                         class="absolute bottom-2 text-[10px] text-slate-300"> 點擊觀看招式影片 
-                     </span>
+                   <div
+                          class="relative w-full aspect-video cursor-pointer group bg-black/40 overflow-hidden"
+                          data-video="${p.videoId || ''}"
+                        >
+                          <!-- 置中 overlay（只負責 icon + 文字） -->
+                          <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                            <i class="fab fa-youtube text-4xl text-red-600 opacity-80"></i>
+                            <span class="mt-2 text-[10px] text-slate-300">
+                              點擊觀看招式影片
+                            </span>
+                          </div>
+                        </div>
                     </div>
                         <div class="p-5">
                             <h4 class="font-bold text-blue-300 mb-2 flex items-center gap-2">
