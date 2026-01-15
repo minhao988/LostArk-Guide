@@ -231,21 +231,24 @@ function switchGate(gateId) {
             </span>
           </div>
         </div>
-
-        <!-- 文字区（同一张卡里面） -->
-        <div class="p-5">
-          <h4 class="font-bold text-blue-300 mb-2 flex items-center gap-2">
+        
+              <!-- 文字區（同一張卡片內） -->
+        <div class="p-5 text-[13px] md:text-[14px] lg:text-[15px]">
+          <!-- 標題 -->
+          <h4 class="font-bold text-blue-300 mb-2 flex items-center gap-2 text-[16px] md:text-[18px]">
             ${p.isCounter ? '<span class="bg-blue-600 text-[8px] px-1.5 py-0.5 rounded text-white">COUNTER</span>' : ''}
             ${p.name}
           </h4>
-
-          <p class="text-slate-300 text-xs mb-4 min-h-[32px] text-[12px]">
+        
+          <!-- 描述 -->
+          <p class="text-slate-300 mb-4 min-h-[32px]">
             ${p.desc}
           </p>
-
+        
+          <!-- 應對方案 -->
           <div class="bg-blue-950/30 border border-blue-500/30 rounded-lg p-3">
-            <p class="text-blue-400 text-[10px] font-black uppercase mb-1">應對方案</p>
-            <p class="text-slate-400 text-xs italic">${p.tips}</p>
+            <p class="text-blue-400 font-black uppercase mb-1 text-[11px] md:text-[12px]">應對方案</p>
+            <p class="text-slate-400 italic text-[11px] md:text-[12px]">${p.tips}</p>
           </div>
         </div>
 
