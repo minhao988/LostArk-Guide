@@ -180,7 +180,7 @@ function switchGate(gateId) {
         </div>
         </div>
 
- <section>
+<section>
   <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
     <span class="w-1.5 h-8 bg-yellow-500 rounded-full"></span>
     核心機制詳解 (Major Mechanics)
@@ -210,7 +210,7 @@ function switchGate(gateId) {
             </div>
           </div>
 
-          <!-- 右側 標題 + 描述 + 影片 -->
+          <!-- 右側：標題 + 描述 + 影片 -->
           <div class="flex-1 min-w-0">
 
             <div class="flex items-center gap-2 mb-2">
@@ -225,18 +225,19 @@ function switchGate(gateId) {
             </p>
 
             ${m.videoId ? `
-              <!-- 小尺寸影片 -->
+              <!-- 攻略頁適中尺寸影片 -->
               <div
-                class="relative w-full aspect-video max-h-[150px] md:max-h-[170px]
-                cursor-pointer group bg-black/40 overflow-hidden"
+                class="relative w-full aspect-video
+                       max-h-[190px] md:max-h-[220px] lg:max-h-[240px]
+                       cursor-pointer group bg-black/40 overflow-hidden"
                 data-video="${m.videoId}"
               >
                 <div
                   class="absolute inset-0 flex flex-col items-center justify-center
-                  pointer-events-none"
+                         pointer-events-none"
                 >
-                  <i class="fab fa-youtube text-3xl text-red-600 opacity-80"></i>
-                  <span class="mt-1 text-[10px] text-slate-300">
+                  <i class="fab fa-youtube text-4xl text-red-600 opacity-80"></i>
+                  <span class="mt-2 text-[11px] text-slate-300">
                     點擊觀看影片
                   </span>
                 </div>
