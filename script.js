@@ -11,8 +11,8 @@ const allRaids = {
                 name: '深淵之主：卡傑羅斯 (Gate 1)',
                 youtubeId: "y8wsk0oEWWQ",
                 patterns: [
-                    { name: '刀劍 (blade line)', desc: 'Boss 揮刀 > 前方甩3條綫 > 砸後方分綫 > 接砸前後。', tips: '側擊沒什麽問題 打頭背適當躲避前後', gif: 'shadow_strike.gif', videoId: 'Q4ewwMjSQHI' },
-                    { name: '深淵反制 (Counter Rush)', desc: 'Boss 全身閃爍藍光，向前方連續衝刺三次。', tips: '第一次衝刺後即可準備反制。若錯過第一次，可在第二或第三次閃紅光時反擊。', gif: 'counter_rush.gif', isCounter: true, videoId: 'AbCdEf12345' },
+                    { name: '刀劍 (blade line)', desc: 'Boss 揮刀 > 前方甩3條綫 > 砸後方分綫 > 砸前後', tips: '側擊沒什麽問題 打頭背適當躲避前後', gif: 'shadow_strike.gif', videoId: 'Q4ewwMjSQHI' },
+                    { name: '4槍連擊 (4 Spear)', desc: 'Boss 往前方射出兩次槍矛 > 往前方丟出大球 > 後續各小地板槍矛', tips: '背後安全', gif: 'counter_rush.gif', isCounter: false, videoId: 'POgWxytwOAA' },
                     { name: '引力坍縮 (Gravity Well)', desc: 'Boss 召喚巨大的黑暗黑洞，吸引所有玩家向中心移動並引爆。', tips: '往外圍跑，或使用具備「強霸體 (Super Armor)」的技能免疫吸引效果。', gif: 'gravity_well.gif', videoId: 'AbCdEf12345' },
                     { name: '紫圈擴散 (Purple Wave)', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' }
                 ],
