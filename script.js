@@ -208,43 +208,51 @@ function switchGate(gateId) {
     </div>
 </section>
 
-        <section>
-            <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
+       <section>
+  <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
+    <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span>
+    招式動作解析 (Action Guide)
+  </h3>
 
-                <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span>
-                招式動作解析 (Action Guide)
-            </h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                ${gate.patterns.map(p => `
-                    <div class="bg-slate-800/40 border border-white/10 rounded-2xl overflow-hidden hover:bg-slate-800/60 transition-all">
-                   <div
-                          class="relative w-full aspect-video cursor-pointer group bg-black/40 overflow-hidden"
-                          data-video="${p.videoId || ''}"
-                        >
-                          <!-- 置中 overlay（只負責 icon + 文字） -->
-                          <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                            <i class="fab fa-youtube text-4xl text-red-600 opacity-80"></i>
-                            <span class="mt-2 text-[10px] text-slate-300">
-                              點擊觀看招式影片
-                            </span>
-                          </div>
-                        </div>
-                    </div>
-                        <div class="p-5">
-                            <h4 class="font-bold text-blue-300 mb-2 flex items-center gap-2">
-                                ${p.isCounter ? '<span class="bg-blue-600 text-[8px] px-1.5 py-0.5 rounded text-white">COUNTER</span>' : ''}
-                                ${p.name}
-                            </h4>
-                            <p class="text-slate-300 text-xs mb-4 min-h-[32px]">${p.desc}</p>
-                            <div class="bg-blue-950/30 border border-blue-500/30 rounded-lg p-3">
-                                <p class="text-blue-400 text-[10px] font-black uppercase mb-1">應對方案</p>
-                                <p class="text-slate-400 text-xs italic">${p.tips}</p>
-                            </div>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-        </section>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    ${gate.patterns.map(p => `
+      <!-- 一招 = 一张卡（这是 grid 的直接子元素） -->
+      <div class="bg-slate-800/40 border border-white/10 rounded-2xl overflow-hidden hover:bg-slate-800/60 transition-all">
+
+        <!-- 影片区（在卡片里面） -->
+        <div
+          class="relative w-full aspect-video cursor-pointer group bg-black/40 overflow-hidden"
+          data-video="${p.videoId || ''}"
+        >
+          <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+            <i class="fab fa-youtube text-4xl text-red-600 opacity-80"></i>
+            <span class="mt-2 text-[10px] text-slate-300">
+              點擊觀看招式影片
+            </span>
+          </div>
+        </div>
+
+        <!-- 文字区（同一张卡里面） -->
+        <div class="p-5">
+          <h4 class="font-bold text-blue-300 mb-2 flex items-center gap-2">
+            ${p.isCounter ? '<span class="bg-blue-600 text-[8px] px-1.5 py-0.5 rounded text-white">COUNTER</span>' : ''}
+            ${p.name}
+          </h4>
+
+          <p class="text-slate-300 text-xs mb-4 min-h-[32px]">
+            ${p.desc}
+          </p>
+
+          <div class="bg-blue-950/30 border border-blue-500/30 rounded-lg p-3">
+            <p class="text-blue-400 text-[10px] font-black uppercase mb-1">應對方案</p>
+            <p class="text-slate-400 text-xs italic">${p.tips}</p>
+          </div>
+        </div>
+
+      </div>
+    `).join('')}
+  </div>
+</section>
     `;
     document.getElementById('gate-content').innerHTML = html;
 const overlay = document.querySelector('.video-overlay');
