@@ -181,52 +181,76 @@ function switchGate(gateId) {
         </div>
 
  <section>
-    <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
-        <span class="w-1.5 h-8 bg-yellow-500 rounded-full"></span>
-        核心機制詳解 (Major Mechanics)
-    </h3>
-    <div class="space-y-6">
-        ${gate.mechanics.map(m => `
-        <div class="info-card rounded-xl p-6 shadow-lg border-l-4
-            ${m.type === 'wipe' ? 'border-l-red-600' : 'border-l-yellow-500'} 
-            break-words">
-            <div class="flex flex-col sm:flex-row gap-4">
-                
-                <!-- 左側 HP + Type -->
-                <div class="flex-shrink sm:flex-shrink-0 w-full sm:w-auto">
-                    <div class="flex items-center gap-2 mb-2">
-                        <div class="text-2xl font-black text-yellow-500">${m.hp}</div>
-                        <div class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-bold text-center uppercase tracking-tighter">
-                            ${m.type}
-                        </div>
-                    </div>
-                </div>
+  <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
+    <span class="w-1.5 h-8 bg-yellow-500 rounded-full"></span>
+    核心機制詳解 (Major Mechanics)
+  </h3>
 
-                <!-- 右側標題 + 描述 + 影片 -->
-                <div class="flex-1 min-w-0">
-                    <div class="flex items-center gap-2 mb-2">
-                        ${getIcon(m.type)}
-                        <h4 class="text-xl font-bold text-slate-100 truncate">${m.title}</h4>
-                    </div>
-                    <p class="text-slate-400 text-sm leading-relaxed break-words mb-3">${m.desc}</p>
+  <div class="space-y-6">
+    ${gate.mechanics.map(m => `
+      <div
+        class="info-card rounded-xl p-6 shadow-lg border-l-4
+        ${m.type === 'wipe' ? 'border-l-red-600' : 'border-l-yellow-500'}
+        break-words"
+      >
+        <div class="flex flex-col sm:flex-row gap-4">
 
-                    <!-- 影片區塊 -->
-                    ${m.videoId ? `
-                    <div class="relative w-full aspect-video cursor-pointer group bg-black/40 overflow-hidden mb-3" data-video="${m.videoId}">
-                        <!-- 置中 overlay icon + 文字 -->
-                        <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                            <i class="fab fa-youtube text-4xl text-red-600 opacity-80"></i>
-                            <span class="mt-2 text-[10px] text-slate-300">點擊觀看影片</span>
-                        </div>
-                    </div>
-                    ` : ''}
-                </div>
-
+          <!-- 左側 HP + Type -->
+          <div class="flex-shrink-0 w-full sm:w-auto">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="text-2xl font-black text-yellow-500">
+                ${m.hp}
+              </div>
+              <div
+                class="px-2 py-0.5 rounded bg-slate-800 text-[10px]
+                font-bold text-center uppercase tracking-tighter"
+              >
+                ${m.type}
+              </div>
             </div>
+          </div>
+
+          <!-- 右側 標題 + 描述 + 影片 -->
+          <div class="flex-1 min-w-0">
+
+            <div class="flex items-center gap-2 mb-2">
+              ${getIcon(m.type)}
+              <h4 class="text-xl font-bold text-slate-100 truncate">
+                ${m.title}
+              </h4>
+            </div>
+
+            <p class="text-slate-400 text-sm leading-relaxed break-words mb-3">
+              ${m.desc}
+            </p>
+
+            ${m.videoId ? `
+              <!-- 小尺寸影片 -->
+              <div
+                class="relative w-full aspect-video max-h-[150px] md:max-h-[170px]
+                cursor-pointer group bg-black/40 overflow-hidden"
+                data-video="${m.videoId}"
+              >
+                <div
+                  class="absolute inset-0 flex flex-col items-center justify-center
+                  pointer-events-none"
+                >
+                  <i class="fab fa-youtube text-3xl text-red-600 opacity-80"></i>
+                  <span class="mt-1 text-[10px] text-slate-300">
+                    點擊觀看影片
+                  </span>
+                </div>
+              </div>
+            ` : ''}
+
+          </div>
+
         </div>
-        `).join('')}
-    </div>
+      </div>
+    `).join('')}
+  </div>
 </section>
+
 
 
        <section>
