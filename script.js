@@ -211,7 +211,7 @@ function switchGate(gateId) {
        <section>
   <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
     <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span>
-    招式動作解析 (Action Guide)
+    招式動作解析 (Patterns Guide)
   </h3>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -226,8 +226,8 @@ function switchGate(gateId) {
         >
           <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
             <i class="fab fa-youtube text-4xl text-red-600 opacity-80"></i>
-            <span class="mt-2 text-[30px] text-slate-300">
-              點擊觀看招式影片
+            <span class="mt-2 text-[20px] text-slate-300">
+               ${p.name}招式影片
             </span>
           </div>
         </div>
