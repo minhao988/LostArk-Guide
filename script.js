@@ -362,30 +362,32 @@ if (overlay) {
 }
 
 
-/* ===== DOM Loaded ===== */
 document.addEventListener('DOMContentLoaded', () => {
-    initSidebar();
-    selectRaid('final_day');
-
-    const menuToggle = document.getElementById('menu-toggle');
     const sidebar = document.getElementById('sidebar');
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidebarToggle = document.getElementById('sidebar-toggle');
 
-    // 手機漢堡開/關
+    /* 手機漢堡開關 */
     menuToggle?.addEventListener('click', () => {
         sidebar.classList.toggle('mobile-open');
     });
 
-    // 桌機收合
-    const toggleBtn = document.getElementById('sidebar-toggle');
-    if (toggleBtn) {
-        toggleBtn.onclick = () => {
-            if (window.innerWidth >= 768) {
-                sidebar.classList.toggle('sidebar-collapsed');
-                toggleBtn.innerHTML = sidebar.classList.contains('sidebar-collapsed')
-                    ? '<i class="fas fa-angle-right"></i>'
-                    : '<i class="fas fa-angle-left"></i>';
+    /* 桌機收合 */
+    sidebarToggle?.addEventListener('click', () => {
+        if (window.innerWidth >= 768) {
+            sidebar.classList.toggle('sidebar-collapsed');
+            sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
+                ? '<i class="fas fa-angle-right"></i>'
+                : '<i class="fas fa-angle-left"></i>';
+        }
+    });
+
+    /* 點手機 overlay 任意地方關閉 sidebar */
+    sidebar.addEventListener('click', e => {
+        if (window.innerWidth < 768 && sidebar.classList.contains('mobile-open')) {
+            if (e.target === sidebar) { // 點在空白處
+                sidebar.classList.remove('mobile-open');
             }
-        };
-    }
-    
+        }
+    });
 });
