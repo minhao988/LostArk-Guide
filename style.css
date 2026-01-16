@@ -137,6 +137,7 @@ body {
 }
 
 /* ===== Sidebar Tooltip（僅收合時顯示） ===== */
+@media (min-width: 768px) {
 #sidebar.sidebar-collapsed .sidebar-icon {
   position: relative;
 }
@@ -185,6 +186,7 @@ body {
 #sidebar.sidebar-collapsed .sidebar-btn:hover .sidebar-icon::after,
 #sidebar.sidebar-collapsed .sidebar-btn:hover .sidebar-icon::before {
   opacity: 1;
+}
 }
 
 
