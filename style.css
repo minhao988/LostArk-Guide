@@ -211,6 +211,13 @@ main {
     }
 }
 
+@media (min-width: 768px) {
+    .flex-container { display: flex; } /* 桌機 flex */
+}
+@media (max-width: 767px) {
+    .flex-container { display: block; } /* 手機 main 不再受 flex */
+}
+
 
 
 
