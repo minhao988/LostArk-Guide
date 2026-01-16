@@ -83,10 +83,12 @@ body {
 
 /* Gate 按鈕普通狀態 */
 .gate-btn {
-    color: #cbd5e1; /* text-slate-400 */
+    color: #cbd5e1;
     border: 1px solid rgba(255,255,255,0.1);
     background-color: transparent;
     transition: all 0.3s ease;
+    font-size: 0.75rem; /* 文字更小 (12px) */
+    padding: 0.4rem 0.8rem; /* 按鈕大小也跟著縮小 */
 }
 
 /* hover 效果 */
@@ -101,6 +103,7 @@ body {
     color: #000;
     border-color: #facc15;
 }
+
 
 
 
