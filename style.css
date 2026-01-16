@@ -60,6 +60,13 @@ body {
         justify-content: center;
         gap: 0;
     }
+  
+
+    #sidebar.sidebar-collapsed .sidebar-icon {
+        width: 2rem; /* 固定寬度 */
+        text-align: center;
+        font-size: 1.2rem;
+    }
 
     /* 文字 */
     .sidebar-text {
@@ -197,3 +204,4 @@ body {
         font-size: 1.5rem;
     }
 }
+
