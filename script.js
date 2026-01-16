@@ -330,10 +330,9 @@ function switchGate(gateId) {
 </section>
     `;
     document.getElementById('gate-content').innerHTML = html;
-const overlay = document.querySelector('.video-overlay');
-if (overlay) {
-    overlay.addEventListener('click', function() {
-        const container = this.parentElement; // 這是保持 aspect-video 的父元素
+    document.querySelectorAll('.video-overlay').forEach(overlay => {
+    overlay.addEventListener('click', function() { ... });
+          const container = this.parentElement; // 這是保持 aspect-video 的父元素
         const iframe = document.createElement('iframe');
         iframe.src = `https://www.youtube.com/embed/${gate.youtubeId}?autoplay=1&mute=1`;
         iframe.className = "w-full h-full absolute top-0 left-0"; // 撐滿父容器
@@ -341,8 +340,9 @@ if (overlay) {
         iframe.allowFullscreen = true;
         container.appendChild(iframe);
         this.remove(); // 移除 overlay
-    });
-}
+});
+
+    
     document.querySelectorAll('[data-video]').forEach(el => {
     el.addEventListener('click', function () {
         const videoId = this.dataset.video;
