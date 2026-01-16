@@ -26,9 +26,11 @@ const allRaids = {
                     { name: '紫圈擴散 (Purple Wave)', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' }
                 ],
                 mechanics: [
-                    { hp: '900', title: '抓人', desc: 'Boss 產生球追蹤玩家並抓起來 隨後出現反制。', details: '失敗反制, 造成被抓的玩家們死亡。', type: 'mech', videoId: 'POgWxytwOAA' },
-                    { hp: 'x700', title: '團隊癱瘓', desc: '戰場變成1打1的局面 所有玩家要在1分鐘内把紫條癱瘓打掉。', details: '反制能提升癱瘓值。', type: 'mech', videoId: 'POgWxytwOAA' },
-                    { hp: 'x500', title: '接劍', desc: '王突然消失 真和假幻象同時出現在1/5/7/11位置 需要在真身位置接劍', details: '失敗團滅，接劍后要躲避後續鈎鎖', type: 'mech', videoId: 'POgWxytwOAA' }
+                    { hp: '900', title: '抓人', desc: 'Boss 產生球追蹤玩家並抓起來 隨後出現反制。', details: '失敗反制, 造成被抓的玩家們死亡。', type: 'counter', videoId: 'POgWxytwOAA' },
+                    { hp: 'x700', title: '團隊癱瘓', desc: '戰場變成1打1的局面 所有玩家要在1分鐘内把紫條癱瘓打掉, 最後找自己的安全區', details: '反制能提升癱瘓值。', type: 'mech', videoId: 'POgWxytwOAA' },
+                    { hp: 'x660', title: '接劍', desc: '王突然消失 真和假幻象同時出現在1/5/7/11位置 需要在真身位置接劍', details: '失敗團滅，接劍后要躲避後續鈎鎖', type: 'mech', videoId: 'POgWxytwOAA' },
+                    { hp: 'x500', title: '接劍', desc: '王開鈎鎖能力和紅圈砸在每位玩家脚下 接著回中間進入動畫 玩家要在3輪内把護盾打掉 期間要根據3名玩家頭上標記和地板如符合 根據700那名標記玩家的安全區去站位躲避 困難模式下安全區前需要格擋中場',
+                     details: '', type: 'shield', videoId: 'POgWxytwOAA' }
                 ]
             },
             2: {
@@ -91,7 +93,19 @@ function getIcon(type) {
         mech: '<i class="fas fa-cog text-yellow-400"></i>',
         warning: '<i class="fas fa-exclamation-circle text-orange-400"></i>',
         dps: '<i class="fas fa-fire text-orange-600"></i>',
-        survival: '<i class="fas fa-heartbeat text-green-400"></i>'
+        survival: '<i class="fas fa-heartbeat text-green-400"></i>',
+        // 👇 新增常用類型
+        counter:   '<i class="fas fa-hand-fist text-sky-400"></i>',        // 反制
+        stagger:   '<i class="fas fa-gauge-high text-purple-400"></i>',    // 破防 / 擊倒
+        pattern:   '<i class="fas fa-diagram-project text-indigo-400"></i>', // 固定模式
+        movement:  '<i class="fas fa-arrows-up-down-left-right text-blue-400"></i>', // 走位
+        positioning:'<i class="fas fa-location-crosshairs text-cyan-400"></i>', // 站位
+        debuff:    '<i class="fas fa-virus text-lime-400"></i>',           // 減益
+        buff:      '<i class="fas fa-arrow-trend-up text-emerald-400"></i>', // 增益
+        cleanse:   '<i class="fas fa-soap text-teal-400"></i>',            // 淨化
+        shield:    '<i class="fas fa-shield-halved text-slate-300"></i>',   // 護盾
+        timer:     '<i class="fas fa-hourglass-half text-amber-400"></i>',  // 倒數
+        puzzle:    '<i class="fas fa-puzzle-piece text-fuchsia-400"></i>'  // 解謎
     };
     return icons[type] || '<i class="fas fa-info-circle text-gray-400"></i>';
 }
