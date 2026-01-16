@@ -36,15 +36,15 @@ body {
         display: none;
     }
     
-    /* #sidebar.sidebar-collapsed .sidebar-btn span {
-        display: none;
-    } */
-    /* #sidebar.sidebar-collapsed .sidebar-btn { justify-content: center; } */
-    
-    #sidebar.sidebar-collapsed .sidebar-btn {
-      justify-content: center; /* 收回後按鈕內 icon 居中 */
-      gap: 0;                  /* 去掉間距 */
-    }
+#sidebar.sidebar-collapsed .sidebar-text {
+    display: none; /* 只隱藏文字 */
+}
+
+/* 收回時按鈕內 icon 居中 */
+#sidebar.sidebar-collapsed .sidebar-btn {
+    justify-content: center;
+    gap: 0;
+}
 
 #sidebar.sidebar-collapsed .sidebar-btn .sidebar-icon {
   display: inline-flex;
@@ -203,6 +203,7 @@ body {
   opacity: 1;
 }
 }
+
 
 
 
