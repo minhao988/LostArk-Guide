@@ -369,50 +369,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.getElementById('sidebar');
     const toggleBtn = document.getElementById('sidebar-toggle');
 
-    // 初始狀態
-    if (window.innerWidth < 768) {
-        sidebar.classList.add('-translate-x-full'); // 手機隱藏
-    } else {
-        sidebar.classList.remove('-translate-x-full'); // 桌機顯示
-    }
-
-    // toggle 按鈕
     if (toggleBtn) {
         toggleBtn.onclick = () => {
-            if (window.innerWidth >= 768) {
-                // 桌機收合
-                sidebar.classList.toggle('sidebar-collapsed');
-                toggleBtn.innerHTML = sidebar.classList.contains('sidebar-collapsed')
-                    ? '<i class="fas fa-angle-right"></i>'
-                    : '<i class="fas fa-angle-left"></i>';
+            sidebar.classList.toggle('sidebar-collapsed');
+            toggleBtn.innerHTML = sidebar.classList.contains('sidebar-collapsed')
+                ? '<i class="fas fa-angle-right"></i>'
+                : '<i class="fas fa-angle-left"></i>';
 
-                document.querySelectorAll('.sidebar-btn span').forEach(span => {
-                    span.style.display = sidebar.classList.contains('sidebar-collapsed') ? 'none' : 'inline';
-                });
-            } else {
-                // 手機滑入/滑出
-                sidebar.classList.toggle('-translate-x-full');
-                toggleBtn.innerHTML = sidebar.classList.contains('-translate-x-full')
-                    ? '<i class="fas fa-bars"></i>'
-                    : '<i class="fas fa-xmark"></i>';
-            }
+            // 顯示/隱藏文字
+            document.querySelectorAll('.sidebar-btn span').forEach(span => {
+                span.style.display = sidebar.classList.contains('sidebar-collapsed') ? 'none' : 'inline';
+            });
         };
     }
-
-    // 手機 hamburger
-    const mobileToggle = document.getElementById('menu-toggle');
-    if (mobileToggle) {
-        mobileToggle.onclick = () => {
-            sidebar.classList.toggle('-translate-x-full');
-        };
-    }
-
-    // resize
-    window.addEventListener('resize', () => {
-        if (window.innerWidth >= 768) {
-            sidebar.classList.remove('-translate-x-full');
-        } else {
-            sidebar.classList.add('-translate-x-full');
-        }
-    });
 });
