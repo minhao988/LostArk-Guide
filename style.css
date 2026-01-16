@@ -219,7 +219,11 @@ main {
     #sidebar.sidebar-collapsed {
         width: 100% !important; /* 手機時收合不縮窄 */
     }
+    main {
+        margin-left: 0 !important; /* 手機 main 永遠不被推開 */
+    }
 }
+
 
 
 
