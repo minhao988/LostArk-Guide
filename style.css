@@ -32,14 +32,24 @@ body {
     }
 
     /* 收合後隱藏文字 */
-    #sidebar.sidebar-collapsed .sidebar-text,
-    #sidebar.sidebar-collapsed .sidebar-btn span {
+    #sidebar.sidebar-collapsed .sidebar-text {
         display: none;
     }
-    #sidebar.sidebar-collapsed .sidebar-btn { justify-content: center; }
-    #sidebar.sidebar-collapsed h1 {
-    justify-content: center;  /* icon 居中 */
-    gap: 0;                   /* 取消 gap */
+    
+    /* #sidebar.sidebar-collapsed .sidebar-btn span {
+        display: none;
+    } */
+    /* #sidebar.sidebar-collapsed .sidebar-btn { justify-content: center; } */
+    
+    #sidebar.sidebar-collapsed .sidebar-btn {
+      justify-content: center; /* 收回後按鈕內 icon 居中 */
+      gap: 0;                  /* 去掉間距 */
+    }
+
+#sidebar.sidebar-collapsed .sidebar-btn .sidebar-icon {
+  display: inline-flex;
+  justify-content: center;
+  width: 1.5rem;
 }
 
     /* 內容區靠左，不留空間 */
@@ -151,7 +161,7 @@ body {
 #sidebar.sidebar-collapsed .sidebar-icon::after {
   content: attr(data-tooltip);
   position: absolute;
-  left: 140%;
+  left: 110%;
   top: 50%;
   transform: translateY(-50%);
 
@@ -193,6 +203,7 @@ body {
   opacity: 1;
 }
 }
+
 
 
 
