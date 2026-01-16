@@ -5,6 +5,11 @@ body {
 }
 main {
     transition: margin-left 0.3s ease;
+    margin-left: 18rem; /* 對應 w-72 = 288px */
+}
+
+#sidebar.sidebar-collapsed + main {
+    margin-left: 4rem; /* 收合後只留窄列 */
 }
 .raid-gradient-final { background: linear-gradient(135deg, #450a0a 0%, #000000 100%); }
 .raid-gradient-act4 { background: linear-gradient(135deg, #1e1b4b 0%, #000000 100%); }
@@ -156,6 +161,7 @@ main {
         display: block;
     }
 }
+
 
 
 
