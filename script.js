@@ -367,36 +367,52 @@ document.addEventListener('DOMContentLoaded', () => {
     selectRaid('final_day');
 
     const sidebar = document.getElementById('sidebar');
-    const toggleBtn = document.getElementById('sidebar-toggle'); // 新增的統一按鈕
+    const toggleBtn = document.getElementById('sidebar-toggle');
 
+    // 初始狀態
+    if (window.innerWidth < 768) {
+        sidebar.classList.add('-translate-x-full'); // 手機隱藏
+    } else {
+        sidebar.classList.remove('-translate-x-full'); // 桌機顯示
+    }
+
+    // toggle 按鈕
     if (toggleBtn) {
         toggleBtn.onclick = () => {
-            // 切換收合狀態
-            sidebar.classList.toggle('sidebar-collapsed');
+            if (window.innerWidth >= 768) {
+                // 桌機收合
+                sidebar.classList.toggle('sidebar-collapsed');
+                toggleBtn.innerHTML = sidebar.classList.contains('sidebar-collapsed')
+                    ? '<i class="fas fa-angle-right"></i>'
+                    : '<i class="fas fa-angle-left"></i>';
 
-            // 手機：如果 sidebar 本來是隱藏的，也打開
-            if (!sidebar.classList.contains('sidebar-collapsed') && window.innerWidth < 768) {
-                sidebar.classList.remove('-translate-x-full');
+                document.querySelectorAll('.sidebar-btn span').forEach(span => {
+                    span.style.display = sidebar.classList.contains('sidebar-collapsed') ? 'none' : 'inline';
+                });
+            } else {
+                // 手機滑入/滑出
+                sidebar.classList.toggle('-translate-x-full');
+                toggleBtn.innerHTML = sidebar.classList.contains('-translate-x-full')
+                    ? '<i class="fas fa-bars"></i>'
+                    : '<i class="fas fa-xmark"></i>';
             }
-
-            // icon 切換
-            toggleBtn.innerHTML = sidebar.classList.contains('sidebar-collapsed')
-                ? '<i class="fas fa-angle-right"></i>'
-                : '<i class="fas fa-angle-left"></i>';
         };
     }
 
-    // 手機初始狀態隱藏 sidebar
-    if (window.innerWidth < 768) {
-        sidebar.classList.add('-translate-x-full');
+    // 手機 hamburger
+    const mobileToggle = document.getElementById('menu-toggle');
+    if (mobileToggle) {
+        mobileToggle.onclick = () => {
+            sidebar.classList.toggle('-translate-x-full');
+        };
     }
 
-    // 可選：窗口尺寸改變時自動調整
+    // resize
     window.addEventListener('resize', () => {
         if (window.innerWidth >= 768) {
-            sidebar.classList.remove('-translate-x-full'); // 桌機一定顯示
+            sidebar.classList.remove('-translate-x-full');
         } else {
-            sidebar.classList.add('-translate-x-full'); // 手機隱藏
+            sidebar.classList.add('-translate-x-full');
         }
     });
 });
