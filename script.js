@@ -399,6 +399,11 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebar.classList.remove('mobile-open');
     }
 });
+  document.querySelectorAll('.sidebar-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        if (window.innerWidth < 768) sidebar.classList.remove('mobile-open');
+    });
+});
 
     // 點手機 overlay 任意地方關閉 sidebar
     sidebar.addEventListener('click', e => {
