@@ -215,7 +215,7 @@ function switchGate(gateId) {
 
             <div class="flex items-center gap-2 mb-2">
               ${getIcon(m.type)}
-              <h4 class="text-xl font-bold text-slate-100 truncate">
+             <h4 class="text-xl sm:text-2xl font-bold text-slate-100">
                 ${m.title}
               </h4>
             </div>
