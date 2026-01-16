@@ -268,7 +268,7 @@ function switchGate(gateId) {
   >
     <i class="fab fa-youtube text-5xl text-red-600 opacity-90"></i>
     <span class="mt-2 text-[12px] text-slate-300">
-      點擊觀看影片
+      點擊觀看${m.title}
     </span>
   </div>
 </div>
