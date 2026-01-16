@@ -212,8 +212,16 @@ main {
     .flex-container { display: flex; } /* 桌機 flex */
 }
 @media (max-width: 767px) {
-    .flex-container { display: block; } /* 手機 main 不再受 flex */
+    .flex-container { 
+        display: block; 
+    } /* 手機 main 不再受 flex */
+    
+    #sidebar.sidebar-collapsed {
+        width: 100% !important; /* 手機時收合不縮窄 */
+    }
 }
+
+
 
 
 
