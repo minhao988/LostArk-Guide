@@ -226,19 +226,20 @@ function switchGate(gateId) {
 
             ${m.videoId ? `
               <!-- 攻略頁適中尺寸影片 -->
-       <div
+    <div
   class="relative w-full aspect-video
-         sm:w-[480px] lg:w-[560px]
-         sm:h-[270px] lg:h-[315px]
-         cursor-pointer group bg-black/40 overflow-hidden"
+         sm:w-[520px] lg:w-[640px]
+         sm:h-[292px] lg:h-[360px]
+         cursor-pointer group bg-black/40
+         overflow-hidden rounded-lg"
   data-video="${m.videoId}"
 >
   <div
     class="absolute inset-0 flex flex-col items-center justify-center
            pointer-events-none"
   >
-    <i class="fab fa-youtube text-4xl text-red-600 opacity-80"></i>
-    <span class="mt-2 text-[11px] text-slate-300">
+    <i class="fab fa-youtube text-5xl text-red-600 opacity-90"></i>
+    <span class="mt-2 text-[12px] text-slate-300">
       點擊觀看影片
     </span>
   </div>
