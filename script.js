@@ -33,8 +33,8 @@ const allRaids = {
                         \u2022 困難模式下安全區前需要格擋中場',
                      details: '在普通困難模式下, 因玩家傷害極有可能在第一輪就打破盾 <br>所以普遍大家如果第一輪打不掉都會留個超絕免疫第一次傷害', type: 'shield', videoId: 'POgWxytwOAA' },
                     { hp: 'x380', title: '接劍/特殊聯動維 Clash/Special Sidereal Wei', desc: '\u2022 卡傑突然丟槍矛去中場，玩家需要面對中場格擋。 <br>\u2022 隨後卡傑出現在12點，下面6點需要接劍。', details: '\u2022 沒人接到團滅', type: 'dps', videoId: 'POgWxytwOAA' },
-                    { hp: 'x100', title: '困難模式限定 - 金球格擋 Gold Orb Just Guard', desc: '\u2022 全員會突然看到畫面出現一段文字，全員被上了無法格擋的負面debuff。<br>\u2022 卡傑會出華夫餅 期間場上生成最多4顆金球吃(吃了能解掉無法格擋的debuff) 
-                        <br>\u2022 隨後會出現一個安全區 1位有吃金球要在前面格擋卡傑，然後再出現第二個安全區再來一位去格擋 <br>\u2022 格擋成功就結束，失敗會再來一次。', details: '\u2022 沒人格擋基本團滅 <br>\u2022 跟隊友溝通好誰先格擋', type: 'mech', videoId: 'POgWxytwOAA' }
+                    { hp: 'x100', title: '困難模式限定 - 金球格擋 Gold Orb Just Guard', desc: '\u2022 全員會突然看到畫面出現一段文字，全員被上了無法格擋的負面debuff。<br>\u2022 卡傑會出華夫餅 期間場上生成最多4顆金球吃(吃了能解掉無法格擋的debuff) <br>\u2022 
+                        隨後會出現一個安全區 1位有吃金球要在前面格擋卡傑，然後再出現第二個安全區再來一位去格擋 <br>\u2022 格擋成功就結束，失敗會再來一次。', details: '\u2022 沒人格擋基本團滅 <br>\u2022 跟隊友溝通好誰先格擋', type: 'mech', videoId: 'POgWxytwOAA' }
                 ]
             },
             2: {
