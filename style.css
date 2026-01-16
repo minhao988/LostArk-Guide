@@ -86,6 +86,26 @@ main {
 #sidebar.w-16 h1 {
     justify-content: center;
 }
+/* 收合後 sidebar */
+#sidebar.sidebar-collapsed {
+    width: 4rem; /* w-16 */
+}
+
+/* 收合後文字隱藏 */
+#sidebar.sidebar-collapsed .sidebar-text {
+    display: none;
+}
+
+/* 收合後按鈕置中 */
+#sidebar.sidebar-collapsed .sidebar-btn {
+    justify-content: center;
+}
+
+/* scrollbar 處理 */
+#sidebar.sidebar-collapsed .custom-scrollbar::-webkit-scrollbar {
+    width: 0;
+}
+
 
 
 
