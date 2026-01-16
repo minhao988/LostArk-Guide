@@ -1,39 +1,53 @@
-/* 基礎背景漸層變換 */
+/* ===== 基礎背景漸層變換 ===== */
 body {
     background-color: #0f172a;
     color: #f1f5f9;
 }
+
+/* 主內容 transition */
 main {
     transition: margin-left 0.3s ease;
-    margin-left: 18rem; /* 對應 w-72 = 288px */
 }
 
-#sidebar.sidebar-collapsed + main {
-    margin-left: 4rem; /* 收合後只留窄列 */
+/* 桌機 margin */
+@media (min-width: 768px) {
+    main {
+        margin-left: 18rem; /* 桌機初始 */
+    }
+    #sidebar.sidebar-collapsed + main {
+        margin-left: 4rem; /* 桌機收合 */
+    }
 }
+
+/* 手機 main 永遠不被推開 */
+@media (max-width: 767px) {
+    main {
+        margin-left: 0 !important;
+    }
+}
+
+/* 漸層背景 */
 .raid-gradient-final { background: linear-gradient(135deg, #450a0a 0%, #000000 100%); }
 .raid-gradient-act4 { background: linear-gradient(135deg, #1e1b4b 0%, #000000 100%); }
 .raid-gradient-serca { background: linear-gradient(135deg, #064e3b 0%, #020617 100%); }
 
-/* 自定義捲軸 */
+/* 自訂捲軸 */
 .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-.custom-scrollbar::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
-.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
 
-/* Sidebar 收合時隱藏 scrollbar */
-#sidebar.w-16 .custom-scrollbar::-webkit-scrollbar {
-    width: 0;
-}
+/* Sidebar 收合 scrollbar */
+#sidebar.sidebar-collapsed .custom-scrollbar::-webkit-scrollbar { width: 0; }
 
-/* 交互組件樣式 */
+/* 交互組件 */
 .gate-btn.active {
-    background-color: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.5);
     color: white;
 }
 
 .sidebar-btn.active {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255,255,255,0.1);
     border-right: 4px solid #eab308;
     color: #eab308;
 }
@@ -41,87 +55,49 @@ main {
 .info-card {
     background: rgba(15, 23, 42, 0.6);
     backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255,255,255,0.05);
 }
 
-.pattern-gif-placeholder {
-    background: linear-gradient(45deg, #1e293b, #334155);
-    position: relative;
-    overflow: hidden;
-    min-height: 160px;
-}
-
-.pattern-gif-placeholder::after {
-    content: "動畫展示載入中";
-    position: absolute;
-    font-size: 10px;
-    color: rgba(255,255,255,0.2);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-/* ===== Sidebar Collapsed 狀態 ===== */
+/* ===== Sidebar 基礎 ===== */
 #sidebar {
-    transition: width 0.3s ease;
+    transition: width 0.3s ease, transform 0.3s ease;
 }
 
-/* 收合時 */
-#sidebar.w-16 {
-    width: 4rem; /* 64px */
+/* 桌機 sidebar */
+@media (min-width: 768px) {
+    #sidebar {
+        position: relative;
+        width: 18rem;
+    }
+    #sidebar.sidebar-collapsed { width: 4rem; }
 }
 
-/* 收合時隱藏文字 */
-#sidebar.w-16 .sidebar-text {
-    display: none;
+/* 手機 sidebar */
+@media (max-width: 767px) {
+    #sidebar {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 50;
+        transform: translateX(-100%);
+    }
+    #sidebar.mobile-open {
+        transform: translateX(0);
+    }
 }
 
-/* 收合時置中 icon */
-#sidebar.w-16 .sidebar-btn {
-    justify-content: center;
-    padding-left: 0;
-    padding-right: 0;
-}
-
-/* Chevron 隱藏（避免擠） */
-#sidebar.w-16 .sidebar-btn i.fa-chevron-right {
-    display: none;
-}
-
-/* 標題只留 icon */
-#sidebar.w-16 h1 {
-    justify-content: center;
-}
-/* 收合後 sidebar */
-#sidebar.sidebar-collapsed {
-    width: 4rem; /* w-16 */
-}
-
-/* 收合後文字隱藏 */
-#sidebar.sidebar-collapsed .sidebar-text {
-    display: none;
-}
-
-/* 收合後按鈕置中 */
-#sidebar.sidebar-collapsed .sidebar-btn {
-    justify-content: center;
-}
-
-/* scrollbar 處理 */
-#sidebar.sidebar-collapsed .custom-scrollbar::-webkit-scrollbar {
-    width: 0;
-}
-
-/* 收合 sidebar */
-#sidebar.sidebar-collapsed {
-    width: 4rem; /* w-16 */
-}
-
-/* 收合後文字隱藏，只保留 icon */
+/* 收合 sidebar 桌機 */
+#sidebar.sidebar-collapsed .sidebar-text,
 #sidebar.sidebar-collapsed .sidebar-btn span {
     display: none;
 }
+#sidebar.sidebar-collapsed .sidebar-btn {
+    justify-content: center;
+}
+#sidebar.sidebar-collapsed .custom-scrollbar::-webkit-scrollbar { width: 0; }
 
-/* 可點按鈕 tooltip */
+/* tooltip */
 #sidebar.sidebar-collapsed .sidebar-btn {
     position: relative;
 }
@@ -139,97 +115,3 @@ main {
     font-size: 0.75rem;
     z-index: 50;
 }
-
-/* 分類標題收合後縮略 */
-#sidebar.sidebar-collapsed .px-6.py-2 {
-    writing-mode: horizontal-tb; /* 不垂直擠 */
-    font-size: 0.65rem;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-/* sidebar-collapsed 已經控制寬度與文字隱藏 */
-#sidebar.sidebar-collapsed {
-    width: 4rem; /* 窄列只留 icon */
-}
-
-/* tooltip 手機可點擊 */
-@media (max-width: 767px) {
-    #sidebar.sidebar-collapsed .sidebar-btn:hover::after,
-    #sidebar.sidebar-collapsed .sidebar-btn:active::after {
-        display: block;
-    }
-}
-
-/* 以下是調整手機和桌面不同sidebar的功能 */
-
-/* 桌機 sidebar */
-@media (min-width: 768px) {
-    #sidebar {
-        position: relative; /* 不固定 */
-        width: 18rem; /* w-72 */
-        transition: width 0.3s ease;
-    }
-    #sidebar.sidebar-collapsed {
-        width: 4rem;
-    }
-
-    main {
-        margin-left: 18rem;
-        transition: margin-left 0.3s ease;
-    }
-    #sidebar.sidebar-collapsed + main {
-        margin-left: 4rem;
-    }
-}
-
-
-/* 手機 sidebar */
-@media (max-width: 767px) {
-    #sidebar {
-        position: fixed;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 50;
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-    }
-
-    /* 只看 mobile-open */
-    #sidebar.mobile-open {
-        transform: translateX(0);
-    }
-
-    /* 手機不推 main */
-    main {
-        margin-left: 0 !important;
-    }
-}
-
-@media (min-width: 768px) {
-    .flex-container { display: flex; } /* 桌機 flex */
-}
-@media (max-width: 767px) {
-    .flex-container { 
-        display: block; 
-    } /* 手機 main 不再受 flex */
-    
-    #sidebar.sidebar-collapsed {
-        width: 100% !important; /* 手機時收合不縮窄 */
-    }
-    main {
-        margin-left: 0 !important; /* 手機 main 永遠不被推開 */
-    }
-}
-
-
-
-
-
-
-
-
-
-
