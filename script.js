@@ -331,16 +331,17 @@ function switchGate(gateId) {
     `;
     document.getElementById('gate-content').innerHTML = html;
     document.querySelectorAll('.video-overlay').forEach(overlay => {
-    overlay.addEventListener('click', function() { ... });
-          const container = this.parentElement; // 這是保持 aspect-video 的父元素
-        const iframe = document.createElement('iframe');
-        iframe.src = `https://www.youtube.com/embed/${gate.youtubeId}?autoplay=1&mute=1`;
-        iframe.className = "w-full h-full absolute top-0 left-0"; // 撐滿父容器
-        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-        iframe.allowFullscreen = true;
-        container.appendChild(iframe);
-        this.remove(); // 移除 overlay
-});
+    overlay.addEventListener('click', function() {
+            const container = this.parentElement; // 這是保持 aspect-video 的父元素
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${gate.youtubeId}?autoplay=1&mute=1`;
+            iframe.className = "w-full h-full absolute top-0 left-0"; // 撐滿父容器
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+            iframe.allowFullscreen = true;
+            container.appendChild(iframe);
+            this.remove(); // 移除 overlay
+            });
+        });
 
     
     document.querySelectorAll('[data-video]').forEach(el => {
