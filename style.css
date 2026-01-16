@@ -31,15 +31,18 @@ body {
         width: 4rem; /* 收合 */
     }
 
-      main {
-        margin-left: 0; /* 不用 margin-left，改用 padding-left */
-        padding-left: 18rem; /* 補償 sidebar 展開 */
-        transition: padding-left 0.3s ease;
-    }
+   /* 桌機主內容 */
+main {
+    padding-left: 18rem; /* 展開 sidebar 的空間 */
+    transition: padding-left 0.3s ease;
+}
 
-    main.sidebar-collapsed {
-        margin-left: 4rem;  /* 收合時對齊 sidebar */
-    }
+/* Sidebar 收合時 */
+main.sidebar-collapsed {
+    padding-left: 4rem; /* 收合後只留小寬度 */
+}
+
+   
 
     /* 收合後隱藏文字 */
     #sidebar.sidebar-collapsed .sidebar-text,
@@ -131,6 +134,7 @@ body {
         font-size: 1.25rem; /* 調整成你想要的大小 */
     }
 }
+
 
 
 
