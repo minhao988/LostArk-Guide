@@ -48,3 +48,35 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+/* ===== Sidebar Collapsed 狀態 ===== */
+#sidebar {
+    transition: width 0.3s ease;
+}
+
+/* 收合時 */
+#sidebar.w-16 {
+    width: 4rem; /* 64px */
+}
+
+/* 收合時隱藏文字 */
+#sidebar.w-16 .sidebar-text {
+    display: none;
+}
+
+/* 收合時置中 icon */
+#sidebar.w-16 .sidebar-btn {
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Chevron 隱藏（避免擠） */
+#sidebar.w-16 .sidebar-btn i.fa-chevron-right {
+    display: none;
+}
+
+/* 標題只留 icon */
+#sidebar.w-16 h1 {
+    justify-content: center;
+}
+
