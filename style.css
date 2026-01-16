@@ -56,17 +56,19 @@ body {
         color: #fff;
     }
 
-    #sidebar.sidebar-collapsed .sidebar-btn {
-        justify-content: center;
-        gap: 0;
-    }
-  
+#sidebar.sidebar-collapsed .sidebar-btn {
+    justify-content: center;
+    gap: 0;
+    padding-left: 0; /* 避免 padding 擠壓 */
+    padding-right: 0;
+}
 
-    #sidebar.sidebar-collapsed .sidebar-icon {
-        width: 2rem; /* 固定寬度 */
-        text-align: center;
-        font-size: 1.2rem;
-    }
+#sidebar.sidebar-collapsed .sidebar-icon {
+    width: 2.5rem;  /* 固定寬度 */
+    text-align: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;  /* 不縮小 */
+}
     #sidebar.sidebar-collapsed .sidebar-category {
     display: none;
 }
@@ -207,5 +209,6 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
