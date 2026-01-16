@@ -389,5 +389,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 sidebar.classList.remove('mobile-open');
             }
         }
-    }
+    });
+
 });
