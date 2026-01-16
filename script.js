@@ -237,6 +237,16 @@ function switchGate(gateId) {
             <p class="text-slate-300 text-sm sm:text-base leading-relaxed break-words mb-4">
               ${m.desc}
             </p>
+            ${m.details ? `
+              <div class="bg-yellow-950/30 border border-yellow-500/30 rounded-lg p-4 mb-4">
+                <p class="text-yellow-400 font-black uppercase mb-1 text-[11px] sm:text-[12px] tracking-wider">
+                  應對方案
+                </p>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                  ${m.details}
+                </p>
+              </div>
+            ` : ''}
 
             ${m.videoId ? `
               <!-- 攻略頁適中尺寸影片 -->
