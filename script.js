@@ -202,7 +202,7 @@ function switchGate(gateId) {
                 ${m.hp}
               </div>
               <div
-                class="px-2 py-0.5 rounded bg-slate-800 text-[10px]
+                class="px-2 py-0.5 rounded bg-slate-800 text-[12px]
                 font-bold text-center uppercase tracking-tighter"
               >
                 ${m.type}
