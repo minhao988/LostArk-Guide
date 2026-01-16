@@ -23,19 +23,22 @@ body {
 @media (min-width: 768px) {
     #sidebar {
         position: relative;
-        width: 18rem;
+        width: 18rem; /* 展開 */
+        transition: width 0.3s ease;
     }
+
     #sidebar.sidebar-collapsed {
-        width: 4rem;
+        width: 4rem; /* 收合 */
     }
 
     main {
-        margin-left: 18rem;
+        margin-left: 18rem; /* 展開時對齊 sidebar */
         transition: margin-left 0.3s ease;
+        padding-left: 0;    /* 防止內容被推太右 */
     }
-   
-      main.sidebar-collapsed {
-        margin-left: 4rem; /* sidebar 收合時 */
+
+    main.sidebar-collapsed {
+        margin-left: 4rem;  /* 收合時對齊 sidebar */
     }
 
     /* 收合後隱藏文字 */
@@ -43,9 +46,9 @@ body {
     #sidebar.sidebar-collapsed .sidebar-btn span {
         display: none;
     }
+
     #sidebar.sidebar-collapsed .sidebar-btn { justify-content:center; }
 }
-
 
 
 /* ===== 手機 (<768px) ===== */
@@ -77,5 +80,6 @@ body {
     #sidebar.mobile-open .sidebar-btn::after,
     #sidebar.mobile-open .sidebar-btn:active::after { display:block; }
 }
+
 
 
