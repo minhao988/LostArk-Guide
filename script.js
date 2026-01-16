@@ -244,7 +244,7 @@ function switchGate(gateId) {
             ${m.details ? `
               <div class="bg-yellow-950/30 border border-yellow-500/30 rounded-lg p-4 mb-4">
                 <p class="text-yellow-400 font-black uppercase mb-1 text-[11px] sm:text-[12px] tracking-wider">
-                  應對方案
+                  提示
                 </p>
                 <p class="text-slate-300 text-sm leading-relaxed">
                   ${m.details}
