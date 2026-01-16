@@ -31,26 +31,23 @@ body {
         width: 4rem; /* 收合 */
     }
 
-   /* 桌機主內容 */
-main {
-    padding-left: 18rem; /* 展開 sidebar 的空間 */
-    transition: padding-left 0.3s ease;
-}
-
-/* Sidebar 收合時 */
-main.sidebar-collapsed {
-    padding-left: 4rem; /* 收合後只留小寬度 */
-}
-
-   
-
-    /* 收合後隱藏文字 */
+    /* 桌機收合後隱藏文字 */
     #sidebar.sidebar-collapsed .sidebar-text,
     #sidebar.sidebar-collapsed .sidebar-btn span {
         display: none;
     }
+    #sidebar.sidebar-collapsed .sidebar-btn { justify-content: center; }
 
-    #sidebar.sidebar-collapsed .sidebar-btn { justify-content:center; }
+    /* 內容區 padding 代替 main padding */
+    header > div,
+    #gate-content {
+        padding-left: 18rem; /* 展開 sidebar */
+        transition: padding-left 0.3s ease;
+    }
+    main.sidebar-collapsed header > div,
+    main.sidebar-collapsed #gate-content {
+        padding-left: 4rem; /* 收合 sidebar */
+    }
 }
 
 
@@ -134,6 +131,7 @@ main.sidebar-collapsed {
         font-size: 1.25rem; /* 調整成你想要的大小 */
     }
 }
+
 
 
 
