@@ -162,6 +162,8 @@ main {
     }
 }
 
+/* 以下是調整手機和桌面不同sidebar的功能 */
+
 /* 桌機 sidebar */
 @media (min-width: 768px) {
     #sidebar {
@@ -201,6 +203,7 @@ main {
         margin-left: 0; /* 手機不推 main */
     }
 }
+
 
 
 
