@@ -1,117 +1,62 @@
-/* ===== 基礎背景漸層變換 ===== */
+/* ===== 基礎背景 ===== */
 body {
     background-color: #0f172a;
     color: #f1f5f9;
 }
 
-/* 主內容 transition */
-main {
-    transition: margin-left 0.3s ease;
-}
-
-/* 桌機 margin */
-@media (min-width: 768px) {
-    main {
-        margin-left: 18rem; /* 桌機初始 */
-    }
-    #sidebar.sidebar-collapsed + main {
-        margin-left: 4rem; /* 桌機收合 */
-    }
-}
-
-/* 手機 main 永遠不被推開 */
-@media (max-width: 767px) {
-    main {
-        margin-left: 0 !important;
-    }
-}
-
 /* 漸層背景 */
-.raid-gradient-final { background: linear-gradient(135deg, #450a0a 0%, #000000 100%); }
-.raid-gradient-act4 { background: linear-gradient(135deg, #1e1b4b 0%, #000000 100%); }
-.raid-gradient-serca { background: linear-gradient(135deg, #064e3b 0%, #020617 100%); }
+.raid-gradient-final { background: linear-gradient(135deg,#450a0a 0%,#000 100%); }
+.raid-gradient-act4 { background: linear-gradient(135deg,#1e1b4b 0%,#000 100%); }
+.raid-gradient-serca { background: linear-gradient(135deg,#064e3b 0%,#020617 100%); }
 
 /* 自訂捲軸 */
-.custom-scrollbar::-webkit-scrollbar { width: 6px; }
+.custom-scrollbar::-webkit-scrollbar { width:6px; }
 .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
-.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius:10px; }
 
-/* Sidebar 收合 scrollbar */
-#sidebar.sidebar-collapsed .custom-scrollbar::-webkit-scrollbar { width: 0; }
-
-/* 交互組件 */
-.gate-btn.active {
-    background-color: rgba(255,255,255,0.15);
-    border-color: rgba(255,255,255,0.5);
-    color: white;
-}
-
-.sidebar-btn.active {
-    background-color: rgba(255,255,255,0.1);
-    border-right: 4px solid #eab308;
-    color: #eab308;
-}
-
-.info-card {
-    background: rgba(15, 23, 42, 0.6);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.05);
-}
-
-/* ===== Sidebar 基礎 ===== */
+/* ===== Sidebar 共通 ===== */
 #sidebar {
     transition: width 0.3s ease, transform 0.3s ease;
 }
 
 /* 桌機 sidebar */
 @media (min-width: 768px) {
-    #sidebar {
-        position: relative;
-        width: 18rem;
+    #sidebar { position: relative; width:18rem; }
+    #sidebar.sidebar-collapsed { width:4rem; }
+
+    main {
+        margin-left: 18rem;
+        transition: margin-left 0.3s ease;
     }
-    #sidebar.sidebar-collapsed { width: 4rem; }
+    #sidebar.sidebar-collapsed + main { margin-left: 4rem; }
+
+    /* 收合後隱藏文字 */
+    #sidebar.sidebar-collapsed .sidebar-text,
+    #sidebar.sidebar-collapsed .sidebar-btn span {
+        display: none;
+    }
+    #sidebar.sidebar-collapsed .sidebar-btn { justify-content:center; }
 }
 
 /* 手機 sidebar */
 @media (max-width: 767px) {
     #sidebar {
         position: fixed;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 50;
+        inset:0;
+        width:100%;
+        height:100%;
         transform: translateX(-100%);
+        z-index:50;
     }
-    #sidebar.mobile-open {
-        transform: translateX(0);
-    }
-}
+    #sidebar.mobile-open { transform: translateX(0); }
 
-/* 收合 sidebar 桌機 */
-#sidebar.sidebar-collapsed .sidebar-text,
-#sidebar.sidebar-collapsed .sidebar-btn span {
-    display: none;
-}
-#sidebar.sidebar-collapsed .sidebar-btn {
-    justify-content: center;
-}
-#sidebar.sidebar-collapsed .custom-scrollbar::-webkit-scrollbar { width: 0; }
+    main { margin-left:0 !important; }
 
-/* tooltip */
-#sidebar.sidebar-collapsed .sidebar-btn {
-    position: relative;
-}
-#sidebar.sidebar-collapsed .sidebar-btn:hover::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    left: 4rem;
-    top: 50%;
-    transform: translateY(-50%);
-    white-space: nowrap;
-    background: rgba(0,0,0,0.85);
-    color: white;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
-    font-size: 0.75rem;
-    z-index: 50;
+    /* 手機收起 sidebar 文字不消失 */
+    #sidebar.sidebar-collapsed { width:100% !important; }
+
+    /* tooltip 可點擊 */
+    #sidebar .sidebar-btn::after { display:none; }
+    #sidebar.mobile-open .sidebar-btn::after,
+    #sidebar.mobile-open .sidebar-btn:active::after { display:block; }
 }
