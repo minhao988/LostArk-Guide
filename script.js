@@ -369,8 +369,12 @@ document.addEventListener('DOMContentLoaded', () => {
 const menuToggle = document.getElementById('menu-toggle');
 const sidebar = document.getElementById('sidebar');
 
+// 手機漢堡開/關
 menuToggle?.addEventListener('click', () => {
-    sidebar.classList.toggle('mobile-open');
+    sidebar.classList.toggle('mobile-open'); // 只切 mobile-open
+});
+overlay.addEventListener('click', () => {
+    sidebar.classList.remove('mobile-open'); // 關閉時只移除 mobile-open
 });
 
 // 桌機收合仍然保留原本 toggleBtn
