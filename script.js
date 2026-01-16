@@ -370,16 +370,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleBtn = document.getElementById('sidebar-toggle');
 
     if (toggleBtn) {
-        toggleBtn.onclick = () => {
-            sidebar.classList.toggle('sidebar-collapsed');
-            toggleBtn.innerHTML = sidebar.classList.contains('sidebar-collapsed')
-                ? '<i class="fas fa-angle-right"></i>'
-                : '<i class="fas fa-angle-left"></i>';
+  toggleBtn.onclick = () => {
+    sidebar.classList.toggle('sidebar-collapsed');
 
-            // 顯示/隱藏文字
-            document.querySelectorAll('.sidebar-btn span').forEach(span => {
-                span.style.display = sidebar.classList.contains('sidebar-collapsed') ? 'none' : 'inline';
-            });
-        };
+    toggleBtn.innerHTML = sidebar.classList.contains('sidebar-collapsed')
+        ? '<i class="fas fa-angle-right"></i>'
+        : '<i class="fas fa-angle-left"></i>';
+
+    // 顯示/隱藏文字
+    document.querySelectorAll('.sidebar-btn span').forEach(span => {
+        span.style.display = sidebar.classList.contains('sidebar-collapsed') ? 'none' : 'inline';
+    });
+};
     }
+    
 });
