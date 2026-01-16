@@ -27,14 +27,14 @@ const allRaids = {
                 ],
                 mechanics: [
                     { hp: '900', title: '抓人 Orb Grab', desc: `卡傑產生球追蹤附近玩家並抓起來，隨後出現反制。`, details: `\u2022 失敗反制，被抓的玩家們死亡。`, type: 'counter', videoId: 'POgWxytwOAA' },
-                    { hp: 'x700', title: '團隊癱瘓 Team Stagger', desc: `進入700機制會變成1打1的局面 所有玩家要在1分鐘内把卡傑的紫條癱瘓打掉, 最後從沒裂縫延伸位找出並站自己的安全區邊`, details: `\u2022 反制能提升癱瘓值 <br> \u2022 推薦旋風手雷`, type: 'mech', videoId: 'POgWxytwOAA' },
+                    { hp: 'x700', title: '團隊癱瘓 Team Stagger', desc: `進入700機制會變成1打1的局面 所有玩家要在1分鐘内把卡傑的紫條癱瘓打掉, 最後從沒裂縫延伸位找出並站自己的安全區邊`, details: `\u2022 反制能提升癱瘓值 <br> \u2022 推薦旋風手雷`, type: 'stagger', videoId: 'POgWxytwOAA' },
                     { hp: 'x660', title: '接劍 Clash', desc: `卡傑突然消失 真和假幻象同時出現在1/5/7/11位置 需要在真身位置接劍`, details: `\u2022 沒人接到團滅 <br>\u2022 接劍后要躲避後續鈎鎖的攻擊`, type: 'mech', videoId: 'POgWxytwOAA' },
                     { hp: 'x500', title: '破盾和安全區 Shield & SafeSpot', desc: `\u2022 卡傑開鈎鎖和紅圈砸在每位玩家脚下 接著回中間進入動畫 玩家要在3輪内把卡傑的護盾破掉 <br>\u2022 期間要根據3名玩家頭上標記和地板如符合 根據700那名標記玩家的安全區去站位躲避 <br>
                         \u2022 困難模式下安全區前需要格擋中場`,
                      details: `在普通困難模式下, 因玩家傷害極有可能在第一輪就打破盾 <br>所以普遍大家如果第一輪打不掉都會留個超絕免疫第一次傷害`, type: 'shield', videoId: 'POgWxytwOAA' },
                     { hp: 'x380', title: '接劍/特殊聯動維 Clash/Special Sidereal Wei', desc: `\u2022 卡傑突然丟槍矛去中場，玩家需要面對中場格擋。 <br>\u2022 隨後卡傑出現在12點，下面6點需要接劍。`, details: `\u2022 沒人接到團滅`, type: 'dps', videoId: 'POgWxytwOAA' },
                     { hp: 'x100', title: '困難模式限定 - 金球格擋 Gold Orb Just Guard', desc: `\u2022 全員會突然看到畫面出現一段文字，全員被上了無法格擋的負面debuff。<br>\u2022 卡傑會出華夫餅 期間場上生成最多4顆金球吃(吃了能解掉無法格擋的debuff) <br>\u2022 
-                        隨後會出現一個安全區 1位有吃金球要在前面格擋卡傑，然後再出現第二個安全區再來一位去格擋 <br>\u2022 格擋成功就結束，失敗會再來一次。`, details: `\u2022 沒人格擋基本團滅 <br>\u2022 跟隊友溝通好誰先格擋`, type: 'mech', videoId: 'POgWxytwOAA' }
+                        隨後會出現一個安全區 1位有吃金球要在前面格擋卡傑，然後再出現第二個安全區再來一位去格擋 <br>\u2022 格擋成功就結束，失敗會再來一次。`, details: `\u2022 沒人格擋基本團滅 <br>\u2022 跟隊友溝通好誰先格擋`, type: 'wipe', videoId: 'POgWxytwOAA' }
                 ]
             },
             2: {
