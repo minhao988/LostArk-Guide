@@ -129,6 +129,12 @@ body {
 }
 
 
+.sidebar-icon {
+  width: 1.5rem;
+  text-align: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
 
 
 
