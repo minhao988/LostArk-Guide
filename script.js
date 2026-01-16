@@ -366,22 +366,26 @@ document.addEventListener('DOMContentLoaded', () => {
     initSidebar();
     selectRaid('final_day');
 
-    const sidebar = document.getElementById('sidebar');
-    const toggleBtn = document.getElementById('sidebar-toggle');
+ const menuToggle = document.getElementById('menu-toggle');
+const sidebar = document.getElementById('sidebar');
 
-    if (toggleBtn) {
-  toggleBtn.onclick = () => {
-    sidebar.classList.toggle('sidebar-collapsed');
+menuToggle?.addEventListener('click', () => {
+    sidebar.classList.toggle('mobile-open');
+});
 
-    toggleBtn.innerHTML = sidebar.classList.contains('sidebar-collapsed')
-        ? '<i class="fas fa-angle-right"></i>'
-        : '<i class="fas fa-angle-left"></i>';
+// 桌機收合仍然保留原本 toggleBtn
+const toggleBtn = document.getElementById('sidebar-toggle');
+if (toggleBtn) {
+    toggleBtn.onclick = () => {
+        sidebar.classList.toggle('sidebar-collapsed');
 
-    // 顯示/隱藏文字
-    document.querySelectorAll('.sidebar-btn span').forEach(span => {
-        span.style.display = sidebar.classList.contains('sidebar-collapsed') ? 'none' : 'inline';
-    });
-};
-    }
+        toggleBtn.innerHTML = sidebar.classList.contains('sidebar-collapsed')
+            ? '<i class="fas fa-angle-right"></i>'
+            : '<i class="fas fa-angle-left"></i>';
+
+        document.querySelectorAll('.sidebar-btn span').forEach(span => {
+            span.style.display = sidebar.classList.contains('sidebar-collapsed') ? 'none' : 'inline';
+        });
+    };
     
 });
