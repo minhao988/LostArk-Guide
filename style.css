@@ -3,7 +3,9 @@ body {
     background-color: #0f172a;
     color: #f1f5f9;
 }
-
+main {
+    transition: margin-left 0.3s ease;
+}
 .raid-gradient-final { background: linear-gradient(135deg, #450a0a 0%, #000000 100%); }
 .raid-gradient-act4 { background: linear-gradient(135deg, #1e1b4b 0%, #000000 100%); }
 .raid-gradient-serca { background: linear-gradient(135deg, #064e3b 0%, #020617 100%); }
@@ -84,5 +86,6 @@ body {
 #sidebar.w-16 h1 {
     justify-content: center;
 }
+
 
 
