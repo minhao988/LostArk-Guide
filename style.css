@@ -13,6 +13,11 @@ body {
 .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
 .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
 
+/* Sidebar 收合時隱藏 scrollbar */
+#sidebar.w-16 .custom-scrollbar::-webkit-scrollbar {
+    width: 0;
+}
+
 /* 交互組件樣式 */
 .gate-btn.active {
     background-color: rgba(255, 255, 255, 0.15);
@@ -79,4 +84,5 @@ body {
 #sidebar.w-16 h1 {
     justify-content: center;
 }
+
 
