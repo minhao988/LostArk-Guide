@@ -7,7 +7,7 @@ const raidIcons = {
 const allRaids = {
     final_day: {
         title: '卡傑羅斯系列 終幕：終結之日 The Final Day',
-        short: '終結之日 The Final Day',
+        short: '終幕： 終結之日',
         category: '卡傑羅斯討伐 (Kazeros Raid)',
         desc: '與深淵大惡魔卡傑羅斯的最後決戰，要求玩家極高的機制熟練度和個人應變能力。',
         theme: 'raid-gradient-final',
@@ -58,7 +58,7 @@ const allRaids = {
     },
     act4: {
         title: '第四幕：天災之始',
-        short: '第四幕',
+        short: '四幕：天災之始',
         category: '卡傑羅斯討伐 (Kazeros Raid)',
         desc: '混沌裂縫被強行撕開，這是一個考驗團隊協作移動與屬性相克的副本。',
         theme: 'raid-gradient-act4',
@@ -76,7 +76,7 @@ const allRaids = {
     },
     serca: {
         title: '絕望女巫：賽爾卡',
-        short: '賽爾卡',
+        short: '絕望女巫：賽爾卡',
         category: '暗影襲擊系列 (Darkness Raid)',
         desc: '女巫描述待定，僅確認爲塞克利亞的牧師角色',
         theme: 'raid-gradient-serca',
