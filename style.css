@@ -19,16 +19,23 @@ body {
     transition: width 0.3s ease, transform 0.3s ease;
 }
 
-/* 桌機 sidebar */
+/* ===== 桌機 (≥768px) ===== */
 @media (min-width: 768px) {
-    #sidebar { position: relative; width:18rem; }
-    #sidebar.sidebar-collapsed { width:4rem; }
+    #sidebar {
+        position: relative;
+        width: 18rem;
+    }
+    #sidebar.sidebar-collapsed {
+        width: 4rem;
+    }
 
     main {
         margin-left: 18rem;
         transition: margin-left 0.3s ease;
     }
-    #sidebar.sidebar-collapsed + main { margin-left: 4rem; }
+    #sidebar.sidebar-collapsed + main {
+        margin-left: 4rem;
+    }
 
     /* 收合後隱藏文字 */
     #sidebar.sidebar-collapsed .sidebar-text,
@@ -38,22 +45,29 @@ body {
     #sidebar.sidebar-collapsed .sidebar-btn { justify-content:center; }
 }
 
-/* 手機 sidebar */
+/* ===== 手機 (<768px) ===== */
 @media (max-width: 767px) {
     #sidebar {
         position: fixed;
-        inset:0;
-        width:100%;
-        height:100%;
+        inset: 0;
+        width: 100%;
+        height: 100%;
         transform: translateX(-100%);
-        z-index:50;
+        z-index: 50;
     }
-    #sidebar.mobile-open { transform: translateX(0); }
 
-    main { margin-left:0 !important; }
+    #sidebar.mobile-open {
+        transform: translateX(0);
+    }
 
-    /* 手機收起 sidebar 文字不消失 */
-    #sidebar.sidebar-collapsed { width:100% !important; }
+    main {
+        margin-left: 0 !important;
+    }
+
+    /* 桌機收合不影響手機 */
+    #sidebar.sidebar-collapsed {
+        width: 100% !important;
+    }
 
     /* tooltip 可點擊 */
     #sidebar .sidebar-btn::after { display:none; }
