@@ -362,31 +362,30 @@ if (overlay) {
 }
 
 
+/* ===== DOM Loaded ===== */
 document.addEventListener('DOMContentLoaded', () => {
     initSidebar();
     selectRaid('final_day');
-    
-const menuToggle = document.getElementById('menu-toggle');
-const sidebar = document.getElementById('sidebar');
 
-// 手機漢堡開/關
-menuToggle?.addEventListener('click', () => {
-    sidebar.classList.toggle('mobile-open'); // 手機只切 mobile-open
-});
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidebar = document.getElementById('sidebar');
 
-// 桌機收合按鈕
-const toggleBtn = document.getElementById('sidebar-toggle');
-if (toggleBtn) {
-    toggleBtn.onclick = () => {
-        sidebar.classList.toggle('sidebar-collapsed');
-        toggleBtn.innerHTML = sidebar.classList.contains('sidebar-collapsed')
-            ? '<i class="fas fa-angle-right"></i>'
-            : '<i class="fas fa-angle-left"></i>';
+    // 手機漢堡開/關
+    menuToggle?.addEventListener('click', () => {
+        sidebar.classList.toggle('mobile-open');
+    });
 
-        document.querySelectorAll('.sidebar-btn span').forEach(span => {
-            span.style.display = sidebar.classList.contains('sidebar-collapsed') ? 'none' : 'inline';
-        });
-    };
-}
+    // 桌機收合
+    const toggleBtn = document.getElementById('sidebar-toggle');
+    if (toggleBtn) {
+        toggleBtn.onclick = () => {
+            if (window.innerWidth >= 768) {
+                sidebar.classList.toggle('sidebar-collapsed');
+                toggleBtn.innerHTML = sidebar.classList.contains('sidebar-collapsed')
+                    ? '<i class="fas fa-angle-right"></i>'
+                    : '<i class="fas fa-angle-left"></i>';
+            }
+        };
+    }
     
 });
