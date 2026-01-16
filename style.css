@@ -81,5 +81,25 @@ body {
     #sidebar.mobile-open .sidebar-btn:active::after { display:block; }
 }
 
+/* Gate 按鈕普通狀態 */
+.gate-btn {
+    color: #cbd5e1; /* text-slate-400 */
+    border: 1px solid rgba(255,255,255,0.1);
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+/* hover 效果 */
+.gate-btn:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: #fff;
+}
+
+/* active / 選中狀態 */
+.gate-btn.active {
+    background-color: #facc15;  /* 高亮黃 */
+    color: #000;
+    border-color: #facc15;
+}
 
 
