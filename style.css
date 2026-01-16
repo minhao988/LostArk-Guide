@@ -106,7 +106,7 @@ body {
 
 /* Raid 主標題 */
 #raid-title {
-    font-size: 2rem;        /* 手機尺寸 */
+    font-size: 1rem;        /* 手機尺寸 */
     font-weight: 800;       /* 保留特粗 */
     line-height: 1.2;
 }
@@ -114,13 +114,13 @@ body {
 /* 桌機尺寸（≥768px） */
 @media (min-width: 768px) {
     #raid-title {
-        font-size: 3.5rem;  /* 調整成你想要的大字 */
+        font-size: 2rem;  /* 調整成你想要的大字 */
     }
 }
 
 /* Raid 描述文字 */
 #raid-desc {
-    font-size: 1rem;       /* 手機尺寸 */
+    font-size: 0.5rem;       /* 手機尺寸 */
     line-height: 1.5;
     opacity: 0.85;         /* 保留原本透明度 */
 }
@@ -131,6 +131,7 @@ body {
         font-size: 1.25rem; /* 調整成你想要的大小 */
     }
 }
+
 
 
 
