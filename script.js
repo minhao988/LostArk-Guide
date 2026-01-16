@@ -374,15 +374,19 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebar.classList.toggle('mobile-open');
     });
 
-    /* 桌機收合 */
+
     sidebarToggle?.addEventListener('click', () => {
-        if (window.innerWidth >= 768) {
-            sidebar.classList.toggle('sidebar-collapsed');
-            sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
-                ? '<i class="fas fa-angle-right"></i>'
-                : '<i class="fas fa-angle-left"></i>';
-        }
-    });
+    if (window.innerWidth >= 768) {
+        // 桌面：收合/展開
+        sidebar.classList.toggle('sidebar-collapsed');
+        sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
+            ? '<i class="fas fa-angle-right"></i>'
+            : '<i class="fas fa-angle-left"></i>';
+    } else {
+        // 手機：開關 mobile-open
+        sidebar.classList.toggle('mobile-open');
+    }
+});
 
     /* 點手機 overlay 任意地方關閉 sidebar */
     sidebar.addEventListener('click', e => {
