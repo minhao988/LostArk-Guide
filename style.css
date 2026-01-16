@@ -67,6 +67,9 @@ body {
         text-align: center;
         font-size: 1.2rem;
     }
+    #sidebar.sidebar-collapsed .sidebar-category {
+    display: none;
+}
 
     /* 文字 */
     .sidebar-text {
@@ -204,4 +207,5 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
