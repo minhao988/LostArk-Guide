@@ -162,6 +162,46 @@ main {
     }
 }
 
+/* 桌機 sidebar */
+@media (min-width: 768px) {
+    #sidebar {
+        position: relative; /* 不固定 */
+        width: 18rem; /* w-72 */
+        transition: width 0.3s ease;
+    }
+    #sidebar.sidebar-collapsed {
+        width: 4rem;
+    }
+
+    main {
+        margin-left: 18rem;
+        transition: margin-left 0.3s ease;
+    }
+    #sidebar.sidebar-collapsed + main {
+        margin-left: 4rem;
+    }
+}
+
+/* 手機 sidebar */
+@media (max-width: 767px) {
+    #sidebar {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 50;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+    #sidebar.mobile-open {
+        transform: translateX(0);
+    }
+
+    main {
+        margin-left: 0; /* 手機不推 main */
+    }
+}
+
 
 
 
