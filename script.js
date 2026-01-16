@@ -26,10 +26,10 @@ const allRaids = {
                     { name: '紫圈擴散 (Purple Wave)', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' }
                 ],
                 mechanics: [
-                    { hp: '900', title: '抓人', desc: 'Boss 產生球追蹤玩家並抓起來 隨後出現反制。', details: '失敗反制, 造成被抓的玩家們死亡。', type: 'counter', videoId: 'POgWxytwOAA' },
-                    { hp: 'x700', title: '團隊癱瘓', desc: '戰場變成1打1的局面 所有玩家要在1分鐘内把紫條癱瘓打掉, 最後找自己的安全區', details: '反制能提升癱瘓值。', type: 'mech', videoId: 'POgWxytwOAA' },
-                    { hp: 'x660', title: '接劍', desc: '王突然消失 真和假幻象同時出現在1/5/7/11位置 需要在真身位置接劍', details: '失敗團滅，接劍后要躲避後續鈎鎖', type: 'mech', videoId: 'POgWxytwOAA' },
-                    { hp: 'x500', title: '接劍', desc: '王開鈎鎖能力和紅圈砸在每位玩家脚下 接著回中間進入動畫 玩家要在3輪内把護盾打掉 期間要根據3名玩家頭上標記和地板如符合 根據700那名標記玩家的安全區去站位躲避 困難模式下安全區前需要格擋中場',
+                    { hp: '900', title: '抓人 Orb Grab', desc: 'Boss 產生球追蹤玩家並抓起來 隨後出現反制。', details: '失敗反制, 造成被抓的玩家們死亡。', type: 'counter', videoId: 'POgWxytwOAA' },
+                    { hp: 'x700', title: '團隊癱瘓 Team Stagger', desc: '戰場變成1打1的局面 所有玩家要在1分鐘内把紫條癱瘓打掉, 最後找自己的安全區', details: '反制能提升癱瘓值。', type: 'mech', videoId: 'POgWxytwOAA' },
+                    { hp: 'x660', title: '接劍 Clash', desc: '王突然消失 真和假幻象同時出現在1/5/7/11位置 需要在真身位置接劍', details: '失敗團滅，接劍后要躲避後續鈎鎖', type: 'mech', videoId: 'POgWxytwOAA' },
+                    { hp: 'x500', title: '破盾和安全區 Shield & SafeSpot', desc: '王開鈎鎖能力和紅圈砸在每位玩家脚下 接著回中間進入動畫 玩家要在3輪内把護盾打掉 期間要根據3名玩家頭上標記和地板如符合 根據700那名標記玩家的安全區去站位躲避 困難模式下安全區前需要格擋中場',
                      details: '', type: 'shield', videoId: 'POgWxytwOAA' }
                 ]
             },
