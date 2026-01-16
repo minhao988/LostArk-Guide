@@ -25,7 +25,6 @@ body {
         position: relative;
         width: 18rem; /* 展開 */
         transition: width 0.3s ease;
-        margin-left: 18rem !important;
     }
 
     #sidebar.sidebar-collapsed {
@@ -128,6 +127,7 @@ body {
         font-size: 1rem; /* 調整成你想要的大小 */
     }
 }
+
 
 
 
