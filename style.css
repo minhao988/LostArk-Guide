@@ -106,6 +106,44 @@ main {
     width: 0;
 }
 
+/* 收合 sidebar */
+#sidebar.sidebar-collapsed {
+    width: 4rem; /* w-16 */
+}
+
+/* 收合後文字隱藏，只保留 icon */
+#sidebar.sidebar-collapsed .sidebar-btn span {
+    display: none;
+}
+
+/* 可點按鈕 tooltip */
+#sidebar.sidebar-collapsed .sidebar-btn {
+    position: relative;
+}
+#sidebar.sidebar-collapsed .sidebar-btn:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    background: rgba(0,0,0,0.85);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    z-index: 50;
+}
+
+/* 分類標題收合後縮略 */
+#sidebar.sidebar-collapsed .px-6.py-2 {
+    writing-mode: horizontal-tb; /* 不垂直擠 */
+    font-size: 0.65rem;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 
 
