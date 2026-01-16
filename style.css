@@ -36,6 +36,9 @@ body {
     #sidebar.sidebar-collapsed + main {
         margin-left: 4rem;
     }
+      main.sidebar-collapsed {
+        margin-left: 4rem; /* sidebar 收合時 */
+    }
 
     /* 收合後隱藏文字 */
     #sidebar.sidebar-collapsed .sidebar-text,
@@ -44,6 +47,8 @@ body {
     }
     #sidebar.sidebar-collapsed .sidebar-btn { justify-content:center; }
 }
+
+
 
 /* ===== 手機 (<768px) ===== */
 @media (max-width: 767px) {
@@ -74,3 +79,4 @@ body {
     #sidebar.mobile-open .sidebar-btn::after,
     #sidebar.mobile-open .sidebar-btn:active::after { display:block; }
 }
+
