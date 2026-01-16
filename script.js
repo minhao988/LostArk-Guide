@@ -359,7 +359,7 @@ if (overlay) {
         this.appendChild(iframe);
     });
 });
-
+}
 
 
 document.addEventListener('DOMContentLoaded', () => {
