@@ -365,24 +365,20 @@ if (overlay) {
 document.addEventListener('DOMContentLoaded', () => {
     initSidebar();
     selectRaid('final_day');
-
+    
 const menuToggle = document.getElementById('menu-toggle');
 const sidebar = document.getElementById('sidebar');
 
 // 手機漢堡開/關
 menuToggle?.addEventListener('click', () => {
-    sidebar.classList.toggle('mobile-open'); // 只切 mobile-open
-});
-overlay.addEventListener('click', () => {
-    sidebar.classList.remove('mobile-open'); // 關閉時只移除 mobile-open
+    sidebar.classList.toggle('mobile-open'); // 手機只切 mobile-open
 });
 
-// 桌機收合仍然保留原本 toggleBtn
+// 桌機收合按鈕
 const toggleBtn = document.getElementById('sidebar-toggle');
 if (toggleBtn) {
     toggleBtn.onclick = () => {
         sidebar.classList.toggle('sidebar-collapsed');
-
         toggleBtn.innerHTML = sidebar.classList.contains('sidebar-collapsed')
             ? '<i class="fas fa-angle-right"></i>'
             : '<i class="fas fa-angle-left"></i>';
