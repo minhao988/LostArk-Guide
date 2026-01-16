@@ -366,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSidebar();
     selectRaid('final_day');
 
- const menuToggle = document.getElementById('menu-toggle');
+const menuToggle = document.getElementById('menu-toggle');
 const sidebar = document.getElementById('sidebar');
 
 menuToggle?.addEventListener('click', () => {
@@ -387,5 +387,6 @@ if (toggleBtn) {
             span.style.display = sidebar.classList.contains('sidebar-collapsed') ? 'none' : 'inline';
         });
     };
+}
     
 });
