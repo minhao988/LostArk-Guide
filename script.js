@@ -399,6 +399,9 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebar.classList.remove('mobile-open');
     }
 });
+
+
+  
   document.querySelectorAll('.sidebar-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         if (window.innerWidth < 768) sidebar.classList.remove('mobile-open');
