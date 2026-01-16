@@ -54,7 +54,7 @@ const allRaids = {
     act4: {
         title: '第四幕：天災之始',
         short: '第四幕',
-        category: '卡澤羅斯討伐戰 (Kazeros)',
+        category: '卡傑羅斯討伐 (Kazeros Raid)',
         desc: '混沌裂縫被強行撕開，這是一個考驗團隊協作移動與屬性相克的副本。',
         theme: 'raid-gradient-act4',
         gates: {
@@ -70,10 +70,10 @@ const allRaids = {
         }
     },
     serca: {
-        title: '深淵之主：賽爾卡',
+        title: '絕望女巫：賽爾卡',
         short: '賽爾卡',
-        category: '深淵副本系列 (Abyss)',
-        desc: '沉睡在寂靜海洋底部的巨獸。氧氣條管理與水流推進是本關的核心。',
+        category: '暗影襲擊系列 (Darkness Raid)',
+        desc: '女巫描述待定，僅確認爲塞克利亞的牧師角色',
         theme: 'raid-gradient-serca',
         gates: {
             1: {
