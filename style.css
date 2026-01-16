@@ -33,9 +33,7 @@ body {
         margin-left: 18rem;
         transition: margin-left 0.3s ease;
     }
-    #sidebar.sidebar-collapsed + main {
-        margin-left: 4rem;
-    }
+   
       main.sidebar-collapsed {
         margin-left: 4rem; /* sidebar 收合時 */
     }
@@ -79,4 +77,5 @@ body {
     #sidebar.mobile-open .sidebar-btn::after,
     #sidebar.mobile-open .sidebar-btn:active::after { display:block; }
 }
+
 
