@@ -364,7 +364,7 @@ if (overlay) {
 
 document.addEventListener('DOMContentLoaded', () => {
      initSidebar();
-    selectRaid(currentRaidId);  // 預設載入 final_day
+    selectRaid('final_day');
     const sidebar = document.getElementById('sidebar');
     const menuToggle = document.getElementById('menu-toggle');
     const sidebarToggle = document.getElementById('sidebar-toggle');
