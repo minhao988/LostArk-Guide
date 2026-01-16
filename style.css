@@ -31,10 +31,10 @@ body {
         width: 4rem; /* 收合 */
     }
 
-    main {
-        margin-left: 18rem; /* 展開時對齊 sidebar */
-        transition: margin-left 0.3s ease;
-        padding-left: 0;    /* 防止內容被推太右 */
+      main {
+        margin-left: 0; /* 不用 margin-left，改用 padding-left */
+        padding-left: 18rem; /* 補償 sidebar 展開 */
+        transition: padding-left 0.3s ease;
     }
 
     main.sidebar-collapsed {
@@ -101,5 +101,6 @@ body {
     color: #000;
     border-color: #facc15;
 }
+
 
 
