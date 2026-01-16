@@ -37,6 +37,10 @@ body {
         display: none;
     }
     #sidebar.sidebar-collapsed .sidebar-btn { justify-content: center; }
+    #sidebar.sidebar-collapsed h1 {
+    justify-content: center;  /* icon 居中 */
+    gap: 0;                   /* 取消 gap */
+}
 
     /* 內容區靠左，不留空間 */
     header > div,
@@ -141,6 +145,7 @@ body {
 #sidebar.sidebar-collapsed .sidebar-icon {
   position: relative;
 }
+    
 
 /* tooltip 本體 */
 #sidebar.sidebar-collapsed .sidebar-icon::after {
@@ -188,6 +193,7 @@ body {
   opacity: 1;
 }
 }
+
 
 
 
