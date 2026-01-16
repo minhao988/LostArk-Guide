@@ -144,6 +144,18 @@ main {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+/* sidebar-collapsed 已經控制寬度與文字隱藏 */
+#sidebar.sidebar-collapsed {
+    width: 4rem; /* 窄列只留 icon */
+}
+
+/* tooltip 手機可點擊 */
+@media (max-width: 767px) {
+    #sidebar.sidebar-collapsed .sidebar-btn:hover::after,
+    #sidebar.sidebar-collapsed .sidebar-btn:active::after {
+        display: block;
+    }
+}
 
 
 
