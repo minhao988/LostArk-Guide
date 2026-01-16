@@ -375,18 +375,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 桌面收合 / 手機 sidebar < 關閉
-    sidebarToggle?.addEventListener('click', () => {
-        if (window.innerWidth >= 768) {
-            // 桌面：收合/展開
-            sidebar.classList.toggle('sidebar-collapsed');
-            sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
-                ? '<i class="fas fa-angle-right"></i>'
-                : '<i class="fas fa-angle-left"></i>';
-        } else {
-            // 手機：關閉 sidebar
-            sidebar.classList.remove('mobile-open');
-        }
-    });
+   sidebarToggle?.addEventListener('click', () => {
+    if (window.innerWidth >= 768) {
+        sidebar.classList.toggle('sidebar-collapsed');
+        document.querySelector('main').classList.toggle('sidebar-collapsed'); // 加這行
+        sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
+            ? '<i class="fas fa-angle-right"></i>'
+            : '<i class="fas fa-angle-left"></i>';
+    } else {
+        sidebar.classList.remove('mobile-open');
+    }
+});
 
     // 點手機 overlay 任意地方關閉 sidebar
     sidebar.addEventListener('click', e => {
