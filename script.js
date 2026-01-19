@@ -318,7 +318,7 @@ function switchGate(gateId) {
           data-video="${p.videoId || ''}"
         >
           <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-            <i class="fab fa-youtube text-4xl text-red-600 opacity-80"></i>
+            <i class="fab fa-youtube text-6xl text-red-600 opacity-80"></i>
             <span class="mt-2 text-[20px] text-slate-300">
                ${p.name}招式影片
             </span>
