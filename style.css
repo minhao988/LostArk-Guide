@@ -4,6 +4,11 @@
     color: #f1f5f9;
 } */
 
+:root {
+  --raid-accent: #facc15;   /* 預設金色 */
+  --raid-accent-soft: rgba(250,204,21,0.15);
+  --raid-accent-border: rgba(250,204,21,0.35);
+}
 header {
     background: linear-gradient(
         180deg,
@@ -24,31 +29,21 @@ body {
 
 /* 漸層背景 */
 .raid-gradient-final {
-    background: linear-gradient(
-        135deg,
-        #7f1d1d 0%,
-        #450a0a 35%,
-        #020617 75%,
-        #000 100%
-    );
+  --raid-accent: #ef4444;         /* 火紅 */
+  --raid-accent-soft: rgba(239,68,68,0.15);
+  --raid-accent-border: rgba(239,68,68,0.35);
 }
+
 .raid-gradient-act4 {
-    background: linear-gradient(
-        135deg,
-        #312e81 0%,
-        #1e1b4b 40%,
-        #020617 80%,
-        #000 100%
-    );
+  --raid-accent: #6366f1;         /* 災厄紫藍 */
+  --raid-accent-soft: rgba(99,102,241,0.15);
+  --raid-accent-border: rgba(99,102,241,0.35);
 }
+
 .raid-gradient-serca {
-    background: linear-gradient(
-        135deg,
-        #0f766e 0%,
-        #064e3b 40%,
-        #022c22 70%,
-        #020617 100%
-    );
+  --raid-accent: #22d3ee;         /* 深海青 */
+  --raid-accent-soft: rgba(34,211,238,0.15);
+  --raid-accent-border: rgba(34,211,238,0.35);
 }
 /* 自訂捲軸 */
 .custom-scrollbar::-webkit-scrollbar { width:6px; }
@@ -345,6 +340,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
 
