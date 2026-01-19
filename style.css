@@ -28,7 +28,7 @@ body {
 
     /* 收回 */
     #sidebar.sidebar-collapsed {
-        width: 4.5rem;
+        width: 4.75rem;
     }
 
     /* 內容區靠左，不留空間 */
@@ -59,14 +59,14 @@ body {
 #sidebar.sidebar-collapsed .sidebar-btn {
     justify-content: center;
     gap: 0;
-    padding-left: 0; /* 避免 padding 擠壓 */
-    padding-right: 0;
+    padding: 0;
+    height: 3rem;
 }
 
 #sidebar.sidebar-collapsed .sidebar-icon {
-    width: 2.5rem;  /* 固定寬度 */
+    width: 2rem;  /* 固定寬度 */
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     flex-shrink: 0;  /* 不縮小 */
 }
     #sidebar.sidebar-collapsed .sidebar-category {
@@ -233,6 +233,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
 
