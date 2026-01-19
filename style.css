@@ -17,7 +17,17 @@ header {
     );
     backdrop-filter: blur(4px);
 }
-
+.info-card {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.04),
+    rgba(255,255,255,0.01)
+  );
+  border-left: 4px solid var(--raid-accent);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+}
 body {
     background: radial-gradient(
         1200px 800px at 20% 0%,
@@ -340,6 +350,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
 
