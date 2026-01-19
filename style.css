@@ -4,6 +4,15 @@
     color: #f1f5f9;
 } */
 
+header {
+    background: linear-gradient(
+        180deg,
+        rgba(2,6,23,0.6),
+        rgba(2,6,23,0.2)
+    );
+    backdrop-filter: blur(4px);
+}
+
 body {
     background: radial-gradient(
         1200px 800px at 20% 0%,
@@ -336,6 +345,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
 
