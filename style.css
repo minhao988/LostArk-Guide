@@ -86,6 +86,16 @@ body {
   box-shadow: 0 20px 40px rgba(0,0,0,.45);
 }
 
+.section-bar {
+  width: 3px;
+  height: 2rem;
+  background: linear-gradient(
+    to bottom,
+    var(--raid-accent),
+    transparent
+  );
+}
+
 /* ===== 桌機 (≥768px) ===== */
 @media (min-width: 768px) {
     #sidebar {
@@ -365,6 +375,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
 
