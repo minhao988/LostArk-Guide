@@ -242,6 +242,11 @@ body {
         width: 100% !important;
     }
 
+    .sidebar-btn.active {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    }
+
     /* tooltip 手機不可見 */
     #sidebar .sidebar-icon::after { display:none; }
     #sidebar.mobile-open .sidebar-icon::after,
@@ -293,6 +298,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
 
