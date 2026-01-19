@@ -128,6 +128,22 @@ body {
     #sidebar.sidebar-collapsed .sidebar-btn {
         overflow: visible;
     }
+    #sidebar.sidebar-collapsed .sidebar-btn:hover {
+            background: linear-gradient(
+            90deg,
+            rgba(250, 204, 21, 0.15),
+            rgba(250, 204, 21, 0.05),
+            transparent
+        );
+    }
+    
+    #sidebar.sidebar-collapsed .sidebar-btn:hover .sidebar-icon {
+        color: #facc15;
+        transform: scale(1.1);
+    }
+    .sidebar-icon {
+        transition: transform 0.15s ease, color 0.15s ease;
+    }
 }
 
 
@@ -206,6 +222,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
 
