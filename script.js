@@ -300,7 +300,7 @@ function switchGate(gateId) {
 
 
 
-       <section>
+  <section>
   <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
     <span class="section-bar"></span>
     
@@ -310,7 +310,7 @@ function switchGate(gateId) {
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     ${gate.patterns.map(p => `
       <!-- 一招 = 一张卡（这是 grid 的直接子元素） -->
-      // <div class="bg-slate-800/40 border border-white/10 rounded-2xl overflow-hidden hover:bg-slate-800/60 transition-all">
+      <!-- <div class="bg-slate-800/40 border border-white/10 rounded-2xl overflow-hidden hover:bg-slate-800/60 transition-all"> -->
 <div class="pattern-card rounded-2xl">
         <!-- 影片区（在卡片里面） -->
         <div
