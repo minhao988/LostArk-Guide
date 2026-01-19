@@ -23,9 +23,24 @@ body {
         #000 100%
     );
 }
-.raid-gradient-act4 { background: linear-gradient(135deg,#1e1b4b 0%,#000 100%); }
-.raid-gradient-serca { background: linear-gradient(135deg,#064e3b 0%,#020617 100%); }
-
+.raid-gradient-act4 {
+    background: linear-gradient(
+        135deg,
+        #312e81 0%,
+        #1e1b4b 40%,
+        #020617 80%,
+        #000 100%
+    );
+}
+.raid-gradient-serca {
+    background: linear-gradient(
+        135deg,
+        #0f766e 0%,
+        #064e3b 40%,
+        #022c22 70%,
+        #020617 100%
+    );
+}
 /* 自訂捲軸 */
 .custom-scrollbar::-webkit-scrollbar { width:6px; }
 .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
@@ -315,6 +330,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
 
