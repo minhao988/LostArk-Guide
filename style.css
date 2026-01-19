@@ -169,6 +169,31 @@ body {
     .sidebar-text {
         transition: transform 0.15s ease, color 0.15s ease;
     }
+
+    /* 文字滑出動畫 */
+    #sidebar.sidebar-collapsed .sidebar-text {
+        position: absolute;      /* 從 icon 右邊浮動 */
+        left: 100%;              /* 緊貼 icon 右邊 */
+        top: 50%;
+        transform: translateY(-50%) translateX(0); /* 初始位置在 icon 上 */
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        background: rgba(15, 23, 42, 0.95);
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        color: #f8fafc;
+        z-index: 50;
+    }
+    
+    /* hover 展開文字 */
+    #sidebar.sidebar-collapsed .sidebar-btn:hover .sidebar-text {
+        transform: translateY(-50%) translateX(10px); /* 往右滑出 10px */
+        opacity: 1;
+        pointer-events: auto;
+    }
 }
 
 
@@ -247,6 +272,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
 
