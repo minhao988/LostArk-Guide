@@ -408,13 +408,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-
-  
   document.querySelectorAll('.sidebar-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-        if (window.innerWidth < 768) sidebar.classList.remove('mobile-open');
+
+        // ① 清掉所有 active
+        document.querySelectorAll('.sidebar-btn')
+            .forEach(b => b.classList.remove('active'));
+
+        // ② 当前这个按钮 active
+        btn.classList.add('active');
+
+        // ③ 手机点完关 sidebar
+        if (window.innerWidth < 768) {
+            sidebar.classList.remove('mobile-open');
+        }
     });
 });
+
 
     // 點手機 overlay 任意地方關閉 sidebar
     sidebar.addEventListener('click', e => {
