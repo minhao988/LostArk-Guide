@@ -79,7 +79,7 @@ body {
         white-space: nowrap;
     }
 
-    #sidebar.sidebar-collapsed .sidebar-text {
+    /* #sidebar.sidebar-collapsed .sidebar-text {
     
         display: inline-block;         /* 不要 display: none */
         position: absolute;            /* 從 icon 右側浮動 */
@@ -96,7 +96,7 @@ body {
         font-size: 0.875rem;
         color: #f8fafc;
         z-index: 50;
-    }
+    } */
 
     /* icon */
     .sidebar-icon {
@@ -186,7 +186,7 @@ body {
     }
 
     /* 文字滑出動畫 */
-    #sidebar.sidebar-collapsed .sidebar-text {
+    #sidebar.sidebar-collapsed .sidebar-collapsed-btn .sidebar-text {
         position: absolute;      /* 從 icon 右邊浮動 */
         left: 100%;              /* 緊貼 icon 右邊 */
         top: 50%;
@@ -204,8 +204,8 @@ body {
     }
     
     /* hover 展開文字 */
-    #sidebar.sidebar-collapsed .sidebar-btn:hover .sidebar-text {
-        transform: translateY(-50%) translateX(10px); /* 往右滑出 10px */
+      #sidebar.sidebar-collapsed .sidebar-collapsed-btn:hover .sidebar-text {
+        transform: translateY(-50%) translateX(10px);
         opacity: 1;
         pointer-events: auto;
     }
@@ -289,6 +289,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
 
