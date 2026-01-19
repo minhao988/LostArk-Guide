@@ -128,7 +128,7 @@ function initSidebar() {
 
     categories.forEach(cat => {
         const catDiv = document.createElement('div');
-        catDiv.innerHTML = `<div class="px-6 py-2 text-xs font-bold text-slate-500 uppercase tracking-wider">${cat}</div>`;
+        catDiv.innerHTML = `<div class="sidebar-category px-6 py-2 text-xs font-bold text-slate-500 uppercase tracking-wider">${cat}</div>`;
         Object.entries(allRaids).forEach(([id, data]) => {
             if (data.category === cat) {
                 const btn = document.createElement('button');
