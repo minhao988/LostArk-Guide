@@ -80,7 +80,7 @@ body {
     }
 
     #sidebar.sidebar-collapsed .sidebar-text {
-        /* display: none; */
+    
         display: inline-block;         /* 不要 display: none */
         position: absolute;            /* 從 icon 右側浮動 */
         left: 100%;                    /* 緊貼 icon 右邊 */
@@ -210,10 +210,7 @@ body {
         pointer-events: auto;
     }
     
-    /* 刪掉或暫時關閉 tooltip */
-    #sidebar.sidebar-collapsed .sidebar-btn::after {
-        content: none;
-    }
+
 }
 
 
@@ -292,6 +289,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
 
