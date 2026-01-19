@@ -17,17 +17,38 @@ header {
     );
     backdrop-filter: blur(4px);
 }
+
+/* 公共 info-card 样式 */
 .info-card {
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,0.04),
-    rgba(255,255,255,0.01)
-  );
-  border-left: 4px solid var(--raid-accent);
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.4),
-    inset 0 1px 0 rgba(255,255,255,0.05);
+  border-left: 4px solid var(--raid-accent, #fff); /* 用主题色 */
+  background-color: var(--raid-accent-soft, rgba(255,255,255,0.05));
+  transition: background 0.3s, border-color 0.3s;
 }
+
+/* sidebar 当前 active */
+.sidebar-btn.active {
+  color: var(--raid-accent, #fff);
+  background-color: var(--raid-accent-soft, rgba(255,255,255,0.05));
+  border-left: 3px solid var(--raid-accent-border, rgba(255,255,255,0.3));
+}
+
+/* gate-tab 当前 active */
+.gate-btn.active {
+  background-color: var(--raid-accent-soft, rgba(255,255,255,0.05));
+  color: var(--raid-accent, #fff);
+  border: 1px solid var(--raid-accent-border, rgba(255,255,255,0.3));
+}
+
+/* 标题 / icon 高亮 */
+h2, h3, h4 {
+  color: var(--raid-accent, #fff);
+}
+
+.sidebar-icon {
+  color: var(--raid-accent, #fff);
+}
+
+
 body {
     background: radial-gradient(
         1200px 800px at 20% 0%,
@@ -377,6 +398,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
 
