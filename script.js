@@ -133,8 +133,8 @@ function initSidebar() {
             if (data.category === cat) {
                 const btn = document.createElement('button');
                 btn.id = `btn-${id}`;
-                //btn.className = 'sidebar-btn w-full text-left px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white flex items-center justify-between transition-all';
-              btn.className = 'sidebar-btn w-full flex items-center justify-start gap-2 px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all relative';
+                //btn.className = 'sidebar-btn  w-full text-left px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white flex items-center justify-between transition-all';
+              btn.className = 'sidebar-btn sidebar-collapsed-btn w-full flex items-center justify-start gap-2 px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all relative';
                 //btn.innerHTML = `<i class="fas ${raidIcons[id] || 'fa-dungeon'} sidebar-icon" data-tooltip="${data.short}"></i> 
                 //<span class="sidebar-text font-medium">${data.short}</span>`;
                 //btn.innerHTML = `<span class="font-medium">${data.short}</span><i class="fas fa-chevron-right text-xs"></i>`;
