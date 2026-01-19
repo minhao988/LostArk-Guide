@@ -144,6 +144,17 @@ body {
     .sidebar-icon {
         transition: transform 0.15s ease, color 0.15s ease;
     }
+    #sidebar .sidebar-btn.active {
+        color: #facc15;
+    }
+    
+    #sidebar.sidebar-collapsed .sidebar-btn.active {
+        background: rgba(250, 204, 21, 0.12);
+    }
+    
+    #sidebar.sidebar-collapsed .sidebar-btn.active .sidebar-icon {
+        color: #facc15;
+    }
 }
 
 
@@ -222,6 +233,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
 
