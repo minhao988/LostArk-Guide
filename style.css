@@ -185,31 +185,35 @@ body {
         transition: transform 0.15s ease, color 0.15s ease;
     }
 
-    /* 文字滑出動畫 */
+    /* ----------------- sidebar 收起文字 hover ----------------- */
+    #sidebar.sidebar-collapsed .sidebar-collapsed-btn {
+        position: relative; /* 让子元素 absolute 相对定位 */
+        overflow: visible;  /* 让文字滑出不被裁掉 */
+    }
+    
     #sidebar.sidebar-collapsed .sidebar-collapsed-btn .sidebar-text {
-        position: absolute;      /* 從 icon 右邊浮動 */
-        left: 100%;              /* 緊貼 icon 右邊 */
+        position: absolute;
+        left: 100%;           /* 紧贴 icon 右边 */
         top: 50%;
-        transform: translateY(-50%) translateX(0); /* 初始位置在 icon 上 */
-        white-space: nowrap;
+        transform: translateY(-50%) translateX(0); /* 初始隐藏 */
         opacity: 0;
         pointer-events: none;
-        transition: transform 0.3s ease, opacity 0.3s ease;
-        background: rgba(15, 23, 42, 0.95);
+        background: rgba(15,23,42,0.95);
         padding: 4px 10px;
         border-radius: 6px;
         font-size: 0.875rem;
         color: #f8fafc;
+        white-space: nowrap;
         z-index: 50;
+        transition: transform 0.3s ease, opacity 0.3s ease;
     }
     
-    /* hover 展開文字 */
-      #sidebar.sidebar-collapsed .sidebar-collapsed-btn:hover .sidebar-text {
+    /* hover 展开文字 */
+    #sidebar.sidebar-collapsed .sidebar-collapsed-btn:hover .sidebar-text {
         transform: translateY(-50%) translateX(10px);
         opacity: 1;
         pointer-events: auto;
     }
-    
 
 }
 
@@ -289,6 +293,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
 
