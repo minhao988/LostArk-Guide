@@ -1,8 +1,9 @@
 const raidIcons = {
-  final_day: 'fa-skull-crossbones',
-  act4: 'fa-fire',
-  serca: 'fa-water'
+  final_day: 'fa-solid fa-fire',
+  act4: 'fa-solid fa-skull',
+  serca: 'fa-solid fa-water'
 };
+
 
 const allRaids = {
     final_day: {
