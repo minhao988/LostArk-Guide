@@ -80,7 +80,22 @@ body {
     }
 
     #sidebar.sidebar-collapsed .sidebar-text {
-        display: none;
+        /* display: none; */
+        display: inline-block;         /* 不要 display: none */
+        position: absolute;            /* 從 icon 右側浮動 */
+        left: 100%;                    /* 緊貼 icon 右邊 */
+        top: 50%;
+        transform: translateY(-50%) translateX(0); /* 初始位置在 icon 上 */
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        background: rgba(15, 23, 42, 0.95);
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        color: #f8fafc;
+        z-index: 50;
     }
 
     /* icon */
@@ -194,6 +209,11 @@ body {
         opacity: 1;
         pointer-events: auto;
     }
+    
+    /* 刪掉或暫時關閉 tooltip */
+    #sidebar.sidebar-collapsed .sidebar-btn::after {
+        content: none;
+    }
 }
 
 
@@ -272,6 +292,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
 
