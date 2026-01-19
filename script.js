@@ -283,7 +283,7 @@ function switchGate(gateId) {
            pointer-events-none"
   >
     <i class="fab fa-youtube text-5xl text-red-600 opacity-90"></i>
-    <span class="mt-2 text-[12px] text-slate-300">
+    <span class="mt-2 text-[20px] text-slate-300">
       點擊觀看${m.title}
     </span>
   </div>
