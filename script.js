@@ -302,7 +302,8 @@ function switchGate(gateId) {
 
        <section>
   <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
-    <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span>
+    <span class="section-bar"></span>
+    
     招式動作解析 (Patterns Guide)
   </h3>
 
