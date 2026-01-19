@@ -71,6 +71,21 @@ body {
     backdrop-filter: blur(8px);
 }
 
+.pattern-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.06),
+    rgba(255,255,255,0.015)
+  );
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.pattern-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,.45);
+}
+
 /* ===== 桌機 (≥768px) ===== */
 @media (min-width: 768px) {
     #sidebar {
@@ -350,6 +365,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
 
