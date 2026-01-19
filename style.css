@@ -79,7 +79,7 @@ body {
         white-space: nowrap;
     }
 
-    /* #sidebar.sidebar-collapsed .sidebar-text {
+     #sidebar.sidebar-collapsed .sidebar-text {
     
         display: inline-block;         /* 不要 display: none */
         position: absolute;            /* 從 icon 右側浮動 */
@@ -96,7 +96,7 @@ body {
         font-size: 0.875rem;
         color: #f8fafc;
         z-index: 50;
-    } */
+    } 
 
     /* icon */
     .sidebar-icon {
@@ -289,6 +289,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
 
