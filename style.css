@@ -114,23 +114,13 @@ body {
         transition: opacity 0.15s ease, transform 0.15s ease;
         z-index: 50;
     }
-
-    #sidebar.sidebar-collapsed .sidebar-icon::before {
-        content: '';
-        position: absolute;
-        left: 100%;
-        top: 50%;
-        transform: translateY(-50%);
-        border-width: 6px;
-        border-style: solid;
-        border-color: transparent rgba(15, 23, 42, 0.95) transparent transparent;
-        opacity: 0;
-        transition: opacity 0.15s ease;
+    #sidebar.sidebar-collapsed .sidebar-btn {
+        overflow: visible;   /* ← 預設很多地方是 hidden */
     }
-
+    
     #sidebar.sidebar-collapsed .sidebar-btn:hover::after {
-    opacity: 1;
-}
+        opacity: 1;
+    }
 }
 
 
@@ -209,6 +199,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
 
