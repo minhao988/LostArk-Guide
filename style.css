@@ -95,7 +95,7 @@ body {
     }
 
     /* tooltip（桌面收回時顯示） */
-    #sidebar.sidebar-collapsed .sidebar-icon::after {
+    #sidebar.sidebar-collapsed .sidebar-btn::after {
         content: attr(data-tooltip);
         position: absolute;
         left: 110%;
@@ -128,11 +128,11 @@ body {
         transition: opacity 0.15s ease;
     }
 
-    #sidebar.sidebar-collapsed .sidebar-btn:hover .sidebar-icon::after,
-    #sidebar.sidebar-collapsed .sidebar-btn:hover .sidebar-icon::before {
-        opacity: 1;
-    }
+    #sidebar.sidebar-collapsed .sidebar-btn:hover::after {
+    opacity: 1;
 }
+  
+
 
 /* ===== 手機 (<768px) ===== */
 @media (max-width: 767px) {
@@ -209,6 +209,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
 
