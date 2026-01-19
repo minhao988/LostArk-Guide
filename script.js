@@ -11,7 +11,7 @@ const allRaids = {
         short: '四幕：毀滅堡壘',
         category: '卡傑羅斯討伐',
         desc: `第四幕是8人終局副本並携帶極具挑戰性的雙門遭遇戰，
-          首領分別是Echidna初魅（第一道門）和Armoche阿莫什（第二道門）。物品等級（普通 1700，困難 1720），機制包含需求格擋、破壞、協同格擋以及特定的站位方式來克服破壞性的死亡。`,
+          首領分別是Echidna初魅（第一道門）和Armoche阿莫什（第二道門）。裝備門檻（普通 1700，困難 1720），機制包含需求格擋、破壞、協同格擋以及特定的站位方式來克服破壞性的死亡。`,
         theme: 'raid-gradient-act4',
         gates: {
             1: {
@@ -29,7 +29,7 @@ const allRaids = {
         title: '卡傑羅斯系列 終幕：終結之日 The Final Day',
         short: '終幕： 終結之日',
         category: '卡傑羅斯討伐',
-        desc: '與深淵大惡魔卡傑羅斯的最後決戰，要求玩家極高的機制熟練度和個人應變能力。',
+        desc: '終幕將會跟深淵大惡魔卡傑羅斯的最後決戰，首領在1-2門都是卡傑羅斯, 裝備門檻（普通 1710，困難 1730, TF 1740）機制包含前面所有看過學過並需要學以致用。',
         theme: 'raid-gradient-final',
         gates: {
             1: {
@@ -63,7 +63,7 @@ const allRaids = {
                 ]
             },
             2: {
-                name: '復活的魔皇：卡澤羅斯 (Gate 2)',
+                name: '大惡魔：卡傑羅斯 (Gate 2)',
                 youtubeId: "99ZhXs-SAx0", 
                 patterns: [
                     { name: '魔皇紅黑波', desc: 'Boss 手中出現紅/黑兩種能量旋渦。', tips: '紅內安全，黑外安全。觀察 Boss 腳下旋轉的光環顏色。', gif: 'red_black.gif' },
