@@ -7,19 +7,20 @@ const raidIcons = {
 
 const allRaids = {
       act4: {
-        title: '第四幕：天災之始',
-        short: '四幕：天災之始',
-        category: '卡傑羅斯討伐 (Kazeros Raid)',
-        desc: '混沌裂縫被強行撕開，這是一個考驗團隊協作移動與屬性相克的副本。',
+        title: '卡傑羅斯系列 四幕：毀滅堡壘 Fortress of Destruction',
+        short: '四幕：毀滅堡壘',
+        category: '卡傑羅斯討伐',
+        desc: `第四幕是8人終局副本並携帶極具挑戰性的雙門遭遇戰，
+          首領分別是Echidna初魅（第一道門）和Armoche阿莫什（第二道門）。物品等級（普通 1700，困難 1720），機制包含需求格擋、破壞、協同格擋以及特定的站位方式來克服破壞性的死亡。`,
         theme: 'raid-gradient-act4',
         gates: {
             1: {
-                name: '裂縫守護者 (Gate 1)',
+                name: 'Echidna初魅 (Gate 1)',
                 patterns: [
                     { name: '混沌踐踏', desc: '全場地板變紅，隨機出現三處安全區。', tips: '注意 Boss 踩地第三下是全場擊飛，必須在安全區內。', gif: 'stomp.gif' }
                 ],
                 mechanics: [
-                    { hp: 'x120', title: '元素共鳴', desc: '根據 Boss 翅膀顏色選擇對應門進入。', type: 'mech' }
+                    { hp: 'x360', title: '與我共舞', desc: '根據 Boss 翅膀顏色選擇對應門進入。', type: 'mech' }
                 ]
             }
         }
@@ -27,7 +28,7 @@ const allRaids = {
   final_day: {
         title: '卡傑羅斯系列 終幕：終結之日 The Final Day',
         short: '終幕： 終結之日',
-        category: '卡傑羅斯討伐 (Kazeros Raid)',
+        category: '卡傑羅斯討伐',
         desc: '與深淵大惡魔卡傑羅斯的最後決戰，要求玩家極高的機制熟練度和個人應變能力。',
         theme: 'raid-gradient-final',
         gates: {
