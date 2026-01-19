@@ -14,7 +14,15 @@ body {
 }
 
 /* 漸層背景 */
-.raid-gradient-final { background: linear-gradient(135deg,#450a0a 0%,#000 100%); }
+.raid-gradient-final {
+    background: linear-gradient(
+        135deg,
+        #7f1d1d 0%,
+        #450a0a 35%,
+        #020617 75%,
+        #000 100%
+    );
+}
 .raid-gradient-act4 { background: linear-gradient(135deg,#1e1b4b 0%,#000 100%); }
 .raid-gradient-serca { background: linear-gradient(135deg,#064e3b 0%,#020617 100%); }
 
@@ -307,6 +315,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
 
