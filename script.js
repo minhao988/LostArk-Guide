@@ -6,7 +6,25 @@ const raidIcons = {
 
 
 const allRaids = {
-    final_day: {
+      act4: {
+        title: '第四幕：天災之始',
+        short: '四幕：天災之始',
+        category: '卡傑羅斯討伐 (Kazeros Raid)',
+        desc: '混沌裂縫被強行撕開，這是一個考驗團隊協作移動與屬性相克的副本。',
+        theme: 'raid-gradient-act4',
+        gates: {
+            1: {
+                name: '裂縫守護者 (Gate 1)',
+                patterns: [
+                    { name: '混沌踐踏', desc: '全場地板變紅，隨機出現三處安全區。', tips: '注意 Boss 踩地第三下是全場擊飛，必須在安全區內。', gif: 'stomp.gif' }
+                ],
+                mechanics: [
+                    { hp: 'x120', title: '元素共鳴', desc: '根據 Boss 翅膀顏色選擇對應門進入。', type: 'mech' }
+                ]
+            }
+        }
+    },
+  final_day: {
         title: '卡傑羅斯系列 終幕：終結之日 The Final Day',
         short: '終幕： 終結之日',
         category: '卡傑羅斯討伐 (Kazeros Raid)',
@@ -53,24 +71,6 @@ const allRaids = {
                 ],
                 mechanics: [
                     { hp: 'x350', title: '反制風暴', desc: '全體 8 人必須在 6 點鐘位置站成一排進行連續 5 次完美反制。', type: 'wipe' }
-                ]
-            }
-        }
-    },
-    act4: {
-        title: '第四幕：天災之始',
-        short: '四幕：天災之始',
-        category: '卡傑羅斯討伐 (Kazeros Raid)',
-        desc: '混沌裂縫被強行撕開，這是一個考驗團隊協作移動與屬性相克的副本。',
-        theme: 'raid-gradient-act4',
-        gates: {
-            1: {
-                name: '裂縫守護者 (Gate 1)',
-                patterns: [
-                    { name: '混沌踐踏', desc: '全場地板變紅，隨機出現三處安全區。', tips: '注意 Boss 踩地第三下是全場擊飛，必須在安全區內。', gif: 'stomp.gif' }
-                ],
-                mechanics: [
-                    { hp: 'x120', title: '元素共鳴', desc: '根據 Boss 翅膀顏色選擇對應門進入。', type: 'mech' }
                 ]
             }
         }
