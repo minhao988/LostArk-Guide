@@ -155,6 +155,20 @@ body {
     #sidebar.sidebar-collapsed .sidebar-btn.active .sidebar-icon {
         color: #facc15;
     }
+    
+    #sidebar .sidebar-btn:hover .sidebar-text {
+        transform: scale(1.08);
+        color: #ffffff;
+    }
+    
+    /* 收合狀態：hover tooltip 文字放大 */
+    #sidebar.sidebar-collapsed .sidebar-btn:hover::after {
+        transform: translateY(-50%) scale(1.08);
+    }
+
+    .sidebar-text {
+        transition: transform 0.15s ease, color 0.15s ease;
+    }
 }
 
 
@@ -233,6 +247,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
 
