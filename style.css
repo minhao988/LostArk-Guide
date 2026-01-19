@@ -28,7 +28,7 @@ body {
 
     /* 收回 */
     #sidebar.sidebar-collapsed {
-        width: 4rem;
+        width: 4.5rem;
     }
 
     /* 內容區靠左，不留空間 */
@@ -121,6 +121,13 @@ body {
     #sidebar.sidebar-collapsed .sidebar-btn:hover::after {
         opacity: 1;
     }
+    #sidebar {
+        overflow: visible; /* tooltip & icon 不被裁 */
+    }
+    
+    #sidebar.sidebar-collapsed .sidebar-btn {
+        overflow: visible;
+    }
 }
 
 
@@ -199,6 +206,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 
 
 
