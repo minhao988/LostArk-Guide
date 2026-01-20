@@ -197,15 +197,15 @@ function selectRaid(raidId) {
 
 
 function renderGateSubmenu(gate) {
-  const container = document.getElementById('gate-submenu');
-  if (!container) {
-    console.log('DOMContentLoaded:', document.readyState);
-console.log('gate-submenu exists:', document.getElementById('gate-submenu'));
-    console.warn('#gate-submenu 尚未存在');
-    return;
-  }
+  const tryRender = () => {
+        const container = document.getElementById('gate-submenu');
+        if (!container) {
+            requestAnimationFrame(tryRender);
+            return;
+        }
 
-  let html = `
+        // 原本的渲染程式碼
+        let html = `
     <div class="px-4 py-2 text-xs font-bold text-slate-500 uppercase">
       本關卡目錄
     </div>
@@ -252,6 +252,13 @@ console.log('gate-submenu exists:', document.getElementById('gate-submenu'));
         ?.scrollIntoView({ behavior: 'smooth' });
     };
   });
+        
+    };
+    tryRender();
+ 
+ 
+
+ 
 }
 
 
