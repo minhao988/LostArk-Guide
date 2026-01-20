@@ -143,6 +143,12 @@ function initSidebar() {
       `;
       btn.onclick = () => selectRaid(id);
       container.appendChild(btn);
+    
+// 這裡新增子選單容器
+const submenu = document.createElement('div');
+submenu.className = 'gate-submenu-container pl-6';
+submenu.id = `gate-submenu-${id}`; // 以 raid id 綁定
+catDiv.appendChild(submenu);
   });
 }
 
@@ -186,68 +192,33 @@ function selectRaid(raidId) {
     }
 }
 
-function renderGateSubmenu(gate) {
-  const tryRender = () => {
-        const container = document.getElementById('gate-submenu');
-        if (!container) {
-            requestAnimationFrame(tryRender);
-            return;
-        }
+function renderGateSubmenu(gate, raidId) {
+  const container = document.getElementById(`gate-submenu-${raidId}`);
+  if (!container) return;
 
-        // 原本的渲染程式碼
-        let html = `
-    <div class="px-4 py-2 text-xs font-bold text-slate-500 uppercase">
-      本關卡目錄
-    </div>
-
-    <div class="submenu-group">
-      <button class="submenu-btn" data-target="section-mechanics">
-        核心機制
-      </button>
-  `;
-
-  gate.mechanics?.forEach((m, i) => {
-    html += `
-      <button class="submenu-sub pl-10 text-slate-400 hover:text-white"
-        data-target="mech-${i}">
-        ${m.hp} ${m.title}
-      </button>
-    `;
+  let html = `<div class="px-2 py-1 text-xs font-bold text-slate-400 uppercase">本關卡目錄</div>`;
+  
+  // 核心機制
+  html += `<div class="submenu-group"><div class="submenu-btn">核心機制</div>`;
+  gate.mechanics?.forEach((m,i) => {
+      html += `<button class="submenu-sub pl-6 text-slate-400 hover:text-white" data-target="mech-${i}">${m.hp} ${m.title}</button>`;
   });
-
-  html += `
-    </div>
-    <div class="submenu-group mt-2">
-      <button class="submenu-btn" data-target="section-patterns">
-        招式解析
-      </button>
-  `;
-
-  gate.patterns?.forEach((p, i) => {
-    html += `
-      <button class="submenu-sub pl-10 text-slate-400 hover:text-white"
-        data-target="pattern-${i}">
-        ${p.name}
-      </button>
-    `;
-  });
-
   html += `</div>`;
+
+  // 招式解析
+  html += `<div class="submenu-group mt-2"><div class="submenu-btn">招式解析</div>`;
+  gate.patterns?.forEach((p,i) => {
+      html += `<button class="submenu-sub pl-6 text-slate-400 hover:text-white" data-target="pattern-${i}">${p.name}</button>`;
+  });
+  html += `</div>`;
+
   container.innerHTML = html;
 
   container.querySelectorAll('button[data-target]').forEach(btn => {
-    btn.onclick = () => {
-      document
-        .getElementById(btn.dataset.target)
-        ?.scrollIntoView({ behavior: 'smooth' });
-    };
+      btn.onclick = () => {
+          document.getElementById(btn.dataset.target)?.scrollIntoView({behavior:'smooth'});
+      }
   });
-        
-    };
-    tryRender();
- 
-
- 
 }
 
 
@@ -265,7 +236,8 @@ function switchGate(gateId) {
     renderGateContent(gate);
 
     // 更新左側 submenu
-    renderGateSubmenu(gate);
+    
+  renderGateSubmenu(gate, currentRaidId);
 }
 
 // ================== 渲染 gate 內容 ==================
