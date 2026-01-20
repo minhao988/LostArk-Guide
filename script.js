@@ -42,7 +42,7 @@ const allRaids = {
                     { name: '落雷抓人 (Lightning Grab)', desc: '\u2022 卡傑握球出現落雷, 接著卡傑要抓隨機一個人 (困難模式如果有人被抓到後續還會有個十字攻擊) 。', tips: '\u2022 只要看到卡傑開落雷就不要站頭。<br>\u2022 如果沒人被抓背後安全, 有人被抓的話最後就站背部側邊',  videoId: '635nAAElFSc' },
                     { name: '阿爾比恩 (Albion)', desc: '\u2022 卡傑退後往前戳, 旁邊會圍起來, 接著接著需求2人協同反制並排火 最後要有一位剩下的人去頭前反制。', tips: '\u2022 看到卡傑退後就不要在頭前被擊飛 <br>\u2022 通常這裏是讓輔助去做協同反制', videoId: 'Ktv7_IxW-bg' },
                     { name: '白藍安全區 (White Blue Safe Spots)', desc: '\u2022 卡傑丟槍在地板并且兩種火的顔色藍/白出來, 藍躲側白躲背——總共3次, 最後躲在卡傑頭前規避外圈爆炸。', tips: `\u2022 卡傑這個動作絕對會丟槍在6點鈡, 絕對不要站人(高傷)第一波炸內，第二波炸外。
-                     <\u2022 記不住就跟隊友走, 記住3次后就躲頭前, 最好還是要學會自己看爲佳。`, videoId: 'Zz-DlbrKizI' },
+                     <br>\u2022 記不住就跟隊友走, 記住3次后就躲頭前, 最好還是要學會自己看爲佳。`, videoId: 'Zz-DlbrKizI' },
                     { name: '雷電風暴 (Lightning Tornado)', desc: '\u2022 卡傑丟槍在前方地板,接著會出現一堆雷和風暴。 <br>\u2022 玩家們遇到這招規避就好, 吃到有負面debuff就遠離其他人。', tips: '\u2022 不要貪心 debuff有間隔性麻痹和小爆炸圈。',  videoId: 'yXS1O_dnel8' },
                     { name: '紫圈擴散 (Purple Wave)', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
                     { name: '紫圈擴散 (Purple Wave)', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
