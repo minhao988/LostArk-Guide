@@ -196,30 +196,56 @@ function selectRaid(raidId) {
 }
 
 
-function renderGateSubmenu() {
+function renderGateSubmenu(gate) {
   const container = document.getElementById('gate-submenu');
   if (!container) return;
 
-  container.innerHTML = `
+  let html = `
     <div class="px-4 py-2 text-xs font-bold text-slate-500 uppercase">
       本關卡目錄
     </div>
-    <button class="submenu-btn px-6 py-2 text-slate-400 hover:text-white"
-      data-target="section-mechanics">
-      核心機制
-    </button>
-    <button class="submenu-btn px-6 py-2 text-slate-400 hover:text-white"
-      data-target="section-patterns">
-      招式解析
-    </button>
+
+    <div class="submenu-group">
+      <button class="submenu-btn" data-target="section-mechanics">
+        核心機制
+      </button>
   `;
 
-  container.querySelectorAll('.submenu-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
+  gate.mechanics?.forEach((m, i) => {
+    html += `
+      <button class="submenu-sub pl-10 text-slate-400 hover:text-white"
+        data-target="mech-${i}">
+        ${m.hp} ${m.title}
+      </button>
+    `;
+  });
+
+  html += `
+    </div>
+    <div class="submenu-group mt-2">
+      <button class="submenu-btn" data-target="section-patterns">
+        招式解析
+      </button>
+  `;
+
+  gate.patterns?.forEach((p, i) => {
+    html += `
+      <button class="submenu-sub pl-10 text-slate-400 hover:text-white"
+        data-target="pattern-${i}">
+        ${p.name}
+      </button>
+    `;
+  });
+
+  html += `</div>`;
+  container.innerHTML = html;
+
+  container.querySelectorAll('button[data-target]').forEach(btn => {
+    btn.onclick = () => {
       document
         .getElementById(btn.dataset.target)
-        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+        ?.scrollIntoView({ behavior: 'smooth' });
+    };
   });
 }
 
@@ -262,8 +288,9 @@ function switchGate(gateId) {
   </h3>
 
   <div class="space-y-6">
-    ${gate.mechanics.map(m => `
-      <div
+  
+    ${gate.mechanics.map((m, i) =>`
+    <div id="mech-${i}" 
         class="info-card rounded-xl p-6 shadow-lg border-l-4
         ${m.type === 'wipe' ? 'border-l-red-600' : 'border-l-yellow-500'}
         break-words"
@@ -349,10 +376,11 @@ function switchGate(gateId) {
   </h3>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    ${gate.patterns.map(p => `
+  ${gate.patterns.map((p, i) => `
+  <div id="pattern-${i}"
       <!-- 一招 = 一张卡（这是 grid 的直接子元素） -->
       <!-- <div class="bg-slate-800/40 border border-white/10 rounded-2xl overflow-hidden hover:bg-slate-800/60 transition-all"> -->
-<div class="pattern-card ${p.isDanger ? 'danger' : ''} rounded-2xl">
+class="pattern-card ${p.isDanger ? 'danger' : ''} rounded-2xl">
         <!-- 影片区（在卡片里面） -->
         <div
           class="relative w-full aspect-video cursor-pointer group bg-black/40 overflow-hidden"
@@ -424,7 +452,7 @@ function switchGate(gateId) {
         this.appendChild(iframe);
     });
   });
-   renderGateSubmenu();
+   renderGateSubmenu(gate);
 }
 
 
