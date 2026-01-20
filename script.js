@@ -273,7 +273,24 @@ function renderGateContent(gate) {
     const container = document.getElementById('gate-content');
     if (!container) return;
 
+  let html = '';
+ if (gate.mainVideoId) { // 假設你在 gate 裡放了 mainVideoId
+    html += `
+    <div class="rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative group mb-8">
+        <div class="absolute inset-0 flex items-center justify-center bg-slate-900/80">
+            <div class="text-center">
+                <i class="fab fa-youtube text-6xl text-red-600 mb-4"></i>
+                <p class="text-slate-200 font-bold">此處載入 ${gate.name} 完整攻略影片</p>
+            </div>
+        </div>
+        <iframe class="w-full h-full" src="https://www.youtube.com/embed/${gate.mainVideoId}" 
+            title="${gate.name} 完整攻略影片" 
+            frameborder="0" allowfullscreen></iframe>
+    </div>
+    `;
+}
     let html = `
+   
         <section id="section-mechanics" data-menu="mechanics">
             <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
                 <span class="w-1.5 h-8 bg-yellow-500 rounded-full"></span>
