@@ -452,13 +452,14 @@ class="pattern-card ${p.isDanger ? 'danger' : ''} rounded-2xl">
         this.appendChild(iframe);
     });
   });
-   renderGateSubmenu(gate);
+  
 }
 
 
 document.addEventListener('DOMContentLoaded', () => {
      initSidebar();
     selectRaid('final_day');
+   renderGateSubmenu(gate);
      const sidebar = document.getElementById('sidebar');
     const menuToggle = document.getElementById('menu-toggle');      // 手機漢堡
     const sidebarToggle = document.getElementById('sidebar-toggle'); // 桌面 < 按鈕
