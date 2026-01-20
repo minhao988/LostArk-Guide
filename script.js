@@ -192,34 +192,7 @@ function selectRaid(raidId) {
     }
 }
 
-function renderGateSubmenu(gate, raidId) {
-  const container = document.getElementById(`gate-submenu-${raidId}`);
-  if (!container) return;
 
-  let html = `<div class="px-2 py-1 text-xs font-bold text-slate-400 uppercase">本關卡目錄</div>`;
-  
-  // 核心機制
-  html += `<div class="submenu-group"><div class="submenu-btn">核心機制</div>`;
-  gate.mechanics?.forEach((m,i) => {
-      html += `<button class="submenu-sub pl-6 text-slate-400 hover:text-white" data-target="mech-${i}">${m.hp} ${m.title}</button>`;
-  });
-  html += `</div>`;
-
-  // 招式解析
-  html += `<div class="submenu-group mt-2"><div class="submenu-btn">招式解析</div>`;
-  gate.patterns?.forEach((p,i) => {
-      html += `<button class="submenu-sub pl-6 text-slate-400 hover:text-white" data-target="pattern-${i}">${p.name}</button>`;
-  });
-  html += `</div>`;
-
-  container.innerHTML = html;
-
-  container.querySelectorAll('button[data-target]').forEach(btn => {
-      btn.onclick = () => {
-          document.getElementById(btn.dataset.target)?.scrollIntoView({behavior:'smooth'});
-      }
-  });
-}
 
 
 // ================== 切換 gate ==================
@@ -237,7 +210,7 @@ function switchGate(gateId) {
 
     // 更新左側 submenu
     
-  renderGateSubmenu(gate, currentRaidId);
+  renderGateSubmenu(gate);
 }
 
 // ================== 渲染 gate 內容 ==================
@@ -246,7 +219,7 @@ function renderGateContent(gate) {
     if (!container) return;
 
   let html = '';
- if (gate.mainVideoId) { // 假設你在 gate 裡放了 mainVideoId
+ if (gate.youtubeId) { // 假設你在 gate 裡放了 mainVideoId
     html += `
     <div class="rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative group mb-8">
         <div class="absolute inset-0 flex items-center justify-center bg-slate-900/80">
@@ -255,7 +228,7 @@ function renderGateContent(gate) {
                 <p class="text-slate-200 font-bold">此處載入 ${gate.name} 完整攻略影片</p>
             </div>
         </div>
-        <iframe class="w-full h-full" src="https://www.youtube.com/embed/${gate.mainVideoId}" 
+        <iframe class="w-full h-full" src="https://www.youtube.com/embed/${gate.youtubeId}" 
             title="${gate.name} 完整攻略影片" 
             frameborder="0" allowfullscreen></iframe>
     </div>
@@ -351,7 +324,6 @@ html += ` // 後續追加，不用再次 let
     });
 }
 
-// ================== 渲染 gate submenu ==================
 function renderGateSubmenu(gate) {
   const container = document.getElementById('gate-submenu');
   if (!container) return;
@@ -382,6 +354,7 @@ function renderGateSubmenu(gate) {
 
   container.innerHTML = html;
 
+  // 點擊 scroll
   container.querySelectorAll('button[data-target]').forEach(btn => {
     btn.onclick = () => document.getElementById(btn.dataset.target)?.scrollIntoView({ behavior: 'smooth' });
   });
