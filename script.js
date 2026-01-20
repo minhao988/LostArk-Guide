@@ -44,7 +44,7 @@ const allRaids = {
                     { name: '白藍安全區 (White Blue Safe Spots)', desc: '\u2022 卡傑丟槍在地板并且兩種火的顔色藍/白出來, 藍躲側白躲背——總共3次, 最後躲在卡傑頭前規避外圈爆炸。', tips: `\u2022 卡傑這個動作絕對會丟槍在6點鈡, 絕對不要站人(高傷)第一波炸內，第二波炸外。
                      <br>\u2022 記不住就跟隊友走, 記住3次后就躲頭前, 最好還是要學會自己看爲佳。`, videoId: 'Zz-DlbrKizI' },
                     { name: '雷電風暴 (Lightning Tornado)', desc: '\u2022 卡傑丟槍在前方地板,接著會出現一堆雷和風暴。 <br>\u2022 玩家們遇到這招規避就好, 吃到有負面debuff就遠離其他人。', tips: '\u2022 不要貪心 debuff有間隔性麻痹和小爆炸圈。',  videoId: 'yXS1O_dnel8' },
-                    { name: '紫圈擴散 (Purple Wave)', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
+                    { name: '浮空炸圈 (Floating Donut)', desc: '\u2022 卡傑浮空並丟下槍, 炸圈從内炸外 全部卡傑墜下來砸頭前270度(高傷)。', tips: '\u2022 直接出去等第一個内圈炸了再回來躲在卡傑的背。',  videoId: 'Qq3E-VVJQkc' },
                     { name: '紫圈擴散 (Purple Wave)', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
                     { name: '紫圈擴散 (Purple Wave)', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
                     { name: '紫圈擴散 (Purple Wave)', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
