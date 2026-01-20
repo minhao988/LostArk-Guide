@@ -215,7 +215,7 @@ function switchGate(gateId) {
         </div>
         </div>
 
-<section>
+<section id="section-mechanics" data-menu="mechanics">
   <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
     <span class="w-1.5 h-8 bg-yellow-500 rounded-full"></span>
     核心機制詳解 (Major Mechanics)
@@ -301,7 +301,7 @@ function switchGate(gateId) {
 
 
 
-  <section>
+<section id="section-patterns" data-menu="patterns">
   <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
     <span class="section-bar"></span>
     
