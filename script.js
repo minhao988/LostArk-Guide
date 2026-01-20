@@ -148,6 +148,40 @@ btn.onclick = () => {
 };
                // btn.onclick = () => selectRaid(id);
                 catDiv.appendChild(btn);
+              
+                if (data.category === cat) {
+
+                // === Raid 按鈕 ===
+                const btn = document.createElement('button');
+                btn.className = 'sidebar-btn ...';
+                btn.innerHTML = `
+                  <i class="fas ${raidIcons[id] || 'fa-flag'}"></i>
+                  <span class="sidebar-text">${data.short}</span>
+                `;
+                catDiv.appendChild(btn);
+              
+                // === ⭐ Raid 底下的 Pattern / Mechanic Menu ===
+                if (data.menus) {
+                  const menuWrap = document.createElement('div');
+                  menuWrap.className = 'ml-8 mt-1 space-y-1';
+              
+                  data.menus.forEach(menu => {
+                    const mBtn = document.createElement('button');
+                    mBtn.className =
+                      'w-full text-left px-4 py-2 text-sm text-slate-400 hover:text-white hover:bg-white/5 rounded';
+              
+                    mBtn.innerHTML = `
+                      <i class="fas ${menu.icon} w-4 mr-2 opacity-70"></i>
+                      ${menu.label}
+                    `;
+              
+                    mBtn.onclick = () => openRaidMenu(id, menu.id);
+                    menuWrap.appendChild(mBtn);
+                  });
+              
+                  catDiv.appendChild(menuWrap);
+                }
+              
             }
         });
         container.appendChild(catDiv);
@@ -155,7 +189,10 @@ btn.onclick = () => {
 }
 
 function selectRaid(raidId) {
+  
     if (!allRaids[raidId]) return;
+  const gateMenu = document.getElementById('gate-submenu');
+if (gateMenu) gateMenu.innerHTML = '';
     currentRaidId = raidId;
 
     document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
@@ -183,6 +220,35 @@ function selectRaid(raidId) {
     switchGate(1);
     // if (window.innerWidth < 768) document.getElementById('sidebar').classList.add('-translate-x-full');
 }
+
+
+function renderGateSubmenu() {
+  const container = document.getElementById('gate-submenu');
+  if (!container) return;
+
+  container.innerHTML = `
+    <div class="px-4 py-2 text-xs font-bold text-slate-500 uppercase">
+      本關卡目錄
+    </div>
+    <button class="submenu-btn px-6 py-2 text-slate-400 hover:text-white"
+      data-target="section-mechanics">
+      核心機制
+    </button>
+    <button class="submenu-btn px-6 py-2 text-slate-400 hover:text-white"
+      data-target="section-patterns">
+      招式解析
+    </button>
+  `;
+
+  container.querySelectorAll('.submenu-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document
+        .getElementById(btn.dataset.target)
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+}
+
 
 function switchGate(gateId) {
     const raid = allRaids[currentRaidId];
@@ -383,7 +449,8 @@ function switchGate(gateId) {
         this.innerHTML = '';
         this.appendChild(iframe);
     });
-});
+  });
+   renderGateSubmenu();
 }
 
 
