@@ -330,7 +330,8 @@ function switchGate(gateId) {
         <div class="p-5 text-[13px] md:text-[14px] lg:text-[15px]">
           <!-- 標題 -->
            <!-- <h4 class="font-bold text-blue-300 mb-2 flex items-center gap-2 text-[16px] md:text-[18px]"> -->
-          <h4 class="pattern-title">
+          <h4 class="pattern-title flex items-center gap-2">
+  ${p.isDanger ? '<span class="pattern-danger-badge">DANGER</span>' : ''}
             ${p.isCounter ? '<span class="bg-blue-600 text-[8px] px-1.5 py-0.5 rounded text-white">COUNTER</span>' : ''}
             ${p.name}
           </h4>
