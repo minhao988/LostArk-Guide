@@ -329,7 +329,8 @@ function switchGate(gateId) {
               <!-- 文字區（同一張卡片內） -->
         <div class="p-5 text-[13px] md:text-[14px] lg:text-[15px]">
           <!-- 標題 -->
-          <h4 class="font-bold text-blue-300 mb-2 flex items-center gap-2 text-[16px] md:text-[18px]">
+           <!-- <h4 class="font-bold text-blue-300 mb-2 flex items-center gap-2 text-[16px] md:text-[18px]"> -->
+          <h4 class="pattern-title">
             ${p.isCounter ? '<span class="bg-blue-600 text-[8px] px-1.5 py-0.5 rounded text-white">COUNTER</span>' : ''}
             ${p.name}
           </h4>
