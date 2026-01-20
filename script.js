@@ -199,6 +199,8 @@ function selectRaid(raidId) {
 function renderGateSubmenu(gate) {
   const container = document.getElementById('gate-submenu');
   if (!container) {
+    console.log('DOMContentLoaded:', document.readyState);
+console.log('gate-submenu exists:', document.getElementById('gate-submenu'));
     console.warn('#gate-submenu 尚未存在');
     return;
   }
