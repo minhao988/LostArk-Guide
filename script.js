@@ -424,6 +424,7 @@ class="pattern-card ${p.isDanger ? 'danger' : ''} rounded-2xl">
   </div>
 </section>
     `;
+   renderGateSubmenu(gate);
     document.getElementById('gate-content').innerHTML = html;
     document.querySelectorAll('.video-overlay').forEach(overlay => {
     overlay.addEventListener('click', function() {
@@ -462,7 +463,7 @@ class="pattern-card ${p.isDanger ? 'danger' : ''} rounded-2xl">
 document.addEventListener('DOMContentLoaded', () => {
      initSidebar();
     selectRaid('final_day');
-   renderGateSubmenu(gate);
+  
      const sidebar = document.getElementById('sidebar');
     const menuToggle = document.getElementById('menu-toggle');      // 手機漢堡
     const sidebarToggle = document.getElementById('sidebar-toggle'); // 桌面 < 按鈕
