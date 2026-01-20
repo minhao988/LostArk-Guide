@@ -424,8 +424,12 @@ class="pattern-card ${p.isDanger ? 'danger' : ''} rounded-2xl">
   </div>
 </section>
     `;
-   renderGateSubmenu(gate);
+   
+    // 🔹 先把 gate content 放進 DOM
     document.getElementById('gate-content').innerHTML = html;
+
+    // 🔹 再呼叫 renderGateSubmenu，這時 #gate-submenu 已經存在
+    renderGateSubmenu(gate);
     document.querySelectorAll('.video-overlay').forEach(overlay => {
     overlay.addEventListener('click', function() {
             const container = this.parentElement; // 這是保持 aspect-video 的父元素
