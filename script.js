@@ -124,7 +124,14 @@ function getIcon(type) {
 function initSidebar() {
   const container = document.getElementById('sidebar-content');
   if (!container) return;
-  container.innerHTML = '';
+
+  // ⚠️ 不再清空整個 container，保留 gate-submenu
+  // container.innerHTML = '';
+
+  // 先清空除了 gate-submenu 之外的舊內容
+  Array.from(container.children).forEach(child => {
+      if (child.id !== 'gate-submenu') child.remove();
+  });
 
   const categories = [...new Set(Object.values(allRaids).map(r => r.category))];
 
@@ -145,7 +152,7 @@ function initSidebar() {
         'sidebar-btn sidebar-collapsed-btn w-full flex items-center gap-2 px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all';
 
       btn.innerHTML = `
-        <i class="fas ${raidIcons[id] || 'fa-flag'} sidebar-icon"></i>
+        <i class="${raidIcons[id] || 'fa-flag'} sidebar-icon"></i>
         <span class="sidebar-text font-medium">${data.short}</span>
       `;
 
