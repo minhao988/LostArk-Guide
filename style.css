@@ -532,7 +532,50 @@ body {
 }
 
 
+/* 子選單群組 */
+.submenu-group {
+    margin-top: 0.5rem;
+}
 
+/* 大分類按鈕 */
+.submenu-btn {
+    width: 100%;
+    text-align: left;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #cbd5e1;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s, background 0.2s;
+}
+
+.submenu-btn:hover {
+    color: #fff;
+}
+
+/* 子項目按鈕 */
+.submenu-sub {
+    width: 100%;
+    text-align: left;
+    padding: 0.3rem 2.5rem; /* 左邊縮排更明顯 */
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: #94a3b8; /* slate-400 */
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.submenu-sub:hover {
+    color: #fff;
+}
+#gate-submenu {
+    display: flex;
+    flex-direction: column;
+}
 
 
 
