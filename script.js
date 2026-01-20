@@ -122,70 +122,45 @@ function getIcon(type) {
 }
 
 function initSidebar() {
-    const container = document.getElementById('sidebar-content');
-    if (!container) return;
-    container.innerHTML = '';
-    const categories = [...new Set(Object.values(allRaids).map(r => r.category))];
+  const container = document.getElementById('sidebar-content');
+  if (!container) return;
+  container.innerHTML = '';
 
-    categories.forEach(cat => {
-        const catDiv = document.createElement('div');
-        catDiv.innerHTML = `<div class="sidebar-category px-6 py-2 text-xs font-bold text-slate-500 uppercase tracking-wider">${cat}</div>`;
-        Object.entries(allRaids).forEach(([id, data]) => {
-            if (data.category === cat) {
-                const btn = document.createElement('button');
-                btn.id = `btn-${id}`;
-                //btn.className = 'sidebar-btn  w-full text-left px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white flex items-center justify-between transition-all';
-              btn.className = 'sidebar-btn sidebar-collapsed-btn w-full flex items-center justify-start gap-2 px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all relative';
-                //btn.innerHTML = `<i class="fas ${raidIcons[id] || 'fa-dungeon'} sidebar-icon" data-tooltip="${data.short}"></i> 
-                //<span class="sidebar-text font-medium">${data.short}</span>`;
-                //btn.innerHTML = `<span class="font-medium">${data.short}</span><i class="fas fa-chevron-right text-xs"></i>`;
-              btn.innerHTML = `<i class="fas ${raidIcons[id] || 'fa-flag'} sidebar-icon"></i> 
-<span class="sidebar-text font-medium">${data.short}</span>`;
-btn.setAttribute('data-tooltip', `${data.category} - ${data.short}`);
-btn.onclick = () => {
-    selectRaid(id);
-    if (window.innerWidth < 768) sidebar.classList.remove('mobile-open');
-};
-               // btn.onclick = () => selectRaid(id);
-                catDiv.appendChild(btn);
-              
-                if (data.category === cat) {
+  const categories = [...new Set(Object.values(allRaids).map(r => r.category))];
 
-                // === Raid 按鈕 ===
-                const btn = document.createElement('button');
-                btn.className = 'sidebar-btn ...';
-                btn.innerHTML = `
-                  <i class="fas ${raidIcons[id] || 'fa-flag'}"></i>
-                  <span class="sidebar-text">${data.short}</span>
-                `;
-                catDiv.appendChild(btn);
-              
-                // === ⭐ Raid 底下的 Pattern / Mechanic Menu ===
-                if (data.menus) {
-                  const menuWrap = document.createElement('div');
-                  menuWrap.className = 'ml-8 mt-1 space-y-1';
-              
-                  data.menus.forEach(menu => {
-                    const mBtn = document.createElement('button');
-                    mBtn.className =
-                      'w-full text-left px-4 py-2 text-sm text-slate-400 hover:text-white hover:bg-white/5 rounded';
-              
-                    mBtn.innerHTML = `
-                      <i class="fas ${menu.icon} w-4 mr-2 opacity-70"></i>
-                      ${menu.label}
-                    `;
-              
-                    mBtn.onclick = () => openRaidMenu(id, menu.id);
-                    menuWrap.appendChild(mBtn);
-                  });
-              
-                  catDiv.appendChild(menuWrap);
-                }
-              
-            }
-        });
-        container.appendChild(catDiv);
+  categories.forEach(cat => {
+    const catDiv = document.createElement('div');
+    catDiv.innerHTML = `
+      <div class="sidebar-category px-6 py-2 text-xs font-bold text-slate-500 uppercase tracking-wider">
+        ${cat}
+      </div>
+    `;
+
+    Object.entries(allRaids).forEach(([id, data]) => {
+      if (data.category !== cat) return;
+
+      const btn = document.createElement('button');
+      btn.id = `btn-${id}`;
+      btn.className =
+        'sidebar-btn sidebar-collapsed-btn w-full flex items-center gap-2 px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all';
+
+      btn.innerHTML = `
+        <i class="fas ${raidIcons[id] || 'fa-flag'} sidebar-icon"></i>
+        <span class="sidebar-text font-medium">${data.short}</span>
+      `;
+
+      btn.onclick = () => {
+        selectRaid(id);
+        if (window.innerWidth < 768) {
+          document.getElementById('sidebar').classList.remove('mobile-open');
+        }
+      };
+
+      catDiv.appendChild(btn);
     });
+
+    container.appendChild(catDiv);
+  });
 }
 
 function selectRaid(raidId) {
