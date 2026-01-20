@@ -201,6 +201,7 @@ function renderGateSubmenu(gate) {
   if (!container) {
     console.warn('#gate-submenu 尚未存在');
     return;
+  }
 
   let html = `
     <div class="px-4 py-2 text-xs font-bold text-slate-500 uppercase">
