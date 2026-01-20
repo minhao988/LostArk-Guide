@@ -166,8 +166,7 @@ function initSidebar() {
 function selectRaid(raidId) {
   
     if (!allRaids[raidId]) return;
-  const gateMenu = document.getElementById('gate-submenu');
-if (gateMenu) gateMenu.innerHTML = '';
+
     currentRaidId = raidId;
 
     document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
