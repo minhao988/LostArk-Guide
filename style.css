@@ -641,6 +641,19 @@ body {
   display: none;
 }
 
+/* gate 子目錄預設展開 */
+.gate-submenu-container {
+  transition: max-height 0.3s ease, opacity 0.2s ease;
+  overflow: hidden;
+}
+
+/* 收起狀態 */
+.gate-submenu-container.collapsed {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
 
 
 
