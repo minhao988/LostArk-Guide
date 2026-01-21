@@ -232,32 +232,38 @@ if (currentSub) currentSub.innerHTML = '';
 function renderGateContent(gate) {
     const container = document.getElementById('gate-content');
     if (!container) return;
-
+// src="https://www.youtube.com/embed/${gate.youtubeId}"
   let html = '';
 // ✅ 主影片（有 youtubeId 才渲染）
   if (gate.youtubeId) {
     html += `
-      <div class="main-video rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative mb-8">
-        
-        <div class="video-overlay absolute inset-0 flex items-center justify-center
-             bg-slate-900/80 transition-opacity duration-300 z-10">
-          <div class="text-center pointer-events-none">
-            <i class="fab fa-youtube text-6xl text-red-600 mb-4"></i>
-            <p class="text-slate-200 font-bold">
-              此處載入 ${gate.name} 完整攻略影片
-            </p>
-          </div>
-        </div>
+    
 
-        <iframe
-          class="w-full h-full relative z-0"
-          src="https://www.youtube.com/embed/${gate.youtubeId}"
-          title="${gate.name} 完整攻略影片"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
-        </iframe>
+          
+         
       </div>
+      <div class="main-video rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative mb-8">
+  <!-- overlay -->
+  <div class="video-overlay absolute inset-0 flex items-center justify-center
+       bg-slate-900/80 cursor-pointer transition-opacity duration-300 z-10">
+    <div class="text-center pointer-events-none">
+      <i class="fab fa-youtube text-6xl text-red-600 mb-4"></i>
+      <p class="text-slate-200 font-bold">
+        此處載入 主影片 完整攻略影片
+      </p>
+    </div>
+  </div>
+
+  <!-- iframe 先空 src -->
+  <iframe
+    class="w-full h-full relative z-0"
+    data-src="https://www.youtube.com/embed/y8wsk0oEWWQ?autoplay=1&mute=1"
+    title="主影片 完整攻略影片"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
     `;
   }
 html += `
@@ -349,13 +355,19 @@ html += `
         });
     });
   // ✅ 主影片 iframe 載入完成後，自動移除 overlay
-  container.querySelectorAll('.main-video iframe').forEach(iframe => {
-    iframe.addEventListener('load', () => {
-      const wrapper = iframe.closest('.main-video');
-      const overlay = wrapper?.querySelector('.video-overlay');
-      overlay?.remove();
-    });
+ document.querySelectorAll('.main-video').forEach(wrapper => {
+  const overlay = wrapper.querySelector('.video-overlay');
+  const iframe = wrapper.querySelector('iframe');
+
+  overlay.addEventListener('click', () => {
+    // 1️⃣ 載入影片
+    iframe.src = iframe.dataset.src;
+
+    // 2️⃣ 淡出 overlay
+    overlay.classList.add('opacity-0');
+    setTimeout(() => overlay.remove(), 300);
   });
+});
 }
 
 function renderGateSubmenu(gate, raidId) {
