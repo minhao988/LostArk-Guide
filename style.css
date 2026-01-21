@@ -358,6 +358,13 @@ body {
       bottom: 0;   /* ✅ 比 height:100vh 穩定 */
       height: auto;
 }
+      .pattern-title {
+        font-size: 0.9rem;  /* 適合手機 */
+    }
+
+    .pattern-title span {
+        font-size: 0.7rem;  /* COUNTER 標籤縮小 */
+    }
  
 
 /* 開啟時 */
@@ -706,6 +713,7 @@ body {
   flex-direction: column;
   gap: 2rem;
 }
+
 
 
 
