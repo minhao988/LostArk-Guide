@@ -833,6 +833,10 @@ body {
 }
 
 
+#sidebar.sidebar-collapsed .sidebar-subcategory {
+    opacity: 1;       /* 永遠顯示 icon */
+    pointer-events: auto; /* 可以點擊 */
+}
 
 
 
