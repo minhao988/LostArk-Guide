@@ -232,21 +232,13 @@ function groupRaidsByCategory() {
 }
 
 function getShortName(name) {
-    // 拆中文和英文
+    // 中文前兩字
     const chineseChars = name.match(/[\u4e00-\u9fff]/g) || [];
-    const englishWords = name.match(/\b[a-zA-Z]/g) || [];
+    let shortName = chineseChars.slice(0, 2).join('');
 
-    let shortName = '';
-
-    // 中文前兩個字
-    if (chineseChars.length > 0) {
-        shortName += chineseChars.slice(0, 2).join('');
-    }
-
-    // 英文首字母大寫
-    if (englishWords.length > 0) {
-        shortName += englishWords.map(c => c.toUpperCase()).join('');
-    }
+    // 抓所有英文單字首字母（兼容半形、全形括號）
+    const englishWords = name.match(/[A-Za-z]+/g) || [];
+    shortName += englishWords.map(w => w[0].toUpperCase()).join('');
 
     return shortName;
 }
