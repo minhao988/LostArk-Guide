@@ -194,6 +194,12 @@ function selectRaid(raidId) {
     if (window.innerWidth < 768) {
         document.getElementById('sidebar')?.classList.remove('mobile-open');
     }
+  document.querySelectorAll('.gate-submenu-container')
+  .forEach(el => el.classList.add('collapsed'));
+
+document
+  .getElementById(`gate-submenu-${raidId}`)
+  ?.classList.remove('collapsed');
 }
 
 
