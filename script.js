@@ -371,11 +371,18 @@ function renderGateSubmenu(gate, raidId) {
 
   container.innerHTML = html;
 
-  container.querySelectorAll('[data-target]').forEach(btn => {
-    btn.onclick = () =>
-      document.getElementById(btn.dataset.target)
-        ?.scrollIntoView({ behavior: 'smooth' });
-  });
+container.querySelectorAll('[data-target]').forEach(btn => {
+  btn.onclick = () => {
+    container.querySelectorAll('.submenu-sub')
+      .forEach(b => b.classList.remove('active'));
+
+    btn.classList.add('active');
+
+    document
+      .getElementById(btn.dataset.target)
+      ?.scrollIntoView({ behavior: 'smooth' });
+  };
+});
 }
   
 
