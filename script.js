@@ -237,7 +237,7 @@ function renderGateContent(gate) {
  if (gate.youtubeId) { // 假設你在 gate 裡放了 mainVideoId
     html += `
     <div class="rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative group mb-8">
-        <div class="absolute inset-0 flex items-center justify-center bg-slate-900/80">
+       <div class="absolute inset-0 flex items-center justify-center bg-slate-900/80 pointer-events-none">
             <div class="text-center">
                 <i class="fab fa-youtube text-6xl text-red-600 mb-4"></i>
                 <p class="text-slate-200 font-bold">此處載入 ${gate.name} 完整攻略影片</p>
