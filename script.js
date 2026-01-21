@@ -540,7 +540,9 @@ function renderGateSubmenu(gate, raidId) {
 
 document.addEventListener('DOMContentLoaded', () => {
      initSidebar();
-    selectRaid('final_day');
+   const initialRaid = 'final_day';
+    expandedRaidId = initialRaid; // ✅ 設定初始展開
+    selectRaid(initialRaid);
   
      const sidebar = document.getElementById('sidebar');
     const menuToggle = document.getElementById('menu-toggle');      // 手機漢堡
