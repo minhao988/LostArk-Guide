@@ -511,10 +511,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById(`gate-submenu-${currentRaidId}`)?.classList.remove('collapsed');
     selectRaid(currentRaidId);
   
-     const sidebar = document.getElementById('sidebar');
-    const menuToggle = document.getElementById('menu-toggle');      // 手機漢堡
-    const sidebarToggle = document.getElementById('sidebar-toggle'); // 桌面 < 按鈕
-
       // 手機漢堡
     const sidebar = document.getElementById('sidebar');
     const menuToggle = document.getElementById('menu-toggle');
