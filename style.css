@@ -727,12 +727,30 @@ body {
     z-index: 10;
     color: #facc15;           /* 字體顏色 */
     font-family: "Inter", "Noto Sans TC", sans-serif; /* 字體 */
-    font-size: 1.5rem;        /* 大小 */
+    font-size: 1rem;        /* 大小 */
     font-weight: 700;         /* 粗細 */
     text-shadow: 2px 2px 6px rgba(0,0,0,0.6); /* 陰影提升可讀性 */
     text-align: center;
     line-height: 1.2;
 }
+
+/* 選擇所有 pattern-card 內的 overlay */
+.pattern-card > div.absolute {
+    color: #f1f5f9;                /* 文字顏色 */
+    font-family: "Inter", "Noto Sans TC", sans-serif;
+    font-size: 16px;                /* 改成你想要大小 */
+    font-weight: 600;
+    text-align: center;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+}
+
+/* 調整 YouTube icon 大小和顏色 */
+.pattern-card > div.absolute i.fab {
+    font-size: 2.5rem;
+    color: #f87171;
+    opacity: 0.85;
+}
+
 
 
 
