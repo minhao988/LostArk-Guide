@@ -234,18 +234,29 @@ function renderGateContent(gate) {
     if (!container) return;
 
   let html = '';
-if (gate.youtubeId) {
-  html += `
-    <div class="main-video rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative mb-8">
-      <iframe class="w-full h-full"
+<div class="main-video rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative mb-8">
+    
+    <!-- 覆蓋提示（iframe 載入完成後由 JS 自動移除） -->
+    <div class="video-overlay absolute inset-0 flex items-center justify-center
+         bg-slate-900/80 transition-opacity duration-300 z-10">
+        <div class="text-center pointer-events-none">
+            <i class="fab fa-youtube text-6xl text-red-600 mb-4"></i>
+            <p class="text-slate-200 font-bold">
+                此處載入 ${gate.name} 完整攻略影片
+            </p>
+        </div>
+    </div>
+
+    <!-- YouTube 主影片 -->
+    <iframe
+        class="w-full h-full relative z-0"
         src="https://www.youtube.com/embed/${gate.youtubeId}"
         title="${gate.name} 完整攻略影片"
         frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen>
-      </iframe>
-    </div>
-  `;
-}
+    </iframe>
+</div>
 html += ` // 後續追加，不用再次 let
    
         <section id="section-mechanics" data-menu="mechanics">
@@ -334,13 +345,13 @@ html += ` // 後續追加，不用再次 let
             this.appendChild(iframe);
         });
     });
-document.querySelectorAll('.main-video').forEach(video => {
-    video.addEventListener('click', () => {
-        const overlay = video.querySelector('.video-overlay');
-        if (overlay) {
-            overlay.remove(); // ← 直接移除「此處載入」整層
-        }
-    });
+// ✅ 主影片 iframe 載入完成後，自動移除 overlay
+container.querySelectorAll('.main-video iframe').forEach(iframe => {
+  iframe.addEventListener('load', () => {
+    const wrapper = iframe.closest('.main-video');
+    const overlay = wrapper?.querySelector('.video-overlay');
+    overlay?.remove();
+  });
 });
 }
 
