@@ -615,10 +615,21 @@ body {
   );
 }
 
+.submenu-sub.active {
+  color: var(--raid-accent);
+  font-weight: 700;
+  border-left-color: var(--raid-accent);
+  background: linear-gradient(
+    90deg,
+    var(--raid-accent-soft),
+    transparent
+  );
+}
 #gate-submenu {
     display: flex;
     flex-direction: column;
 }
+
 
 
 
