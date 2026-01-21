@@ -371,18 +371,25 @@ function renderGateSubmenu(gate, raidId) {
 
   container.innerHTML = html;
 
-container.querySelectorAll('[data-target]').forEach(btn => {
-  btn.onclick = () => {
-    container.querySelectorAll('.submenu-sub')
-      .forEach(b => b.classList.remove('active'));
-
-    btn.classList.add('active');
-
-    document
-      .getElementById(btn.dataset.target)
-      ?.scrollIntoView({ behavior: 'smooth' });
-  };
-});
+  container.querySelectorAll('[data-target]').forEach(btn => {
+    btn.onclick = () => {
+      // active 樣式
+      container.querySelectorAll('.submenu-sub')
+        .forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+  
+      // scroll
+      document
+        .getElementById(btn.dataset.target)
+        ?.scrollIntoView({ behavior: 'smooth' });
+  
+      // 📱 手機版：收回 sidebar
+      if (window.innerWidth < 768) {
+        document.getElementById('sidebar')
+          ?.classList.remove('mobile-open');
+      }
+    };
+  });
 }
   
 
