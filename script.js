@@ -215,47 +215,77 @@ if (window.innerWidth >= 768) {
 let expandedRaidId = null; // 記錄哪個 raid 的 gate 展開
 
 
-// ================== 切換 gate ==================
+
 // ================== 切換 raid (展開/收合) ==================
+// function switchRaid(raidId) {
+//     const currentSub = document.getElementById(`gate-submenu-${raidId}`);
+//     if (!currentSub) return;
+
+//     // 點擊同一個 raid → 收合
+//   if (expandedRaidId === raidId) {
+//     // 只收合 submenu，不清空內容
+//     currentSub.classList.add('collapsed');
+    
+//     // 不再清空 gate-content，或根據需求保留第一關內容
+//     // document.getElementById('gate-content').innerHTML = '';
+
+//     expandedRaidId = null;
+//     currentRaidId = null;
+
+//     // 移除 Sidebar active 樣式
+//     document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+//     return;
+// }
+
+//     // 點擊其他 raid → 展開
+//     // 先收掉所有其他 raid submenu
+//     document.querySelectorAll('.gate-submenu-container')
+//         .forEach(el => {
+//             el.classList.add('collapsed');
+//             el.innerHTML = '';
+//         });
+
+//     // 展開當前 raid submenu
+//     currentSub.classList.remove('collapsed');
+
+//     expandedRaidId = raidId;
+//     currentRaidId = raidId;
+
+//     // 更新 Sidebar active 樣式
+//     document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+//     document.getElementById(`btn-${raidId}`)?.classList.add('active');
+
+//     // ✅ 關鍵：呼叫 selectRaid 渲染 Gate tabs + 第一關內容 + submenu
+//     selectRaid(raidId);
+// }
+
 function switchRaid(raidId) {
     const currentSub = document.getElementById(`gate-submenu-${raidId}`);
     if (!currentSub) return;
 
-    // 點擊同一個 raid → 收合
-  if (expandedRaidId === raidId) {
-    // 只收合 submenu，不清空內容
-    currentSub.classList.add('collapsed');
-    
-    // 不再清空 gate-content，或根據需求保留第一關內容
-    // document.getElementById('gate-content').innerHTML = '';
+    if (expandedRaidId === raidId) {
+        // 點同 raid → 收合 submenu
+        currentSub.classList.add('collapsed');
+        expandedRaidId = null;
 
-    expandedRaidId = null;
-    currentRaidId = null;
+        // 移除 Sidebar active 樣式，但保留 main content
+        document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+        return; // ✅ 不呼叫 selectRaid，保持畫面不變
+    }
 
-    // 移除 Sidebar active 樣式
-    document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
-    return;
-}
+    // 點其他 raid → 展開
+    document.querySelectorAll('.gate-submenu-container').forEach(el => {
+        el.classList.add('collapsed');
+        el.innerHTML = '';
+    });
 
-    // 點擊其他 raid → 展開
-    // 先收掉所有其他 raid submenu
-    document.querySelectorAll('.gate-submenu-container')
-        .forEach(el => {
-            el.classList.add('collapsed');
-            el.innerHTML = '';
-        });
-
-    // 展開當前 raid submenu
     currentSub.classList.remove('collapsed');
-
     expandedRaidId = raidId;
-    currentRaidId = raidId;
 
-    // 更新 Sidebar active 樣式
     document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
     document.getElementById(`btn-${raidId}`)?.classList.add('active');
 
-    // ✅ 關鍵：呼叫 selectRaid 渲染 Gate tabs + 第一關內容 + submenu
+    // 呼叫 selectRaid 只在切換不同 raid 時渲染
     selectRaid(raidId);
 }
 
