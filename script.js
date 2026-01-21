@@ -123,34 +123,42 @@ function getIcon(type) {
 
 // ================== 初始化 sidebar ==================
 function initSidebar() {
-  const container = document.getElementById('sidebar-content');
-  if (!container) return;
+    const container = document.getElementById('sidebar-content');
+    if (!container) return;
 
-  // 保留 gate-submenu，清除其他內容
-  Array.from(container.children).forEach(child => {
-      if (child.id !== 'gate-submenu') child.remove();
-  });
+    Array.from(container.children).forEach(child => {
+        if (child.id !== 'gate-submenu') child.remove();
+    });
 
-  // 生成 raid 按鈕
-  Object.entries(allRaids).forEach(([id, data]) => {
-      const btn = document.createElement('button');
-      btn.id = `btn-${id}`;
-      btn.className =
-        'sidebar-btn w-full flex items-center gap-2 px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all';
-      btn.innerHTML = `
-        <i class="${raidIcons[id] || 'fa-flag'} sidebar-icon"></i>
-        <span class="sidebar-text font-medium">${data.short}</span>
-      `;
-      // ✅ 點擊只呼叫 switchRaid
-      btn.onclick = () => switchRaid(id);
-      container.appendChild(btn);
+    const groupedRaids = groupRaidsByCategory();
 
-      // 只生成空 submenu 容器，不填內容
-      const submenu = document.createElement('div');
-      submenu.className = 'gate-submenu-container pl-6 collapsed';
-      submenu.id = `gate-submenu-${id}`;
-      container.appendChild(submenu);
-  });
+    Object.entries(groupedRaids).forEach(([category, raids]) => {
+        // 生成分類標題
+        const catTitle = document.createElement('div');
+        catTitle.className = 'px-6 py-2 text-xs font-bold text-slate-500 uppercase';
+        catTitle.innerText = category;
+        container.appendChild(catTitle);
+
+        // 生成該 category 下的 raid 按鈕
+        raids.forEach(raid => {
+            const btn = document.createElement('button');
+            btn.id = `btn-${raid.id}`;
+            btn.className =
+                'sidebar-btn w-full flex items-center gap-2 px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all';
+            btn.innerHTML = `
+                <i class="${raidIcons[raid.id] || 'fa-flag'} sidebar-icon"></i>
+                <span class="sidebar-text font-medium">${raid.short}</span>
+            `;
+            btn.onclick = () => switchRaid(raid.id);
+            container.appendChild(btn);
+
+            // 生成空 submenu
+            const submenu = document.createElement('div');
+            submenu.className = 'gate-submenu-container pl-6 collapsed';
+            submenu.id = `gate-submenu-${raid.id}`;
+            container.appendChild(submenu);
+        });
+    });
 }
 
 
@@ -211,6 +219,17 @@ if (window.innerWidth >= 768) {
     raid.theme + ' transition-all duration-500';
 }
 }
+
+function groupRaidsByCategory() {
+    const groups = {};
+    Object.entries(allRaids).forEach(([id, raid]) => {
+        const cat = raid.category || '未分類';
+        if (!groups[cat]) groups[cat] = [];
+        groups[cat].push({ id, ...raid });
+    });
+    return groups;
+}
+
 
 let expandedRaidId = null; // 記錄哪個 raid 的 gate 展開
 
