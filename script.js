@@ -134,11 +134,11 @@ function initSidebar() {
 
     Object.entries(groupedRaids).forEach(([category, raids]) => {
         // 生成分類標題
-      const catTitle = document.createElement('div');
-      catTitle.className = 'sidebar-category px-6 py-2 text-xs font-bold text-slate-500 uppercase';
-      catTitle.innerText = category;
-      catTitle.dataset.fullName = category; // 保存完整名稱
-      container.appendChild(catTitle);
+        let catTitle = document.createElement('div');
+        catTitle.className = 'sidebar-category px-6 py-2 text-xs font-bold text-slate-500 uppercase';
+        catTitle.dataset.fullName = category;  // ✅ 固定 fullName
+        catTitle.innerText = category;         // 初始顯示完整名稱
+        container.appendChild(catTitle);
 
         // 生成該 category 下的 raid 按鈕
         raids.forEach(raid => {
@@ -255,11 +255,10 @@ function updateSidebarCategories(sidebarCollapsed) {
     const categories = document.querySelectorAll('.sidebar-category');
     categories.forEach(cat => {
         if (sidebarCollapsed) {
-            cat.dataset.fullName = cat.innerText;       // 保存完整名稱
-            cat.innerText = getShortName(cat.innerText); // 顯示縮寫
-            cat.title = cat.dataset.fullName;           // hover 顯示完整名稱
+            cat.innerText = getShortName(cat.dataset.fullName);
+            cat.title = cat.dataset.fullName;
         } else {
-            cat.innerText = cat.dataset.fullName;      // 展開時還原
+            cat.innerText = cat.dataset.fullName;
             cat.title = '';
         }
     });
@@ -271,48 +270,6 @@ let expandedRaidId = null; // 記錄哪個 raid 的 gate 展開
 
 
 // ================== 切換 raid (展開/收合) ==================
-// function switchRaid(raidId) {
-//     const currentSub = document.getElementById(`gate-submenu-${raidId}`);
-//     if (!currentSub) return;
-
-//     // 點擊同一個 raid → 收合
-//   if (expandedRaidId === raidId) {
-//     // 只收合 submenu，不清空內容
-//     currentSub.classList.add('collapsed');
-    
-//     // 不再清空 gate-content，或根據需求保留第一關內容
-//     // document.getElementById('gate-content').innerHTML = '';
-
-//     expandedRaidId = null;
-//     currentRaidId = null;
-
-//     // 移除 Sidebar active 樣式
-//     document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
-//     return;
-// }
-
-//     // 點擊其他 raid → 展開
-//     // 先收掉所有其他 raid submenu
-//     document.querySelectorAll('.gate-submenu-container')
-//         .forEach(el => {
-//             el.classList.add('collapsed');
-//             el.innerHTML = '';
-//         });
-
-//     // 展開當前 raid submenu
-//     currentSub.classList.remove('collapsed');
-
-//     expandedRaidId = raidId;
-//     currentRaidId = raidId;
-
-//     // 更新 Sidebar active 樣式
-//     document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
-//     document.getElementById(`btn-${raidId}`)?.classList.add('active');
-
-//     // ✅ 關鍵：呼叫 selectRaid 渲染 Gate tabs + 第一關內容 + submenu
-//     selectRaid(raidId);
-// }
-
 function switchRaid(raidId) {
     const currentSub = document.getElementById(`gate-submenu-${raidId}`);
     if (!currentSub) return;
@@ -360,27 +317,7 @@ function switchGate(gateId) {
   // 只渲染當前 gate submenu
   renderGateSubmenu(gate, currentRaidId);
 }
- //  function switchGate(gateId) {
- //  const raid = allRaids[currentRaidId];
- //  const gate = raid.gates[gateId];
- //   if (!gate) return;
 
- //   // Gate tab active
- //   document.querySelectorAll('.gate-btn')
- //     .forEach(btn => btn.classList.remove('active'));
- //   document.getElementById(`gate-tab-${gateId}`)?.classList.add('active');
-
- //   renderGateContent(gate);
-
- //   // 👇 關鍵：先隱藏所有 submenu
- //   // document.querySelectorAll('.gate-submenu-container')
- //   //   .forEach(el => el.innerHTML = '');
- //   const currentSub = document.getElementById(`gate-submenu-${currentRaidId}`);
- // if (currentSub) currentSub.innerHTML = '';
-
- //   // 👇 只渲染當前 raid 的 submenu
- //   renderGateSubmenu(gate, currentRaidId);
- // }
 
 // ================== 渲染 gate 內容 ==================
 function renderGateContent(gate) {
@@ -608,17 +545,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 桌面收合 / 手機 sidebar < 關閉
-   sidebarToggle?.addEventListener('click', () => {
+sidebarToggle?.addEventListener('click', () => {
     if (window.innerWidth >= 768) {
         sidebar.classList.toggle('sidebar-collapsed');
-        document.querySelector('main').classList.toggle('sidebar-collapsed'); // 加這行
+        document.querySelector('main').classList.toggle('sidebar-collapsed');
         sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
             ? '<i class="fas fa-angle-right"></i>'
             : '<i class="fas fa-angle-left"></i>';
 
-       // === 這裡加入縮寫處理 ===
         const sidebarCollapsed = sidebar.classList.contains('sidebar-collapsed');
-        updateSidebarCategories(sidebarCollapsed);
+        updateSidebarCategories(sidebarCollapsed); // ✅ 這裡只更新文字
     } else {
         sidebar.classList.remove('mobile-open');
     }
