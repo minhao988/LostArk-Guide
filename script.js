@@ -237,10 +237,6 @@ function renderGateContent(gate) {
 // ✅ 主影片（有 youtubeId 才渲染）
   if (gate.youtubeId) {
     html += `
-    
-
-          
-         
       </div>
       <div class="main-video rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative mb-8">
   <!-- overlay -->
@@ -257,7 +253,7 @@ function renderGateContent(gate) {
   <!-- iframe 先空 src -->
   <iframe
     class="w-full h-full relative z-0"
-    data-src="https://www.youtube.com/embed/y8wsk0oEWWQ?autoplay=1&mute=1"
+    data-src="https://www.youtube.com/embed/${gate.youtubeId}?autoplay=1&mute=1"
     title="主影片 完整攻略影片"
     frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
