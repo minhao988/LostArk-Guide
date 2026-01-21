@@ -246,12 +246,23 @@ function getShortName(name) {
 function updateSidebarCategories(sidebarCollapsed) {
     const categories = document.querySelectorAll('.sidebar-category');
     categories.forEach(cat => {
+        const fullName = cat.dataset.fullName;
+
         if (sidebarCollapsed) {
-            cat.innerText = getShortName(cat.dataset.fullName);
-            cat.title = cat.dataset.fullName;
+            // 使用縮寫
+            const shortName = getShortName(fullName);
+            cat.innerHTML = `<span class="sidebar-cat-text">${shortName}</span>`;
+            cat.title = fullName;
+
+            // 確保縮寫不被 flex / overflow 擠掉
+            cat.style.whiteSpace = 'nowrap';
+            cat.style.overflow = 'visible';
         } else {
-            cat.innerText = cat.dataset.fullName;
+            // 展示完整名稱
+            cat.innerHTML = `<span class="sidebar-cat-text">${fullName}</span>`;
             cat.title = '';
+            cat.style.whiteSpace = '';
+            cat.style.overflow = '';
         }
     });
 }
