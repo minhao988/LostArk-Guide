@@ -134,10 +134,11 @@ function initSidebar() {
 
     Object.entries(groupedRaids).forEach(([category, raids]) => {
         // 生成分類標題
-        const catTitle = document.createElement('div');
-        catTitle.className = 'sidebar-category px-6 py-2 text-xs font-bold text-slate-500 uppercase';
-        catTitle.innerText = category;
-        container.appendChild(catTitle);
+      const catTitle = document.createElement('div');
+      catTitle.className = 'sidebar-category px-6 py-2 text-xs font-bold text-slate-500 uppercase';
+      catTitle.innerText = category;
+      catTitle.dataset.fullName = category; // 保存完整名稱
+      container.appendChild(catTitle);
 
         // 生成該 category 下的 raid 按鈕
         raids.forEach(raid => {
