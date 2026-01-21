@@ -141,11 +141,11 @@ function initSidebar() {
         <i class="${raidIcons[id] || 'fa-flag'} sidebar-icon"></i>
         <span class="sidebar-text font-medium">${data.short}</span>
       `;
-      // btn.onclick = () => selectRaid(id);
-  btn.onclick = () => {
-  selectRaid(id);
-  toggleRaidSubmenu(id);
-};
+   btn.onclick = () => switchRaid(id);
+//   btn.onclick = () => {
+//   selectRaid(id);
+//   toggleRaidSubmenu(id);
+// };
       container.appendChild(btn);
     
 // 這裡新增子選單容器
@@ -206,38 +206,46 @@ let expandedRaidId = null; // 記錄哪個 raid 的 gate 展開
 
 
 // ================== 切換 gate ==================
+// ================== 切換 raid (展開/收合) ==================
 function switchRaid(raidId) {
+    const currentSub = document.getElementById(`gate-submenu-${raidId}`);
+    if (!currentSub) return;
+
     // 點擊同一個 raid → 收合
     if (expandedRaidId === raidId) {
-        // 收掉 gate submenu
-        const currentSub = document.getElementById(`gate-submenu-${raidId}`);
-        if (currentSub) currentSub.innerHTML = '';
+        // 收掉 gate submenu 和內容
+        currentSub.classList.add('collapsed');
+        currentSub.innerHTML = '';
+        document.getElementById('gate-content').innerHTML = '';
 
         expandedRaidId = null;
+        currentRaidId = null;
 
         // 移除 Sidebar active 樣式
         document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
-
-        // 清空 gate 內容
-        document.getElementById('gate-content').innerHTML = '';
-        currentRaidId = null;
         return;
     }
 
     // 點擊其他 raid → 展開
+    // 先收掉所有其他 raid submenu
+    document.querySelectorAll('.gate-submenu-container')
+        .forEach(el => {
+            el.classList.add('collapsed');
+            el.innerHTML = '';
+        });
+
+    // 展開當前 raid submenu
+    currentSub.classList.remove('collapsed');
+
     expandedRaidId = raidId;
     currentRaidId = raidId;
 
     // 更新 Sidebar active 樣式
     document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector(`.sidebar-btn[data-raid-id="${raidId}"]`)?.classList.add('active');
+    document.getElementById(`btn-${raidId}`)?.classList.add('active');
 
-    const raid = allRaids[raidId];
-    if (!raid || !raid.gates) return;
-
-    // 自動切換到第一個 gate
-    const firstGateKey = Object.keys(raid.gates)[0];
-    switchGate(firstGateKey); // 這會自動渲染 gate submenu 和 gate 內容
+    // ✅ 關鍵：呼叫 selectRaid 渲染 Gate tabs + 第一關內容 + submenu
+    selectRaid(raidId);
 }
  //  function switchGate(gateId) {
  //  const raid = allRaids[currentRaidId];
@@ -464,14 +472,11 @@ function renderGateSubmenu(gate, raidId) {
   });
 }
   
-function toggleRaidSubmenu(raidId) {
-  
-
-
-  // 切換目前這個
- const currentSub = document.getElementById(`gate-submenu-${raidId}`);
-    if (currentSub) currentSub.classList.remove('collapsed');
-}
+// function toggleRaidSubmenu(raidId) {
+//   // 切換目前這個
+//  const currentSub = document.getElementById(`gate-submenu-${raidId}`);
+//     if (currentSub) currentSub.classList.remove('collapsed');
+// }
 
 
 document.addEventListener('DOMContentLoaded', () => {
