@@ -212,19 +212,20 @@ function switchRaid(raidId) {
     if (!currentSub) return;
 
     // 點擊同一個 raid → 收合
-    if (expandedRaidId === raidId) {
-        // 收掉 gate submenu 和內容
-        currentSub.classList.add('collapsed');
-        currentSub.innerHTML = '';
-        document.getElementById('gate-content').innerHTML = '';
+  if (expandedRaidId === raidId) {
+    // 只收合 submenu，不清空內容
+    currentSub.classList.add('collapsed');
+    
+    // 不再清空 gate-content，或根據需求保留第一關內容
+    // document.getElementById('gate-content').innerHTML = '';
 
-        expandedRaidId = null;
-        currentRaidId = null;
+    expandedRaidId = null;
+    currentRaidId = null;
 
-        // 移除 Sidebar active 樣式
-        document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
-        return;
-    }
+    // 移除 Sidebar active 樣式
+    document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+    return;
+}
 
     // 點擊其他 raid → 展開
     // 先收掉所有其他 raid submenu
