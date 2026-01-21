@@ -231,21 +231,20 @@ function groupRaidsByCategory() {
 }
 
 function getShortName(name) {
-    // 1. 拆分中文和英文
-    // 用正則找中文和英文單字
+    // 拆中文和英文
     const chineseChars = name.match(/[\u4e00-\u9fff]/g) || [];
-    const englishWords = name.match(/[A-Za-z]/g) || [];
+    const englishWords = name.match(/\b[a-zA-Z]/g) || [];
 
-    // 2. 取中文首字 + 英文首字母
     let shortName = '';
+
+    // 中文前兩個字
     if (chineseChars.length > 0) {
-        shortName += chineseChars[0];       // 第一個中文字
-        if (chineseChars.length > 1) {
-            shortName += chineseChars[1];   // 可選加第二個中文字
-        }
+        shortName += chineseChars.slice(0, 2).join('');
     }
+
+    // 英文首字母大寫
     if (englishWords.length > 0) {
-        shortName += englishWords[0].toUpperCase(); // 第一個英文
+        shortName += englishWords.map(c => c.toUpperCase()).join('');
     }
 
     return shortName;
