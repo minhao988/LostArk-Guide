@@ -763,6 +763,21 @@ body {
 }
 
 
+/* Sidebar category 文字包 span，防止 flex 擠掉 */
+.sidebar-category span {
+  display: inline-block;
+  min-width: 0;        /* 避免 flex shrink 導致文字消失 */
+  white-space: nowrap;  /* 不換行 */
+  overflow: hidden;     /* 裁掉超出部分 */
+  text-overflow: ellipsis; /* 顯示省略號 */
+  transition: all 0.2s;
+}
+
+/* Hover 顯示 tooltip */
+.sidebar-category:hover {
+  color: #facc15; /* 顏色可自訂 */
+  cursor: default;
+}
 
 
 
