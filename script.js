@@ -223,19 +223,20 @@ function groupRaidsByCategory() {
 }
 
 function getShortName(name) {
-    // 中文前兩字
+    // 取中文前兩字
     const chineseChars = name.match(/[\u4e00-\u9fff]/g) || [];
     let shortName = chineseChars.slice(0, 2).join('');
 
-    // 抓所有英文單字首字母（兼容半形、全形括號）
+    // 取英文單字首字母
     const englishWords = name.match(/[A-Za-z]+/g) || [];
     shortName += englishWords.map(w => w[0].toUpperCase()).join('');
 
-    return shortName;
+    return shortName || name; // 防止空
 }
 
 function updateSidebarCategories(sidebarCollapsed) {
     const categories = document.querySelectorAll('.sidebar-category');
+
     categories.forEach(cat => {
         const fullName = cat.dataset.fullName;
 
@@ -243,9 +244,8 @@ function updateSidebarCategories(sidebarCollapsed) {
             // 使用縮寫
             const shortName = getShortName(fullName);
             cat.innerHTML = `<span class="sidebar-cat-text">${shortName}</span>`;
-            cat.title = fullName;
+            cat.title = fullName; // 滑鼠 hover 顯示完整名稱
 
-            // 確保縮寫不被 flex / overflow 擠掉
             cat.style.whiteSpace = 'nowrap';
             cat.style.overflow = 'visible';
         } else {
@@ -525,7 +525,9 @@ document.addEventListener('DOMContentLoaded', () => {
             sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
                 ? '<i class="fas fa-angle-right"></i>'
                 : '<i class="fas fa-angle-left"></i>';
-            updateSidebarCategories(sidebar.classList.contains('sidebar-collapsed'));
+
+        // ✅ 更新分類名稱
+           updateSidebarCategories(sidebar.classList.contains('sidebar-collapsed'));
         } else {
             sidebar.classList.remove('mobile-open');
         }
