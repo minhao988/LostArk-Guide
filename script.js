@@ -345,11 +345,11 @@ html += ` // 後續追加，不用再次 let
             this.appendChild(iframe);
         });
     });
-  document.querySelectorAll('.main-video').forEach(video => {
+document.querySelectorAll('.main-video').forEach(video => {
     video.addEventListener('click', () => {
         const overlay = video.querySelector('.video-overlay');
         if (overlay) {
-            overlay.classList.add('opacity-0');
+            overlay.remove(); // ← 直接移除「此處載入」整層
         }
     });
 });
