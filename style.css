@@ -672,9 +672,9 @@ body {
   display: none;
 }
 
-#sidebar .gate-submenu-container {
-  transition: max-height 0.3s ease, opacity 0.2s ease;
-  overflow: hidden;
+#sidebar #gate-submenu {
+  max-height: none !important;
+  overflow: visible !important;
 }
 
 #gate-content .gate-submenu-container {
@@ -688,6 +688,7 @@ body {
   opacity: 0;
   pointer-events: none;
 }
+
 
 
 
