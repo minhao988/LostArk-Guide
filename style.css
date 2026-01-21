@@ -629,6 +629,13 @@ body {
     display: flex;
     flex-direction: column;
 }
+#gate-submenu > div:first-child {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: #64748b;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+}
 
 
 
