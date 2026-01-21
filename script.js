@@ -123,80 +123,59 @@ function getIcon(type) {
 
 // ================== 初始化 sidebar ==================
 function initSidebar() {
-    const container = document.getElementById('sidebar-content');
-    if (!container) return;
+  const container = document.getElementById('sidebar-content');
+  if (!container) return;
 
-    container.innerHTML = ''; // 先清空
+  // 保留 gate-submenu，清除其他內容
+  Array.from(container.children).forEach(child => {
+      if (child.id !== 'gate-submenu') child.remove();
+  });
 
-    // 收集 categories
-    const categories = {};
-
-    Object.entries(allRaids).forEach(([id, data]) => {
-        // category 還沒建立
-        if (!categories[data.category]) {
-            const catBtn = document.createElement('div');
-            catBtn.className = 'category-btn text-slate-400 font-bold px-6 py-2 cursor-pointer hover:text-white transition-all';
-            catBtn.innerText = data.category;
-
-            const raidList = document.createElement('div');
-            raidList.className = 'category-raids pl-4 collapsed';
-            categories[data.category] = raidList;
-
-            catBtn.onclick = () => raidList.classList.toggle('collapsed');
-
-            container.appendChild(catBtn);
-            container.appendChild(raidList);
-        }
-
-        const raidList = categories[data.category];
-
-        // raid btn
-        const btn = document.createElement('button');
-        btn.id = `btn-${id}`;
-        btn.className = 'sidebar-btn w-full flex items-center gap-2 px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all';
-        btn.innerHTML = `<i class="${raidIcons[id] || 'fa-flag'} sidebar-icon"></i>
-                         <span class="sidebar-text font-medium">${data.short}</span>`;
-        btn.onclick = () => {
-            selectRaid(id);
-        };
-        raidList.appendChild(btn);
-
-        // 子選單容器
-        const submenu = document.createElement('div');
-        submenu.className = 'gate-submenu-container pl-6 collapsed';
-        submenu.id = `gate-submenu-${id}`;
-        raidList.appendChild(submenu);
-    });
-}
-
-// ================== 切換子選單 ==================
-function toggleRaidSubmenu(raidId) {
-  // 收回其他 raid 的 submenu
-  document.querySelectorAll('.gate-submenu-container').forEach(el => el.classList.add('collapsed'));
-
-  const currentSub = document.getElementById(`gate-submenu-${raidId}`);
-  if (currentSub) currentSub.classList.remove('collapsed');
+  // 生成 raid 按鈕
+  Object.entries(allRaids).forEach(([id, data]) => {
+      const btn = document.createElement('button');
+      btn.id = `btn-${id}`;
+      btn.className =
+        'sidebar-btn w-full flex items-center gap-2 px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all';
+      btn.innerHTML = `
+        <i class="${raidIcons[id] || 'fa-flag'} sidebar-icon"></i>
+        <span class="sidebar-text font-medium">${data.short}</span>
+      `;
+      // btn.onclick = () => selectRaid(id);
+  btn.onclick = () => {
+  selectRaid(id);
+  toggleRaidSubmenu(id);
+};
+      container.appendChild(btn);
+    
+// 這裡新增子選單容器
+const submenu = document.createElement('div');
+submenu.className = 'gate-submenu-container pl-6 collapsed';
+submenu.id = `gate-submenu-${id}`; // 以 raid id 綁定
+container.appendChild(submenu);
+  });
 }
 
 
 // ================== 選擇 raid ==================
 function selectRaid(raidId) {
     if (!allRaids[raidId]) return;
+
     currentRaidId = raidId;
     const raid = allRaids[raidId];
 
-    // 更新 sidebar active
+    // 更新 raid active 狀態
     document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
     document.getElementById(`btn-${raidId}`)?.classList.add('active');
 
-    // 更新主區域
+    // 更新標題 / 描述 / breadcrumb
     document.getElementById('raid-title').innerHTML = raid.title;
     document.getElementById('raid-desc').innerHTML = raid.desc;
     document.getElementById('mobile-title').innerHTML = raid.short;
     document.getElementById('breadcrumb').innerHTML = raid.short;
     document.getElementById('main-body').className = raid.theme + ' min-h-screen transition-all duration-500';
 
-    // gate tabs
+    // 生成 gate tabs
     const tabsContainer = document.getElementById('gate-tabs');
     tabsContainer.innerHTML = '';
     Object.keys(raid.gates).forEach(gId => {
@@ -208,32 +187,21 @@ function selectRaid(raidId) {
         tabsContainer.appendChild(btn);
     });
 
+    // 預設第一關
     switchGate(1);
 
-    // 顯示子選單
-    document.querySelectorAll('.gate-submenu-container').forEach(el => el.classList.add('collapsed'));
-    document.getElementById(`gate-submenu-${raidId}`)?.classList.remove('collapsed');
+    // 若手機版，關閉 sidebar
+    if (window.innerWidth < 768) {
+        document.getElementById('sidebar')?.classList.remove('mobile-open');
+    }
+  document.querySelectorAll('.gate-submenu-container')
+  .forEach(el => el.classList.add('collapsed'));
+
+document
+  .getElementById(`gate-submenu-${raidId}`)
+  ?.classList.remove('collapsed');
 }
 
-// ====================================
-// 切 gate
-// ====================================
-function switchGate(gateId) {
-    const raid = allRaids[currentRaidId];
-    const gate = raid.gates[gateId];
-    if (!gate) return;
-
-    // gate btn active
-    document.querySelectorAll('.gate-btn').forEach(btn => btn.classList.remove('active'));
-    document.getElementById(`gate-tab-${gateId}`)?.classList.add('active');
-
-    renderGateContent(gate);
-
-    // render submenu
-    const currentSub = document.getElementById(`gate-submenu-${currentRaidId}`);
-    if (currentSub) currentSub.innerHTML = '';
-    renderGateSubmenu(gate, currentRaidId);
-}
 
 
 
@@ -463,6 +431,14 @@ function renderGateSubmenu(gate, raidId) {
   });
 }
   
+function toggleRaidSubmenu(raidId) {
+  
+
+
+  // 切換目前這個
+ const currentSub = document.getElementById(`gate-submenu-${raidId}`);
+    if (currentSub) currentSub.classList.remove('collapsed');
+}
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -479,22 +455,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 桌面收合 / 手機 sidebar < 關閉
-sidebarToggle?.addEventListener('click', () => {
+   sidebarToggle?.addEventListener('click', () => {
     if (window.innerWidth >= 768) {
         sidebar.classList.toggle('sidebar-collapsed');
-        document.querySelector('main').classList.toggle('sidebar-collapsed'); 
-
-        // 收合所有子選單
-        document.querySelectorAll('.gate-submenu-container')
-            .forEach(sub => sub.classList.add('collapsed'));
-
+        document.querySelector('main').classList.toggle('sidebar-collapsed'); // 加這行
         sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
             ? '<i class="fas fa-angle-right"></i>'
             : '<i class="fas fa-angle-left"></i>';
     } else {
         sidebar.classList.remove('mobile-open');
     }
-});
 });
 
   document.querySelectorAll('.sidebar-btn').forEach(btn => {
