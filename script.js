@@ -169,10 +169,10 @@ function selectRaid(raidId) {
     document.getElementById(`btn-${raidId}`)?.classList.add('active');
 
     // 更新標題 / 描述 / breadcrumb
-    document.getElementById('raid-title').innerText = raid.title;
-    document.getElementById('raid-desc').innerText = raid.desc;
-    document.getElementById('mobile-title').innerText = raid.short;
-    document.getElementById('breadcrumb').innerText = raid.short;
+    document.getElementById('raid-title').innerHTML = raid.title;
+    document.getElementById('raid-desc').innerHTML = raid.desc;
+    document.getElementById('mobile-title').innerHTML = raid.short;
+    document.getElementById('breadcrumb').innerHTML = raid.short;
     document.getElementById('main-body').className = raid.theme + ' min-h-screen transition-all duration-500';
 
     // 生成 gate tabs
