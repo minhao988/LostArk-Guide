@@ -122,68 +122,51 @@ function getIcon(type) {
 }
 
 // ================== 初始化 sidebar ==================
-// ================== 初始化 sidebar ==================
 function initSidebar() {
-  const container = document.getElementById('sidebar-content');
-  if (!container) return;
+    const container = document.getElementById('sidebar-content');
+    if (!container) return;
 
-  // 清空內容（保留 gate-submenu 也不用，全部重建）
-  container.innerHTML = '';
+    container.innerHTML = ''; // 先清空
 
-  // 先收集所有 category
-  const categories = {};
+    // 收集 categories
+    const categories = {};
 
-  Object.entries(allRaids).forEach(([id, data]) => {
-    // 如果 category 還沒生成
-    if (!categories[data.category]) {
-      // category 按鈕
-      const catBtn = document.createElement('div');
-      catBtn.id = `cat-${data.category}`;
-      catBtn.className =
-        'category-btn text-slate-400 font-bold px-6 py-2 cursor-pointer hover:text-white transition-all';
-      catBtn.innerText = data.category;
+    Object.entries(allRaids).forEach(([id, data]) => {
+        // category 還沒建立
+        if (!categories[data.category]) {
+            const catBtn = document.createElement('div');
+            catBtn.className = 'category-btn text-slate-400 font-bold px-6 py-2 cursor-pointer hover:text-white transition-all';
+            catBtn.innerText = data.category;
 
-      // category 內 raid 容器
-      const raidList = document.createElement('div');
-      raidList.className = 'category-raids pl-4 collapsed';
-      raidList.id = `category-raids-${data.category}`;
+            const raidList = document.createElement('div');
+            raidList.className = 'category-raids pl-4 collapsed';
+            categories[data.category] = raidList;
 
-      // 點擊 category 展開/收合
-      catBtn.onclick = () => raidList.classList.toggle('collapsed');
+            catBtn.onclick = () => raidList.classList.toggle('collapsed');
 
-      container.appendChild(catBtn);
-      container.appendChild(raidList);
+            container.appendChild(catBtn);
+            container.appendChild(raidList);
+        }
 
-      categories[data.category] = raidList;
-    }
+        const raidList = categories[data.category];
 
-    const raidList = categories[data.category];
+        // raid btn
+        const btn = document.createElement('button');
+        btn.id = `btn-${id}`;
+        btn.className = 'sidebar-btn w-full flex items-center gap-2 px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all';
+        btn.innerHTML = `<i class="${raidIcons[id] || 'fa-flag'} sidebar-icon"></i>
+                         <span class="sidebar-text font-medium">${data.short}</span>`;
+        btn.onclick = () => {
+            selectRaid(id);
+        };
+        raidList.appendChild(btn);
 
-    // raid 按鈕
-    const btn = document.createElement('button');
-    btn.id = `btn-${id}`;
-    btn.className =
-      'sidebar-btn w-full flex items-center gap-2 px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all';
-    btn.innerHTML = `
-      <i class="${raidIcons[id] || 'fa-flag'} sidebar-icon"></i>
-      <span class="sidebar-text font-medium">${data.short}</span>
-    `;
-    btn.onclick = () => {
-      selectRaid(id);
-      toggleRaidSubmenu(id);
-
-      // active 樣式
-      document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    };
-    raidList.appendChild(btn);
-
-    // 子選單容器
-    const submenu = document.createElement('div');
-    submenu.className = 'gate-submenu-container pl-6 collapsed';
-    submenu.id = `gate-submenu-${id}`;
-    raidList.appendChild(submenu);
-  });
+        // 子選單容器
+        const submenu = document.createElement('div');
+        submenu.className = 'gate-submenu-container pl-6 collapsed';
+        submenu.id = `gate-submenu-${id}`;
+        raidList.appendChild(submenu);
+    });
 }
 
 // ================== 切換子選單 ==================
@@ -199,20 +182,21 @@ function toggleRaidSubmenu(raidId) {
 // ================== 選擇 raid ==================
 function selectRaid(raidId) {
     if (!allRaids[raidId]) return;
-
     currentRaidId = raidId;
     const raid = allRaids[raidId];
 
+    // 更新 sidebar active
     document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
     document.getElementById(`btn-${raidId}`)?.classList.add('active');
 
+    // 更新主區域
     document.getElementById('raid-title').innerHTML = raid.title;
     document.getElementById('raid-desc').innerHTML = raid.desc;
     document.getElementById('mobile-title').innerHTML = raid.short;
     document.getElementById('breadcrumb').innerHTML = raid.short;
     document.getElementById('main-body').className = raid.theme + ' min-h-screen transition-all duration-500';
 
-    // 生成 gate tabs
+    // gate tabs
     const tabsContainer = document.getElementById('gate-tabs');
     tabsContainer.innerHTML = '';
     Object.keys(raid.gates).forEach(gId => {
@@ -226,13 +210,29 @@ function selectRaid(raidId) {
 
     switchGate(1);
 
-    // 📌 收回所有子選單
+    // 顯示子選單
     document.querySelectorAll('.gate-submenu-container').forEach(el => el.classList.add('collapsed'));
     document.getElementById(`gate-submenu-${raidId}`)?.classList.remove('collapsed');
+}
 
-    if (window.innerWidth < 768) {
-        document.getElementById('sidebar')?.classList.remove('mobile-open');
-    }
+// ====================================
+// 切 gate
+// ====================================
+function switchGate(gateId) {
+    const raid = allRaids[currentRaidId];
+    const gate = raid.gates[gateId];
+    if (!gate) return;
+
+    // gate btn active
+    document.querySelectorAll('.gate-btn').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(`gate-tab-${gateId}`)?.classList.add('active');
+
+    renderGateContent(gate);
+
+    // render submenu
+    const currentSub = document.getElementById(`gate-submenu-${currentRaidId}`);
+    if (currentSub) currentSub.innerHTML = '';
+    renderGateSubmenu(gate, currentRaidId);
 }
 
 
