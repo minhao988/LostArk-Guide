@@ -637,6 +637,9 @@ body {
   margin-top: 0.5rem;
 }
 
+#sidebar.sidebar-collapsed .gate-submenu-container {
+  display: none;
+}
 
 
 
