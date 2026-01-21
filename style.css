@@ -537,7 +537,7 @@ body {
     margin-top: 0.5rem;
 }
 
-/* 大分類按鈕 */
+/* /* 大分類按鈕 */
 .submenu-btn {
     width: 100%;
     text-align: left;
@@ -549,13 +549,32 @@ body {
     border: none;
     cursor: pointer;
     transition: color 0.2s, background 0.2s;
+} */
+    
+.submenu-btn {
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #cbd5e1;
+  background: transparent;
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.submenu-btn:hover {
+
+/* .submenu-btn:hover {
     color: #fff;
+} */
+.submenu-btn:hover {
+  color: var(--raid-accent);
+  background: var(--raid-accent-soft);
+  border-left-color: var(--raid-accent);
 }
 
-/* 子項目按鈕 */
+/* /* 子項目按鈕 */
 .submenu-sub {
     width: 100%;
     text-align: left;
@@ -567,15 +586,40 @@ body {
     border: none;
     cursor: pointer;
     transition: color 0.2s;
+} */
+
+/* .submenu-sub:hover {
+    color: #fff;
+} */
+
+.submenu-sub {
+  width: 100%;
+  text-align: left;
+  padding: 0.35rem 2.5rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #94a3b8;
+  background: transparent;
+  border-left: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .submenu-sub:hover {
-    color: #fff;
+  color: #fff;
+  border-left-color: var(--raid-accent);
+  background: linear-gradient(
+    90deg,
+    var(--raid-accent-soft),
+    transparent
+  );
 }
+
 #gate-submenu {
     display: flex;
     flex-direction: column;
 }
+
 
 
 
