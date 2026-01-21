@@ -190,23 +190,21 @@ body {
 
     /* 改成：只透明隱藏，不完全 display:none */
 #sidebar.sidebar-collapsed .sidebar-category {
-    position: relative;  /* 必须有，才能让 ::after 相对定位 */
-    overflow: visible;
-    display: inline-block;  /* 保留在 DOM 裡 */
     opacity: 0;
-    pointer-events: none;
-   
-    left: 100%;             /* 緊貼 icon 右邊 */
+    pointer-events: none; /* 不擋 icon */
+    position: absolute;
+    left: 100%; 
     top: 50%;
-    transform: translateY(-50%) translateX(0);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(-50%);
     background: rgba(15,23,42,0.95);
     padding: 4px 10px;
     border-radius: 6px;
-    font-size: 0.875rem;
     color: #f8fafc;
+    white-space: nowrap;
+    transition: opacity 0.3s ease, transform 0.3s ease;
     z-index: 50;
 }
+
     /* 文字 */
     .sidebar-text {
         display: inline-block;
@@ -791,6 +789,9 @@ body {
   text-overflow: ellipsis; /* 顯示省略號 */
   transition: all 0.2s;
 }
+#sidebar.sidebar-collapsed .sidebar-category span {
+  overflow: visible;
+}
 
 /* Hover 顯示 tooltip */
 .sidebar-category:hover {
@@ -798,10 +799,11 @@ body {
   cursor: default;
 }
 
+/* hover 顯示文字 */
 #sidebar.sidebar-collapsed .sidebar-category:hover {
     opacity: 1;
-    transform: translateY(-50%) translateX(10px);
     pointer-events: auto;
+    transform: translateY(-50%) translateX(10px);
 }
 
 #sidebar.sidebar-collapsed .sidebar-category::after {
@@ -829,6 +831,7 @@ body {
     transform: translateY(-50%) translateX(10px) scale(1.08);
     pointer-events: auto;
 }
+
 
 
 
