@@ -458,3 +458,26 @@ h2, h3, h4 {
     opacity: 0.85;
 }
 
+/* 確保子選單可以摺疊 */
+.submenu-group,
+#gate-submenu {
+    max-height: 0;        /* 預設收起 */
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none; /* 收起時不能點擊 */
+}
+
+/* 展開狀態 */
+.submenu-group.active,
+#gate-submenu.active {
+    max-height: 1000px; /* 足夠大，容納所有子項 */
+    opacity: 1;
+    pointer-events: auto; /* 可點擊 */
+}
+
+/* 收合動畫過渡 */
+.submenu-group,
+#gate-submenu {
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
