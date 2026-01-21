@@ -260,7 +260,7 @@ function renderGateContent(gate) {
       </div>
     `;
   }
-html += ` // 後續追加，不用再次 let
+html += `
    
         <section id="section-mechanics" data-menu="mechanics">
             <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
