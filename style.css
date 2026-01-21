@@ -714,6 +714,25 @@ body {
   gap: 2rem;
 }
 
+.video-overlay {
+    position: absolute;       /* 覆蓋在影片上 */
+    top: 0;                   /* 或你想要的位置 */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;            /* 方便置中 */
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;     /* 不干擾影片點擊 */
+    z-index: 10;
+    color: #facc15;           /* 字體顏色 */
+    font-family: "Inter", "Noto Sans TC", sans-serif; /* 字體 */
+    font-size: 1.5rem;        /* 大小 */
+    font-weight: 700;         /* 粗細 */
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.6); /* 陰影提升可讀性 */
+    text-align: center;
+    line-height: 1.2;
+}
 
 
 
