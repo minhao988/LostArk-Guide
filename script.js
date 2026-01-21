@@ -197,20 +197,23 @@ function selectRaid(raidId) {
 
 // ================== 切換 gate ==================
 function switchGate(gateId) {
-    const raid = allRaids[currentRaidId];
-    const gate = raid.gates[gateId];
-    if (!gate) return;
+  const raid = allRaids[currentRaidId];
+  const gate = raid.gates[gateId];
+  if (!gate) return;
 
-    // 更新 gate tab active
-    document.querySelectorAll('.gate-btn').forEach(btn => btn.classList.remove('active'));
-    document.getElementById(`gate-tab-${gateId}`)?.classList.add('active');
+  // Gate tab active
+  document.querySelectorAll('.gate-btn')
+    .forEach(btn => btn.classList.remove('active'));
+  document.getElementById(`gate-tab-${gateId}`)?.classList.add('active');
 
-    // 渲染 gate 內容
-    renderGateContent(gate);
+  renderGateContent(gate);
 
-    // 更新左側 submenu
-    
-  renderGateSubmenu(gate);
+  // 👇 關鍵：先隱藏所有 submenu
+  document.querySelectorAll('.gate-submenu-container')
+    .forEach(el => el.innerHTML = '');
+
+  // 👇 只渲染當前 raid 的 submenu
+  renderGateSubmenu(gate, currentRaidId);
 }
 
 // ================== 渲染 gate 內容 ==================
@@ -324,39 +327,54 @@ html += ` // 後續追加，不用再次 let
     });
 }
 
-function renderGateSubmenu(gate) {
-  const container = document.getElementById('gate-submenu');
+function renderGateSubmenu(gate, raidId) {
+  const container = document.getElementById(`gate-submenu-${raidId}`);
   if (!container) return;
 
-  let html = `<div class="px-4 py-2 text-xs font-bold text-slate-500 uppercase">本關卡目錄</div>`;
+  let html = `
+    <div class="px-4 py-2 text-xs font-bold text-slate-500 uppercase">
+      ${gate.name}
+    </div>
+  `;
 
-  // 核心機制
   if (gate.mechanics?.length) {
-    html += `<div class="submenu-group">
-      <button class="submenu-btn" data-target="section-mechanics">核心機制</button>
-      ${gate.mechanics.map((m,i) => `
-        <button class="submenu-sub pl-10 text-slate-400 hover:text-white"
-          data-target="mech-${i}">${m.hp} ${m.title}</button>
-      `).join('')}
-    </div>`;
+    html += `
+      <div class="submenu-group">
+        <button class="submenu-btn" data-target="section-mechanics">
+          核心機制
+        </button>
+        ${gate.mechanics.map((m,i) => `
+          <button class="submenu-sub pl-10"
+            data-target="mech-${i}">
+            ${m.hp} ${m.title}
+          </button>
+        `).join('')}
+      </div>
+    `;
   }
 
-  // 招式
   if (gate.patterns?.length) {
-    html += `<div class="submenu-group mt-2">
-      <button class="submenu-btn" data-target="section-patterns">招式解析</button>
-      ${gate.patterns.map((p,i) => `
-        <button class="submenu-sub pl-10 text-slate-400 hover:text-white"
-          data-target="pattern-${i}">${p.name}</button>
-      `).join('')}
-    </div>`;
+    html += `
+      <div class="submenu-group mt-2">
+        <button class="submenu-btn" data-target="section-patterns">
+          招式解析
+        </button>
+        ${gate.patterns.map((p,i) => `
+          <button class="submenu-sub pl-10"
+            data-target="pattern-${i}">
+            ${p.name}
+          </button>
+        `).join('')}
+      </div>
+    `;
   }
 
   container.innerHTML = html;
 
-  // 點擊 scroll
-  container.querySelectorAll('button[data-target]').forEach(btn => {
-    btn.onclick = () => document.getElementById(btn.dataset.target)?.scrollIntoView({ behavior: 'smooth' });
+  container.querySelectorAll('[data-target]').forEach(btn => {
+    btn.onclick = () =>
+      document.getElementById(btn.dataset.target)
+        ?.scrollIntoView({ behavior: 'smooth' });
   });
 }
   
