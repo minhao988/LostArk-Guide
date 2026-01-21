@@ -190,10 +190,12 @@ body {
 
     /* 改成：只透明隱藏，不完全 display:none */
 #sidebar.sidebar-collapsed .sidebar-category {
+    position: relative;  /* 必须有，才能让 ::after 相对定位 */
+    overflow: visible;
     display: inline-block;  /* 保留在 DOM 裡 */
     opacity: 0;
     pointer-events: none;
-    position: absolute;     /* 浮動 tooltip */
+   
     left: 100%;             /* 緊貼 icon 右邊 */
     top: 50%;
     transform: translateY(-50%) translateX(0);
@@ -808,7 +810,7 @@ body {
     position: absolute;
     left: 110%;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%) translateX(0);
     background: rgba(15,23,42,0.95);
     color: #f8fafc;
     font-size: 12px;
@@ -820,12 +822,13 @@ body {
     pointer-events: none;
     box-shadow: 0 8px 24px rgba(0,0,0,.4);
     transition: opacity 0.15s ease, transform 0.15s ease;
-    z-index: 50;
+    z-index: 999;
 }
 
 #sidebar.sidebar-collapsed .sidebar-category:hover::after {
     opacity: 1;
-    transform: translateY(-50%) scale(1.08);
+    transform: translateY(-50%) translateX(10px) scale(1.08);
+    pointer-events: auto;
 }
 
 
