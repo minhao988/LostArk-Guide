@@ -345,14 +345,14 @@ html += ` // 後續追加，不用再次 let
             this.appendChild(iframe);
         });
     });
-// ✅ 主影片 iframe 載入完成後，自動移除 overlay
-container.querySelectorAll('.main-video iframe').forEach(iframe => {
-  iframe.addEventListener('load', () => {
-    const wrapper = iframe.closest('.main-video');
-    const overlay = wrapper?.querySelector('.video-overlay');
-    overlay?.remove();
+  // ✅ 主影片 iframe 載入完成後，自動移除 overlay
+  container.querySelectorAll('.main-video iframe').forEach(iframe => {
+    iframe.addEventListener('load', () => {
+      const wrapper = iframe.closest('.main-video');
+      const overlay = wrapper?.querySelector('.video-overlay');
+      overlay?.remove();
+    });
   });
-});
 }
 
 function renderGateSubmenu(gate, raidId) {
