@@ -333,16 +333,6 @@ body {
 
 /* ===== 手機 (<768px) ===== */
 @media (max-width: 767px) {
- #main-body,
-  main,
-  #gate-content {
-    min-height: auto !important;
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
-  }
-
-    
     /* #sidebar {
         position: fixed;
         inset: 0;
@@ -698,6 +688,7 @@ body {
   opacity: 0;
   pointer-events: none;
 }
+
 
 
 
