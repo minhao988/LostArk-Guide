@@ -141,18 +141,15 @@ function initSidebar() {
         <i class="${raidIcons[id] || 'fa-flag'} sidebar-icon"></i>
         <span class="sidebar-text font-medium">${data.short}</span>
       `;
-   btn.onclick = () => switchRaid(id);
-//   btn.onclick = () => {
-//   selectRaid(id);
-//   toggleRaidSubmenu(id);
-// };
+      // ✅ 點擊只呼叫 switchRaid
+      btn.onclick = () => switchRaid(id);
       container.appendChild(btn);
-    
-// 這裡新增子選單容器
-const submenu = document.createElement('div');
-submenu.className = 'gate-submenu-container pl-6 collapsed';
-submenu.id = `gate-submenu-${id}`; // 以 raid id 綁定
-container.appendChild(submenu);
+
+      // 只生成空 submenu 容器，不填內容
+      const submenu = document.createElement('div');
+      submenu.className = 'gate-submenu-container pl-6 collapsed';
+      submenu.id = `gate-submenu-${id}`;
+      container.appendChild(submenu);
   });
 }
 
@@ -185,8 +182,11 @@ function selectRaid(raidId) {
         btn.innerText = `關卡 G${gId}`;
         btn.onclick = () => switchGate(parseInt(gId));
         tabsContainer.appendChild(btn);
+      
+      
     });
-
+const firstGate = raid.gates[Object.keys(raid.gates)[0]];
+renderGateSubmenu(firstGate, raidId);
     // 預設第一關
     switchGate(1);
 
@@ -246,6 +246,24 @@ function switchRaid(raidId) {
 
     // ✅ 關鍵：呼叫 selectRaid 渲染 Gate tabs + 第一關內容 + submenu
     selectRaid(raidId);
+}
+
+
+function switchGate(gateId) {
+  const raid = allRaids[currentRaidId];
+  const gate = raid.gates[gateId];
+  if (!gate) return;
+
+  // Gate tab active
+  document.querySelectorAll('.gate-btn')
+    .forEach(btn => btn.classList.remove('active'));
+  document.getElementById(`gate-tab-${gateId}`)?.classList.add('active');
+
+  // 渲染 gate 內容
+  renderGateContent(gate);
+
+  // 只渲染當前 gate submenu
+  renderGateSubmenu(gate, currentRaidId);
 }
  //  function switchGate(gateId) {
  //  const raid = allRaids[currentRaidId];
