@@ -206,70 +206,28 @@ let expandedRaidId = null; // 記錄哪個 raid 的 gate 展開
 
 
 // ================== 切換 gate ==================
-function switchRaid(raidId) {
-    const gateSubmenu = document.getElementById('gate-submenu');
 
-    // 點擊同一個 raid → 收合
-    if (expandedRaidId === raidId) {
-        gateSubmenu.innerHTML = '';
-        expandedRaidId = null;
-        // 移除 Sidebar active 樣式
-        document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
-        // 清空 gate 內容區
-        document.getElementById('gate-content').innerHTML = '';
-        return;
-    }
+  function switchGate(gateId) {
+  const raid = allRaids[currentRaidId];
+  const gate = raid.gates[gateId];
+   if (!gate) return;
 
-    // 點擊其他 raid → 展開
-    expandedRaidId = raidId;
-    currentRaidId = raidId;
+   // Gate tab active
+   document.querySelectorAll('.gate-btn')
+     .forEach(btn => btn.classList.remove('active'));
+   document.getElementById(`gate-tab-${gateId}`)?.classList.add('active');
 
-    // 更新 Sidebar active 樣式
-    document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector(`.sidebar-btn[data-raid-id="${raidId}"]`)?.classList.add('active');
+   renderGateContent(gate);
 
-    // 先清空舊的 gate submenu
-    gateSubmenu.innerHTML = '';
+   // 👇 關鍵：先隱藏所有 submenu
+   // document.querySelectorAll('.gate-submenu-container')
+   //   .forEach(el => el.innerHTML = '');
+   const currentSub = document.getElementById(`gate-submenu-${currentRaidId}`);
+ if (currentSub) currentSub.innerHTML = '';
 
-    const raid = allRaids[raidId];
-    if (!raid) return;
-
-    // 如果有 gates，先渲染 gate tabs
-    const gates = raid.gates;
-    if (gates) {
-        let html = `<div>關卡列表：</div>`;
-        for (const [key, gate] of Object.entries(gates)) {
-            html += `<button class="submenu-sub" onclick="switchGate('${key}')">${gate.name}</button>`;
-        }
-        gateSubmenu.innerHTML = html;
-
-        // 自動切換到第一個 gate，渲染內容
-        const firstGateKey = Object.keys(gates)[0];
-        switchGate(firstGateKey);
-    }
-}
-
-// function switchGate(gateId) {
-//   const raid = allRaids[currentRaidId];
-//   const gate = raid.gates[gateId];
-//   if (!gate) return;
-
-//   // Gate tab active
-//   document.querySelectorAll('.gate-btn')
-//     .forEach(btn => btn.classList.remove('active'));
-//   document.getElementById(`gate-tab-${gateId}`)?.classList.add('active');
-
-//   renderGateContent(gate);
-
-//   // 👇 關鍵：先隱藏所有 submenu
-//   // document.querySelectorAll('.gate-submenu-container')
-//   //   .forEach(el => el.innerHTML = '');
-//   const currentSub = document.getElementById(`gate-submenu-${currentRaidId}`);
-// if (currentSub) currentSub.innerHTML = '';
-
-//   // 👇 只渲染當前 raid 的 submenu
-//   renderGateSubmenu(gate, currentRaidId);
-// }
+   // 👇 只渲染當前 raid 的 submenu
+   renderGateSubmenu(gate, currentRaidId);
+ }
 
 // ================== 渲染 gate 內容 ==================
 function renderGateContent(gate) {
