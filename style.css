@@ -184,9 +184,9 @@ body {
     font-size: 1.15rem;
     flex-shrink: 0;  /* 不縮小 */
 }
-    /* #sidebar.sidebar-collapsed .sidebar-category {
-    display: none;
-} */
+.sidebar-category {
+    position: relative; /* ✅ 必须 */
+}
 
     /* 改成：只透明隱藏，不完全 display:none */
 #sidebar.sidebar-collapsed .sidebar-category {
@@ -804,7 +804,6 @@ body {
     pointer-events: auto;
 }
 
-
 #sidebar.sidebar-collapsed .sidebar-category::after {
     content: attr(data-tooltip);
     position: absolute;
@@ -830,6 +829,9 @@ body {
     transform: translateY(-50%) translateX(10px) scale(1.08);
     pointer-events: auto;
 }
+
+
+
 
 
 
