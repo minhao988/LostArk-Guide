@@ -362,7 +362,7 @@ html += `
                                 ${m.videoId ? `<div class="relative w-full aspect-video sm:w-[520px] lg:w-[640px] sm:h-[292px] lg:h-[360px] cursor-pointer group bg-black/40 overflow-hidden rounded-lg" data-video="${m.videoId}">
                                     <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                                         <i class="fab fa-youtube text-5xl text-red-600 opacity-90"></i>
-                                        <span class="mt-2 text-[20px] text-slate-300">${m.title} 機制</span>
+                                        <span class="mt-2 text-[15px] text-slate-300">${m.title} 機制</span>
                                     </div>
                                 </div>` : ''}
                             </div>
@@ -383,7 +383,7 @@ html += `
                         <div class="relative w-full aspect-video cursor-pointer group bg-black/40 overflow-hidden" data-video="${p.videoId || ''}">
                             <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                                 <i class="fab fa-youtube text-6xl text-red-600 opacity-80"></i>
-                                <span class="mt-2 text-[20px] text-slate-300">${p.name}招式影片</span>
+                                <span class="mt-2 text-[15px] text-slate-300">${p.name}招式影片</span>
                             </div>
                         </div>
                         <div class="p-5 text-[13px] md:text-[14px] lg:text-[15px]">
