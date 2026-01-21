@@ -135,7 +135,7 @@ function initSidebar() {
     Object.entries(groupedRaids).forEach(([category, raids]) => {
         // 生成分類標題
         const catTitle = document.createElement('div');
-        catTitle.className = 'px-6 py-2 text-xs font-bold text-slate-500 uppercase';
+        catTitle.className = 'sidebar-category px-6 py-2 text-xs font-bold text-slate-500 uppercase';
         catTitle.innerText = category;
         container.appendChild(catTitle);
 
