@@ -184,10 +184,27 @@ body {
     font-size: 1.15rem;
     flex-shrink: 0;  /* 不縮小 */
 }
-    #sidebar.sidebar-collapsed .sidebar-category {
+    /* #sidebar.sidebar-collapsed .sidebar-category {
     display: none;
-}
+} */
 
+    /* 改成：只透明隱藏，不完全 display:none */
+#sidebar.sidebar-collapsed .sidebar-category {
+    display: inline-block;  /* 保留在 DOM 裡 */
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;     /* 浮動 tooltip */
+    left: 100%;             /* 緊貼 icon 右邊 */
+    top: 50%;
+    transform: translateY(-50%) translateX(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    background: rgba(15,23,42,0.95);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    color: #f8fafc;
+    z-index: 50;
+}
     /* 文字 */
     .sidebar-text {
         display: inline-block;
@@ -779,8 +796,37 @@ body {
   cursor: default;
 }
 
+#sidebar.sidebar-collapsed .sidebar-category:hover {
+    opacity: 1;
+    transform: translateY(-50%) translateX(10px);
+    pointer-events: auto;
+}
 
 
+#sidebar.sidebar-collapsed .sidebar-category::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 110%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(15,23,42,0.95);
+    color: #f8fafc;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 8px 24px rgba(0,0,0,.4);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    z-index: 50;
+}
+
+#sidebar.sidebar-collapsed .sidebar-category:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.08);
+}
 
 
 
