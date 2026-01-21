@@ -230,6 +230,41 @@ function groupRaidsByCategory() {
     return groups;
 }
 
+function getShortName(name) {
+    // 1. 拆分中文和英文
+    // 用正則找中文和英文單字
+    const chineseChars = name.match(/[\u4e00-\u9fff]/g) || [];
+    const englishWords = name.match(/[A-Za-z]/g) || [];
+
+    // 2. 取中文首字 + 英文首字母
+    let shortName = '';
+    if (chineseChars.length > 0) {
+        shortName += chineseChars[0];       // 第一個中文字
+        if (chineseChars.length > 1) {
+            shortName += chineseChars[1];   // 可選加第二個中文字
+        }
+    }
+    if (englishWords.length > 0) {
+        shortName += englishWords[0].toUpperCase(); // 第一個英文
+    }
+
+    return shortName;
+}
+
+function updateSidebarCategories(sidebarCollapsed) {
+    const categories = document.querySelectorAll('.sidebar-category');
+    categories.forEach(cat => {
+        if (sidebarCollapsed) {
+            cat.dataset.fullName = cat.innerText;       // 保存完整名稱
+            cat.innerText = getShortName(cat.innerText); // 顯示縮寫
+            cat.title = cat.dataset.fullName;           // hover 顯示完整名稱
+        } else {
+            cat.innerText = cat.dataset.fullName;      // 展開時還原
+            cat.title = '';
+        }
+    });
+}
+
 
 let expandedRaidId = null; // 記錄哪個 raid 的 gate 展開
 
@@ -580,6 +615,10 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
             ? '<i class="fas fa-angle-right"></i>'
             : '<i class="fas fa-angle-left"></i>';
+
+       // === 這裡加入縮寫處理 ===
+        const sidebarCollapsed = sidebar.classList.contains('sidebar-collapsed');
+        updateSidebarCategories(sidebarCollapsed);
     } else {
         sidebar.classList.remove('mobile-open');
     }
