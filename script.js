@@ -200,6 +200,16 @@ renderGateSubmenu(firstGate, raidId);
 document
   .getElementById(`gate-submenu-${raidId}`)
   ?.classList.remove('collapsed');
+
+  const mainBody = document.getElementById('main-body');
+
+if (window.innerWidth >= 768) {
+  mainBody.className =
+    raid.theme + ' min-h-screen transition-all duration-500';
+} else {
+  mainBody.className =
+    raid.theme + ' transition-all duration-500';
+}
 }
 
 let expandedRaidId = null; // 記錄哪個 raid 的 gate 展開
