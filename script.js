@@ -438,15 +438,16 @@ html += `
         });
     });
   // ✅ 主影片 iframe 載入完成後，自動移除 overlay
- document.querySelectorAll('.main-video').forEach(wrapper => {
+document.querySelectorAll('.main-video').forEach(wrapper => {
   const overlay = wrapper.querySelector('.video-overlay');
   const iframe = wrapper.querySelector('iframe');
 
   overlay.addEventListener('click', () => {
-    // 1️⃣ 載入影片
-    iframe.src = iframe.dataset.src;
+    // 如果已經載入就 return
+    if (!iframe.src || iframe.src === '') {
+        iframe.src = iframe.dataset.src;
+    }
 
-    // 2️⃣ 淡出 overlay
     overlay.classList.add('opacity-0');
     setTimeout(() => overlay.remove(), 300);
   });
@@ -518,20 +519,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 桌面收合
     const sidebarToggle = document.getElementById('sidebar-toggle');
-    sidebarToggle?.addEventListener('click', () => {
-        if (window.innerWidth >= 768) {
-            sidebar.classList.toggle('sidebar-collapsed');
-            document.querySelector('main')?.classList.toggle('sidebar-collapsed');
-            sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
-                ? '<i class="fas fa-angle-right"></i>'
-                : '<i class="fas fa-angle-left"></i>';
+  sidebarToggle?.addEventListener('click', () => {
+    if (window.innerWidth >= 768) {
+        sidebar.classList.toggle('sidebar-collapsed');
+        document.querySelector('main')?.classList.toggle('sidebar-collapsed');
+        sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
+            ? '<i class="fas fa-angle-right"></i>'
+            : '<i class="fas fa-angle-left"></i>';
 
-        // ✅ 更新分類名稱
-           updateSidebarCategories(sidebar.classList.contains('sidebar-collapsed'));
-        } else {
-            sidebar.classList.remove('mobile-open');
-        }
-    });
+        // 更新分類名稱
+        updateSidebarCategories(sidebar.classList.contains('sidebar-collapsed'));
+
+        // 收回所有 raid submenu
+        document.querySelectorAll('.gate-submenu-container').forEach(el => {
+            if (sidebar.classList.contains('sidebar-collapsed')) {
+                el.classList.add('collapsed');
+            } else if (expandedRaidId === el.id.replace('gate-submenu-', '')) {
+                el.classList.remove('collapsed');
+            }
+        });
+    } else {
+        sidebar.classList.remove('mobile-open');
+    }
+});
 
   document.querySelectorAll('.sidebar-btn').forEach(btn => {
     btn.addEventListener('click', () => {
