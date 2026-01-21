@@ -234,18 +234,26 @@ function renderGateContent(gate) {
     if (!container) return;
 
   let html = '';
- if (gate.youtubeId) { // 假設你在 gate 裡放了 mainVideoId
+if (gate.youtubeId) {
     html += `
-    <div class="rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative group mb-8">
-       <div class="absolute inset-0 flex items-center justify-center bg-slate-900/80 pointer-events-none">
+    <div class="main-video rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative mb-8">
+       
+       <div class="video-overlay absolute inset-0 flex items-center justify-center
+            bg-slate-900/80 pointer-events-none transition-opacity duration-300">
             <div class="text-center">
                 <i class="fab fa-youtube text-6xl text-red-600 mb-4"></i>
-                <p class="text-slate-200 font-bold">此處載入 ${gate.name} 完整攻略影片</p>
+                <p class="text-slate-200 font-bold">
+                  此處載入 ${gate.name} 完整攻略影片
+                </p>
             </div>
         </div>
-        <iframe class="w-full h-full" src="https://www.youtube.com/embed/${gate.youtubeId}" 
-            title="${gate.name} 完整攻略影片" 
-            frameborder="0" allowfullscreen></iframe>
+
+        <iframe class="w-full h-full"
+            src="https://www.youtube.com/embed/${gate.youtubeId}"
+            title="${gate.name} 完整攻略影片"
+            frameborder="0"
+            allowfullscreen>
+        </iframe>
     </div>
     `;
 }
@@ -337,6 +345,14 @@ html += ` // 後續追加，不用再次 let
             this.appendChild(iframe);
         });
     });
+  document.querySelectorAll('.main-video').forEach(video => {
+    video.addEventListener('click', () => {
+        const overlay = video.querySelector('.video-overlay');
+        if (overlay) {
+            overlay.classList.add('opacity-0');
+        }
+    });
+});
 }
 
 function renderGateSubmenu(gate, raidId) {
