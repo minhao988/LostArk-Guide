@@ -432,19 +432,12 @@ function renderGateSubmenu(gate, raidId) {
 }
   
 function toggleRaidSubmenu(raidId) {
-  // 先把其他 raid 的 submenu 全部收起
-  document.querySelectorAll('.gate-submenu-container')
-    .forEach(el => {
-      if (el.id !== `gate-submenu-${raidId}`) {
-        el.classList.add('collapsed');
-      }
-    });
+  
+
 
   // 切換目前這個
-  const current = document.getElementById(`gate-submenu-${raidId}`);
-  if (!current) return;
-
-  current.classList.toggle('collapsed');
+ const currentSub = document.getElementById(`gate-submenu-${raidId}`);
+    if (currentSub) currentSub.classList.remove('collapsed');
 }
 
 
