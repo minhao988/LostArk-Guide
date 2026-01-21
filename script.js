@@ -142,10 +142,10 @@ function initSidebar() {
         <span class="sidebar-text font-medium">${data.short}</span>
       `;
       // btn.onclick = () => selectRaid(id);
-    btn.onclick = () => {
-      toggleRaidSubmenu(id);
-      selectRaid(id);
-    };
+  btn.onclick = () => {
+  selectRaid(id);
+  toggleRaidSubmenu(id);
+};
       container.appendChild(btn);
     
 // 這裡新增子選單容器
