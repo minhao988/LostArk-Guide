@@ -23,7 +23,7 @@
         </button>
     </div>
 
-    <div class="flex h-screen">
+   <div class="flex min-h-screen">
        <!-- 側邊欄 Header -->
 <!-- <aside id="sidebar" class="w-72 bg-black/90 backdrop-blur-md transition-all duration-300 border-r border-white/10 flex flex-col"> -->
     <aside id="sidebar"
@@ -59,7 +59,8 @@
 </aside>
 
         <!-- 主內容區 -->
-        <main class="flex-1 flex flex-col h-screen overflow-hidden">
+        <!-- <main class="flex-1 flex flex-col h-screen overflow-hidden"> -->
+            <main class="flex-1 flex flex-col overflow-visible">
           <header class="p-4 md:p-6 pb-3 bg-black/20">
                 <div class="max-w-5xl xl:max-w-7xl 2xl:max-w-[1600px] mx-auto">
                     <nav class="text-sm text-slate-400 mb-2">攻略站 / <span id="breadcrumb">卡傑羅斯</span></nav>
@@ -71,7 +72,8 @@
                 </div>
             </header>
 
-            <div class="flex-1 overflow-y-auto p-6 md:p-10 pt-2 custom-scrollbar">
+            <!-- <div class="flex-1 overflow-y-auto p-6 md:p-10 pt-2 custom-scrollbar"> -->
+                <div class="flex-1 p-6 md:p-10 pt-2 custom-scrollbar md:overflow-y-auto overflow-visible">
                 <div id="gate-content" class="max-w-5xl xl:max-w-7xl 2xl:max-w-[1600px] mx-auto">
                     <!-- JS 生成關卡內容 -->
                 </div>
@@ -83,6 +85,7 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
