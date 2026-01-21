@@ -346,12 +346,16 @@ body {
     top: 0;
     left: -100%; /* 預設隱藏 */
     width: 80vw; /* 或 100vw 視需求 */
-    height: 100vh;
+   
     background-color: #0f172a;
-    overflow-y: auto;
+    overflow: hidden;
     transition: left 0.3s ease;
     z-index: 50;
+   
+      bottom: 0;   /* ✅ 比 height:100vh 穩定 */
+      height: auto;
 }
+ 
 
 /* 開啟時 */
 #sidebar.mobile-open {
@@ -363,9 +367,10 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding-bottom: 20px;
-}
 
+    overflow-y: auto;        /* ✅ 真正該滾的地方 */
+    -webkit-overflow-scrolling: touch; /* ✅ iOS 必加 */
+}
     /* #sidebar.mobile-open {
         transform: translateX(0);
     } */
@@ -678,6 +683,7 @@ body {
   opacity: 0;
   pointer-events: none;
 }
+
 
 
 
