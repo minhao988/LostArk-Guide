@@ -141,7 +141,11 @@ function initSidebar() {
         <i class="${raidIcons[id] || 'fa-flag'} sidebar-icon"></i>
         <span class="sidebar-text font-medium">${data.short}</span>
       `;
-      btn.onclick = () => selectRaid(id);
+      // btn.onclick = () => selectRaid(id);
+    btn.onclick = () => {
+      toggleRaidSubmenu(id);
+      selectRaid(id);
+    };
       container.appendChild(btn);
     
 // 這裡新增子選單容器
@@ -209,8 +213,10 @@ function switchGate(gateId) {
   renderGateContent(gate);
 
   // 👇 關鍵：先隱藏所有 submenu
-  document.querySelectorAll('.gate-submenu-container')
-    .forEach(el => el.innerHTML = '');
+  // document.querySelectorAll('.gate-submenu-container')
+  //   .forEach(el => el.innerHTML = '');
+  const currentSub = document.getElementById(`gate-submenu-${currentRaidId}`);
+if (currentSub) currentSub.innerHTML = '';
 
   // 👇 只渲染當前 raid 的 submenu
   renderGateSubmenu(gate, currentRaidId);
@@ -392,7 +398,21 @@ function renderGateSubmenu(gate, raidId) {
   });
 }
   
+function toggleRaidSubmenu(raidId) {
+  // 先把其他 raid 的 submenu 全部收起
+  document.querySelectorAll('.gate-submenu-container')
+    .forEach(el => {
+      if (el.id !== `gate-submenu-${raidId}`) {
+        el.classList.add('collapsed');
+      }
+    });
 
+  // 切換目前這個
+  const current = document.getElementById(`gate-submenu-${raidId}`);
+  if (!current) return;
+
+  current.classList.toggle('collapsed');
+}
 
 
 document.addEventListener('DOMContentLoaded', () => {
