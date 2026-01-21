@@ -146,7 +146,7 @@ function initSidebar() {
     
 // 這裡新增子選單容器
 const submenu = document.createElement('div');
-submenu.className = 'gate-submenu-container pl-6';
+submenu.className = 'gate-submenu-container pl-6 collapsed';
 submenu.id = `gate-submenu-${id}`; // 以 raid id 綁定
 container.appendChild(submenu);
   });
