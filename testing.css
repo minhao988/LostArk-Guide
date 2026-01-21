@@ -424,3 +424,37 @@ h2, h3, h4 {
     #sidebar .sidebar-icon::after { display: none; }
 }
 
+/* 修正影片覆蓋層，保持顯示但不阻擋點擊 */
+.video-overlay {
+    position: absolute;       /* 覆蓋在影片上 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;            /* 方便置中文字 */
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;     /* ❌ 確保影片可以點擊 */
+    z-index: 10;              /* 層級不要太高，低於 sidebar tooltip */
+    color: #facc15;
+    font-family: "Inter", "Noto Sans TC", sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* 調整 pattern-card 內 overlay */
+.pattern-card > div.absolute {
+    pointer-events: none;    /* ❌ 不阻擋影片點擊 */
+}
+
+/* 調整 YouTube icon 大小和顏色（可點擊影片本身） */
+.pattern-card > div.absolute i.fab {
+    pointer-events: none;    /* ❌ 保持影片可點擊 */
+    font-size: 2.5rem;
+    color: #f87171;
+    opacity: 0.85;
+}
+
