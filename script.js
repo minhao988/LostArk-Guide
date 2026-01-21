@@ -164,11 +164,9 @@ function selectRaid(raidId) {
     currentRaidId = raidId;
     const raid = allRaids[raidId];
 
-    // 更新 raid active 狀態
     document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
     document.getElementById(`btn-${raidId}`)?.classList.add('active');
 
-    // 更新標題 / 描述 / breadcrumb
     document.getElementById('raid-title').innerHTML = raid.title;
     document.getElementById('raid-desc').innerHTML = raid.desc;
     document.getElementById('mobile-title').innerHTML = raid.short;
@@ -187,21 +185,16 @@ function selectRaid(raidId) {
         tabsContainer.appendChild(btn);
     });
 
-    // 預設第一關
     switchGate(1);
 
-    // 若手機版，關閉 sidebar
+    // 📌 收回所有子選單
+    document.querySelectorAll('.gate-submenu-container').forEach(el => el.classList.add('collapsed'));
+    document.getElementById(`gate-submenu-${raidId}`)?.classList.remove('collapsed');
+
     if (window.innerWidth < 768) {
         document.getElementById('sidebar')?.classList.remove('mobile-open');
     }
-  document.querySelectorAll('.gate-submenu-container')
-  .forEach(el => el.classList.add('collapsed'));
-
-document
-  .getElementById(`gate-submenu-${raidId}`)
-  ?.classList.remove('collapsed');
 }
-
 
 
 
@@ -455,16 +448,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 桌面收合 / 手機 sidebar < 關閉
-   sidebarToggle?.addEventListener('click', () => {
+sidebarToggle?.addEventListener('click', () => {
     if (window.innerWidth >= 768) {
         sidebar.classList.toggle('sidebar-collapsed');
-        document.querySelector('main').classList.toggle('sidebar-collapsed'); // 加這行
+        document.querySelector('main').classList.toggle('sidebar-collapsed'); 
+
+        // 收合所有子選單
+        document.querySelectorAll('.gate-submenu-container')
+            .forEach(sub => sub.classList.add('collapsed'));
+
         sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
             ? '<i class="fas fa-angle-right"></i>'
             : '<i class="fas fa-angle-left"></i>';
     } else {
         sidebar.classList.remove('mobile-open');
     }
+});
 });
 
   document.querySelectorAll('.sidebar-btn').forEach(btn => {
