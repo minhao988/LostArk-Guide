@@ -359,11 +359,11 @@ body {
       height: auto;
 }
       .pattern-title {
-        font-size: 0.9rem;  /* 適合手機 */
+        font-size: 0.7rem;  /* 適合手機 */
     }
 
     .pattern-title span {
-        font-size: 0.7rem;  /* COUNTER 標籤縮小 */
+        font-size: 0.5rem;  /* COUNTER 標籤縮小 */
     }
  
 
@@ -428,26 +428,26 @@ body {
 
 /* ===== Raid 標題 ===== */
 #raid-title {
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 800;
     line-height: 1.2;
 }
 
 @media (min-width: 768px) {
     #raid-title {
-        font-size: 2rem;
+        font-size: 1.2rem;
     }
 }
 
 #raid-desc {
-    font-size: 0.75rem;
+    font-size: 0.6rem;
     line-height: 1.5;
     opacity: 0.85;
 }
 
 @media (min-width: 768px) {
     #raid-desc {
-        font-size: 1.5rem;
+        font-size: 0.9rem;
     }
 }
 
@@ -713,6 +713,7 @@ body {
   flex-direction: column;
   gap: 2rem;
 }
+
 
 
 
