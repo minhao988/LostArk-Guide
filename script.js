@@ -428,23 +428,31 @@ html += `
     
     
     // 3️⃣ 點擊 overlay 播放影片，同時暫停其他影片
-document.querySelectorAll('.main-video').forEach(wrapper => {
-  const overlay = wrapper.querySelector('.video-overlay');
-  const iframe = wrapper.querySelector('iframe');
+    document.querySelectorAll('.main-video').forEach(wrapper => {
+      const overlay = wrapper.querySelector('.video-overlay');
+      const iframe = wrapper.querySelector('iframe');
+    
+      overlay.addEventListener('click', () => {
+        // 隱藏 overlay
+        overlay.classList.add('opacity-0');
+        setTimeout(() => overlay.remove(), 300);
+    
+        // 先暫停其他影片（如果有其他 iframe）
+        document.querySelectorAll('.main-video iframe').forEach(f => {
+          if (f !== iframe) {
+            f.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+          }
+        });
+    
+        // 啟動當前影片
+        // 先把 src 改成帶 autoplay
+        const src = iframe.src;
+        if (!src.includes('autoplay=1')) {
+          iframe.src = src + (src.includes('?') ? '&' : '?') + 'autoplay=1';
+        }
+      });
+    });
 
-  // 先把 iframe 的 src 存起來，清掉真正的 src
-  const videoSrc = iframe.getAttribute('src');
-  iframe.removeAttribute('src');
-
-  overlay.addEventListener('click', () => {
-    // 1️⃣ 讓 overlay 消失
-    overlay.classList.add('opacity-0');
-    setTimeout(() => overlay.remove(), 300);
-
-    // 2️⃣ 給 iframe src，開始播放
-    iframe.setAttribute('src', videoSrc);
-  });
-});
 }
 
 // 2️⃣ 當 API 準備好
