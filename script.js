@@ -556,21 +556,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 🔹 點 sidebar 按鈕選擇
     document.querySelectorAll('.sidebar-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            // 清掉所有 active
-            document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            if (window.innerWidth >= 768) {
-                // 桌面展開 submenu
-                const submenuId = btn.dataset.submenu;
-                const submenu = document.getElementById(submenuId);
-                if (submenu) submenu.classList.toggle('collapsed');
-            } else {
-                // 手機版直接關閉 sidebar + overlay
-                sidebar.classList.remove('mobile-open');
-                sidebarOverlay.style.display = 'none';
-            }
-        });
+      btn.addEventListener('click', () => {
+        // ① 清掉所有 active
+        document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    
+        const submenuId = btn.dataset.submenu;
+        const submenu = document.getElementById(submenuId);
+    
+        if (window.innerWidth >= 768) {
+          // 桌面版：點按鈕展開 / 收回 submenu
+          if (submenu) submenu.classList.toggle('collapsed');
+        } else {
+          // 手機版：點按鈕 → 收回 sidebar & 隱藏 overlay
+          sidebar.classList.remove('mobile-open');
+          sidebarOverlay.style.display = 'none';
+        }
+      });
     });
 });
