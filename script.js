@@ -473,31 +473,38 @@ function renderGateSubmenu(gate, raidId) {
     });
 }
   
-// ---------------- ScrollSpy 功能 ----------------
+let scrollSpySections = [];
+let scrollSpyBtns = [];
+
 function initScrollSpy() {
-  const sections = document.querySelectorAll('[id^="mech-"], [id^="pattern-"], [data-menu]');
-  const sidebarSubBtns = document.querySelectorAll('.submenu-sub, .submenu-btn');
+    function updateSpyElements() {
+        scrollSpySections = document.querySelectorAll('[id^="mech-"], [id^="pattern-"], [data-menu]');
+        scrollSpyBtns = document.querySelectorAll('.submenu-sub, .submenu-btn');
+    }
 
-  window.addEventListener('scroll', () => {
-    let currentSectionId = null;
-    const scrollPos = window.scrollY || window.pageYOffset;
+    updateSpyElements(); // 初始抓取
 
-    sections.forEach(section => {
-      const offsetTop = section.getBoundingClientRect().top + window.scrollY - 120; // 偏移值可調整
-      if (scrollPos >= offsetTop) {
-        currentSectionId = section.id || section.dataset.menu;
-      }
+    window.addEventListener('scroll', () => {
+        const scrollPos = window.scrollY || window.pageYOffset;
+        let currentId = null;
+
+        scrollSpySections.forEach(section => {
+            const offsetTop = section.getBoundingClientRect().top + window.scrollY - 100; // 依 header 調整
+            if (scrollPos >= offsetTop) {
+                currentId = section.id || section.dataset.menu;
+            }
+        });
+
+        if (currentId) {
+            scrollSpyBtns.forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.querySelector(`.submenu-sub[data-target="${currentId}"], .submenu-btn[data-target="${currentId}"]`);
+            if (activeBtn) activeBtn.classList.add('active');
+        }
     });
 
-    // 清除所有 active
-    sidebarSubBtns.forEach(btn => btn.classList.remove('active'));
-
-    // 加上 active
-    if (currentSectionId) {
-      const activeBtn = document.querySelector(`.submenu-sub[data-target="${currentSectionId}"], .submenu-btn[data-target="${currentSectionId}"]`);
-      if (activeBtn) activeBtn.classList.add('active');
-    }
-  });
+    // 🔹 每次重新渲染 submenu 後呼叫 updateSpyElements()
+    const observer = new MutationObserver(updateSpyElements);
+    observer.observe(document.getElementById('sidebar-content'), { childList: true, subtree: true });
 }
 
 
