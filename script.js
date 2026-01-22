@@ -264,35 +264,32 @@ function updateSidebarCategories(sidebarCollapsed) {
 
 // ================== 切換 raid (展開/收合) ==================
 function switchRaid(raidId) {
-    const currentSub = document.getElementById(`gate-submenu-${raidId}`);
-    if (!currentSub) return;
+  const currentSub = document.getElementById(`gate-submenu-${raidId}`);
+  if (!currentSub) return;
 
-    if (expandedRaidId === raidId) {
-        // 點同 raid → 收合
-        currentSub.classList.add('collapsed');
-        expandedRaidId = null;
-        document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
-        return;
-    }
+  const isSame = expandedRaidId === raidId;
 
-    // 收合其他 raid submenu
-    document.querySelectorAll('.gate-submenu-container').forEach(el => {
-        if (el.id === `gate-submenu-${raidId}`) {
-            el.classList.remove('collapsed');
-        } else {
-            el.classList.add('collapsed');
-            el.innerHTML = '';
-        }
-    });
+  document.querySelectorAll('.gate-submenu-container').forEach(el => {
+    el.classList.add('collapsed');
+    el.innerHTML = '';
+  });
 
+  document.querySelectorAll('.sidebar-btn')
+    .forEach(b => b.classList.remove('active'));
+
+  if (!isSame) {
     expandedRaidId = raidId;
-
-    // 更新 sidebar active
-    document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+    currentSub.classList.remove('collapsed');
     document.getElementById(`btn-${raidId}`)?.classList.add('active');
-
-    // 更新 main content
     selectRaid(raidId);
+  } else {
+    expandedRaidId = null;
+  }
+
+  // 📱 手机：点完直接关 sidebar
+  if (window.innerWidth < 768) {
+    document.getElementById('sidebar')?.classList.remove('mobile-open');
+  }
 }
 
 
