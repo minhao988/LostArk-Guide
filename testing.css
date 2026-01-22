@@ -378,3 +378,23 @@ h2, h3, h4 {
   opacity: 0;
   pointer-events: none;
 }
+#sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 40;
+}
+
+/* sidebar 本身要比 overlay 高 */
+#sidebar {
+  z-index: 50;
+}
+
+/* sidebar 打開時，overlay 才能被點 */
+#sidebar.mobile-open + #sidebar-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
