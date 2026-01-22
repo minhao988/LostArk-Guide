@@ -210,26 +210,23 @@ function initSidebar() {
         catTitle.innerText = category;
         container.appendChild(catTitle);
 
-         // 手機 & 桌面版點 category 展開/收回 submenu，不收 sidebar
-        catTitle.addEventListener('click', () => {
-            raids.forEach(raid => {
-                const btn = document.getElementById(`btn-${raid.id}`);
-                const submenu = document.getElementById(`gate-submenu-${raid.id}`);
-                const isCollapsed = submenu.classList.contains('collapsed');
-        
-                submenu.classList.toggle('collapsed', !isCollapsed);
-                btn.classList.toggle('active', !isCollapsed);
-               // ✅ 如果展開，初始化 scroll
-                if (!isCollapsed) {
-                    // submenu 被收回，不用初始化
-                } else {
-                    initScroll(submenu); // 這裡呼叫你的 scroll 初始化
-                }
-            });
-        
-            // 手機版不要收 sidebar → 不傳 collapseSidebar 或傳 false
-        });
+       catTitle.addEventListener('click', () => {
+    raids.forEach(raid => {
+        const btn = document.getElementById(`btn-${raid.id}`);
+        const submenu = document.getElementById(`gate-submenu-${raid.id}`);
+        const isCollapsed = submenu.classList.contains('collapsed');
 
+        submenu.classList.toggle('collapsed', !isCollapsed);
+        btn.classList.toggle('active', !isCollapsed);
+
+        if (isCollapsed) { // 剛展開
+            // 等 CSS transition 結束再初始化
+            setTimeout(() => {
+                initScroll(submenu);
+            }, 50); // 50ms 足夠
+        }
+    });
+});
         // 生成 raid 按鈕
         raids.forEach(raid => {
             const btn = document.createElement('button');
