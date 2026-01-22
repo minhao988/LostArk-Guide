@@ -52,7 +52,7 @@ const allRaids = {
                     { name: '14. 快速反制', desc: '\u2022 卡傑瞬間出反制 失敗就會往前衝。', tips: '\u2022 此招式只出現在700機制。<br>\u2022 基本在700機制全程留反制技等這個',  videoId: 'AbCdEf12345', isCounter: true },
                     { name: '15. 退後反制', desc: '\u2022 卡傑退後出反制 失敗就往前戳', tips: '\u2022 此招式只出現在700機制。<br>\u2022 基本在700機制全程留反制技等這個。',  videoId: 'AbCdEf12345',  isCounter: true  },
                     { name: '16. 内場落雷', desc: '\u2022 卡傑出附近一堆落雷然後直接轉向玩家攻擊。', tips: '\u2022 此招式只出現在700機制。<br>\u2022 基本在700機制全程留反制技等這個',  videoId: 'AbCdEf12345', isDanger: true },
-                    { name: '17. 2連格擋', desc: '\u2022 卡傑選擇一名玩家格擋2次 接著攻擊頭前扇形。', tips: '\u2022 此招式注意自己是不是有debuff負面狀態或者看身上有沒有暗器的標記, 知道是你就不要亂轉乖乖格擋。<br>\u2022 其他人不會格擋就別幫忙 只要有人失敗地上就有火。', videoId: 'AbCdEf12345', isDanger: true },
+                    { name: '17. 2連格擋', desc: '\u2022 卡傑選擇一名玩家格擋2次 接著攻擊頭前扇形。', tips: '\u2022 此招式注意自己是不是有debuff負面狀態或者看身上有沒有暗器的標記, 知道是你就不要亂轉乖乖格擋。<br>\u2022 其他人不會格擋就別幫忙 只要有人失敗地上就有火。', videoId: 'ogivioxsS-U', isDanger: true },
                     { name: '18. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
                     { name: '19. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
                     { name: '20. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
