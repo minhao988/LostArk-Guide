@@ -556,9 +556,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initSidebar();
   
     expandedRaidId = currentRaidId;
-    document.getElementById(`gate-submenu-${currentRaidId}`)?.classList.remove('collapsed');
+    renderGateSubmenu(Object.values(allRaids[currentRaidId].gates)[0], currentRaidId);
     selectRaid(currentRaidId);
-
+    initScrollSpy();
     const sidebar = document.getElementById('sidebar');
     const sidebarOverlay = document.getElementById('sidebar-overlay');
     const menuToggle = document.getElementById('menu-toggle');
@@ -622,7 +622,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
-initScrollSpy();
+
   
 
 let isScrolling;
