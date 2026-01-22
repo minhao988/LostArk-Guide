@@ -418,18 +418,24 @@ html += `
             this.appendChild(iframe);
         });
     });
-// 綁定主影片 overlay 點擊
-const mainVideo = document.querySelector('.main-video');
-if (mainVideo) {
-    const overlay = mainVideo.querySelector('.video-overlay');
-    const iframe = mainVideo.querySelector('iframe');
-    const originalSrc = iframe.getAttribute('src').replace('&autoplay=1', '');
-    overlay.addEventListener('click', () => {
-        overlay.classList.add('opacity-0');
-        setTimeout(() => overlay.remove(), 300);
-        iframe.setAttribute('src', originalSrc + '&autoplay=1');
+    // 主影片點擊播放
+    document.querySelectorAll('.main-video').forEach(wrapper => {
+        const overlay = wrapper.querySelector('.video-overlay');
+        const videoId = wrapper.dataset.video;
+        if (!videoId) return;
+    
+        overlay.addEventListener('click', () => {
+            // 直接把 wrapper 內容換成 iframe
+            wrapper.innerHTML = `
+                <iframe
+                    src="https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1"
+                    class="absolute inset-0 w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                ></iframe>
+            `;
+        });
     });
-}
 }
 
 // 2️⃣ 當 API 準備好
@@ -556,27 +562,5 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-  document.querySelectorAll('.main-video').forEach(wrapper => {
-  const overlay = wrapper.querySelector('.video-overlay');
-  const iframe = wrapper.querySelector('iframe');
-  // 儲存原始 src
-  const originalSrc = iframe.getAttribute('src').replace('&autoplay=1', '');
 
-  overlay.addEventListener('click', () => {
-    // 隱藏 overlay
-    overlay.classList.add('opacity-0');
-    setTimeout(() => overlay.remove(), 300);
-
-    // 暫停其他影片
-    document.querySelectorAll('.main-video iframe').forEach(otherIframe => {
-      if (otherIframe !== iframe) {
-        const src = otherIframe.getAttribute('src').replace('&autoplay=1', '');
-        otherIframe.setAttribute('src', src);
-      }
-    });
-
-    // 播放這個影片
-    iframe.setAttribute('src', originalSrc + '&autoplay=1');
-  });
-});
 });
