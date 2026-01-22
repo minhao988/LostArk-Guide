@@ -545,7 +545,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.innerWidth >= 768) {
         // 桌面收合
         sidebar.classList.toggle('sidebar-collapsed');
-        document.querySelector('main')?.classList.toggle('sidebar-collapsed');
+        document.getElementById('main-body')?.classList.toggle('sidebar-collapsed');
         sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
             ? '<i class="fas fa-angle-right"></i>'
             : '<i class="fas fa-angle-left"></i>';
