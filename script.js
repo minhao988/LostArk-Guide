@@ -525,11 +525,11 @@ function initScrollSpy() {
     const container = document.getElementById('sidebar-content');
     if (!mainBody || !container) return;
 
-    let scrollSpyBtns = Array.from(container.querySelectorAll('.submenu-sub, .submenu-btn'));
+    let scrollSpyBtns = Array.from(container.querySelectorAll('[data-target]'));
 
-    // 當 sidebar DOM 變化時更新
+    // DOM 變化時更新 scrollSpyBtns
     const observer = new MutationObserver(() => {
-        scrollSpyBtns = Array.from(container.querySelectorAll('.submenu-sub, .submenu-btn'));
+        scrollSpyBtns = Array.from(container.querySelectorAll('[data-target]'));
     });
     observer.observe(container, { childList: true, subtree: true });
 
@@ -541,8 +541,7 @@ function initScrollSpy() {
             const section = document.getElementById(btn.dataset.target);
             if (!section) return;
 
-            // 修正 offsetTop，改為相對 mainBody
-            const sectionTop = section.getBoundingClientRect().top - mainBody.getBoundingClientRect().top;
+            const sectionTop = section.offsetTop; // 相對 mainBody
             if (scrollTop >= sectionTop - 80) currentActiveId = btn.dataset.target;
         });
 
@@ -550,10 +549,15 @@ function initScrollSpy() {
             scrollSpyBtns.forEach(b => b.classList.remove('active'));
             const activeBtn = container.querySelector(`[data-target="${currentActiveId}"]`);
             if (activeBtn) activeBtn.classList.add('active');
+
+            // 📌 optional: 自動 scroll sidebar
+            if (activeBtn && activeBtn.scrollIntoView) {
+                activeBtn.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+            }
         }
     });
 
-    // 初始化一次，確保頁面加載時就有高亮
+    // 初始化一次
     mainBody.dispatchEvent(new Event('scroll'));
 }
 
