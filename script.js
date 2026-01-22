@@ -196,19 +196,19 @@ function initSidebar() {
         catTitle.innerText = category;
         container.appendChild(catTitle);
 
-      // 🔹 桌面版 & 手機版 category 點擊都可以展開/收回 submenu，但手機不收 sidebar
-catTitle.addEventListener('click', () => {
-    raids.forEach(raid => {
-        const btn = document.getElementById(`btn-${raid.id}`);
-        const submenu = document.getElementById(`gate-submenu-${raid.id}`);
-        const isCollapsed = submenu.classList.contains('collapsed');
-
-        submenu.classList.toggle('collapsed', !isCollapsed);
-        btn.classList.toggle('active', !isCollapsed);
-    });
-
-    // 手機版不關 sidebar，不做任何操作
-});
+         // 手機 & 桌面版點 category 展開/收回 submenu，不收 sidebar
+        catTitle.addEventListener('click', () => {
+            raids.forEach(raid => {
+                const btn = document.getElementById(`btn-${raid.id}`);
+                const submenu = document.getElementById(`gate-submenu-${raid.id}`);
+                const isCollapsed = submenu.classList.contains('collapsed');
+        
+                submenu.classList.toggle('collapsed', !isCollapsed);
+                btn.classList.toggle('active', !isCollapsed);
+            });
+        
+            // 手機版不要收 sidebar → 不傳 collapseSidebar 或傳 false
+        });
 
         // 生成 raid 按鈕
         raids.forEach(raid => {
@@ -358,8 +358,13 @@ function switchRaid(raidId) {
     expandedRaidId = null;
   }
 
-  // 📱 手机：点完直接关 sidebar
-  if (window.innerWidth < 768) {
+  // // 📱 手机：点完直接关 sidebar
+  // if (window.innerWidth < 768) {
+  //   document.getElementById('sidebar')?.classList.remove('mobile-open');
+  // }
+
+  // 📱 手机版：只在 collapseSidebar 為 true 時才收回
+  if (collapseSidebar && window.innerWidth < 768) {
     document.getElementById('sidebar')?.classList.remove('mobile-open');
   }
 }
