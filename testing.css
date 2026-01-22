@@ -208,6 +208,7 @@ h2, h3, h4 {
 /* 收合狀態 */
 #sidebar.sidebar-collapsed {
     width: 4.75rem;
+  overflow-y: hidden; /* ❌ 關閉垂直滾動 */
   
 }
 
