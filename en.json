@@ -1,0 +1,21 @@
+{
+  "site": {
+    "title": "Lost Ark Raid Guide",
+    "welcome": "Select a raid to view details"
+  },
+  "menu": {
+    "home": "Home",
+    "raid": "Raids",
+    "setting": "Settings"
+  },
+  "raid": {
+    "act4": {
+      "title": "Act 4: Fortress of Destruction",
+      "desc": "An 8-player endgame raid featuring Echidna and Armoche."
+    },
+    "final_day": {
+      "title": "Final Day",
+      "desc": "The final battle against Kazeros."
+    }
+  }
+}
