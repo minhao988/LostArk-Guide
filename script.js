@@ -507,6 +507,11 @@ function initScrollSpy() {
                 currentId = section.id || section.dataset.menu;
             }
         });
+         // 🔹 滾到最底部，強制最後一個 section active
+    if (scrollPos + windowHeight >= docHeight - 10) { // 10px 緩衝
+        const lastSection = scrollSpySections[scrollSpySections.length - 1];
+        currentId = lastSection.id || lastSection.dataset.menu;
+    }
 
         if (!currentId) return;
 
@@ -661,29 +666,7 @@ document.getElementById('main-body').addEventListener('scroll', () => {
     }, 100); // 滾動停止 100ms 移除
 });
 
-//   function updateScrollSpy() {
-//     const sections = document.querySelectorAll('.submenu-sub');
-//     const scrollY = window.scrollY + window.innerHeight; // 計算視窗底部
-//     let activeSet = false;
 
-//     sections.forEach(section => {
-//         const sectionTop = section.offsetTop;
-//         const sectionBottom = sectionTop + section.offsetHeight;
-
-//         if (scrollY >= sectionTop + section.offsetHeight / 2) {
-//             document.querySelectorAll('.submenu-sub.active').forEach(el => el.classList.remove('active'));
-//             section.classList.add('active');
-//             activeSet = true;
-//         }
-//     });
-
-//     // 如果滾到最底部，確保最後一個 active
-//     if (!activeSet) {
-//         sections[sections.length - 1].classList.add('active');
-//     }
-// }
-
-// window.addEventListener('scroll', updateScrollSpy);
  const activeSubmenu = document.querySelector('.submenu-sub.active');
 if (activeSubmenu) {
     activeSubmenu.scrollIntoView({
