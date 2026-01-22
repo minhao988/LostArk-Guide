@@ -321,7 +321,7 @@ if (gate.youtubeId) {
     <!-- iframe 直接給 src -->
     <iframe
       class="w-full h-full relative z-0"
-      src="https://www.youtube.com/embed/${gate.youtubeId}?enablejsapi=1&autoplay=0&mute=1"
+      src="https://www.youtube.com/embed/${gate.youtubeId}?enablejsapi=1&mute=1"
       title="主影片 完整攻略影片"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay"
@@ -428,7 +428,7 @@ html += `
     
     
     // 3️⃣ 點擊 overlay 播放影片，同時暫停其他影片
-    document.querySelectorAll('.main-video').forEach(wrapper => {
+     document.querySelectorAll('.main-video').forEach(wrapper => {
       const overlay = wrapper.querySelector('.video-overlay');
       const iframe = wrapper.querySelector('iframe');
     
@@ -437,19 +437,15 @@ html += `
         overlay.classList.add('opacity-0');
         setTimeout(() => overlay.remove(), 300);
     
-        // 先暫停其他影片（如果有其他 iframe）
-        document.querySelectorAll('.main-video iframe').forEach(f => {
-          if (f !== iframe) {
-            f.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        // 播放影片
+        iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+    
+        // 暫停其他影片
+        document.querySelectorAll('.main-video iframe').forEach(other => {
+          if (other !== iframe) {
+            other.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
           }
         });
-    
-        // 啟動當前影片
-        // 先把 src 改成帶 autoplay
-        const src = iframe.src;
-        if (!src.includes('autoplay=1')) {
-          iframe.src = src + (src.includes('?') ? '&' : '?') + 'autoplay=1';
-        }
       });
     });
 
