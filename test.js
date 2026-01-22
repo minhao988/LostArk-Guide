@@ -168,31 +168,24 @@ function initSidebar() {
       
 catTitle.addEventListener('click', () => {
     const sidebarEl = document.getElementById('sidebar');
-   const isSidebarCollapsed =
-    sidebarEl.classList.contains('sidebar-collapsed');
+    const isCollapsed = sidebarEl.classList.contains('sidebar-collapsed');
 
-   if (isSidebarCollapsed) {
-    if (raids[0]) {
-        switchRaid(raids[0].id);
+    if (isCollapsed) {
+        if (raids[0]) switchRaid(raids[0].id);
+        return;
     }
-    return; // 🔴 絕對不能碰 submenu
-}
 
-    // 展開狀態：toggle submenu
     raids.forEach(raid => {
         const btn = document.getElementById(`btn-${raid.id}`);
         const submenu = document.getElementById(`gate-submenu-${raid.id}`);
-        const isSubCollapsed = submenu.classList.contains('collapsed');
+        const shouldExpand = submenu.classList.contains('collapsed'); // 如果 collapsed 就要展開
 
-        submenu.classList.toggle('collapsed', !isSubCollapsed);
-        btn.classList.toggle('active', !isSubCollapsed);
+        submenu.classList.toggle('collapsed', !shouldExpand); // true -> 收合, false -> 展開
+        btn.classList.toggle('active', shouldExpand);
 
-        if (!isSubCollapsed) return; // 只在展開時初始化 scroll
-
-        // 確保 submenu DOM 已經渲染
-        setTimeout(() => {
-            initScroll(submenu);
-        }, 50);
+        if (shouldExpand) {
+            setTimeout(() => initScroll(submenu), 50);
+        }
     });
 });
         // 生成 raid 按鈕
@@ -321,7 +314,7 @@ function updateSidebarCategories(sidebarCollapsed) {
 
 // ================== 切換 raid (展開/收合) ==================
 function switchRaid(raidId) {
-  const sidebarEl = document.getElementById('sidebar');
+
   const isCollapsed = sidebarEl.classList.contains('sidebar-collapsed');
 
   // 🔥 收合狀態：只切內容，不動 submenu
@@ -675,7 +668,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
 
 let isScrolling;
-const sidebar = document.getElementById('sidebar');
+
 document.getElementById('main-body')?.addEventListener('scroll', () => {
     sidebar?.classList.add('scrolling');
     clearTimeout(isScrolling);
@@ -683,8 +676,5 @@ document.getElementById('main-body')?.addEventListener('scroll', () => {
         sidebar?.classList.remove('scrolling');
     }, 100);
 });
-
-
-
 
 });
