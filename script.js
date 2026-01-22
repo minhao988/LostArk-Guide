@@ -555,24 +555,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
       // 🔹 點 sidebar 按鈕選擇
-      document.querySelectorAll('.sidebar-btn').forEach(btn => {
+
+    document.querySelectorAll('.sidebar-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-          // 清掉所有 active
-          document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-  
+         // 清掉所有 active
+            document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+          // 桌面展開 submenu
           if (window.innerWidth >= 768) {
-              // 桌面版：展開或收回 submenu
               const submenuId = btn.dataset.submenu;
               const submenu = document.getElementById(submenuId);
-              if (submenu) {
-                  submenu.classList.toggle('collapsed');
-              }
+              if (submenu) submenu.classList.toggle('collapsed');
           } else {
-              // 手機版：關閉 sidebar
+              // 手機版直接關閉 sidebar + overlay
               sidebar.classList.remove('mobile-open');
               sidebarOverlay.style.display = 'none';
           }
       });
-    });
+  });
 });
