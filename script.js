@@ -166,27 +166,25 @@ function initSidebar() {
         catTitle.innerText = category;
         container.appendChild(catTitle);
       
+
 catTitle.addEventListener('click', () => {
     const sidebarEl = document.getElementById('sidebar');
     const isCollapsed = sidebarEl.classList.contains('sidebar-collapsed');
 
-    // 如果 sidebar 已收合，就直接切換 raid 內容，不動 submenu
     if (isCollapsed) {
         if (raids[0]) switchRaid(raids[0].id);
         return;
     }
 
-    // 展開/收合整個分類：只操作 switchRaid
-    raids.forEach(raid => {
+    for (let raid of raids) {
         if (expandedRaidId === raid.id) {
-            // 已展開 → 收合
-            switchRaid(raid.id);
+            switchRaid(raid.id); // 收合
+            break;
         } else {
-            // 展開第一個 raid
-            switchRaid(raid.id);
-            return; // 只展開第一個
+            switchRaid(raid.id); // 展開第一個
+            break;
         }
-    });
+    }
 });
         // 生成 raid 按鈕
         raids.forEach(raid => {
@@ -314,8 +312,8 @@ function updateSidebarCategories(sidebarCollapsed) {
 
 // ================== 切換 raid (展開/收合) ==================
 function switchRaid(raidId) {
-
-  const isCollapsed = sidebarEl.classList.contains('sidebar-collapsed');
+const sidebarEl = document.getElementById('sidebar');
+const isCollapsed = sidebarEl.classList.contains('sidebar-collapsed');
 
   // 🔥 收合狀態：只切內容，不動 submenu
   if (isCollapsed) {
