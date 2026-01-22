@@ -363,7 +363,40 @@ const isCollapsed = sidebarEl.classList.contains('sidebar-collapsed');
             }
 }
 
+function initScrollSpy() {
+    const container = document.getElementById('gate-content');
+    const sidebar = document.getElementById('sidebar');
+    let isScrolling;
 
+    if (!container || !sidebar) return;
+
+    container.addEventListener('scroll', () => {
+        sidebar.classList.add('scrolling');
+        clearTimeout(isScrolling);
+        isScrolling = setTimeout(() => {
+            sidebar.classList.remove('scrolling');
+        }, 100);
+
+        // ScrollSpy 核心：偵測目前區塊
+        const sections = container.querySelectorAll('section[id], .pattern-card');
+        sections.forEach(sec => {
+            const rect = sec.getBoundingClientRect();
+            if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
+                const target = sec.id || sec.dataset.menu || sec.dataset.target;
+                if (!target) return;
+
+                // 先移除 sidebar 之前 active
+                sidebar.querySelectorAll('.active').forEach(a => a.classList.remove('active'));
+
+                const link = sidebar.querySelector(`[data-target="${target}"]`);
+                if (link) link.classList.add('active');
+
+                // 可選：自動滾動 sidebar，保持 active 可見
+                link?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+            }
+        });
+    });
+}
 
 
 
@@ -472,6 +505,7 @@ html += `
     `;
 
     container.innerHTML = html;
+  initScrollSpy();
 
     // 綁定影片點擊
     document.querySelectorAll('[data-video]').forEach(el => {
