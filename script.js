@@ -118,9 +118,7 @@ const allRaids = {
         }
     }
 };
-let currentScrollSpy = null;
-let currentRaidId = 'final_day';
-let expandedRaidId = null; // 記錄目前展開的 raid submenu
+
 
 function getIcon(type) {
     const icons = {
