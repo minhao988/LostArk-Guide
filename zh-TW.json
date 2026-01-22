@@ -1,0 +1,21 @@
+{
+  "site": {
+    "title": "失落方舟副本攻略站",
+    "welcome": "選擇副本查看詳細攻略"
+  },
+  "menu": {
+    "home": "首頁",
+    "raid": "副本攻略",
+    "setting": "設定"
+  },
+  "raid": {
+    "act4": {
+      "title": "四幕：毀滅堡壘",
+      "desc": "第四幕是8人終局副本，首領為 Echidna 與 Armoche。"
+    },
+    "final_day": {
+      "title": "終幕：終結之日",
+      "desc": "與卡傑羅斯的最終決戰。"
+    }
+  }
+}
