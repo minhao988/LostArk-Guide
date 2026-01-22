@@ -559,25 +559,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 🔹 點 sidebar 按鈕選擇
-document.querySelectorAll('.sidebar-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        // 清掉所有 active
+    document.querySelectorAll('.sidebar-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        // ① 清掉所有 active
         document.querySelectorAll('.sidebar-btn')
-            .forEach(b => b.classList.remove('active'));
-
-        // 當前 active
+          .forEach(b => b.classList.remove('active'));
+        
+        // ② 当前按钮 active
         btn.classList.add('active');
-
-        if (window.innerWidth < 768) {
-            // 手機版 → 點完關 sidebar，不展開
-            sidebar.classList.remove('mobile-open');
-        } else {
-            // 桌面版 → 展開 / 收回 submenu
-            const submenu = btn.nextElementSibling; // 假設 submenu 在 btn 後面
-            if (submenu && submenu.classList.contains('gate-submenu-container')) {
-                submenu.classList.toggle('collapsed');
+    
+        // ③ 桌面才控制 submenu 展開收回
+        if (window.innerWidth >= 768) {
+          const raidId = btn.dataset.raidId;
+          document.querySelectorAll('.gate-submenu-container').forEach(el => {
+            if (el.id === `gate-submenu-${raidId}`) {
+              el.classList.toggle('collapsed');
+            } else {
+              el.classList.add('collapsed');
             }
+          });
         }
+    
+        // ④ 手機點完關 sidebar
+        if (window.innerWidth < 768) {
+          sidebar.classList.remove('mobile-open');
+          sidebarOverlay.style.display = 'none';
+        }
+      });
     });
-});
 });
