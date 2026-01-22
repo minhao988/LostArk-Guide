@@ -377,35 +377,50 @@ h2, h3, h4 {
 }
 
 /* ================== Mobile Sidebar ================== */
+/* 手機版 sidebar */
 @media (max-width: 768px) {
 
   #sidebar {
+    width: 16rem !important;
+    transform: translateX(-100%);
     position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
-    width: 16rem;
-    transform: translateX(-100%);
     transition: transform 0.3s ease;
     z-index: 100;
   }
 
-  /* 手机展开 */
+  /* 打開時 */
   #sidebar.mobile-open {
     transform: translateX(0);
   }
 
-  /* 手机不使用收合宽度 */
+  /* 收合不影響寬度 */
   #sidebar.sidebar-collapsed {
-    width: 16rem;
+    width: 16rem !important;
   }
 
-  /* 主内容不被挤 */
+  /* 主內容不被挤 */
   #main-body {
+    margin-left: 0 !important;
     padding-left: 0 !important;
   }
-}
 
+  /* overlay */
+  #sidebar-overlay {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  #sidebar.mobile-open + #sidebar-overlay {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
 .gate-submenu-container {
   max-height: 1000px;
   overflow: hidden;
