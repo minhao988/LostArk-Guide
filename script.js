@@ -219,6 +219,12 @@ function initSidebar() {
         
                 submenu.classList.toggle('collapsed', !isCollapsed);
                 btn.classList.toggle('active', !isCollapsed);
+               // ✅ 如果展開，初始化 scroll
+                if (!isCollapsed) {
+                    // submenu 被收回，不用初始化
+                } else {
+                    initScroll(submenu); // 這裡呼叫你的 scroll 初始化
+                }
             });
         
             // 手機版不要收 sidebar → 不傳 collapseSidebar 或傳 false
