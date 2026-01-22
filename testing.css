@@ -218,6 +218,7 @@ h2, h3, h4 {
 /* 收合狀態 */
 #sidebar.sidebar-collapsed {
     width: 4.75rem;
+   transform: translateX(-13.25rem); /* 18rem - 4.75rem = 13.25rem */
 }
 
 /* Sidebar 按鈕 */
