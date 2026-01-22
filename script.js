@@ -513,6 +513,12 @@ html += `
 
 
 
+let currentScrollSpy = null;
+let isScrollingByClick = false; // 🔹 點擊 submenu 時暫停 ScrollSpy
+let currentRaidId = 'final_day';
+let expandedRaidId = null;
+
+// ================== 渲染 gate submenu ==================
 function renderGateSubmenu(gate, raidId) {
     const container = document.getElementById(`gate-submenu-${raidId}`);
     if (!container) return;
@@ -543,82 +549,45 @@ function renderGateSubmenu(gate, raidId) {
 
     container.innerHTML = html;
 
-    // 🔹 直接綁事件，不用 setTimeout
+    // 🔹 綁定 submenu 點擊事件
     const submenuBtns = container.querySelectorAll('[data-target]');
     submenuBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const targetEl = document.getElementById(btn.dataset.target);
             if (!targetEl) return;
 
-            // 展開 submenu
-            container.classList.remove('collapsed');
-
             const mainBody = document.getElementById('main-body');
-            // 修正滾動位置
+
+            // 🔹 點擊滾動時暫停 ScrollSpy
+            isScrollingByClick = true;
             const topPos = targetEl.offsetTop - 120;
             mainBody.scrollTo({ top: topPos, behavior: 'smooth' });
 
-            // 樣式 active
+            // 🔹 500ms 後解除暫停
+            setTimeout(() => { isScrollingByClick = false; }, 500);
+
+            // 🔹 樣式 active
             submenuBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            // // 手機收 sidebar
-            // if (window.innerWidth < 768) {
-            //     document.getElementById('sidebar')?.classList.remove('mobile-open');
-            //     document.getElementById('sidebar-overlay').style.display = 'none';
-            // }
+            // 🔹 手機收 sidebar
+            if (window.innerWidth < 768) {
+                document.getElementById('sidebar')?.classList.remove('mobile-open');
+                document.getElementById('sidebar-overlay').style.display = 'none';
+            }
         });
     });
+
+    // 初始化 ScrollSpy
+    initScroll(container);
 }
 
-
-// function initScroll(container) {
-//     if (!container) return;
-
-//     const mainBody = document.getElementById('main-body');
-//     if (!mainBody) return;
-
-//     // 🔥 先移除舊的 scrollSpy
-//     if (currentScrollSpy) {
-//         mainBody.removeEventListener('scroll', currentScrollSpy);
-//         currentScrollSpy = null;
-//     }
-
-//     const scrollBtns = () =>
-//         Array.from(container.querySelectorAll('.submenu-btn, .submenu-sub'));
-
-//     const onScroll = () => {
-//         let activeBtn = null;
-
-//         scrollBtns().forEach(btn => {
-//             const target = document.getElementById(btn.dataset.target);
-//             if (!target) return;
-
-//             const offsetTop =
-//                 target.offsetTop - 140;
-
-//             if (mainBody.scrollTop >= offsetTop) {
-//                 activeBtn = btn;
-//             }
-//         });
-
-//         scrollBtns().forEach(b => b.classList.remove('active'));
-//         if (activeBtn) activeBtn.classList.add('active');
-//     };
-
-//     currentScrollSpy = onScroll;
-//     mainBody.addEventListener('scroll', onScroll, { passive: true });
-
-//     onScroll();
-// }
-
+// ================== ScrollSpy ==================
 function initScroll(container) {
     if (!container) return;
-
     const mainBody = document.getElementById('main-body');
     if (!mainBody) return;
 
-    // 移除舊的 scrollSpy
     if (currentScrollSpy) {
         mainBody.removeEventListener('scroll', currentScrollSpy);
         currentScrollSpy = null;
@@ -626,8 +595,10 @@ function initScroll(container) {
 
     const scrollBtns = () => Array.from(container.querySelectorAll('.submenu-btn, .submenu-sub'));
 
-    const onScroll = () => {
-        const threshold = 140; // 距離上方多少算 active
+    currentScrollSpy = () => {
+        if (isScrollingByClick) return; // 🔹 點擊滾動時暫停
+
+        const threshold = 140; // 偏移高度
         let activeBtn = null;
         let closestDistance = Infinity;
 
@@ -644,18 +615,12 @@ function initScroll(container) {
             }
         });
 
-        // 樣式更新
         scrollBtns().forEach(b => b.classList.remove('active'));
         if (activeBtn) activeBtn.classList.add('active');
     };
 
-    mainBody.addEventListener('scroll', onScroll);
-    currentScrollSpy = onScroll;
-
-    // 觸發一次，確保初始狀態正確
-    onScroll();
+    mainBody.addEventListener('scroll', currentScrollSpy);
 }
-
 
 document.addEventListener('DOMContentLoaded', () => {
    initSidebar();
