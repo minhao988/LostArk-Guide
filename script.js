@@ -554,33 +554,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 🔹 點 sidebar 按鈕選擇
-    document.querySelectorAll('.sidebar-btn').forEach(btn => {
+      // 🔹 點 sidebar 按鈕選擇
+      document.querySelectorAll('.sidebar-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        // ① 清掉所有 active
-        document.querySelectorAll('.sidebar-btn')
-          .forEach(b => b.classList.remove('active'));
-        
-        // ② 当前按钮 active
-        btn.classList.add('active');
-    
-        // ③ 桌面才控制 submenu 展開收回
-        if (window.innerWidth >= 768) {
-          const raidId = btn.dataset.raidId;
-          document.querySelectorAll('.gate-submenu-container').forEach(el => {
-            if (el.id === `gate-submenu-${raidId}`) {
-              el.classList.toggle('collapsed');
-            } else {
-              el.classList.add('collapsed');
-            }
-          });
-        }
-    
-        // ④ 手機點完關 sidebar
-        if (window.innerWidth < 768) {
-          sidebar.classList.remove('mobile-open');
-          sidebarOverlay.style.display = 'none';
-        }
+          // 清掉所有 active
+          document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+  
+          if (window.innerWidth >= 768) {
+              // 桌面版：展開或收回 submenu
+              const submenuId = btn.dataset.submenu;
+              const submenu = document.getElementById(submenuId);
+              if (submenu) {
+                  submenu.classList.toggle('collapsed');
+              }
+          } else {
+              // 手機版：關閉 sidebar
+              sidebar.classList.remove('mobile-open');
+              sidebarOverlay.style.display = 'none';
+          }
       });
     });
 });
