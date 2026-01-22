@@ -569,6 +569,7 @@ let isScrollingByClick = false; // 🔹 點擊 submenu 時暫停 ScrollSpy
 let currentRaidId = 'final_day';
 let expandedRaidId = null;
 
+
 // ================== 渲染 gate submenu ==================
 function renderGateSubmenu(gate, raidId) {
     const container = document.getElementById(`gate-submenu-${raidId}`);
@@ -600,38 +601,36 @@ function renderGateSubmenu(gate, raidId) {
 
     container.innerHTML = html;
 
-    // 🔹 綁定 submenu 點擊事件
-    const submenuBtns = container.querySelectorAll('[data-target]');
-    submenuBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const targetEl = document.getElementById(btn.dataset.target);
-            if (!targetEl) return;
+    // 🔹 綁定點擊滾動
+    const containerScroll = document.getElementById('gate-content');
+    container.querySelectorAll('.submenu-btn, .submenu-sub').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = btn.dataset.target;
+            const targetEl = document.getElementById(targetId);
+            if (!targetEl || !containerScroll) return;
 
-            const mainBody = document.getElementById('main-body');
-
-            // 🔹 點擊滾動時暫停 ScrollSpy
+            // 暫停 ScrollSpy，避免滾動時誤觸
             isScrollingByClick = true;
-            const topPos = targetEl.offsetTop - 120;
-            mainBody.scrollTo({ top: topPos, behavior: 'smooth' });
 
-            // 🔹 500ms 後解除暫停
-            setTimeout(() => { isScrollingByClick = false; }, 500);
+            // 滾動到目標區塊
+            containerScroll.scrollTo({
+                top: targetEl.offsetTop - 60, // 調整偏移量
+                behavior: 'smooth'
+            });
 
-            // 🔹 樣式 active
-            submenuBtns.forEach(b => b.classList.remove('active'));
+            // 更新 active 樣式
+            container.querySelectorAll('.submenu-btn, .submenu-sub').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            // 🔹 手機收 sidebar
-            if (window.innerWidth < 768) {
-                document.getElementById('sidebar')?.classList.remove('mobile-open');
-                document.getElementById('sidebar-overlay').style.display = 'none';
-            }
+            // 點擊完成後，0.5秒恢復 ScrollSpy
+            setTimeout(() => {
+                isScrollingByClick = false;
+            }, 500);
         });
     });
-
-    // 初始化 ScrollSpy
-    initScroll(container);
 }
+
 
 // ================== ScrollSpy ==================
 function initScroll(container) {
