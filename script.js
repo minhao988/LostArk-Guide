@@ -727,9 +727,10 @@ function renderGateSubmenu(gate, raidId) {
 //             }
 //         }
 //     }
-
+const scrollContainer =
+  document.querySelector('.md\\:overflow-y-auto');
 //     // 🔹 window scroll
-//     window.addEventListener('scroll', onScroll, { passive: true });
+//     window.addEventListener(scrollContainer, onScroll, { passive: true });
 
 //     // 🔹 sidebar 點擊同步高亮
 //     sidebarContainer.addEventListener('click', e => {
