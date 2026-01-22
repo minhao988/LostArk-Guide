@@ -197,6 +197,19 @@ function selectRaid(raidId) {
     switchGate(Object.keys(raid.gates)[0]);
 }
 
+// ================== 切換 gate ==================
+function switchGate(gateId) {
+  const raid = allRaids[currentRaidId];
+  const gate = raid.gates[gateId];
+  if (!gate) return;
+
+  document.querySelectorAll('.gate-btn')
+    .forEach(btn => btn.classList.remove('active'));
+  document.getElementById(`gate-tab-${gateId}`)?.classList.add('active');
+
+  renderGateContent(gate);
+  renderGateSubmenu(gate, currentRaidId);
+}
 
 function groupRaidsByCategory() {
     const groups = {};
@@ -250,34 +263,34 @@ function updateSidebarCategories(sidebarCollapsed) {
 
 
 // ================== 切換 raid (展開/收合) ==================
-// function switchRaid(raidId) {
-//   const currentSub = document.getElementById(`gate-submenu-${raidId}`);
-//   if (!currentSub) return;
+function switchRaid(raidId) {
+  const currentSub = document.getElementById(`gate-submenu-${raidId}`);
+  if (!currentSub) return;
 
-//   const isSame = expandedRaidId === raidId;
+  const isSame = expandedRaidId === raidId;
 
-//   document.querySelectorAll('.gate-submenu-container').forEach(el => {
-//     el.classList.add('collapsed');
-//     el.innerHTML = '';
-//   });
+  document.querySelectorAll('.gate-submenu-container').forEach(el => {
+    el.classList.add('collapsed');
+    el.innerHTML = '';
+  });
 
-//   document.querySelectorAll('.sidebar-btn')
-//     .forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.sidebar-btn')
+    .forEach(b => b.classList.remove('active'));
 
-//   if (!isSame) {
-//     expandedRaidId = raidId;
-//     currentSub.classList.remove('collapsed');
-//     document.getElementById(`btn-${raidId}`)?.classList.add('active');
-//     selectRaid(raidId);
-//   } else {
-//     expandedRaidId = null;
-//   }
+  if (!isSame) {
+    expandedRaidId = raidId;
+    currentSub.classList.remove('collapsed');
+    document.getElementById(`btn-${raidId}`)?.classList.add('active');
+    selectRaid(raidId);
+  } else {
+    expandedRaidId = null;
+  }
 
-//   // 📱 手机：点完直接关 sidebar
-//   if (window.innerWidth < 768) {
-//     document.getElementById('sidebar')?.classList.remove('mobile-open');
-//   }
-// }
+  // 📱 手机：点完直接关 sidebar
+  if (window.innerWidth < 768) {
+    document.getElementById('sidebar')?.classList.remove('mobile-open');
+  }
+}
 
 
 
@@ -415,140 +428,91 @@ html += `
 }
 
 
-// function renderGateSubmenu(gate, raidId) {
-//     const container = document.getElementById(`gate-submenu-${raidId}`);
-//     if (!container) return;
-
-//     let html = `<div class="px-4 py-2 text-xs font-bold text-slate-500 uppercase">${gate.name}</div>`;
-
-//     if (gate.mechanics?.length) {
-//         html += `
-//           <div class="submenu-group">
-//             <button class="submenu-btn" data-target="section-mechanics">核心機制</button>
-//             ${gate.mechanics.map((m,i) => `
-//                 <button class="submenu-sub pl-10" data-target="mech-${i}">${m.hp} ${m.title}</button>
-//             `).join('')}
-//           </div>
-//         `;
-//     }
-
-//     if (gate.patterns?.length) {
-//         html += `
-//           <div class="submenu-group mt-2">
-//             <button class="submenu-btn" data-target="section-patterns">招式解析</button>
-//             ${gate.patterns.map((p,i) => `
-//                 <button class="submenu-sub pl-10" data-target="pattern-${i}">${p.name}</button>
-//             `).join('')}
-//           </div>
-//         `;
-//     }
-
-//     container.innerHTML = html;
-
-//     // 綁定 scroll
-//     container.querySelectorAll('[data-target]').forEach(btn => {
-//     btn.onclick = () => {
-//         // 點 submenu 前確保 raid submenu 展開
-//         document.getElementById(`gate-submenu-${raidId}`)?.classList.remove('collapsed');
-//         container.querySelectorAll('.submenu-sub').forEach(b => b.classList.remove('active'));
-//         btn.classList.add('active');
-//         document.getElementById(btn.dataset.target)?.scrollIntoView({ behavior: 'smooth' });
-
-//         // 🔹 手機收回 sidebar + 隱藏 overlay
-//         if (window.innerWidth < 768) {
-//             const sidebar = document.getElementById('sidebar');
-//             const overlay = document.getElementById('sidebar-overlay');
-//             sidebar?.classList.remove('mobile-open');
-//             if (overlay) overlay.style.display = 'none';
-//         }
-//     };
-// });
-// }
-
-// ================== 切換 raid (展開/收合) ==================
-function switchRaid(raidId) {
-    const currentSub = document.getElementById(`gate-submenu-${raidId}`);
-    if (!currentSub) return;
-
-    const isSame = expandedRaidId === raidId;
-
-    // 先收合所有 submenu
-    document.querySelectorAll('.gate-submenu-container').forEach(el => {
-        el.classList.add('collapsed');
-        el.innerHTML = '';
-    });
-
-    if (!isSame) {
-        // 展開選中 raid 的 submenu
-        renderGateSubmenu(Object.values(allRaids[raidId].gates)[0], raidId);
-        expandedRaidId = raidId;
-    } else {
-        expandedRaidId = null; // 點同一個 raid => 收合
-    }
-
-    // 切換 raid 內容
-    selectRaid(raidId);
-}
-
-// 統一生成 submenu
 function renderGateSubmenu(gate, raidId) {
     const container = document.getElementById(`gate-submenu-${raidId}`);
     if (!container) return;
 
-    container.innerHTML = ''; // 先清空
+    let html = `<div class="px-4 py-2 text-xs font-bold text-slate-500 uppercase">${gate.name}</div>`;
 
-    Object.entries(allRaids[raidId].gates).forEach(([gId, g]) => {
-        const btn = document.createElement('button');
-        btn.className = 'submenu-btn';
-        btn.dataset.target = `gate-content`; // scrollSpy 或後續改成 gate 對應 id
-        btn.innerText = `關卡 G${gId} - ${g.name}`;
-        btn.onclick = () => switchGate(gId);
-        container.appendChild(btn);
-    });
+    if (gate.mechanics?.length) {
+        html += `
+          <div class="submenu-group">
+            <button class="submenu-btn" data-target="section-mechanics">核心機制</button>
+            ${gate.mechanics.map((m,i) => `
+                <button class="submenu-sub pl-10" data-target="mech-${i}">${m.hp} ${m.title}</button>
+            `).join('')}
+          </div>
+        `;
+    }
 
-    container.classList.remove('collapsed'); // 展開
+    if (gate.patterns?.length) {
+        html += `
+          <div class="submenu-group mt-2">
+            <button class="submenu-btn" data-target="section-patterns">招式解析</button>
+            ${gate.patterns.map((p,i) => `
+                <button class="submenu-sub pl-10" data-target="pattern-${i}">${p.name}</button>
+            `).join('')}
+          </div>
+        `;
+    }
+
+    container.innerHTML = html;
+
+    // 綁定 scroll
+    container.querySelectorAll('[data-target]').forEach(btn => {
+    btn.onclick = () => {
+        // 點 submenu 前確保 raid submenu 展開
+        document.getElementById(`gate-submenu-${raidId}`)?.classList.remove('collapsed');
+        container.querySelectorAll('.submenu-sub').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.target)?.scrollIntoView({ behavior: 'smooth' });
+
+        // 🔹 手機收回 sidebar + 隱藏 overlay
+        if (window.innerWidth < 768) {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            sidebar?.classList.remove('mobile-open');
+            if (overlay) overlay.style.display = 'none';
+        }
+    };
+});
 }
+  
+let scrollSpySections = [];
+let scrollSpyBtns = [];
 
 function initScrollSpy() {
-    const mainBody = document.getElementById('main-body');
-    const container = document.getElementById('sidebar-content');
-    if (!mainBody || !container) return;
+    function updateSpyElements() {
+        scrollSpySections = document.querySelectorAll('[id^="mech-"], [id^="pattern-"], [data-menu]');
+        scrollSpyBtns = document.querySelectorAll('.submenu-sub, .submenu-btn');
+    }
 
-    let scrollSpyBtns = Array.from(container.querySelectorAll('[data-target]'));
+    updateSpyElements(); // 初始抓取
 
-    // DOM 變化時更新 scrollSpyBtns
-    const observer = new MutationObserver(() => {
-        scrollSpyBtns = Array.from(container.querySelectorAll('[data-target]'));
-    });
-    observer.observe(container, { childList: true, subtree: true });
+    window.addEventListener('scroll', () => {
+        const scrollPos = window.scrollY || window.pageYOffset;
+        let currentId = null;
 
-    mainBody.addEventListener('scroll', () => {
-        const scrollTop = mainBody.scrollTop;
-        let currentActiveId = null;
-
-        scrollSpyBtns.forEach(btn => {
-            const section = document.getElementById(btn.dataset.target);
-            if (!section) return;
-
-            const sectionTop = section.offsetTop; // 相對 mainBody
-            if (scrollTop >= sectionTop - 80) currentActiveId = btn.dataset.target;
+        scrollSpySections.forEach(section => {
+            const offsetTop = section.getBoundingClientRect().top + window.scrollY - 100; // 依 header 調整
+            if (scrollPos >= offsetTop) {
+                currentId = section.id || section.dataset.menu;
+            }
         });
 
-        if (currentActiveId) {
-            scrollSpyBtns.forEach(b => b.classList.remove('active'));
-            const activeBtn = container.querySelector(`[data-target="${currentActiveId}"]`);
+        if (currentId) {
+            scrollSpyBtns.forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.querySelector(`.submenu-sub[data-target="${currentId}"], .submenu-btn[data-target="${currentId}"]`);
             if (activeBtn) activeBtn.classList.add('active');
-
-            // 📌 optional: 自動 scroll sidebar
-            if (activeBtn && activeBtn.scrollIntoView) {
-                activeBtn.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-            }
         }
     });
 
-    // 初始化一次
-    mainBody.dispatchEvent(new Event('scroll'));
+    // 🔹 每次重新渲染 submenu 後呼叫 updateSpyElements()
+    const observer = new MutationObserver(updateSpyElements);
+    observer.observe(document.getElementById('sidebar-content'), { childList: true, subtree: true });
 }
+
+
 
 
 
@@ -556,9 +520,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initSidebar();
   
     expandedRaidId = currentRaidId;
-    renderGateSubmenu(Object.values(allRaids[currentRaidId].gates)[0], currentRaidId);
+    document.getElementById(`gate-submenu-${currentRaidId}`)?.classList.remove('collapsed');
     selectRaid(currentRaidId);
-    initScrollSpy();
+
     const sidebar = document.getElementById('sidebar');
     const sidebarOverlay = document.getElementById('sidebar-overlay');
     const menuToggle = document.getElementById('menu-toggle');
@@ -622,7 +586,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
-
+ initScrollSpy();
   
 
 let isScrolling;
@@ -635,8 +599,29 @@ document.getElementById('main-body').addEventListener('scroll', () => {
     }, 100); // 滾動停止 100ms 移除
 });
 
- 
+  function updateScrollSpy() {
+    const sections = document.querySelectorAll('.submenu-sub');
+    const scrollY = window.scrollY + window.innerHeight; // 計算視窗底部
+    let activeSet = false;
 
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
+
+        if (scrollY >= sectionTop + section.offsetHeight / 2) {
+            document.querySelectorAll('.submenu-sub.active').forEach(el => el.classList.remove('active'));
+            section.classList.add('active');
+            activeSet = true;
+        }
+    });
+
+    // 如果滾到最底部，確保最後一個 active
+    if (!activeSet) {
+        sections[sections.length - 1].classList.add('active');
+    }
+}
+
+window.addEventListener('scroll', updateScrollSpy);
  const activeSubmenu = document.querySelector('.submenu-sub.active');
 if (activeSubmenu) {
     activeSubmenu.scrollIntoView({
