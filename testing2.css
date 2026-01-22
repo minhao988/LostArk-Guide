@@ -157,7 +157,8 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
 /* Sidebar 收合 */
 #sidebar.sidebar-collapsed {
     width: 4.75rem;
-    overflow-y: hidden; /* ✅ 禁止垂直 scrollbar */
+    overflow: hidden; /* 不只是 overflow-y */
+    position: relative; /* 保證絕對定位子元素不影響 scrollbar */
 }
 
 /* Sidebar 按鈕 */
