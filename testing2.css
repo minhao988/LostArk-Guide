@@ -273,7 +273,7 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
 /* ================== 圖片 icon ================== */
 .menu-icon {
   width:24px; height:24px;
-  background-image: url('kazeros.jpg');
+  background-image: url('https://raw.githubusercontent.com/minhao988/LostArk-Guide/main/kazeros.jpg');
   background-size:contain; background-repeat:no-repeat;
   display:inline-block;
 }
