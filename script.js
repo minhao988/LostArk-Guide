@@ -499,7 +499,8 @@ function initScrollSpy() {
             const section = document.getElementById(btn.dataset.target);
             if (!section) return;
 
-            const sectionTop = section.offsetTop; // 相對 main-body
+            // 修正 offsetTop，改為相對 mainBody
+            const sectionTop = section.getBoundingClientRect().top - mainBody.getBoundingClientRect().top;
             if (scrollTop >= sectionTop - 80) currentActiveId = btn.dataset.target;
         });
 
@@ -509,6 +510,9 @@ function initScrollSpy() {
             if (activeBtn) activeBtn.classList.add('active');
         }
     });
+
+    // 初始化一次，確保頁面加載時就有高亮
+    mainBody.dispatchEvent(new Event('scroll'));
 }
 
 
