@@ -418,36 +418,6 @@ html += `
             this.appendChild(iframe);
         });
     });
-    // 1️⃣ 載入 YouTube API
-    const tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    document.head.appendChild(tag);
-    
-    const players = new Map(); // iframe -> YT.Player
-    
-    
-    
-    // 3️⃣ 點擊 overlay 播放影片，同時暫停其他影片
-     document.querySelectorAll('.main-video').forEach(wrapper => {
-      const overlay = wrapper.querySelector('.video-overlay');
-      const iframe = wrapper.querySelector('iframe');
-    
-      overlay.addEventListener('click', () => {
-        // 隱藏 overlay
-        overlay.classList.add('opacity-0');
-        setTimeout(() => overlay.remove(), 300);
-    
-        // 播放影片
-        iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-    
-        // 暫停其他影片
-        document.querySelectorAll('.main-video iframe').forEach(other => {
-          if (other !== iframe) {
-            other.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-          }
-        });
-      });
-    });
 
 }
 
@@ -574,4 +544,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
+
+  document.querySelectorAll('.main-video').forEach(wrapper => {
+  const overlay = wrapper.querySelector('.video-overlay');
+  const iframe = wrapper.querySelector('iframe');
+  // 儲存原始 src
+  const originalSrc = iframe.getAttribute('src').replace('&autoplay=1', '');
+
+  overlay.addEventListener('click', () => {
+    // 隱藏 overlay
+    overlay.classList.add('opacity-0');
+    setTimeout(() => overlay.remove(), 300);
+
+    // 暫停其他影片
+    document.querySelectorAll('.main-video iframe').forEach(otherIframe => {
+      if (otherIframe !== iframe) {
+        const src = otherIframe.getAttribute('src').replace('&autoplay=1', '');
+        otherIframe.setAttribute('src', src);
+      }
+    });
+
+    // 播放這個影片
+    iframe.setAttribute('src', originalSrc + '&autoplay=1');
+  });
+});
 });
