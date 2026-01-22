@@ -7,14 +7,14 @@ const raidIcons = {
 
 const allRaids = {
       act4: {
-        title: '卡傑羅斯系列 四幕：毀滅堡壘 Fortress of Destruction',
+        title: '卡傑羅斯系列 四幕：毀滅堡壘',
         short: '四幕：毀滅堡壘',
         category: '卡傑羅斯討伐',
         desc: '第四幕是8人終局副本並携帶極具挑戰性的雙門遭遇戰，首領分別是Echidna初魅（第一道門）和Armoche阿莫什（第二道門）。<br> 裝備門檻（普通 1700，困難 1720），機制包含需求格擋、破壞、協同格擋以及特定的站位方式來克服破壞性的死亡。',
         theme: 'raid-gradient-act4',
         gates: {
             1: {
-                name: 'Echidna初魅 (Gate 1)',
+                name: 'Echidna初魅 1門',
                 patterns: [
                     { name: '混沌踐踏', desc: '全場地板變紅，隨機出現三處安全區。', tips: '注意 Boss 踩地第三下是全場擊飛，必須在安全區內。', gif: 'stomp.gif' }
                 ],
@@ -25,50 +25,50 @@ const allRaids = {
         }
     },
   final_day: {
-        title: '卡傑羅斯系列 終幕：終結之日 The Final Day',
+        title: '卡傑羅斯系列 終幕：終結之日',
         short: '終幕： 終結之日',
         category: '卡傑羅斯討伐',
         desc: '終幕將會跟深淵大惡魔卡傑羅斯的最後決戰，首領在1-2門都是卡傑羅斯。<br> 裝備門檻（普通 1710，困難 1730, TF 1740）機制包含前面所有看過學過並需要學以致用。',
         theme: 'raid-gradient-final',
         gates: {
             1: {
-                name: '深淵之主：卡傑羅斯 (Gate 1)',
+                name: '深淵之主：卡傑羅斯 1門',
                 youtubeId: "y8wsk0oEWWQ",
                 patterns: [
-                    { name: '1. 刀劍 (blade line)', desc: '\u2022 卡傑揮刀 > 前方甩3條綫 > 砸後方分綫 > 砸前後', tips: '\u2022 側擊沒什麽問題 打頭背適當躲避前後', videoId: 'Q4ewwMjSQHI' },
-                    { name: '2. 4槍連擊 (4 Spear)', desc: '\u2022 卡傑往前方射出兩次槍矛 > 往前方丟出大球 > 後續各小地板槍矛', tips: '\u2022 背後安全', isCounter: false, videoId: 'POgWxytwOAA' },
-                    { name: '3. 右側甩左 (Side To Side)', desc: '\u2022 卡傑先往右側位攻擊， 接著攻擊左側270度。', tips: '\u2022 看到卡傑砸了右側后就跑去站右側', videoId: 'ilZzFsW1CII' },
-                    { name: '4. 分身 (Clone)', desc: '\u2022 卡傑旁邊出現一堆分身劈隨機方向，然後卡傑會隨機劈兩次 然後往自己周圍划一圈。', tips: '\u2022 看好安全位置躲好 最後靠近卡傑的要記得躲避或者霸體。',  videoId: '3JtGtVrRlT0' },
-                    { name: '5. 落雷抓人 (Lightning Grab)', desc: '\u2022 卡傑握球出現落雷, 接著卡傑要抓隨機一個人 (困難模式如果有人被抓到後續還會有個十字攻擊) 。', tips: '\u2022 只要看到卡傑開落雷就不要站頭。<br>\u2022 如果沒人被抓背後安全, 有人被抓的話最後就站背部側邊',  videoId: '635nAAElFSc' },
-                    { name: '6. 阿爾比恩 (Albion)', desc: '\u2022 卡傑退後往前戳, 旁邊會圍起來, 接著接著需求2人協同反制並排火 最後要有一位剩下的人去頭前反制。', tips: '\u2022 看到卡傑退後就不要在頭前被擊飛 <br>\u2022 通常這裏是讓輔助去做協同反制', videoId: 'Ktv7_IxW-bg', isDanger: true, isCounter: true },
-                    { name: '7. 白藍安全區 (White Blue Safe Spots)', desc: '\u2022 卡傑丟槍在地板并且兩種火的顔色藍/白出來, 藍躲側白躲背——總共3次, 最後躲在卡傑頭前規避外圈爆炸。', tips: `\u2022 卡傑這個動作絕對會丟槍在6點鈡, 絕對不要站人(高傷)第一波炸內，第二波炸外。
+                    { name: '1. 刀劍', desc: '\u2022 卡傑揮刀 > 前方甩3條綫 > 砸後方分綫 > 砸前後', tips: '\u2022 側擊沒什麽問題 打頭背適當躲避前後', videoId: 'Q4ewwMjSQHI' },
+                    { name: '2. 4槍連擊', desc: '\u2022 卡傑往前方射出兩次槍矛 > 往前方丟出大球 > 後續各小地板槍矛', tips: '\u2022 背後安全', isCounter: false, videoId: 'POgWxytwOAA' },
+                    { name: '3. 右側甩左', desc: '\u2022 卡傑先往右側位攻擊， 接著攻擊左側270度。', tips: '\u2022 看到卡傑砸了右側后就跑去站右側', videoId: 'ilZzFsW1CII' },
+                    { name: '4. 分身', desc: '\u2022 卡傑旁邊出現一堆分身劈隨機方向，然後卡傑會隨機劈兩次 然後往自己周圍划一圈。', tips: '\u2022 看好安全位置躲好 最後靠近卡傑的要記得躲避或者霸體。',  videoId: '3JtGtVrRlT0' },
+                    { name: '5. 落雷抓人', desc: '\u2022 卡傑握球出現落雷, 接著卡傑要抓隨機一個人 (困難模式如果有人被抓到後續還會有個十字攻擊) 。', tips: '\u2022 只要看到卡傑開落雷就不要站頭。<br>\u2022 如果沒人被抓背後安全, 有人被抓的話最後就站背部側邊',  videoId: '635nAAElFSc' },
+                    { name: '6. 阿爾比恩', desc: '\u2022 卡傑退後往前戳, 旁邊會圍起來, 接著接著需求2人協同反制並排火 最後要有一位剩下的人去頭前反制。', tips: '\u2022 看到卡傑退後就不要在頭前被擊飛 <br>\u2022 通常這裏是讓輔助去做協同反制', videoId: 'Ktv7_IxW-bg', isDanger: true, isCounter: true },
+                    { name: '7. 白藍安全區', desc: '\u2022 卡傑丟槍在地板并且兩種火的顔色藍/白出來, 藍躲側白躲背——總共3次, 最後躲在卡傑頭前規避外圈爆炸。', tips: `\u2022 卡傑這個動作絕對會丟槍在6點鈡, 絕對不要站人(高傷)第一波炸內，第二波炸外。
                      <br>\u2022 記不住就跟隊友走, 記住3次后就躲頭前, 最好還是要學會自己看爲佳。`, videoId: 'Zz-DlbrKizI',  isDanger: true },
-                    { name: '8. 雷電風暴 (Lightning Tornado)', desc: '\u2022 卡傑丟槍在前方地板,接著會出現一堆雷和風暴。 <br>\u2022 玩家們遇到這招規避就好, 吃到有負面debuff就遠離其他人。', tips: '\u2022 不要貪心 debuff有間隔性麻痹和小爆炸圈。',  videoId: 'yXS1O_dnel8', isDanger: true },
-                    { name: '9. 浮空炸圈 (Floating Donut)', desc: '\u2022 卡傑浮空並丟下槍, 炸圈從内炸外 全部卡傑墜下來砸頭前270度(高傷)。', tips: '\u2022 直接出去等第一個内圈炸了再回來躲在卡傑的背。',  videoId: 'Qq3E-VVJQkc', isDanger: true },
-                    { name: '10. 紫圈擴散 (Purple Wave)', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
-                    { name: '11. 紫圈擴散 (Purple Wave)', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
-                    { name: '12. 紫圈擴散 (Purple Wave)', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
-                    { name: '13. 紫圈擴散 (Purple Wave)', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' }
+                    { name: '8. 雷電風暴', desc: '\u2022 卡傑丟槍在前方地板,接著會出現一堆雷和風暴。 <br>\u2022 玩家們遇到這招規避就好, 吃到有負面debuff就遠離其他人。', tips: '\u2022 不要貪心 debuff有間隔性麻痹和小爆炸圈。',  videoId: 'yXS1O_dnel8', isDanger: true },
+                    { name: '9. 浮空炸圈', desc: '\u2022 卡傑浮空並丟下槍, 炸圈從内炸外 全部卡傑墜下來砸頭前270度(高傷)。', tips: '\u2022 直接出去等第一個内圈炸了再回來躲在卡傑的背。',  videoId: 'Qq3E-VVJQkc', isDanger: true },
+                    { name: '10. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
+                    { name: '11. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
+                    { name: '12. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
+                    { name: '13. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' }
                 ],
                 mechanics: [
-                    { hp: '900', title: '抓人 Orb Grab', desc: `\u2022 卡傑產生球追蹤附近玩家並抓起來，隨後出現反制。`, details: `\u2022 失敗反制，被抓的玩家們死亡。`, type: 'counter', videoId: 'DZ6vfIyhbIA' },
-                    { hp: 'x700', title: '團隊癱瘓 Team Stagger', desc: `\u2022 進入700機制會變成1打1的局面 所有玩家要在1分鐘内把卡傑的紫條癱瘓打掉, 最後從沒裂縫延伸位找出並站自己的安全區邊`, details: `\u2022 反制能提升癱瘓值 <br> \u2022 推薦旋風手雷`, type: 'stagger', videoId: 'PVcQhrsAAQs' },
-                    { hp: 'x660', title: '接劍 Clash', desc: `\u2022 卡傑突然消失 真和假幻象同時出現在1/5/7/11位置 需要在真身位置接劍`, details: `\u2022 沒人接到團滅 <br>\u2022 接劍后要躲避後續鈎鎖的攻擊`, type: 'mech', videoId: 'P5A8ZnppIP4' },
-                    { hp: 'x500', title: '破盾和安全區 Shield & SafeSpot', desc: `\u2022 卡傑開鈎鎖和紅圈砸在每位玩家脚下 接著回中間進入動畫 玩家要在3輪内把卡傑的護盾破掉 <br>\u2022 期間要根據3名玩家頭上標記和地板如符合 根據700那名標記玩家的安全區去站位躲避 <br>
+                    { hp: '900', title: '抓人', desc: `\u2022 卡傑產生球追蹤附近玩家並抓起來，隨後出現反制。`, details: `\u2022 失敗反制，被抓的玩家們死亡。`, type: 'counter', videoId: 'DZ6vfIyhbIA' },
+                    { hp: 'x700', title: '團隊癱瘓', desc: `\u2022 進入700機制會變成1打1的局面 所有玩家要在1分鐘内把卡傑的紫條癱瘓打掉, 最後從沒裂縫延伸位找出並站自己的安全區邊`, details: `\u2022 反制能提升癱瘓值 <br> \u2022 推薦旋風手雷`, type: 'stagger', videoId: 'PVcQhrsAAQs' },
+                    { hp: 'x660', title: '接劍', desc: `\u2022 卡傑突然消失 真和假幻象同時出現在1/5/7/11位置 需要在真身位置接劍`, details: `\u2022 沒人接到團滅 <br>\u2022 接劍后要躲避後續鈎鎖的攻擊`, type: 'mech', videoId: 'P5A8ZnppIP4' },
+                    { hp: 'x500', title: '破盾和安全區', desc: `\u2022 卡傑開鈎鎖和紅圈砸在每位玩家脚下 接著回中間進入動畫 玩家要在3輪内把卡傑的護盾破掉 <br>\u2022 期間要根據3名玩家頭上標記和地板如符合 根據700那名標記玩家的安全區去站位躲避 <br>
                         \u2022 困難模式下安全區前需要格擋中場`,
                      details: `\u2022 在普通困難模式下, 因玩家傷害極有可能在第一輪就打破盾 <br>所以普遍大家如果第一輪打不掉都會留個超絕免疫第一次傷害`, type: 'shield', videoId: '0ybcYOYbFxY' },
-                    { hp: 'x380', title: '接劍/特殊聯動維 Clash/Special Sidereal Wei', desc: `\u2022 卡傑突然丟槍矛去中場，玩家需要面對中場格擋。 <br>\u2022 隨後卡傑出現在12點，下面6點需要接劍。`, details: `\u2022 沒人接到團滅`, type: 'dps', videoId: 'eOCQUYk8ua8' },
-                    { hp: 'x100', title: '困難模式限定 - 金球格擋 Gold Orb Just Guard', desc: `\u2022 全員會突然看到畫面出現一段文字，全員被上了無法格擋的負面debuff。<br>\u2022 卡傑會出華夫餅 期間場上生成最多4顆金球吃(吃了能解掉無法格擋的debuff) <br>\u2022 
+                    { hp: 'x380', title: '接劍/特殊聯動維', desc: `\u2022 卡傑突然丟槍矛去中場，玩家需要面對中場格擋。 <br>\u2022 隨後卡傑出現在12點，下面6點需要接劍。`, details: `\u2022 沒人接到團滅`, type: 'dps', videoId: 'eOCQUYk8ua8' },
+                    { hp: 'x100', title: '困難模式限定 - 金球格擋', desc: `\u2022 全員會突然看到畫面出現一段文字，全員被上了無法格擋的負面debuff。<br>\u2022 卡傑會出華夫餅 期間場上生成最多4顆金球吃(吃了能解掉無法格擋的debuff) <br>\u2022 
                         隨後會出現一個安全區 1位有吃金球要在前面格擋卡傑，然後再出現第二個安全區再來一位去格擋 <br>\u2022 格擋成功就結束，失敗會再來一次。`, details: `\u2022 沒人格擋基本團滅 <br>\u2022 跟隊友溝通好誰先格擋`, type: 'wipe', videoId: 'xTKnNkgzdWk' }
                 ]
             },
             2: {
-                name: '大惡魔：卡傑羅斯 (Gate 2)',
+                name: '大惡魔：卡傑羅斯 2門',
                 youtubeId: "99ZhXs-SAx0", 
                 patterns: [
                     { name: '1. 魔皇紅黑波', desc: 'Boss 手中出現紅/黑兩種能量旋渦。', tips: '紅內安全，黑外安全。觀察 Boss 腳下旋轉的光環顏色。', gif: 'red_black.gif' },
-                    { name: '2. 魔箭雨 (Demon Rain)', desc: 'Boss 向天空射箭，隨後場地落下大量帶有「眩暈」效果的箭矢。', tips: '地面的紅圈會預告落點，箭雨有兩波，第一波結束後不要立刻回位。', gif: 'demon_rain.gif' },
-                    { name: '3. 抓人連打 (Grab & Slam)', desc: 'Boss 伸出手向前抓取。若抓到玩家，會進行連續重摔。', tips: '看到 Boss 手向後蓄力並發出黑煙時，立刻向側邊位移。被抓者需要隊友給予癱瘓。', gif: 'grab_slam.gif' }
+                    { name: '2. 魔箭雨', desc: 'Boss 向天空射箭，隨後場地落下大量帶有「眩暈」效果的箭矢。', tips: '地面的紅圈會預告落點，箭雨有兩波，第一波結束後不要立刻回位。', gif: 'demon_rain.gif' },
+                    { name: '3. 抓人連打', desc: 'Boss 伸出手向前抓取。若抓到玩家，會進行連續重摔。', tips: '看到 Boss 手向後蓄力並發出黑煙時，立刻向側邊位移。被抓者需要隊友給予癱瘓。', gif: 'grab_slam.gif' }
                 ],
                 mechanics: [
                     { hp: 'x350', title: '反制風暴', desc: '全體 8 人必須在 6 點鐘位置站成一排進行連續 5 次完美反制。', type: 'wipe' }
@@ -79,19 +79,28 @@ const allRaids = {
     serca: {
         title: '絕望女巫：賽爾卡',
         short: '絕望女巫：賽爾卡',
-        category: '暗影襲擊系列 (Darkness Raid)',
+        category: '暗影襲擊系列',
         desc: '女巫描述待定，僅確認爲塞克利亞的牧師角色',
         theme: 'raid-gradient-serca',
         gates: {
             1: {
-                name: '海潮祭壇 (Gate 1)',
+                name: '賽爾卡 1門',
                 patterns: [
                     { name: '1. 急流噴射', desc: 'Boss 向隨機玩家噴射高速水柱，帶有強制擊退。', tips: '若背靠地圖邊緣會被推入海中秒殺。', gif: 'water_jet.gif' }
                 ],
                 mechanics: [
                     { hp: '全程', title: '氧氣瓶系統', desc: '氧氣歸零會持續扣血，尋找泡泡點回氧。', type: 'warning' }
                 ]
-            }
+            },
+            2: {
+                  name: '賽爾卡 2門',
+                  patterns: [
+                      { name: '1. 急流噴射', desc: 'Boss 向隨機玩家噴射高速水柱，帶有強制擊退。', tips: '若背靠地圖邊緣會被推入海中秒殺。', gif: 'water_jet.gif' }
+                  ],
+                  mechanics: [
+                      { hp: '全程', title: '氧氣瓶系統', desc: '氧氣歸零會持續扣血，尋找泡泡點回氧。', type: 'warning' }
+                  ]
+              }
         }
     }
 };
