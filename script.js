@@ -418,7 +418,18 @@ html += `
             this.appendChild(iframe);
         });
     });
-
+// 綁定主影片 overlay 點擊
+const mainVideo = document.querySelector('.main-video');
+if (mainVideo) {
+    const overlay = mainVideo.querySelector('.video-overlay');
+    const iframe = mainVideo.querySelector('iframe');
+    const originalSrc = iframe.getAttribute('src').replace('&autoplay=1', '');
+    overlay.addEventListener('click', () => {
+        overlay.classList.add('opacity-0');
+        setTimeout(() => overlay.remove(), 300);
+        iframe.setAttribute('src', originalSrc + '&autoplay=1');
+    });
+}
 }
 
 // 2️⃣ 當 API 準備好
