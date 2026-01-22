@@ -428,26 +428,23 @@ html += `
     
     
     // 3️⃣ 點擊 overlay 播放影片，同時暫停其他影片
-    document.querySelectorAll('.main-video').forEach(wrapper => {
-      const overlay = wrapper.querySelector('.video-overlay');
-      const iframe = wrapper.querySelector('iframe');
-    
-      overlay.addEventListener('click', () => {
-        overlay.classList.add('opacity-0');
-        setTimeout(() => overlay.remove(), 300);
-    
-        // 播放這個影片
-        const currentPlayer = players.get(iframe);
-        if (currentPlayer) currentPlayer.playVideo();
-    
-        // 暫停其他影片
-        players.forEach((player, otherIframe) => {
-          if (otherIframe !== iframe) {
-            player.pauseVideo();
-          }
-        });
-      });
-    });
+document.querySelectorAll('.main-video').forEach(wrapper => {
+  const overlay = wrapper.querySelector('.video-overlay');
+  const iframe = wrapper.querySelector('iframe');
+
+  // 先把 iframe 的 src 存起來，清掉真正的 src
+  const videoSrc = iframe.getAttribute('src');
+  iframe.removeAttribute('src');
+
+  overlay.addEventListener('click', () => {
+    // 1️⃣ 讓 overlay 消失
+    overlay.classList.add('opacity-0');
+    setTimeout(() => overlay.remove(), 300);
+
+    // 2️⃣ 給 iframe src，開始播放
+    iframe.setAttribute('src', videoSrc);
+  });
+});
 }
 
 // 2️⃣ 當 API 準備好
