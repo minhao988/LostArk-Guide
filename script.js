@@ -168,23 +168,33 @@ function initSidebar() {
       
 
 catTitle.addEventListener('click', () => {
-    const sidebarEl = document.getElementById('sidebar');
-    const isCollapsed = sidebarEl.classList.contains('sidebar-collapsed');
+    if (!raids.length) return;
 
-    if (isCollapsed) {
-        if (raids[0]) switchRaid(raids[0].id);
-        return;
-    }
+    const firstRaidId = raids[0].id;
 
-    for (let raid of raids) {
-        if (expandedRaidId === raid.id) {
-            switchRaid(raid.id); // 收合
-            break;
-        } else {
-            switchRaid(raid.id); // 展開第一個
-            break;
-        }
-    }
+    // 切換 raid
+    switchRaid(firstRaidId);
+
+    // 等 submenu 渲染完成再滾動到第一個 gate
+    setTimeout(() => {
+        const submenu = document.getElementById(`gate-submenu-${firstRaidId}`);
+        if (!submenu) return;
+        const firstGateBtn = submenu.querySelector('.submenu-btn, .submenu-sub');
+        if (!firstGateBtn) return;
+
+        // 計算正確 scrollTop
+        const mainBody = document.getElementById('main-body');
+        const topPos = firstGateBtn.getBoundingClientRect().top + mainBody.scrollTop - 120;
+
+        mainBody.scrollTo({
+            top: topPos,
+            behavior: 'smooth'
+        });
+
+        // 樣式 active
+        submenu.querySelectorAll('.submenu-btn, .submenu-sub').forEach(b => b.classList.remove('active'));
+        firstGateBtn.classList.add('active');
+    }, 50); // 與 renderGateSubmenu setTimeout 對齊
 });
         // 生成 raid 按鈕
         raids.forEach(raid => {
