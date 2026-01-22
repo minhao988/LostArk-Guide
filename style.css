@@ -240,6 +240,12 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
     overflow-y: auto;                /* 超出自動滾動 */
     padding-right: 4px;              /* 給滾動條一點空間 */
 }
+@media (max-width: 768px) {
+  .gate-submenu-container {
+    max-height: none !important;
+    overflow: visible !important;
+  }
+}
 
 /* 滾動條美化 */
 .gate-submenu-container::-webkit-scrollbar {
@@ -397,6 +403,7 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
   border:1px solid rgba(250,204,21,0.5);
   padding:3px 6px; border-radius:999px;
 }
+
 
 
 
