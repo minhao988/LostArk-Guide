@@ -524,50 +524,30 @@ function renderGateSubmenu(gate, raidId) {
     container.innerHTML = html;
 
     // 🔹 綁定 submenu 按鈕點擊
-    const submenuBtns = container.querySelectorAll('[data-target]');
-    submenuBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const targetEl = document.getElementById(btn.dataset.target);
-            if (!targetEl) return;
-
-            // 展開 submenu (確保 visible)
-            container.classList.remove('collapsed');
-
-            // 滾動主頁面到對應 section
-            const mainBody = document.getElementById('main-body');
-mainBody.scrollTo({
-    top: targetEl.offsetTop - 120,
-    behavior: 'smooth'
-});
-
-            // 更新 submenu active
-            submenuBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            
-          if (window.innerWidth >= 768) {
-    const rect = btn.getBoundingClientRect();
-    const containerRect = container.getBoundingClientRect();
-
-    if (rect.top < containerRect.top || rect.bottom > containerRect.bottom) {
-        container.scrollBy({
-            top: rect.top - containerRect.top,
-            behavior: 'smooth'
-        });
-    }
-}
-
-            // 🔹 手機版收 sidebar
-            if (window.innerWidth < 768) {
-                document.getElementById('sidebar')?.classList.remove('mobile-open');
-                document.getElementById('sidebar-overlay').style.display = 'none';
-            }
-        });
-    });
-
-    // 🔹 submenu 展開後初始化 scrollSpy
     setTimeout(() => {
-        initScroll(container);
+        const submenuBtns = container.querySelectorAll('[data-target]');
+        submenuBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetEl = document.getElementById(btn.dataset.target);
+                if (!targetEl) return;
+
+                container.classList.remove('collapsed');
+
+                const mainBody = document.getElementById('main-body');
+                mainBody.scrollTo({
+                    top: targetEl.offsetTop - 120,
+                    behavior: 'smooth'
+                });
+
+                submenuBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                if (window.innerWidth < 768) {
+                    document.getElementById('sidebar')?.classList.remove('mobile-open');
+                    document.getElementById('sidebar-overlay').style.display = 'none';
+                }
+            });
+        });
     }, 50);
 }
 
