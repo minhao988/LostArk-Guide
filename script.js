@@ -518,6 +518,7 @@ function initScrollSpy() {
 
 document.addEventListener('DOMContentLoaded', () => {
     initSidebar();
+  
     expandedRaidId = currentRaidId;
     document.getElementById(`gate-submenu-${currentRaidId}`)?.classList.remove('collapsed');
     selectRaid(currentRaidId);
@@ -585,8 +586,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
- 
-  const sidebar = document.getElementById('sidebar');
+ initScrollSpy();
+  
 
 let isScrolling;
 document.getElementById('main-body').addEventListener('scroll', () => {
@@ -597,6 +598,6 @@ document.getElementById('main-body').addEventListener('scroll', () => {
         sidebar.classList.remove('scrolling');
     }, 100); // 滾動停止 100ms 移除
 });
- initScrollSpy();
+ 
 
 });
