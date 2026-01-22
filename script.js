@@ -132,6 +132,51 @@ function getIcon(type) {
 }
 
 // ================== 初始化 sidebar ==================
+// function initSidebar() {
+//     const container = document.getElementById('sidebar-content');
+//     if (!container) return;
+
+//     // 先清空
+//     Array.from(container.children).forEach(child => {
+//         if (child.id !== 'gate-submenu') child.remove();
+//     });
+
+//     const groupedRaids = groupRaidsByCategory();
+
+//     Object.entries(groupedRaids).forEach(([category, raids]) => {
+//         // 生成分類標題
+//         let catTitle = document.createElement('div');
+//         catTitle.className = 'sidebar-category px-6 py-2 text-xs font-bold text-slate-500 uppercase';
+//         catTitle.dataset.fullName = category;
+//         catTitle.innerText = category;
+//         container.appendChild(catTitle);
+
+//         // 生成 raid 按鈕
+//         raids.forEach(raid => {
+//             const btn = document.createElement('button');
+//             btn.id = `btn-${raid.id}`;
+//             btn.className = 'sidebar-btn w-full flex items-center gap-2 px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all';
+//             // btn.innerHTML = `
+//             //     <i class="${raidIcons[raid.id] || 'fa-flag'} sidebar-icon"></i>
+//             //     <span class="sidebar-text font-medium">${raid.short}</span>
+//             // `;
+//           btn.innerHTML = raidIcons[raid.id].startsWith('http')
+//     ? `<img src="${raidIcons[raid.id]}" class="sidebar-icon w-6 h-6 object-contain" />
+//        <span class="sidebar-text font-medium">${raid.short}</span>`
+//     : `<i class="${raidIcons[raid.id]} sidebar-icon"></i>
+//        <span class="sidebar-text font-medium">${raid.short}</span>`;
+//             btn.onclick = () => switchRaid(raid.id);
+//             container.appendChild(btn);
+
+//             // 生成空 submenu
+//             const submenu = document.createElement('div');
+//             submenu.className = 'gate-submenu-container pl-6 collapsed';
+//             submenu.id = `gate-submenu-${raid.id}`;
+//             container.appendChild(submenu);
+//         });
+//     });
+// }
+
 function initSidebar() {
     const container = document.getElementById('sidebar-content');
     if (!container) return;
@@ -151,20 +196,33 @@ function initSidebar() {
         catTitle.innerText = category;
         container.appendChild(catTitle);
 
+        // 🔹 桌面版點 category 展開/收回 submenu
+        catTitle.addEventListener('click', () => {
+            if (window.innerWidth < 768) return; // 手機版不做任何展開/收合
+
+            raids.forEach(raid => {
+                const btn = document.getElementById(`btn-${raid.id}`);
+                const submenu = document.getElementById(`gate-submenu-${raid.id}`);
+                const isCollapsed = submenu.classList.contains('collapsed');
+
+                submenu.classList.toggle('collapsed', !isCollapsed);
+                btn.classList.toggle('active', !isCollapsed);
+            });
+        });
+
         // 生成 raid 按鈕
         raids.forEach(raid => {
             const btn = document.createElement('button');
             btn.id = `btn-${raid.id}`;
             btn.className = 'sidebar-btn w-full flex items-center gap-2 px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all';
-            // btn.innerHTML = `
-            //     <i class="${raidIcons[raid.id] || 'fa-flag'} sidebar-icon"></i>
-            //     <span class="sidebar-text font-medium">${raid.short}</span>
-            // `;
-          btn.innerHTML = raidIcons[raid.id].startsWith('http')
-    ? `<img src="${raidIcons[raid.id]}" class="sidebar-icon w-6 h-6 object-contain" />
-       <span class="sidebar-text font-medium">${raid.short}</span>`
-    : `<i class="${raidIcons[raid.id]} sidebar-icon"></i>
-       <span class="sidebar-text font-medium">${raid.short}</span>`;
+
+            // 判斷是圖片還是 Font Awesome
+            btn.innerHTML = raidIcons[raid.id].startsWith('http')
+                ? `<img src="${raidIcons[raid.id]}" class="sidebar-icon w-6 h-6 object-contain" />
+                   <span class="sidebar-text font-medium">${raid.short}</span>`
+                : `<i class="${raidIcons[raid.id]} sidebar-icon"></i>
+                   <span class="sidebar-text font-medium">${raid.short}</span>`;
+
             btn.onclick = () => switchRaid(raid.id);
             container.appendChild(btn);
 
