@@ -306,8 +306,7 @@ function renderGateContent(gate) {
 
 if (gate.youtubeId) {
   html += `
-  <div class="main-video rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative mb-8">
-    <!-- overlay -->
+<div class="main-video rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative mb-8" data-video="${gate.youtubeId}">
     <div class="video-overlay absolute inset-0 flex items-center justify-center
          bg-slate-900/80 cursor-pointer transition-opacity duration-300 z-10">
       <div class="text-center pointer-events-none">
@@ -317,18 +316,8 @@ if (gate.youtubeId) {
         </p>
       </div>
     </div>
-
-    <!-- iframe 直接給 src -->
-    <iframe
-      class="w-full h-full relative z-0"
-      src="https://www.youtube.com/embed/${gate.youtubeId}?enablejsapi=1&mute=1"
-      title="主影片 完整攻略影片"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay"
-      allowfullscreen>
-    </iframe>
-  </div>
-  `;
+</div>
+`;
 }
 html += `
    
