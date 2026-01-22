@@ -460,17 +460,22 @@ function renderGateSubmenu(gate, raidId) {
 
     // 綁定 scroll
     container.querySelectorAll('[data-target]').forEach(btn => {
-        btn.onclick = () => {
-            // 點 submenu 前確保 raid submenu 展開
-            document.getElementById(`gate-submenu-${raidId}`)?.classList.remove('collapsed');
-            container.querySelectorAll('.submenu-sub').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            document.getElementById(btn.dataset.target)?.scrollIntoView({ behavior: 'smooth' });
+    btn.onclick = () => {
+        // 點 submenu 前確保 raid submenu 展開
+        document.getElementById(`gate-submenu-${raidId}`)?.classList.remove('collapsed');
+        container.querySelectorAll('.submenu-sub').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.target)?.scrollIntoView({ behavior: 'smooth' });
 
-            // 手機收回 sidebar
-            if (window.innerWidth < 768) document.getElementById('sidebar')?.classList.remove('mobile-open');
-        };
-    });
+        // 🔹 手機收回 sidebar + 隱藏 overlay
+        if (window.innerWidth < 768) {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            sidebar?.classList.remove('mobile-open');
+            if (overlay) overlay.style.display = 'none';
+        }
+    };
+});
 }
   
 let scrollSpySections = [];
