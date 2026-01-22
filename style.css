@@ -397,3 +397,56 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
 }
 
 
+/* ================== Just Guard 卡片 ================== */
+.pattern-card.justguard {
+  background: linear-gradient(180deg, rgba(21,128,61,0.35), rgba(2,6,23,0.9));
+  border: 1px solid rgba(34,197,94,0.6);
+  box-shadow: 0 0 8px rgba(34,197,94,0.5), 0 10px 40px rgba(21,128,61,0.7);
+  border-radius: 1rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.pattern-card.justguard::before {
+  content:"";
+  position:absolute;
+  left:0; top:0;
+  width:4px; height:100%;
+  background: linear-gradient(to bottom, #22c55e, rgba(34,197,94,0.2), transparent);
+  border-radius:2px 0 0 2px;
+}
+
+.pattern-card.justguard::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  border-radius:inherit;
+  background: radial-gradient(circle at top left, rgba(34,197,94,0.1), transparent 70%);
+  mix-blend-mode: screen;
+}
+
+.pattern-card.justguard:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(21,128,61,0.8), 0 0 30px rgba(34,197,94,0.3);
+}
+
+.pattern-card.justguard .pattern-title {
+  color:#bbf7d0;
+  text-shadow: 0 0 8px rgba(34,197,94,0.7);
+}
+
+.pattern-justguard-badge {
+  font-size:10px; font-weight:900; letter-spacing:0.08em;
+  color:#bbf7d0;
+  background:rgba(34,197,94,0.25);
+  border:1px solid rgba(34,197,94,0.6);
+  padding:3px 6px; border-radius:999px;
+  text-transform: uppercase;
+  box-shadow: 0 0 4px rgba(255,255,255,0.1) inset;
+}
+
+
+
+
