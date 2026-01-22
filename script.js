@@ -477,59 +477,39 @@ function renderGateSubmenu(gate, raidId) {
     };
 });
 }
-  
-let scrollSpySections = [];
-let scrollSpyBtns = [];
 
-function initMainBodyScrollSpy() {
+function initScrollSpy() {
     const mainBody = document.getElementById('main-body');
-    if (!mainBody) return;
+    const container = document.getElementById('sidebar-content');
+    if (!mainBody || !container) return;
 
-    let submenuButtons = [];
+    let scrollSpyBtns = Array.from(container.querySelectorAll('.submenu-sub, .submenu-btn'));
 
-    // 取得最新的 submenu 對應 section
-    function updateSpyElements() {
-        submenuButtons = document.querySelectorAll('.submenu-sub, .submenu-btn');
-    }
-
-    updateSpyElements(); // 初始化
+    // 當 sidebar DOM 變化時更新
+    const observer = new MutationObserver(() => {
+        scrollSpyBtns = Array.from(container.querySelectorAll('.submenu-sub, .submenu-btn'));
+    });
+    observer.observe(container, { childList: true, subtree: true });
 
     mainBody.addEventListener('scroll', () => {
         const scrollTop = mainBody.scrollTop;
-        const containerRect = mainBody.getBoundingClientRect();
-
         let currentActiveId = null;
 
-        // 每個 section 的位置相對於 scroll container
-        submenuButtons.forEach(btn => {
-            const targetId = btn.dataset.target;
-            if (!targetId) return;
-            const section = document.getElementById(targetId);
+        scrollSpyBtns.forEach(btn => {
+            const section = document.getElementById(btn.dataset.target);
             if (!section) return;
 
-            const sectionRect = section.getBoundingClientRect();
-            const offsetTop = section.offsetTop; // 相對於 container
-            if (scrollTop >= offsetTop - 80) { // 80px header padding 調整
-                currentActiveId = targetId;
-            }
+            const sectionTop = section.offsetTop; // 相對 main-body
+            if (scrollTop >= sectionTop - 80) currentActiveId = btn.dataset.target;
         });
 
         if (currentActiveId) {
-            submenuButtons.forEach(b => b.classList.remove('active'));
-            const activeBtn = document.querySelector(`.submenu-sub[data-target="${currentActiveId}"], .submenu-btn[data-target="${currentActiveId}"]`);
-            if (activeBtn) {
-                activeBtn.classList.add('active');
-                // 自動滾動到可視區
-                activeBtn.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-            }
+            scrollSpyBtns.forEach(b => b.classList.remove('active'));
+            const activeBtn = container.querySelector(`[data-target="${currentActiveId}"]`);
+            if (activeBtn) activeBtn.classList.add('active');
         }
     });
-
-    // 每次 submenu 更新時重新抓元素
-    const observer = new MutationObserver(updateSpyElements);
-    observer.observe(document.getElementById('sidebar-content'), { childList: true, subtree: true });
 }
-
 
 
 
@@ -603,7 +583,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
-initMainBodyScrollSpy();
+initScrollSpy();
   
 
 let isScrolling;
@@ -629,29 +609,5 @@ if (activeSubmenu) {
     activeSubmenu.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 }
   
-function updateSpyElements() {
-    scrollSpyBtns = document.querySelectorAll('.submenu-sub, .submenu-btn');
-}
 
-const observer = new MutationObserver(updateSpyElements);
-observer.observe(document.getElementById('sidebar-content'), { childList: true, subtree: true });
-
-// scrollSpy 主監聽
-document.getElementById('main-body').addEventListener('scroll', () => {
-    const scrollTop = document.getElementById('main-body').scrollTop;
-    let currentActiveId = null;
-
-    scrollSpyBtns.forEach(btn => {
-        const section = document.getElementById(btn.dataset.target);
-        if (section && scrollTop >= section.offsetTop - 80) {
-            currentActiveId = btn.dataset.target;
-        }
-    });
-
-    if (currentActiveId) {
-        scrollSpyBtns.forEach(b => b.classList.remove('active'));
-        const activeBtn = document.querySelector(`[data-target="${currentActiveId}"]`);
-        activeBtn?.classList.add('active');
-    }
-});
 });
