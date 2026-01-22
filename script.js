@@ -196,19 +196,19 @@ function initSidebar() {
         catTitle.innerText = category;
         container.appendChild(catTitle);
 
-        // 🔹 桌面版點 category 展開/收回 submenu
-        catTitle.addEventListener('click', () => {
-            if (window.innerWidth < 768) return; // 手機版不做任何展開/收合
+      // 🔹 桌面版 & 手機版 category 點擊都可以展開/收回 submenu，但手機不收 sidebar
+catTitle.addEventListener('click', () => {
+    raids.forEach(raid => {
+        const btn = document.getElementById(`btn-${raid.id}`);
+        const submenu = document.getElementById(`gate-submenu-${raid.id}`);
+        const isCollapsed = submenu.classList.contains('collapsed');
 
-            raids.forEach(raid => {
-                const btn = document.getElementById(`btn-${raid.id}`);
-                const submenu = document.getElementById(`gate-submenu-${raid.id}`);
-                const isCollapsed = submenu.classList.contains('collapsed');
+        submenu.classList.toggle('collapsed', !isCollapsed);
+        btn.classList.toggle('active', !isCollapsed);
+    });
 
-                submenu.classList.toggle('collapsed', !isCollapsed);
-                btn.classList.toggle('active', !isCollapsed);
-            });
-        });
+    // 手機版不關 sidebar，不做任何操作
+});
 
         // 生成 raid 按鈕
         raids.forEach(raid => {
