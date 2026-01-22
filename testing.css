@@ -335,3 +335,33 @@ h2, h3, h4 {
     transform: translateY(-50%) translateX(10px) scale(1.08);
     pointer-events: auto;
 }
+
+/* ================== Mobile Sidebar ================== */
+@media (max-width: 768px) {
+
+  #sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 16rem;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 100;
+  }
+
+  /* 手机展开 */
+  #sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  /* 手机不使用收合宽度 */
+  #sidebar.sidebar-collapsed {
+    width: 16rem;
+  }
+
+  /* 主内容不被挤 */
+  #main-body {
+    padding-left: 0 !important;
+  }
+}
