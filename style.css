@@ -294,3 +294,106 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
   display:inline-block;
 }
 
+
+
+/* ================== Danger 卡片 ================== */
+.pattern-card.danger {
+  background: linear-gradient(180deg, rgba(127,29,29,0.35), rgba(2,6,23,0.9));
+  border: 1px solid rgba(239,68,68,0.6);
+  box-shadow: 0 0 8px rgba(239,68,68,0.5), 0 10px 40px rgba(127,29,29,0.7);
+  border-radius: 1rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.pattern-card.danger::before {
+  content:"";
+  position:absolute;
+  left:0; top:0;
+  width:4px; height:100%;
+  background: linear-gradient(to bottom, #ef4444, rgba(239,68,68,0.2), transparent);
+  border-radius:2px 0 0 2px;
+}
+
+.pattern-card.danger::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  border-radius:inherit;
+  background: radial-gradient(circle at top left, rgba(239,68,68,0.1), transparent 70%);
+  mix-blend-mode: screen;
+}
+
+.pattern-card.danger:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(127,29,29,0.8), 0 0 30px rgba(239,68,68,0.3);
+}
+
+.pattern-card.danger .pattern-title {
+  color:#fecaca;
+  text-shadow: 0 0 8px rgba(239,68,68,0.7);
+}
+
+.pattern-danger-badge {
+  font-size:10px; font-weight:900; letter-spacing:0.08em;
+  color:#fee2e2;
+  background:rgba(239,68,68,0.25);
+  border:1px solid rgba(239,68,68,0.6);
+  padding:3px 6px; border-radius:999px;
+  text-transform: uppercase;
+  box-shadow: 0 0 4px rgba(255,255,255,0.1) inset;
+}
+
+/* ================== Counter 卡片 ================== */
+.pattern-card.counter {
+  background: linear-gradient(180deg, rgba(14,116,144,0.35), rgba(2,6,23,0.9));
+  border: 1px solid rgba(34,211,238,0.6);
+  box-shadow: 0 0 8px rgba(34,211,238,0.5), 0 10px 40px rgba(14,116,144,0.7);
+  border-radius: 1rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.pattern-card.counter::before {
+  content:"";
+  position:absolute;
+  left:0; top:0;
+  width:4px; height:100%;
+  background: linear-gradient(to bottom, #22d3ee, rgba(34,211,238,0.2), transparent);
+  border-radius:2px 0 0 2px;
+}
+
+.pattern-card.counter::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  border-radius:inherit;
+  background: radial-gradient(circle at top left, rgba(34,211,238,0.1), transparent 70%);
+  mix-blend-mode: screen;
+}
+
+.pattern-card.counter:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(14,116,144,0.8), 0 0 30px rgba(34,211,238,0.3);
+}
+
+.pattern-card.counter .pattern-title {
+  color:#cffafe;
+  text-shadow: 0 0 8px rgba(34,211,238,0.7);
+}
+
+.pattern-counter-badge {
+  font-size:10px; font-weight:900; letter-spacing:0.08em;
+  color:#cffafe;
+  background:rgba(34,211,238,0.25);
+  border:1px solid rgba(34,211,238,0.6);
+  padding:3px 6px; border-radius:999px;
+  text-transform: uppercase;
+  box-shadow: 0 0 4px rgba(255,255,255,0.1) inset;
+}
+
+
