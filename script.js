@@ -427,13 +427,7 @@ html += `
     });
 }
 
-// 2️⃣ 當 API 準備好
-function onYouTubeIframeAPIReady() {
-  document.querySelectorAll('.main-video iframe').forEach(iframe => {
-    const player = new YT.Player(iframe, {});
-    players.set(iframe, player);
-  });
-}
+
 function renderGateSubmenu(gate, raidId) {
     const container = document.getElementById(`gate-submenu-${raidId}`);
     if (!container) return;
@@ -479,11 +473,35 @@ function renderGateSubmenu(gate, raidId) {
     });
 }
   
-// function toggleRaidSubmenu(raidId) {
-//   // 切換目前這個
-//  const currentSub = document.getElementById(`gate-submenu-${raidId}`);
-//     if (currentSub) currentSub.classList.remove('collapsed');
-// }
+// ---------------- ScrollSpy 功能 ----------------
+function initScrollSpy() {
+  const sections = document.querySelectorAll('[id^="mech-"], [id^="pattern-"], [data-menu]');
+  const sidebarSubBtns = document.querySelectorAll('.submenu-sub, .submenu-btn');
+
+  window.addEventListener('scroll', () => {
+    let currentSectionId = null;
+    const scrollPos = window.scrollY || window.pageYOffset;
+
+    sections.forEach(section => {
+      const offsetTop = section.getBoundingClientRect().top + window.scrollY - 120; // 偏移值可調整
+      if (scrollPos >= offsetTop) {
+        currentSectionId = section.id || section.dataset.menu;
+      }
+    });
+
+    // 清除所有 active
+    sidebarSubBtns.forEach(btn => btn.classList.remove('active'));
+
+    // 加上 active
+    if (currentSectionId) {
+      const activeBtn = document.querySelector(`.submenu-sub[data-target="${currentSectionId}"], .submenu-btn[data-target="${currentSectionId}"]`);
+      if (activeBtn) activeBtn.classList.add('active');
+    }
+  });
+}
+
+
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -555,6 +573,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
+  document.addEventListener('DOMContentLoaded', () => {
+  initScrollSpy();
+});
 
 
 });
