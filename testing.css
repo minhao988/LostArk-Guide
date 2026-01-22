@@ -457,3 +457,13 @@ h2, h3, h4 {
 #main-body.sidebar-collapsed {
     margin-left: 4.75rem;
 }
+
+/* 圖片icon*/
+.menu-icon {
+  width: 24px;                 /* icon 寬度 */
+  height: 24px;                /* icon 高度 */
+  background-image: url('kazeros.png');  /* 這裡寫檔案路徑 */
+  background-size: contain;    /* 保持比例 */
+  background-repeat: no-repeat;
+  display: inline-block;       /* 讓 span/div 可以顯示背景 */
+}
