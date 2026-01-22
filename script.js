@@ -169,6 +169,21 @@ catTitle.addEventListener('click', () => {
     if (!raids.length) return;
 
     const firstRaidId = raids[0].id;
+
+ // 🔹 手機版 (小於768px) 僅展開/收回 submenu，不切換 raid
+    if (window.innerWidth < 768) {
+        const submenu = document.getElementById(`gate-submenu-${firstRaidId}`);
+        if (!submenu) return;
+
+        const isExpanded = !submenu.classList.contains('collapsed');
+        if (isExpanded) {
+            submenu.classList.add('collapsed');
+        } else {
+            submenu.classList.remove('collapsed');
+        }
+        return;
+    }
+     
    if (expandedRaidId === firstRaidId) {
         // 已經展開 → 收回
         document.getElementById(`gate-submenu-${firstRaidId}`).classList.add('collapsed');
@@ -368,32 +383,28 @@ function initScrollSpy() {
     const sidebar = document.getElementById('sidebar');
     if (!container || !sidebar) return;
 
-    // 先移除舊 listener，避免重複綁定
     container.removeEventListener('scroll', container._scrollSpyListener);
 
     const listener = () => {
-        const scrollTop = container.scrollTop;
-        const containerHeight = container.clientHeight;
+        if (isScrollingByClick) return;
 
+        const scrollTop = container.scrollTop;
         const sections = container.querySelectorAll('section[id], .pattern-card');
         let activeTarget = null;
 
         sections.forEach(sec => {
-            const offsetTop = sec.offsetTop;
-            const offsetHeight = sec.offsetHeight;
-
-            if (scrollTop >= offsetTop - 60 && scrollTop < offsetTop + offsetHeight) {
+            const rect = sec.getBoundingClientRect();
+            const offsetTop = rect.top + scrollTop - container.getBoundingClientRect().top;
+            if (scrollTop >= offsetTop - 60 && scrollTop < offsetTop + sec.offsetHeight) {
                 activeTarget = sec.id || sec.dataset.menu || sec.dataset.target;
             }
         });
 
-        // 更新 sidebar active
         sidebar.querySelectorAll('.active').forEach(a => a.classList.remove('active'));
         if (activeTarget) {
             const link = sidebar.querySelector(`[data-target="${activeTarget}"]`);
             if (link) {
                 link.classList.add('active');
-                // 保持 active 可見
                 link.scrollIntoView({ block: 'nearest' });
             }
         }
@@ -402,8 +413,7 @@ function initScrollSpy() {
     container.addEventListener('scroll', listener);
     container._scrollSpyListener = listener;
 
-    // 初始化一次
-    listener();
+    setTimeout(listener, 50); // 確保 DOM 完全渲染
 }
 
 
