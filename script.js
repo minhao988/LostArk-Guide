@@ -541,6 +541,8 @@ html += `
 }
 
 
+
+
 // function renderGateSubmenu(gate, raidId) {
 //     const container = document.getElementById(`gate-submenu-${raidId}`);
 //     if (!container) return;
@@ -571,24 +573,16 @@ html += `
 
 //     container.innerHTML = html;
 
-//     // 綁定 scroll
+//     // 綁定 submenu 按鈕滾動
 //     container.querySelectorAll('[data-target]').forEach(btn => {
-//     btn.onclick = () => {
-//         // 點 submenu 前確保 raid submenu 展開
-//         document.getElementById(`gate-submenu-${raidId}`)?.classList.remove('collapsed');
-//         container.querySelectorAll('.submenu-sub').forEach(b => b.classList.remove('active'));
-//         btn.classList.add('active');
-//         document.getElementById(btn.dataset.target)?.scrollIntoView({ behavior: 'smooth' });
-
-//         // 🔹 手機收回 sidebar + 隱藏 overlay
-//         if (window.innerWidth < 768) {
-//             const sidebar = document.getElementById('sidebar');
-//             const overlay = document.getElementById('sidebar-overlay');
-//             sidebar?.classList.remove('mobile-open');
-//             if (overlay) overlay.style.display = 'none';
-//         }
-//     };
-// });
+//         btn.addEventListener('click', () => {
+//             const targetId = btn.dataset.target;
+//             const targetEl = document.getElementById(targetId);
+//             if (targetEl) {
+//                 targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+//             }
+//         });
+//     });
 // }
 
 function renderGateSubmenu(gate, raidId) {
@@ -621,16 +615,43 @@ function renderGateSubmenu(gate, raidId) {
 
     container.innerHTML = html;
 
-    // 綁定 submenu 按鈕滾動
-    container.querySelectorAll('[data-target]').forEach(btn => {
+    // 🔹 綁定 submenu 按鈕點擊
+    const submenuBtns = container.querySelectorAll('[data-target]');
+    submenuBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            const targetId = btn.dataset.target;
-            const targetEl = document.getElementById(targetId);
-            if (targetEl) {
-                targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const targetEl = document.getElementById(btn.dataset.target);
+            if (!targetEl) return;
+
+            // 展開 submenu (確保 visible)
+            container.classList.remove('collapsed');
+
+            // 滾動主頁面到對應 section
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // 更新 submenu active
+            submenuBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // submenu scroll 確保 active btn 可見
+            const rect = btn.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+            if (rect.top < containerRect.top || rect.bottom > containerRect.bottom) {
+                const offset = rect.top - containerRect.top;
+                container.scrollBy({ top: offset, behavior: 'smooth' });
+            }
+
+            // 🔹 手機版收 sidebar
+            if (window.innerWidth < 768) {
+                document.getElementById('sidebar')?.classList.remove('mobile-open');
+                document.getElementById('sidebar-overlay').style.display = 'none';
             }
         });
     });
+
+    // 🔹 submenu 展開後初始化 scrollSpy
+    setTimeout(() => {
+        initScroll(container);
+    }, 50);
 }
   
 // function initScrollSpy() {
