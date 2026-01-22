@@ -312,7 +312,7 @@ if (gate.youtubeId) {
       <div class="text-center pointer-events-none">
         <i class="fab fa-youtube text-6xl text-red-600 mb-4"></i>
         <p class="text-slate-200 font-bold">
-          點擊播放主影片
+          點擊播放全流程影片
         </p>
       </div>
     </div>
