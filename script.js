@@ -519,6 +519,56 @@ html += `
 }
 
 
+// function renderGateSubmenu(gate, raidId) {
+//     const container = document.getElementById(`gate-submenu-${raidId}`);
+//     if (!container) return;
+
+//     let html = `<div class="px-4 py-2 text-xs font-bold text-slate-500 uppercase">${gate.name}</div>`;
+
+//     if (gate.mechanics?.length) {
+//         html += `
+//           <div class="submenu-group">
+//             <button class="submenu-btn" data-target="section-mechanics">核心機制</button>
+//             ${gate.mechanics.map((m,i) => `
+//                 <button class="submenu-sub pl-10" data-target="mech-${i}">${m.hp} ${m.title}</button>
+//             `).join('')}
+//           </div>
+//         `;
+//     }
+
+//     if (gate.patterns?.length) {
+//         html += `
+//           <div class="submenu-group mt-2">
+//             <button class="submenu-btn" data-target="section-patterns">招式解析</button>
+//             ${gate.patterns.map((p,i) => `
+//                 <button class="submenu-sub pl-10" data-target="pattern-${i}">${p.name}</button>
+//             `).join('')}
+//           </div>
+//         `;
+//     }
+
+//     container.innerHTML = html;
+
+//     // 綁定 scroll
+//     container.querySelectorAll('[data-target]').forEach(btn => {
+//     btn.onclick = () => {
+//         // 點 submenu 前確保 raid submenu 展開
+//         document.getElementById(`gate-submenu-${raidId}`)?.classList.remove('collapsed');
+//         container.querySelectorAll('.submenu-sub').forEach(b => b.classList.remove('active'));
+//         btn.classList.add('active');
+//         document.getElementById(btn.dataset.target)?.scrollIntoView({ behavior: 'smooth' });
+
+//         // 🔹 手機收回 sidebar + 隱藏 overlay
+//         if (window.innerWidth < 768) {
+//             const sidebar = document.getElementById('sidebar');
+//             const overlay = document.getElementById('sidebar-overlay');
+//             sidebar?.classList.remove('mobile-open');
+//             if (overlay) overlay.style.display = 'none';
+//         }
+//     };
+// });
+// }
+
 function renderGateSubmenu(gate, raidId) {
     const container = document.getElementById(`gate-submenu-${raidId}`);
     if (!container) return;
@@ -549,24 +599,16 @@ function renderGateSubmenu(gate, raidId) {
 
     container.innerHTML = html;
 
-    // 綁定 scroll
+    // 綁定 submenu 按鈕滾動
     container.querySelectorAll('[data-target]').forEach(btn => {
-    btn.onclick = () => {
-        // 點 submenu 前確保 raid submenu 展開
-        document.getElementById(`gate-submenu-${raidId}`)?.classList.remove('collapsed');
-        container.querySelectorAll('.submenu-sub').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById(btn.dataset.target)?.scrollIntoView({ behavior: 'smooth' });
-
-        // 🔹 手機收回 sidebar + 隱藏 overlay
-        if (window.innerWidth < 768) {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
-            sidebar?.classList.remove('mobile-open');
-            if (overlay) overlay.style.display = 'none';
-        }
-    };
-});
+        btn.addEventListener('click', () => {
+            const targetId = btn.dataset.target;
+            const targetEl = document.getElementById(targetId);
+            if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
 }
   
 function initScrollSpy() {
