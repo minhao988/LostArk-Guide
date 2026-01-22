@@ -585,9 +585,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
-  document.addEventListener('DOMContentLoaded', () => {
-  initScrollSpy();
-});
+ 
+  const sidebar = document.getElementById('sidebar');
 
+let isScrolling;
+document.getElementById('main-body').addEventListener('scroll', () => {
+    sidebar.classList.add('scrolling');
+
+    clearTimeout(isScrolling);
+    isScrolling = setTimeout(() => {
+        sidebar.classList.remove('scrolling');
+    }, 100); // 滾動停止 100ms 移除
+});
+ initScrollSpy();
 
 });
