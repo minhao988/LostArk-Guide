@@ -152,9 +152,9 @@ function initSidebar() {
     if (!container) return;
 
     // 先清空
-    Array.from(container.children).forEach(child => {
-        if (child.id !== 'gate-submenu') child.remove();
-    });
+  Array.from(container.children).forEach(child => {
+    if (!child.id.startsWith('gate-submenu-')) child.remove();
+});
 
     const groupedRaids = groupRaidsByCategory();
 
@@ -614,11 +614,10 @@ function initScroll(container) {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    initSidebar();
-  
-    expandedRaidId = currentRaidId;
-    document.getElementById(`gate-submenu-${currentRaidId}`)?.classList.remove('collapsed');
-    selectRaid(currentRaidId);
+   initSidebar();
+selectRaid(currentRaidId);
+expandedRaidId = currentRaidId;
+document.getElementById(`gate-submenu-${currentRaidId}`)?.classList.remove('collapsed');
 
     const sidebar = document.getElementById('sidebar');
     const sidebarOverlay = document.getElementById('sidebar-overlay');
