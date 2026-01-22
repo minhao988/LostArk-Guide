@@ -182,7 +182,7 @@ h2, h3, h4 {
 
 
 /* ===== Sidebar 基礎 ===== */
-#sidebar {
+/* #sidebar {
     position: relative;
     width: 18rem;
     background: linear-gradient(180deg, rgba(2,6,23,0.95), rgba(2,6,23,0.85));
@@ -192,6 +192,26 @@ h2, h3, h4 {
     z-index: 50;
     display: flex;
     flex-direction: column;
+} */
+#sidebar {
+    position: fixed;       /* 🔹 改成 fixed */
+    top: 0;                /* 從頂部開始 */
+    left: 0;
+    height: 100vh;         /* 撐滿整個視窗 */
+    width: 18rem;
+    background: linear-gradient(180deg, rgba(2,6,23,0.95), rgba(2,6,23,0.85));
+    backdrop-filter: blur(8px);
+    overflow-y: auto;      /* 可以滾動內部選單 */
+    transition: width 0.3s ease;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+}
+
+#sidebar.scrolling .sidebar-btn:hover .sidebar-text {
+    opacity: 0 !important;
+    transform: none !important;
+    pointer-events: none !important;
 }
 
 /* 收合狀態 */
