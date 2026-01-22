@@ -661,15 +661,12 @@ document.getElementById(`gate-submenu-${currentRaidId}`)?.classList.remove('coll
 
 let isScrolling;
 
-document.getElementById('main-body')?.addEventListener('scroll', () => {
-    sidebar?.classList.add('scrolling');
-    clearTimeout(isScrolling);
-    isScrolling = setTimeout(() => {
-        sidebar?.classList.remove('scrolling');
-    }, 100);
-});
-
-
-
+  document.getElementById('main-body')?.addEventListener('scroll', () => {
+      sidebar?.classList.add('scrolling');
+      clearTimeout(isScrolling);
+      isScrolling = setTimeout(() => {
+          sidebar?.classList.remove('scrolling');
+      }, 100);
+  });
 
 });
