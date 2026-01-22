@@ -303,7 +303,7 @@ function renderGateContent(gate) {
 // src="https://www.youtube.com/embed/${gate.youtubeId}"
   let html = '';
 
-// ✅ 主影片（iframe 直接給 src）
+
 if (gate.youtubeId) {
   html += `
   <div class="main-video rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative mb-8">
@@ -321,7 +321,7 @@ if (gate.youtubeId) {
     <!-- iframe 直接給 src -->
     <iframe
       class="w-full h-full relative z-0"
-      src="https://www.youtube.com/embed/${gate.youtubeId}?autoplay=1&mute=1"
+      src="https://www.youtube.com/embed/${gate.youtubeId}?enablejsapi=1&autoplay=0&mute=1"
       title="主影片 完整攻略影片"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay"
@@ -418,16 +418,45 @@ html += `
             this.appendChild(iframe);
         });
     });
-  // ✅ 主影片 iframe 載入完成後，自動移除 overlay
-document.querySelectorAll('.main-video').forEach(wrapper => {
-  const overlay = wrapper.querySelector('.video-overlay');
-  overlay.addEventListener('click', () => {
-    overlay.classList.add('opacity-0');
-    setTimeout(() => overlay.remove(), 300);
-  });
-});
+    // 1️⃣ 載入 YouTube API
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(tag);
+    
+    const players = new Map(); // iframe -> YT.Player
+    
+    
+    
+    // 3️⃣ 點擊 overlay 播放影片，同時暫停其他影片
+    document.querySelectorAll('.main-video').forEach(wrapper => {
+      const overlay = wrapper.querySelector('.video-overlay');
+      const iframe = wrapper.querySelector('iframe');
+    
+      overlay.addEventListener('click', () => {
+        overlay.classList.add('opacity-0');
+        setTimeout(() => overlay.remove(), 300);
+    
+        // 播放這個影片
+        const currentPlayer = players.get(iframe);
+        if (currentPlayer) currentPlayer.playVideo();
+    
+        // 暫停其他影片
+        players.forEach((player, otherIframe) => {
+          if (otherIframe !== iframe) {
+            player.pauseVideo();
+          }
+        });
+      });
+    });
 }
 
+// 2️⃣ 當 API 準備好
+function onYouTubeIframeAPIReady() {
+  document.querySelectorAll('.main-video iframe').forEach(iframe => {
+    const player = new YT.Player(iframe, {});
+    players.set(iframe, player);
+  });
+}
 function renderGateSubmenu(gate, raidId) {
     const container = document.getElementById(`gate-submenu-${raidId}`);
     if (!container) return;
