@@ -533,33 +533,34 @@ function renderGateSubmenu(gate, raidId) {
 
     container.innerHTML = html;
 
-    // 🔹 綁定 submenu 按鈕點擊
-    setTimeout(() => {
-        const submenuBtns = container.querySelectorAll('[data-target]');
-        submenuBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const targetEl = document.getElementById(btn.dataset.target);
-                if (!targetEl) return;
+    // 🔹 直接綁事件，不用 setTimeout
+    const submenuBtns = container.querySelectorAll('[data-target]');
+    submenuBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetEl = document.getElementById(btn.dataset.target);
+            if (!targetEl) return;
 
-                container.classList.remove('collapsed');
+            // 展開 submenu
+            container.classList.remove('collapsed');
 
-                const mainBody = document.getElementById('main-body');
-                mainBody.scrollTo({
-                    top: targetEl.offsetTop - 120,
-                    behavior: 'smooth'
-                });
+            const mainBody = document.getElementById('main-body');
+            // 修正滾動位置
+            const topPos = targetEl.offsetTop - 120;
+            mainBody.scrollTo({ top: topPos, behavior: 'smooth' });
 
-                submenuBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
+            // 樣式 active
+            submenuBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
 
-                if (window.innerWidth < 768) {
-                    document.getElementById('sidebar')?.classList.remove('mobile-open');
-                    document.getElementById('sidebar-overlay').style.display = 'none';
-                }
-            });
+            // 手機收 sidebar
+            if (window.innerWidth < 768) {
+                document.getElementById('sidebar')?.classList.remove('mobile-open');
+                document.getElementById('sidebar-overlay').style.display = 'none';
+            }
         });
-    }, 50);
+    });
 }
+
 
 function initScroll(container) {
     if (!container) return;
