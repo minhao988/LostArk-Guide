@@ -170,7 +170,7 @@ catTitle.addEventListener('click', () => {
 
     const firstRaidId = raids[0].id;
 
- // 🔹 手機版 (小於768px) 僅展開/收回 submenu，不切換 raid
+    // 🔹 手機版 (小於768px) 僅展開/收回 submenu，不切換 raid
     if (window.innerWidth < 768) {
         const submenu = document.getElementById(`gate-submenu-${firstRaidId}`);
         if (!submenu) return;
@@ -181,63 +181,39 @@ catTitle.addEventListener('click', () => {
         } else {
             submenu.classList.remove('collapsed');
         }
+
+        // 手機版點 category 不收 sidebar
         return;
     }
-     
-   if (expandedRaidId === firstRaidId) {
-        // 已經展開 → 收回
+
+    // 桌面版：切換 raid
+    if (expandedRaidId === firstRaidId) {
+        // 已經展開 → 收回 submenu
         document.getElementById(`gate-submenu-${firstRaidId}`).classList.add('collapsed');
         expandedRaidId = null;
-        return;
+    } else {
+        // 切換 raid
+        switchRaid(firstRaidId);
+
+        // 等 submenu 渲染完成再滾動到第一個 gate
+        setTimeout(() => {
+            const submenu = document.getElementById(`gate-submenu-${firstRaidId}`);
+            if (!submenu) return;
+            const firstGateBtn = submenu.querySelector('.submenu-btn, .submenu-sub');
+            if (!firstGateBtn) return;
+
+            const mainBody = document.getElementById('main-body');
+            const topPos = firstGateBtn.getBoundingClientRect().top + mainBody.scrollTop - 120;
+
+            mainBody.scrollTo({ top: topPos, behavior: 'smooth' });
+
+            // 樣式 active
+            submenu.querySelectorAll('.submenu-btn, .submenu-sub').forEach(b => b.classList.remove('active'));
+            firstGateBtn.classList.add('active');
+        }, 50);
     }
-    // 切換 raid
-    switchRaid(firstRaidId);
-
-    // 等 submenu 渲染完成再滾動到第一個 gate
-    setTimeout(() => {
-        const submenu = document.getElementById(`gate-submenu-${firstRaidId}`);
-        if (!submenu) return;
-        const firstGateBtn = submenu.querySelector('.submenu-btn, .submenu-sub');
-        if (!firstGateBtn) return;
-
-        // 計算正確 scrollTop
-        const mainBody = document.getElementById('main-body');
-        const topPos = firstGateBtn.getBoundingClientRect().top + mainBody.scrollTop - 120;
-
-        mainBody.scrollTo({
-            top: topPos,
-            behavior: 'smooth'
-        });
-
-        // 樣式 active
-        submenu.querySelectorAll('.submenu-btn, .submenu-sub').forEach(b => b.classList.remove('active'));
-        firstGateBtn.classList.add('active');
-    }, 50); // 與 renderGateSubmenu setTimeout 對齊
 });
-        // 生成 raid 按鈕
-        raids.forEach(raid => {
-            const btn = document.createElement('button');
-            btn.id = `btn-${raid.id}`;
-            btn.className = 'sidebar-btn w-full flex items-center gap-2 px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all';
 
-            // 判斷是圖片還是 Font Awesome
-            btn.innerHTML = raidIcons[raid.id].startsWith('http')
-                ? `<img src="${raidIcons[raid.id]}" class="sidebar-icon w-6 h-6 object-contain" />
-                   <span class="sidebar-text font-medium">${raid.short}</span>`
-                : `<i class="${raidIcons[raid.id]} sidebar-icon"></i>
-                   <span class="sidebar-text font-medium">${raid.short}</span>`;
-
-            btn.onclick = () => switchRaid(raid.id);
-            container.appendChild(btn);
-
-            // 生成空 submenu
-            const submenu = document.createElement('div');
-            submenu.className = 'gate-submenu-container pl-6 collapsed';
-            submenu.id = `gate-submenu-${raid.id}`;
-            container.appendChild(submenu);
-        });
-    });
-}
 
 
 // ================== 選擇 raid ==================
