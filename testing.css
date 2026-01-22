@@ -442,13 +442,12 @@ h2, h3, h4 {
     display: block;
 }
 
-/* 主內容區跟 sidebar 聯動 */
+
 #main-body {
+    margin-left: 16rem;
     transition: margin-left 0.3s ease;
-    margin-left: 16rem; /* 預設留出 sidebar 寬度 */
 }
 
-#sidebar.sidebar-collapsed + #main-body,
 #main-body.sidebar-collapsed {
-    margin-left: 4.75rem; /* 收合時跟著 sidebar 縮小 */
+    margin-left: 4.75rem;
 }
