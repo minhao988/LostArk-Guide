@@ -171,7 +171,12 @@ catTitle.addEventListener('click', () => {
     if (!raids.length) return;
 
     const firstRaidId = raids[0].id;
-
+   if (expandedRaidId === firstRaidId) {
+        // 已經展開 → 收回
+        document.getElementById(`gate-submenu-${firstRaidId}`).classList.add('collapsed');
+        expandedRaidId = null;
+        return;
+    }
     // 切換 raid
     switchRaid(firstRaidId);
 
@@ -353,6 +358,11 @@ const isCollapsed = sidebarEl.classList.contains('sidebar-collapsed');
   } else {
     expandedRaidId = null;
   }
+          // 手機收 sidebar
+            if (window.innerWidth < 768) {
+                document.getElementById('sidebar')?.classList.remove('mobile-open');
+                document.getElementById('sidebar-overlay').style.display = 'none';
+            }
 }
 
 
@@ -552,15 +562,55 @@ function renderGateSubmenu(gate, raidId) {
             submenuBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            // 手機收 sidebar
-            if (window.innerWidth < 768) {
-                document.getElementById('sidebar')?.classList.remove('mobile-open');
-                document.getElementById('sidebar-overlay').style.display = 'none';
-            }
+            // // 手機收 sidebar
+            // if (window.innerWidth < 768) {
+            //     document.getElementById('sidebar')?.classList.remove('mobile-open');
+            //     document.getElementById('sidebar-overlay').style.display = 'none';
+            // }
         });
     });
 }
 
+
+// function initScroll(container) {
+//     if (!container) return;
+
+//     const mainBody = document.getElementById('main-body');
+//     if (!mainBody) return;
+
+//     // 🔥 先移除舊的 scrollSpy
+//     if (currentScrollSpy) {
+//         mainBody.removeEventListener('scroll', currentScrollSpy);
+//         currentScrollSpy = null;
+//     }
+
+//     const scrollBtns = () =>
+//         Array.from(container.querySelectorAll('.submenu-btn, .submenu-sub'));
+
+//     const onScroll = () => {
+//         let activeBtn = null;
+
+//         scrollBtns().forEach(btn => {
+//             const target = document.getElementById(btn.dataset.target);
+//             if (!target) return;
+
+//             const offsetTop =
+//                 target.offsetTop - 140;
+
+//             if (mainBody.scrollTop >= offsetTop) {
+//                 activeBtn = btn;
+//             }
+//         });
+
+//         scrollBtns().forEach(b => b.classList.remove('active'));
+//         if (activeBtn) activeBtn.classList.add('active');
+//     };
+
+//     currentScrollSpy = onScroll;
+//     mainBody.addEventListener('scroll', onScroll, { passive: true });
+
+//     onScroll();
+// }
 
 function initScroll(container) {
     if (!container) return;
@@ -568,40 +618,43 @@ function initScroll(container) {
     const mainBody = document.getElementById('main-body');
     if (!mainBody) return;
 
-    // 🔥 先移除舊的 scrollSpy
+    // 移除舊的 scrollSpy
     if (currentScrollSpy) {
         mainBody.removeEventListener('scroll', currentScrollSpy);
         currentScrollSpy = null;
     }
 
-    const scrollBtns = () =>
-        Array.from(container.querySelectorAll('.submenu-btn, .submenu-sub'));
+    const scrollBtns = () => Array.from(container.querySelectorAll('.submenu-btn, .submenu-sub'));
 
     const onScroll = () => {
+        const threshold = 140; // 距離上方多少算 active
         let activeBtn = null;
+        let closestDistance = Infinity;
 
         scrollBtns().forEach(btn => {
             const target = document.getElementById(btn.dataset.target);
             if (!target) return;
 
-            const offsetTop =
-                target.offsetTop - 140;
+            const rect = target.getBoundingClientRect();
+            const distance = Math.abs(rect.top - threshold);
 
-            if (mainBody.scrollTop >= offsetTop) {
+            if (rect.top <= threshold && distance < closestDistance) {
+                closestDistance = distance;
                 activeBtn = btn;
             }
         });
 
+        // 樣式更新
         scrollBtns().forEach(b => b.classList.remove('active'));
         if (activeBtn) activeBtn.classList.add('active');
     };
 
+    mainBody.addEventListener('scroll', onScroll);
     currentScrollSpy = onScroll;
-    mainBody.addEventListener('scroll', onScroll, { passive: true });
 
+    // 觸發一次，確保初始狀態正確
     onScroll();
 }
-
 
 
 document.addEventListener('DOMContentLoaded', () => {
