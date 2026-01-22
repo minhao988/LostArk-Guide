@@ -1,5 +1,5 @@
 const raidIcons = {
-  final_day: 'fa-solid fa-fire',
+  final_day: 'kazeros.jpg',
   act4: 'fa-solid fa-skull',
   serca: 'fa-solid fa-water'
 };
