@@ -321,7 +321,7 @@ function updateSidebarCategories(sidebarCollapsed) {
 
 // ================== 切換 raid (展開/收合) ==================
 function switchRaid(raidId) {
-  const sidebarEl = document.getElementById('sidebar');
+
   const isCollapsed = sidebarEl.classList.contains('sidebar-collapsed');
 
   // 🔥 收合狀態：只切內容，不動 submenu
@@ -675,7 +675,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
 
 let isScrolling;
-const sidebar = document.getElementById('sidebar');
+
 document.getElementById('main-body')?.addEventListener('scroll', () => {
     sidebar?.classList.add('scrolling');
     clearTimeout(isScrolling);
