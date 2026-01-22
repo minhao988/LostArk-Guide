@@ -366,37 +366,46 @@ const isCollapsed = sidebarEl.classList.contains('sidebar-collapsed');
 function initScrollSpy() {
     const container = document.getElementById('gate-content');
     const sidebar = document.getElementById('sidebar');
-    let isScrolling;
-
     if (!container || !sidebar) return;
 
-    container.addEventListener('scroll', () => {
-        sidebar.classList.add('scrolling');
-        clearTimeout(isScrolling);
-        isScrolling = setTimeout(() => {
-            sidebar.classList.remove('scrolling');
-        }, 100);
+    // 先移除舊 listener，避免重複綁定
+    container.removeEventListener('scroll', container._scrollSpyListener);
 
-        // ScrollSpy 核心：偵測目前區塊
+    const listener = () => {
+        const scrollTop = container.scrollTop;
+        const containerHeight = container.clientHeight;
+
         const sections = container.querySelectorAll('section[id], .pattern-card');
+        let activeTarget = null;
+
         sections.forEach(sec => {
-            const rect = sec.getBoundingClientRect();
-            if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
-                const target = sec.id || sec.dataset.menu || sec.dataset.target;
-                if (!target) return;
+            const offsetTop = sec.offsetTop;
+            const offsetHeight = sec.offsetHeight;
 
-                // 先移除 sidebar 之前 active
-                sidebar.querySelectorAll('.active').forEach(a => a.classList.remove('active'));
-
-                const link = sidebar.querySelector(`[data-target="${target}"]`);
-                if (link) link.classList.add('active');
-
-                // 可選：自動滾動 sidebar，保持 active 可見
-                link?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+            if (scrollTop >= offsetTop - 60 && scrollTop < offsetTop + offsetHeight) {
+                activeTarget = sec.id || sec.dataset.menu || sec.dataset.target;
             }
         });
-    });
+
+        // 更新 sidebar active
+        sidebar.querySelectorAll('.active').forEach(a => a.classList.remove('active'));
+        if (activeTarget) {
+            const link = sidebar.querySelector(`[data-target="${activeTarget}"]`);
+            if (link) {
+                link.classList.add('active');
+                // 保持 active 可見
+                link.scrollIntoView({ block: 'nearest' });
+            }
+        }
+    };
+
+    container.addEventListener('scroll', listener);
+    container._scrollSpyListener = listener;
+
+    // 初始化一次
+    listener();
 }
+
 
 
 
