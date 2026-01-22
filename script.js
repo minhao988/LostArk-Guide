@@ -48,7 +48,7 @@ const allRaids = {
                     { name: '10. 凌空墜', desc: '\u2022 卡傑朝隨機一名玩家上鈎再向下俯衝。', tips: '\u2022 此招式只出現在700機制和地下室階段。<br>\u2022 此招式在地下室階段吃滿下俯衝會纍積很多能量槽。', videoId: 'HFkjS7_jvto' },
                     { name: '11. 上鈎格擋', desc: '\u2022 卡傑上鈎后接格擋。', tips: '\u2022 此招式只出現在700機制 <br>\u2022 繞去背後可以無視格擋。', gif: 'purple_wave.gif', videoId: 'tb-pDiUhzm4' },
                     { name: '12. 迴旋格擋', desc: '\u2022 卡傑轉槍退後往前投擲迴旋槍, 槍回來插地板格擋。', tips: '\u2022 此招式只出現在700機制 <br><u2022> 看到插地板才面對卡傑格擋',  videoId: 'aDCD1pFK8L4', isDanger: true },
-                    { name: '13. 瞬移格擋', desc: '\u2022 卡傑揮劍瞬移后立刻出格擋。', tips: '\u2022 此招式只出現在700機制。<br>\u2022 看到瞬移先下意識準備格。', videoId: 'AbCdEf12345' },
+                    { name: '13. 瞬移格擋', desc: '\u2022 卡傑揮劍瞬移后立刻出格擋。', tips: '\u2022 此招式只出現在700機制。<br>\u2022 看到瞬移先下意識準備格。', videoId: 'AbCdEf12345', isJustGuard: true },
                     { name: '14. 快速反制', desc: '\u2022 卡傑瞬間出反制 失敗就會往前衝。', tips: '\u2022 此招式只出現在700機制。<br>\u2022 基本在700機制全程留反制技等這個',  videoId: 'AbCdEf12345', isCounter: true },
                     { name: '15. 退後反制', desc: '\u2022 卡傑退後出反制 失敗就往前戳', tips: '\u2022 此招式只出現在700機制。<br>\u2022 基本在700機制全程留反制技等這個。',  videoId: 'AbCdEf12345',  isCounter: true  },
                     { name: '16. 内場落雷', desc: '\u2022 卡傑出附近一堆落雷然後直接轉向玩家攻擊。', tips: '\u2022 此招式只出現在700機制。<br>\u2022 基本在700機制全程留反制技等這個',  videoId: 'AbCdEf12345', isDanger: true },
@@ -455,30 +455,39 @@ html += `
                 <span class="section-bar"></span>
                 招式動作解析 (Patterns Guide)
             </h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                ${gate.patterns?.map((p,i) => `
-                    <div id="pattern-${i}" class="pattern-card ${p.isDanger ? 'danger' : ''} rounded-2xl">
-                        <div class="relative w-full aspect-video cursor-pointer group bg-black/40 overflow-hidden" data-video="${p.videoId || ''}">
-                            <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                                <i class="fab fa-youtube text-6xl text-red-600 opacity-80"></i>
-                                <span class="mt-2 video-title  text-slate-300">${p.name}招式影片</span>
-                            </div>
-                        </div>
-                        <div class="p-5 text-[13px] md:text-[14px] lg:text-[15px]">
-                            <h4 class="pattern-title flex items-center gap-2">
-                                ${p.isDanger ? '<span class="pattern-danger-badge">DANGER</span>' : ''}
-                                ${p.isCounter ? '<span class="pattern-counter-badge">COUNTER</span>' : ''}
-                                ${p.name}
-                            </h4>
-                            <p class="text-slate-300 mb-4 min-h-[32px]">${p.desc}</p>
-                            <div class="bg-blue-950/30 border border-blue-500/30 rounded-lg p-3">
-                                <p class="text-blue-400 font-black uppercase mb-1 text-[11px] md:text-[12px]">應對方案</p>
-                                <p class="text-slate-400 italic text-[11px] md:text-[12px]">${p.tips}</p>
-                            </div>
-                        </div>
-                    </div>
-                `).join('')}
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    ${gate.patterns?.map((p,i) => `
+        <div id="pattern-${i}" class="pattern-card 
+            ${p.isDanger ? 'danger' : ''} 
+            ${p.isCounter ? 'counter' : ''} 
+            ${p.isJustGuard ? 'justguard' : ''} 
+            rounded-2xl">
+            
+            <div class="relative w-full aspect-video cursor-pointer group bg-black/40 overflow-hidden" data-video="${p.videoId || ''}">
+                <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                    <i class="fab fa-youtube text-6xl text-red-600 opacity-80"></i>
+                    <span class="mt-2 video-title text-slate-300">${p.name}招式影片</span>
+                </div>
             </div>
+            
+            <div class="p-5 text-[13px] md:text-[14px] lg:text-[15px]">
+                <h4 class="pattern-title flex items-center gap-2">
+                    ${p.isDanger ? '<span class="pattern-danger-badge">DANGER</span>' : ''}
+                    ${p.isCounter ? '<span class="pattern-counter-badge">COUNTER</span>' : ''}
+                    ${p.isJustGuard ? '<span class="pattern-justguard-badge">JUST GUARD</span>' : ''}
+                    ${p.name}
+                </h4>
+                
+                <p class="text-slate-300 mb-4 min-h-[32px]">${p.desc}</p>
+                
+                <div class="bg-blue-950/30 border border-blue-500/30 rounded-lg p-3">
+                    <p class="text-blue-400 font-black uppercase mb-1 text-[11px] md:text-[12px]">應對方案</p>
+                    <p class="text-slate-400 italic text-[11px] md:text-[12px]">${p.tips}</p>
+                </div>
+            </div>
+        </div>
+    `).join('')}
+</div>
         </section>
     `;
 
