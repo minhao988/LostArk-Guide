@@ -118,7 +118,7 @@ const allRaids = {
         }
     }
 };
-
+let currentScrollSpy = null;
 let currentRaidId = 'final_day';
 let expandedRaidId = null; // 記錄目前展開的 raid submenu
 
@@ -321,6 +321,16 @@ function updateSidebarCategories(sidebarCollapsed) {
 
 // ================== 切換 raid (展開/收合) ==================
 function switchRaid(raidId) {
+  const sidebarEl = document.getElementById('sidebar');
+  const isCollapsed = sidebarEl.classList.contains('sidebar-collapsed');
+
+  // 🔥 收合狀態：只切內容，不動 submenu
+  if (isCollapsed) {
+    expandedRaidId = raidId;
+    selectRaid(raidId);
+    return;
+  }
+
   const currentSub = document.getElementById(`gate-submenu-${raidId}`);
   if (!currentSub) return;
 
@@ -341,16 +351,6 @@ function switchRaid(raidId) {
     selectRaid(raidId);
   } else {
     expandedRaidId = null;
-  }
-
-  // // 📱 手机：点完直接关 sidebar
-  // if (window.innerWidth < 768) {
-  //   document.getElementById('sidebar')?.classList.remove('mobile-open');
-  // }
-
-  // 📱 手机版：只在 collapseSidebar 為 true 時才收回
-  if (collapseSidebar && window.innerWidth < 768) {
-    document.getElementById('sidebar')?.classList.remove('mobile-open');
   }
 }
 
@@ -543,7 +543,11 @@ function renderGateSubmenu(gate, raidId) {
             container.classList.remove('collapsed');
 
             // 滾動主頁面到對應 section
-            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const mainBody = document.getElementById('main-body');
+mainBody.scrollTo({
+    top: targetEl.offsetTop - 120,
+    behavior: 'smooth'
+});
 
             // 更新 submenu active
             submenuBtns.forEach(b => b.classList.remove('active'));
@@ -579,13 +583,19 @@ function renderGateSubmenu(gate, raidId) {
 function initScroll(container) {
     if (!container) return;
 
-    const scrollBtns = () =>
-        Array.from(container.querySelectorAll('.submenu-btn, .submenu-sub'));
-
     const mainBody = document.getElementById('main-body');
     if (!mainBody) return;
 
-    function onScroll() {
+    // 🔥 先移除舊的 scrollSpy
+    if (currentScrollSpy) {
+        mainBody.removeEventListener('scroll', currentScrollSpy);
+        currentScrollSpy = null;
+    }
+
+    const scrollBtns = () =>
+        Array.from(container.querySelectorAll('.submenu-btn, .submenu-sub'));
+
+    const onScroll = () => {
         let activeBtn = null;
 
         scrollBtns().forEach(btn => {
@@ -593,9 +603,7 @@ function initScroll(container) {
             if (!target) return;
 
             const offsetTop =
-                target.getBoundingClientRect().top +
-                mainBody.scrollTop -
-                140;
+                target.offsetTop - 140;
 
             if (mainBody.scrollTop >= offsetTop) {
                 activeBtn = btn;
@@ -604,9 +612,9 @@ function initScroll(container) {
 
         scrollBtns().forEach(b => b.classList.remove('active'));
         if (activeBtn) activeBtn.classList.add('active');
-    }
+    };
 
-    mainBody.removeEventListener('scroll', onScroll);
+    currentScrollSpy = onScroll;
     mainBody.addEventListener('scroll', onScroll, { passive: true });
 
     onScroll();
@@ -667,13 +675,13 @@ document.addEventListener('DOMContentLoaded', () => {
   
 
 let isScrolling;
-document.getElementById('main-body').addEventListener('scroll', () => {
-    sidebar.classList.add('scrolling');
-
+const sidebar = document.getElementById('sidebar');
+document.getElementById('main-body')?.addEventListener('scroll', () => {
+    sidebar?.classList.add('scrolling');
     clearTimeout(isScrolling);
     isScrolling = setTimeout(() => {
-        sidebar.classList.remove('scrolling');
-    }, 100); // 滾動停止 100ms 移除
+        sidebar?.classList.remove('scrolling');
+    }, 100);
 });
 
 
