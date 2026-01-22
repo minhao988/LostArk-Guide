@@ -197,19 +197,6 @@ function selectRaid(raidId) {
     switchGate(Object.keys(raid.gates)[0]);
 }
 
-// ================== 切換 gate ==================
-function switchGate(gateId) {
-  const raid = allRaids[currentRaidId];
-  const gate = raid.gates[gateId];
-  if (!gate) return;
-
-  document.querySelectorAll('.gate-btn')
-    .forEach(btn => btn.classList.remove('active'));
-  document.getElementById(`gate-tab-${gateId}`)?.classList.add('active');
-
-  renderGateContent(gate);
-  renderGateSubmenu(gate, currentRaidId);
-}
 
 function groupRaidsByCategory() {
     const groups = {};
@@ -263,34 +250,34 @@ function updateSidebarCategories(sidebarCollapsed) {
 
 
 // ================== 切換 raid (展開/收合) ==================
-function switchRaid(raidId) {
-  const currentSub = document.getElementById(`gate-submenu-${raidId}`);
-  if (!currentSub) return;
+// function switchRaid(raidId) {
+//   const currentSub = document.getElementById(`gate-submenu-${raidId}`);
+//   if (!currentSub) return;
 
-  const isSame = expandedRaidId === raidId;
+//   const isSame = expandedRaidId === raidId;
 
-  document.querySelectorAll('.gate-submenu-container').forEach(el => {
-    el.classList.add('collapsed');
-    el.innerHTML = '';
-  });
+//   document.querySelectorAll('.gate-submenu-container').forEach(el => {
+//     el.classList.add('collapsed');
+//     el.innerHTML = '';
+//   });
 
-  document.querySelectorAll('.sidebar-btn')
-    .forEach(b => b.classList.remove('active'));
+//   document.querySelectorAll('.sidebar-btn')
+//     .forEach(b => b.classList.remove('active'));
 
-  if (!isSame) {
-    expandedRaidId = raidId;
-    currentSub.classList.remove('collapsed');
-    document.getElementById(`btn-${raidId}`)?.classList.add('active');
-    selectRaid(raidId);
-  } else {
-    expandedRaidId = null;
-  }
+//   if (!isSame) {
+//     expandedRaidId = raidId;
+//     currentSub.classList.remove('collapsed');
+//     document.getElementById(`btn-${raidId}`)?.classList.add('active');
+//     selectRaid(raidId);
+//   } else {
+//     expandedRaidId = null;
+//   }
 
-  // 📱 手机：点完直接关 sidebar
-  if (window.innerWidth < 768) {
-    document.getElementById('sidebar')?.classList.remove('mobile-open');
-  }
-}
+//   // 📱 手机：点完直接关 sidebar
+//   if (window.innerWidth < 768) {
+//     document.getElementById('sidebar')?.classList.remove('mobile-open');
+//   }
+// }
 
 
 
@@ -428,54 +415,109 @@ html += `
 }
 
 
+// function renderGateSubmenu(gate, raidId) {
+//     const container = document.getElementById(`gate-submenu-${raidId}`);
+//     if (!container) return;
+
+//     let html = `<div class="px-4 py-2 text-xs font-bold text-slate-500 uppercase">${gate.name}</div>`;
+
+//     if (gate.mechanics?.length) {
+//         html += `
+//           <div class="submenu-group">
+//             <button class="submenu-btn" data-target="section-mechanics">核心機制</button>
+//             ${gate.mechanics.map((m,i) => `
+//                 <button class="submenu-sub pl-10" data-target="mech-${i}">${m.hp} ${m.title}</button>
+//             `).join('')}
+//           </div>
+//         `;
+//     }
+
+//     if (gate.patterns?.length) {
+//         html += `
+//           <div class="submenu-group mt-2">
+//             <button class="submenu-btn" data-target="section-patterns">招式解析</button>
+//             ${gate.patterns.map((p,i) => `
+//                 <button class="submenu-sub pl-10" data-target="pattern-${i}">${p.name}</button>
+//             `).join('')}
+//           </div>
+//         `;
+//     }
+
+//     container.innerHTML = html;
+
+//     // 綁定 scroll
+//     container.querySelectorAll('[data-target]').forEach(btn => {
+//     btn.onclick = () => {
+//         // 點 submenu 前確保 raid submenu 展開
+//         document.getElementById(`gate-submenu-${raidId}`)?.classList.remove('collapsed');
+//         container.querySelectorAll('.submenu-sub').forEach(b => b.classList.remove('active'));
+//         btn.classList.add('active');
+//         document.getElementById(btn.dataset.target)?.scrollIntoView({ behavior: 'smooth' });
+
+//         // 🔹 手機收回 sidebar + 隱藏 overlay
+//         if (window.innerWidth < 768) {
+//             const sidebar = document.getElementById('sidebar');
+//             const overlay = document.getElementById('sidebar-overlay');
+//             sidebar?.classList.remove('mobile-open');
+//             if (overlay) overlay.style.display = 'none';
+//         }
+//     };
+// });
+// }
+
+// ================== 切換 raid (展開/收合) ==================
+function switchRaid(raidId) {
+    const currentSub = document.getElementById(`gate-submenu-${raidId}`);
+    if (!currentSub) return;
+
+    const isSame = expandedRaidId === raidId;
+
+    // 收合所有 submenu
+    document.querySelectorAll('.gate-submenu-container').forEach(el => {
+        el.classList.add('collapsed');
+        el.innerHTML = '';
+    });
+
+    if (!isSame) {
+        // 展開這個 raid 的 submenu
+        const raid = allRaids[raidId];
+        Object.entries(raid.gates).forEach(([gId, gate]) => {
+            const btn = document.createElement('button');
+            btn.className = 'submenu-btn';
+            btn.innerText = `關卡 G${gId} - ${gate.name}`;
+            btn.onclick = () => switchGate(gId);
+            currentSub.appendChild(btn);
+        });
+
+        currentSub.classList.remove('collapsed');
+        expandedRaidId = raidId;
+    } else {
+        // 點同一個 raid => 收合
+        expandedRaidId = null;
+    }
+
+    // 切換 raid 內容
+    selectRaid(raidId);
+}
+
+// ================== 渲染 gate submenu (初始或切換) ==================
 function renderGateSubmenu(gate, raidId) {
-    const container = document.getElementById(`gate-submenu-${raidId}`);
-    if (!container) return;
+    const submenu = document.getElementById(`gate-submenu-${raidId}`);
+    if (!submenu) return;
 
-    let html = `<div class="px-4 py-2 text-xs font-bold text-slate-500 uppercase">${gate.name}</div>`;
+    submenu.innerHTML = ''; // 先清空
 
-    if (gate.mechanics?.length) {
-        html += `
-          <div class="submenu-group">
-            <button class="submenu-btn" data-target="section-mechanics">核心機制</button>
-            ${gate.mechanics.map((m,i) => `
-                <button class="submenu-sub pl-10" data-target="mech-${i}">${m.hp} ${m.title}</button>
-            `).join('')}
-          </div>
-        `;
-    }
+    Object.entries(allRaids[raidId].gates).forEach(([gId, g]) => {
+        const btn = document.createElement('button');
+        btn.className = 'submenu-btn' + (gId == gate.id ? ' active' : '');
+        btn.innerText = `關卡 G${gId} - ${g.name}`;
+        btn.onclick = () => switchGate(gId);
+        submenu.appendChild(btn);
+    });
 
-    if (gate.patterns?.length) {
-        html += `
-          <div class="submenu-group mt-2">
-            <button class="submenu-btn" data-target="section-patterns">招式解析</button>
-            ${gate.patterns.map((p,i) => `
-                <button class="submenu-sub pl-10" data-target="pattern-${i}">${p.name}</button>
-            `).join('')}
-          </div>
-        `;
-    }
-
-    container.innerHTML = html;
-
-    // 綁定 scroll
-    container.querySelectorAll('[data-target]').forEach(btn => {
-    btn.onclick = () => {
-        // 點 submenu 前確保 raid submenu 展開
-        document.getElementById(`gate-submenu-${raidId}`)?.classList.remove('collapsed');
-        container.querySelectorAll('.submenu-sub').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById(btn.dataset.target)?.scrollIntoView({ behavior: 'smooth' });
-
-        // 🔹 手機收回 sidebar + 隱藏 overlay
-        if (window.innerWidth < 768) {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
-            sidebar?.classList.remove('mobile-open');
-            if (overlay) overlay.style.display = 'none';
-        }
-    };
-});
+    // 展開 submenu
+    submenu.classList.remove('collapsed');
+    expandedRaidId = raidId;
 }
 
 function initScrollSpy() {
