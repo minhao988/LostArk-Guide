@@ -118,7 +118,7 @@ const allRaids = {
         }
     }
 };
-let currentScrollSpy = null;
+
 let currentRaidId = 'final_day';
 let expandedRaidId = null; // 記錄目前展開的 raid submenu
 
@@ -145,7 +145,51 @@ function getIcon(type) {
     return icons[type] || '<i class="fas fa-info-circle text-gray-400"></i>';
 }
 
+// ================== 初始化 sidebar ==================
+// function initSidebar() {
+//     const container = document.getElementById('sidebar-content');
+//     if (!container) return;
 
+//     // 先清空
+//     Array.from(container.children).forEach(child => {
+//         if (child.id !== 'gate-submenu') child.remove();
+//     });
+
+//     const groupedRaids = groupRaidsByCategory();
+
+//     Object.entries(groupedRaids).forEach(([category, raids]) => {
+//         // 生成分類標題
+//         let catTitle = document.createElement('div');
+//         catTitle.className = 'sidebar-category px-6 py-2 text-xs font-bold text-slate-500 uppercase';
+//         catTitle.dataset.fullName = category;
+//         catTitle.innerText = category;
+//         container.appendChild(catTitle);
+
+//         // 生成 raid 按鈕
+//         raids.forEach(raid => {
+//             const btn = document.createElement('button');
+//             btn.id = `btn-${raid.id}`;
+//             btn.className = 'sidebar-btn w-full flex items-center gap-2 px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all';
+//             // btn.innerHTML = `
+//             //     <i class="${raidIcons[raid.id] || 'fa-flag'} sidebar-icon"></i>
+//             //     <span class="sidebar-text font-medium">${raid.short}</span>
+//             // `;
+//           btn.innerHTML = raidIcons[raid.id].startsWith('http')
+//     ? `<img src="${raidIcons[raid.id]}" class="sidebar-icon w-6 h-6 object-contain" />
+//        <span class="sidebar-text font-medium">${raid.short}</span>`
+//     : `<i class="${raidIcons[raid.id]} sidebar-icon"></i>
+//        <span class="sidebar-text font-medium">${raid.short}</span>`;
+//             btn.onclick = () => switchRaid(raid.id);
+//             container.appendChild(btn);
+
+//             // 生成空 submenu
+//             const submenu = document.createElement('div');
+//             submenu.className = 'gate-submenu-container pl-6 collapsed';
+//             submenu.id = `gate-submenu-${raid.id}`;
+//             container.appendChild(submenu);
+//         });
+//     });
+// }
 
 function initSidebar() {
     const container = document.getElementById('sidebar-content');
@@ -166,28 +210,31 @@ function initSidebar() {
         catTitle.innerText = category;
         container.appendChild(catTitle);
       
-catTitle.addEventListener('click', () => {
-    const sidebarEl = document.getElementById('sidebar');
-    const isCollapsed = sidebarEl.classList.contains('sidebar-collapsed');
-
-    if (isCollapsed) {
-        if (raids[0]) switchRaid(raids[0].id);
-        return;
-    }
-
-    raids.forEach(raid => {
-        const btn = document.getElementById(`btn-${raid.id}`);
-        const submenu = document.getElementById(`gate-submenu-${raid.id}`);
-        const shouldExpand = submenu.classList.contains('collapsed'); // 如果 collapsed 就要展開
-
-        submenu.classList.toggle('collapsed', !shouldExpand); // true -> 收合, false -> 展開
-        btn.classList.toggle('active', shouldExpand);
-
-        if (shouldExpand) {
-            setTimeout(() => initScroll(submenu), 50);
-        }
-    });
-});
+      catTitle.addEventListener('click', () => {
+          const isCollapsed = document.getElementById('sidebar').classList.contains('collapsed'); // 或其他標記
+      
+          if (isCollapsed) {
+              // Sidebar 縮小 → 只切換 raid，不展開 submenu
+              // 可以選擇切換到第一個 raid
+              if (raids[0]) switchRaid(raids[0].id);
+          } else {
+              // Sidebar 展開 → 展開/收回 submenu
+              raids.forEach(raid => {
+                  const btn = document.getElementById(`btn-${raid.id}`);
+                  const submenu = document.getElementById(`gate-submenu-${raid.id}`);
+                  const isSubCollapsed = submenu.classList.contains('collapsed');
+      
+                  submenu.classList.toggle('collapsed', !isSubCollapsed);
+                  btn.classList.toggle('active', !isSubCollapsed);
+      
+                  if (isSubCollapsed) {
+                      setTimeout(() => {
+                          initScroll(submenu); // 展開後初始化 scroll
+                      }, 50);
+                  }
+              });
+          }
+      });
         // 生成 raid 按鈕
         raids.forEach(raid => {
             const btn = document.createElement('button');
@@ -314,16 +361,6 @@ function updateSidebarCategories(sidebarCollapsed) {
 
 // ================== 切換 raid (展開/收合) ==================
 function switchRaid(raidId) {
-
-  const isCollapsed = sidebarEl.classList.contains('sidebar-collapsed');
-
-  // 🔥 收合狀態：只切內容，不動 submenu
-  if (isCollapsed) {
-    expandedRaidId = raidId;
-    selectRaid(raidId);
-    return;
-  }
-
   const currentSub = document.getElementById(`gate-submenu-${raidId}`);
   if (!currentSub) return;
 
@@ -344,6 +381,16 @@ function switchRaid(raidId) {
     selectRaid(raidId);
   } else {
     expandedRaidId = null;
+  }
+
+  // // 📱 手机：点完直接关 sidebar
+  // if (window.innerWidth < 768) {
+  //   document.getElementById('sidebar')?.classList.remove('mobile-open');
+  // }
+
+  // 📱 手机版：只在 collapseSidebar 為 true 時才收回
+  if (collapseSidebar && window.innerWidth < 768) {
+    document.getElementById('sidebar')?.classList.remove('mobile-open');
   }
 }
 
@@ -492,8 +539,55 @@ html += `
 }
 
 
+// function renderGateSubmenu(gate, raidId) {
+//     const container = document.getElementById(`gate-submenu-${raidId}`);
+//     if (!container) return;
 
+//     let html = `<div class="px-4 py-2 text-xs font-bold text-slate-500 uppercase">${gate.name}</div>`;
 
+//     if (gate.mechanics?.length) {
+//         html += `
+//           <div class="submenu-group">
+//             <button class="submenu-btn" data-target="section-mechanics">核心機制</button>
+//             ${gate.mechanics.map((m,i) => `
+//                 <button class="submenu-sub pl-10" data-target="mech-${i}">${m.hp} ${m.title}</button>
+//             `).join('')}
+//           </div>
+//         `;
+//     }
+
+//     if (gate.patterns?.length) {
+//         html += `
+//           <div class="submenu-group mt-2">
+//             <button class="submenu-btn" data-target="section-patterns">招式解析</button>
+//             ${gate.patterns.map((p,i) => `
+//                 <button class="submenu-sub pl-10" data-target="pattern-${i}">${p.name}</button>
+//             `).join('')}
+//           </div>
+//         `;
+//     }
+
+//     container.innerHTML = html;
+
+//     // 綁定 scroll
+//     container.querySelectorAll('[data-target]').forEach(btn => {
+//     btn.onclick = () => {
+//         // 點 submenu 前確保 raid submenu 展開
+//         document.getElementById(`gate-submenu-${raidId}`)?.classList.remove('collapsed');
+//         container.querySelectorAll('.submenu-sub').forEach(b => b.classList.remove('active'));
+//         btn.classList.add('active');
+//         document.getElementById(btn.dataset.target)?.scrollIntoView({ behavior: 'smooth' });
+
+//         // 🔹 手機收回 sidebar + 隱藏 overlay
+//         if (window.innerWidth < 768) {
+//             const sidebar = document.getElementById('sidebar');
+//             const overlay = document.getElementById('sidebar-overlay');
+//             sidebar?.classList.remove('mobile-open');
+//             if (overlay) overlay.style.display = 'none';
+//         }
+//     };
+// });
+// }
 
 function renderGateSubmenu(gate, raidId) {
     const container = document.getElementById(`gate-submenu-${raidId}`);
@@ -525,93 +619,130 @@ function renderGateSubmenu(gate, raidId) {
 
     container.innerHTML = html;
 
-    // 🔹 綁定 submenu 按鈕點擊
-    const submenuBtns = container.querySelectorAll('[data-target]');
-    submenuBtns.forEach(btn => {
+    // 綁定 submenu 按鈕滾動
+    container.querySelectorAll('[data-target]').forEach(btn => {
         btn.addEventListener('click', () => {
-            const targetEl = document.getElementById(btn.dataset.target);
-            if (!targetEl) return;
-
-            // 展開 submenu (確保 visible)
-            container.classList.remove('collapsed');
-
-            // 滾動主頁面到對應 section
-            const mainBody = document.getElementById('main-body');
-mainBody.scrollTo({
-    top: targetEl.offsetTop - 120,
-    behavior: 'smooth'
-});
-
-            // 更新 submenu active
-            submenuBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            
-          if (window.innerWidth >= 768) {
-    const rect = btn.getBoundingClientRect();
-    const containerRect = container.getBoundingClientRect();
-
-    if (rect.top < containerRect.top || rect.bottom > containerRect.bottom) {
-        container.scrollBy({
-            top: rect.top - containerRect.top,
-            behavior: 'smooth'
-        });
-    }
-}
-
-            // 🔹 手機版收 sidebar
-            if (window.innerWidth < 768) {
-                document.getElementById('sidebar')?.classList.remove('mobile-open');
-                document.getElementById('sidebar-overlay').style.display = 'none';
+            const targetId = btn.dataset.target;
+            const targetEl = document.getElementById(targetId);
+            if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
     });
-
-    // 🔹 submenu 展開後初始化 scrollSpy
-    setTimeout(() => {
-        initScroll(container);
-    }, 50);
 }
+  
+function initScrollSpy() {
+    const sidebarContainer = document.getElementById('sidebar-content');
+    if (!sidebarContainer) return;
 
-function initScroll(container) {
-    if (!container) return;
+    let scrollSpySections = [];
+    let scrollSpyBtns = [];
 
-    const mainBody = document.getElementById('main-body');
-    if (!mainBody) return;
+    // 重新抓取目前畫面上的 section & sidebar 按鈕
+    function updateSpyElements() {
+        scrollSpySections = Array.from(
+            document.querySelectorAll('[data-menu], [id^="mech-"], [id^="pattern-"]')
+        );
 
-    // 🔥 先移除舊的 scrollSpy
-    if (currentScrollSpy) {
-        mainBody.removeEventListener('scroll', currentScrollSpy);
-        currentScrollSpy = null;
+        scrollSpyBtns = Array.from(
+            sidebarContainer.querySelectorAll('.submenu-btn, .submenu-sub')
+        );
     }
 
-    const scrollBtns = () =>
-        Array.from(container.querySelectorAll('.submenu-btn, .submenu-sub'));
+    updateSpyElements();
 
-    const onScroll = () => {
-        let activeBtn = null;
+    function onScroll() {
+        const scrollY = window.scrollY || window.pageYOffset;
+        let currentId = null;
 
-        scrollBtns().forEach(btn => {
-            const target = document.getElementById(btn.dataset.target);
-            if (!target) return;
-
+        // 依照畫面由上往下找最後一個「已經超過頂部」的 section
+        for (let i = 0; i < scrollSpySections.length; i++) {
+            const section = scrollSpySections[i];
             const offsetTop =
-                target.offsetTop - 140;
+                section.getBoundingClientRect().top + scrollY - 140; // header 偏移
 
-            if (mainBody.scrollTop >= offsetTop) {
-                activeBtn = btn;
+            if (scrollY >= offsetTop) {
+                currentId = section.id || section.dataset.menu;
             }
-        });
+        }
 
-        scrollBtns().forEach(b => b.classList.remove('active'));
-        if (activeBtn) activeBtn.classList.add('active');
-    };
+        // 🔹 若最後一個 section 已進入視窗，強制指定為 active
+        const lastSection = scrollSpySections[scrollSpySections.length - 1];
+        if (lastSection) {
+            const rect = lastSection.getBoundingClientRect();
+            if (rect.top < window.innerHeight) {
+                currentId = lastSection.id || lastSection.dataset.menu;
+            }
+        }
 
-    currentScrollSpy = onScroll;
-    mainBody.addEventListener('scroll', onScroll, { passive: true });
+        if (!currentId) return;
 
-    onScroll();
+        // sidebar 高亮處理
+        scrollSpyBtns.forEach(btn => btn.classList.remove('active'));
+
+        const activeBtn = sidebarContainer.querySelector(
+            `.submenu-btn[data-target="${currentId}"], 
+             .submenu-sub[data-target="${currentId}"]`
+        );
+
+        if (activeBtn) {
+            activeBtn.classList.add('active');
+
+            // 🔹 確保 activeBtn 在 sidebar 可視範圍內（避免抖動）
+            const sidebarRect = sidebarContainer.getBoundingClientRect();
+            const btnRect = activeBtn.getBoundingClientRect();
+
+            if (btnRect.top < sidebarRect.top || btnRect.bottom > sidebarRect.bottom) {
+                sidebarContainer.scrollTo({
+                    top:
+                        sidebarContainer.scrollTop +
+                        (btnRect.top - sidebarRect.top) -
+                        sidebarRect.height / 2 +
+                        btnRect.height / 2,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    }
+
+    // 🔹 window scroll
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 🔹 sidebar 點擊同步高亮
+    sidebarContainer.addEventListener('click', e => {
+        const btn = e.target.closest('[data-target]');
+        if (!btn) return;
+
+        const targetId = btn.dataset.target;
+        const targetEl = document.getElementById(targetId);
+        if (!targetEl) return;
+
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        scrollSpyBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // 手機版自動收回 sidebar
+        if (window.innerWidth < 768) {
+            document.getElementById('sidebar')?.classList.remove('mobile-open');
+            const overlay = document.getElementById('sidebar-overlay');
+            if (overlay) overlay.style.display = 'none';
+        }
+    });
+
+    // 🔹 submenu / gate 變動時自動重新抓 section
+    const observer = new MutationObserver(() => {
+        updateSpyElements();
+        onScroll();
+    });
+
+    observer.observe(document.getElementById('main-body'), {
+        childList: true,
+        subtree: true
+    });
 }
+
+
 
 
 
@@ -665,16 +796,50 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+    // 🔹 點 sidebar 按鈕選擇
+    // document.querySelectorAll('.sidebar-btn').forEach(btn => {
+    //   btn.addEventListener('click', () => {
+    //     // ① 清掉所有 active
+    //     document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+    //     btn.classList.add('active');
+    
+    //     const submenuId = btn.dataset.submenu;
+    //     const submenu = document.getElementById(submenuId);
+    
+    //     if (window.innerWidth >= 768) {
+    //       // 桌面版：點按鈕展開 / 收回 submenu
+    //       if (submenu) submenu.classList.toggle('collapsed');
+    //     } else {
+    //       // 手機版：點按鈕 → 收回 sidebar & 隱藏 overlay
+    //       sidebar.classList.remove('mobile-open');
+    //       sidebarOverlay.style.display = 'none';
+    //     }
+    //   });
+    // });
+ initScrollSpy();
   
 
 let isScrolling;
+document.getElementById('main-body').addEventListener('scroll', () => {
+    sidebar.classList.add('scrolling');
 
-document.getElementById('main-body')?.addEventListener('scroll', () => {
-    sidebar?.classList.add('scrolling');
     clearTimeout(isScrolling);
     isScrolling = setTimeout(() => {
-        sidebar?.classList.remove('scrolling');
-    }, 100);
+        sidebar.classList.remove('scrolling');
+    }, 100); // 滾動停止 100ms 移除
 });
+
+
+//  const activeSubmenu = document.querySelector('.submenu-sub.active');
+// if (activeSubmenu) {
+//     activeSubmenu.scrollIntoView({
+//         block: 'nearest', // 滾動到可見區域，但不強制頂部對齊
+//         behavior: 'smooth' // 平滑滾動
+//     });
+// }
+//   if (activeSubmenu && window.innerWidth < 768) {
+//     activeSubmenu.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+// }
+  
 
 });
