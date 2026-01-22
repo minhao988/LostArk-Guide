@@ -608,46 +608,6 @@ function renderGateSubmenu(gate, raidId) {
 }
 
 
-// ================== ScrollSpy ==================
-function initScroll(container) {
-    if (!container) return;
-    const mainBody = document.getElementById('main-body');
-    if (!mainBody) return;
-
-    if (currentScrollSpy) {
-        mainBody.removeEventListener('scroll', currentScrollSpy);
-        currentScrollSpy = null;
-    }
-
-    const scrollBtns = () => Array.from(container.querySelectorAll('.submenu-btn, .submenu-sub'));
-
-    currentScrollSpy = () => {
-        if (isScrollingByClick) return; // 🔹 點擊滾動時暫停
-
-        const threshold = 140; // 偏移高度
-        let activeBtn = null;
-        let closestDistance = Infinity;
-
-        scrollBtns().forEach(btn => {
-            const target = document.getElementById(btn.dataset.target);
-            if (!target) return;
-
-            const rect = target.getBoundingClientRect();
-            const distance = Math.abs(rect.top - threshold);
-
-            if (rect.top <= threshold && distance < closestDistance) {
-                closestDistance = distance;
-                activeBtn = btn;
-            }
-        });
-
-        scrollBtns().forEach(b => b.classList.remove('active'));
-        if (activeBtn) activeBtn.classList.add('active');
-    };
-
-    mainBody.addEventListener('scroll', currentScrollSpy);
-}
-
 document.addEventListener('DOMContentLoaded', () => {
    initSidebar();
 selectRaid(currentRaidId);
