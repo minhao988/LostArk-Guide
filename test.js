@@ -753,18 +753,18 @@ function initScroll(container = document.getElementById('sidebar-content')) {
     const observer = new MutationObserver(() => {
         scrollBtns = Array.from(container.querySelectorAll('.submenu-btn, .submenu-sub'));
     });
-
     observer.observe(container, { childList: true, subtree: true });
 
     function onScroll() {
         const scrollTop = container === window ? window.scrollY : container.scrollTop;
-
         let activeBtn = null;
+
         scrollBtns.forEach(btn => {
             const targetId = btn.dataset.target;
             const targetEl = document.getElementById(targetId);
             if (!targetEl) return;
 
+            // 計算偏移量
             const offsetTop = targetEl.getBoundingClientRect().top + window.scrollY - 140;
             if (scrollTop >= offsetTop) {
                 activeBtn = btn;
@@ -774,25 +774,46 @@ function initScroll(container = document.getElementById('sidebar-content')) {
         scrollBtns.forEach(btn => btn.classList.remove('active'));
         if (activeBtn) activeBtn.classList.add('active');
 
-        // 自動 scroll 到可視
+        // 🔹 focus 到 activeBtn
         if (activeBtn && container !== window) {
             const rect = activeBtn.getBoundingClientRect();
             const containerRect = container.getBoundingClientRect();
 
+            // btn 不在 container 可視範圍才滾動
             if (rect.top < containerRect.top || rect.bottom > containerRect.bottom) {
-                container.scrollTo({
-                    top: container.scrollTop + (rect.top - containerRect.top) - containerRect.height / 2 + rect.height / 2,
-                    behavior: 'smooth'
-                });
+                const offset = rect.top - containerRect.top;
+                container.scrollBy({ top: offset, behavior: 'smooth' });
             }
         }
     }
 
-    // 支援 window 或 container scroll
     const scrollTarget = container === window ? window : container;
     scrollTarget.addEventListener('scroll', onScroll, { passive: true });
 
-    onScroll(); // 初始化時執行一次
+    // 🔹 sidebar 點擊按鈕也要 focus
+    scrollBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetId = btn.dataset.target;
+            const targetEl = document.getElementById(targetId);
+            if (!targetEl) return;
+
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            scrollBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            if (container !== window) {
+                const rect = btn.getBoundingClientRect();
+                const containerRect = container.getBoundingClientRect();
+                if (rect.top < containerRect.top || rect.bottom > containerRect.bottom) {
+                    const offset = rect.top - containerRect.top;
+                    container.scrollBy({ top: offset, behavior: 'smooth' });
+                }
+            }
+        });
+    });
+
+    onScroll();
 }
 
 
