@@ -365,3 +365,16 @@ h2, h3, h4 {
     padding-left: 0 !important;
   }
 }
+
+.gate-submenu-container {
+  max-height: 1000px;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.2s ease;
+  opacity: 1;
+}
+
+.gate-submenu-container.collapsed {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
