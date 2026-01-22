@@ -123,44 +123,54 @@ function getIcon(type) {
 }
 
 // ================== 初始化 sidebar ==================
-function initSidebar() {
-    const container = document.getElementById('sidebar-content');
-    if (!container) return;
+function initScrollSpy() {
+    const sidebarContainer = document.getElementById('sidebar-content');
 
-    // 先清空
-    Array.from(container.children).forEach(child => {
-        if (child.id !== 'gate-submenu') child.remove();
-    });
+    function updateSpyElements() {
+        scrollSpySections = document.querySelectorAll('[id^="mech-"], [id^="pattern-"], [data-menu]');
+        scrollSpyBtns = document.querySelectorAll('.submenu-sub, .submenu-btn');
+    }
 
-    const groupedRaids = groupRaidsByCategory();
+    updateSpyElements();
 
-    Object.entries(groupedRaids).forEach(([category, raids]) => {
-        // 生成分類標題
-        let catTitle = document.createElement('div');
-        catTitle.className = 'sidebar-category px-6 py-2 text-xs font-bold text-slate-500 uppercase';
-        catTitle.dataset.fullName = category;
-        catTitle.innerText = category;
-        container.appendChild(catTitle);
+    function onScroll() {
+        const scrollPos = window.scrollY || window.pageYOffset;
+        let currentId = null;
 
-        // 生成 raid 按鈕
-        raids.forEach(raid => {
-            const btn = document.createElement('button');
-            btn.id = `btn-${raid.id}`;
-            btn.className = 'sidebar-btn w-full flex items-center gap-2 px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all';
-            btn.innerHTML = `
-                <i class="${raidIcons[raid.id] || 'fa-flag'} sidebar-icon"></i>
-                <span class="sidebar-text font-medium">${raid.short}</span>
-            `;
-            btn.onclick = () => switchRaid(raid.id);
-            container.appendChild(btn);
-
-            // 生成空 submenu
-            const submenu = document.createElement('div');
-            submenu.className = 'gate-submenu-container pl-6 collapsed';
-            submenu.id = `gate-submenu-${raid.id}`;
-            container.appendChild(submenu);
+        // 找到當前滾動到的 section
+        scrollSpySections.forEach(section => {
+            const offsetTop = section.getBoundingClientRect().top + window.scrollY - 120; // header 偏移
+            if (scrollPos >= offsetTop) {
+                currentId = section.id || section.dataset.menu;
+            }
         });
-    });
+
+        if (!currentId) return;
+
+        // 高亮 sidebar
+        scrollSpyBtns.forEach(btn => btn.classList.remove('active'));
+        const activeBtn = document.querySelector(`.submenu-sub[data-target="${currentId}"], .submenu-btn[data-target="${currentId}"]`);
+        if (activeBtn) {
+            activeBtn.classList.add('active');
+
+            // 自動 scroll sidebar 使 activeBtn 可見
+            const sidebarRect = sidebarContainer.getBoundingClientRect();
+            const btnRect = activeBtn.getBoundingClientRect();
+
+            if (btnRect.top < sidebarRect.top || btnRect.bottom > sidebarRect.bottom) {
+                // btn 不在可見範圍內
+                sidebarContainer.scrollTo({
+                    top: sidebarContainer.scrollTop + (btnRect.top - sidebarRect.top) - sidebarRect.height / 2 + btnRect.height / 2,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    }
+
+    window.addEventListener('scroll', onScroll);
+    // 重新渲染 submenu 後更新 sections
+    const observer = new MutationObserver(updateSpyElements);
+    observer.observe(sidebarContainer, { childList: true, subtree: true });
 }
 
 
