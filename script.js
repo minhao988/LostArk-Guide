@@ -478,66 +478,84 @@ function renderGateSubmenu(gate, raidId) {
 });
 }
   
-let scrollSpySections = [];
-let scrollSpyBtns = [];
-
 function initScrollSpy() {
     const sidebarContainer = document.getElementById('sidebar-content');
+    if (!sidebarContainer) return;
 
     let scrollSpySections = [];
     let scrollSpyBtns = [];
 
+    // 重新抓取目前畫面上的 section & sidebar 按鈕
     function updateSpyElements() {
-        // 所有機制與招式區塊
-        scrollSpySections = document.querySelectorAll('[id^="mech-"], [id^="pattern-"], [data-menu]');
-        // 對應 sidebar 按鈕
-        scrollSpyBtns = document.querySelectorAll('.submenu-sub, .submenu-btn');
+        scrollSpySections = Array.from(
+            document.querySelectorAll('[data-menu], [id^="mech-"], [id^="pattern-"]')
+        );
+
+        scrollSpyBtns = Array.from(
+            sidebarContainer.querySelectorAll('.submenu-btn, .submenu-sub')
+        );
     }
 
-    updateSpyElements(); // 初始抓取
+    updateSpyElements();
 
     function onScroll() {
-        const scrollPos = window.scrollY || window.pageYOffset;
+        const scrollY = window.scrollY || window.pageYOffset;
         let currentId = null;
 
-        // 找到當前滾動到的 section
-        scrollSpySections.forEach(section => {
-            const offsetTop = section.getBoundingClientRect().top + window.scrollY - 120; // header 偏移
-            if (scrollPos >= offsetTop) {
+        // 依照畫面由上往下找最後一個「已經超過頂部」的 section
+        for (let i = 0; i < scrollSpySections.length; i++) {
+            const section = scrollSpySections[i];
+            const offsetTop =
+                section.getBoundingClientRect().top + scrollY - 140; // header 偏移
+
+            if (scrollY >= offsetTop) {
                 currentId = section.id || section.dataset.menu;
             }
-        });
-         // 🔹 滾到最底部，強制最後一個 section active
-    if (scrollPos + windowHeight >= docHeight - 10) { // 10px 緩衝
+        }
+
+        // 🔹 若最後一個 section 已進入視窗，強制指定為 active
         const lastSection = scrollSpySections[scrollSpySections.length - 1];
-        currentId = lastSection.id || lastSection.dataset.menu;
-    }
+        if (lastSection) {
+            const rect = lastSection.getBoundingClientRect();
+            if (rect.top < window.innerHeight) {
+                currentId = lastSection.id || lastSection.dataset.menu;
+            }
+        }
 
         if (!currentId) return;
 
-        // 高亮 sidebar
+        // sidebar 高亮處理
         scrollSpyBtns.forEach(btn => btn.classList.remove('active'));
-        const activeBtn = document.querySelector(`.submenu-sub[data-target="${currentId}"], .submenu-btn[data-target="${currentId}"]`);
+
+        const activeBtn = sidebarContainer.querySelector(
+            `.submenu-btn[data-target="${currentId}"], 
+             .submenu-sub[data-target="${currentId}"]`
+        );
+
         if (activeBtn) {
             activeBtn.classList.add('active');
 
-            // 自動 scroll sidebar 使 activeBtn 可見
+            // 🔹 確保 activeBtn 在 sidebar 可視範圍內（避免抖動）
             const sidebarRect = sidebarContainer.getBoundingClientRect();
             const btnRect = activeBtn.getBoundingClientRect();
 
             if (btnRect.top < sidebarRect.top || btnRect.bottom > sidebarRect.bottom) {
                 sidebarContainer.scrollTo({
-                    top: sidebarContainer.scrollTop + (btnRect.top - sidebarRect.top) - sidebarRect.height / 2 + btnRect.height / 2,
+                    top:
+                        sidebarContainer.scrollTop +
+                        (btnRect.top - sidebarRect.top) -
+                        sidebarRect.height / 2 +
+                        btnRect.height / 2,
                     behavior: 'smooth'
                 });
             }
         }
     }
 
-    // 🔹 window scroll 時觸發
-    window.addEventListener('scroll', onScroll);
+    // 🔹 window scroll
+    window.addEventListener('scroll', onScroll, { passive: true });
 
-    // 🔹 sidebar click scroll 同步高亮
+    // 🔹 sidebar 點擊同步高亮
     sidebarContainer.addEventListener('click', e => {
         const btn = e.target.closest('[data-target]');
         if (!btn) return;
@@ -546,39 +564,31 @@ function initScrollSpy() {
         const targetEl = document.getElementById(targetId);
         if (!targetEl) return;
 
-        // 滾動到 section
         targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-        // 高亮按鈕
         scrollSpyBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
-        // 手機模式收回 sidebar
+        // 手機版自動收回 sidebar
         if (window.innerWidth < 768) {
-            const sidebar = document.getElementById('sidebar');
+            document.getElementById('sidebar')?.classList.remove('mobile-open');
             const overlay = document.getElementById('sidebar-overlay');
-            sidebar?.classList.remove('mobile-open');
             if (overlay) overlay.style.display = 'none';
         }
     });
 
-    // 🔹 MutationObserver：submenu 更新時重新抓取 section 與 btn
-    const observer = new MutationObserver(updateSpyElements);
-    observer.observe(sidebarContainer, { childList: true, subtree: true });
+    // 🔹 submenu / gate 變動時自動重新抓 section
+    const observer = new MutationObserver(() => {
+        updateSpyElements();
+        onScroll();
+    });
 
-    // 🔹 初始化：滾到當前 active 的 submenu
-    setTimeout(() => {
-        const activeSubmenu = document.querySelector('.submenu-sub.active');
-        if (activeSubmenu) {
-            const sidebarRect = sidebarContainer.getBoundingClientRect();
-            const btnRect = activeSubmenu.getBoundingClientRect();
-            sidebarContainer.scrollTo({
-                top: sidebarContainer.scrollTop + (btnRect.top - sidebarRect.top) - sidebarRect.height / 2 + btnRect.height / 2,
-                behavior: 'auto'
-            });
-        }
-    }, 300);
+    observer.observe(document.getElementById('main-body'), {
+        childList: true,
+        subtree: true
+    });
 }
+
 
 
 
@@ -634,25 +644,25 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
     // 🔹 點 sidebar 按鈕選擇
-    document.querySelectorAll('.sidebar-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        // ① 清掉所有 active
-        document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+    // document.querySelectorAll('.sidebar-btn').forEach(btn => {
+    //   btn.addEventListener('click', () => {
+    //     // ① 清掉所有 active
+    //     document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+    //     btn.classList.add('active');
     
-        const submenuId = btn.dataset.submenu;
-        const submenu = document.getElementById(submenuId);
+    //     const submenuId = btn.dataset.submenu;
+    //     const submenu = document.getElementById(submenuId);
     
-        if (window.innerWidth >= 768) {
-          // 桌面版：點按鈕展開 / 收回 submenu
-          if (submenu) submenu.classList.toggle('collapsed');
-        } else {
-          // 手機版：點按鈕 → 收回 sidebar & 隱藏 overlay
-          sidebar.classList.remove('mobile-open');
-          sidebarOverlay.style.display = 'none';
-        }
-      });
-    });
+    //     if (window.innerWidth >= 768) {
+    //       // 桌面版：點按鈕展開 / 收回 submenu
+    //       if (submenu) submenu.classList.toggle('collapsed');
+    //     } else {
+    //       // 手機版：點按鈕 → 收回 sidebar & 隱藏 overlay
+    //       sidebar.classList.remove('mobile-open');
+    //       sidebarOverlay.style.display = 'none';
+    //     }
+    //   });
+    // });
  initScrollSpy();
   
 
@@ -667,16 +677,16 @@ document.getElementById('main-body').addEventListener('scroll', () => {
 });
 
 
- const activeSubmenu = document.querySelector('.submenu-sub.active');
-if (activeSubmenu) {
-    activeSubmenu.scrollIntoView({
-        block: 'nearest', // 滾動到可見區域，但不強制頂部對齊
-        behavior: 'smooth' // 平滑滾動
-    });
-}
-  if (activeSubmenu && window.innerWidth < 768) {
-    activeSubmenu.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-}
+//  const activeSubmenu = document.querySelector('.submenu-sub.active');
+// if (activeSubmenu) {
+//     activeSubmenu.scrollIntoView({
+//         block: 'nearest', // 滾動到可見區域，但不強制頂部對齊
+//         behavior: 'smooth' // 平滑滾動
+//     });
+// }
+//   if (activeSubmenu && window.innerWidth < 768) {
+//     activeSubmenu.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+// }
   
 
 });
