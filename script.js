@@ -1,5 +1,5 @@
 const raidIcons = {
-  final_day: 'kazeros.jpg',
+  final_day: 'https://raw.githubusercontent.com/minhao988/LostArk-Guide/main/kazeros.jpg',
   act4: 'fa-solid fa-skull',
   serca: 'fa-solid fa-water'
 };
@@ -156,10 +156,15 @@ function initSidebar() {
             const btn = document.createElement('button');
             btn.id = `btn-${raid.id}`;
             btn.className = 'sidebar-btn w-full flex items-center gap-2 px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all';
-            btn.innerHTML = `
-                <i class="${raidIcons[raid.id] || 'fa-flag'} sidebar-icon"></i>
-                <span class="sidebar-text font-medium">${raid.short}</span>
-            `;
+            // btn.innerHTML = `
+            //     <i class="${raidIcons[raid.id] || 'fa-flag'} sidebar-icon"></i>
+            //     <span class="sidebar-text font-medium">${raid.short}</span>
+            // `;
+          btn.innerHTML = raidIcons[raid.id].startsWith('http')
+    ? `<img src="${raidIcons[raid.id]}" class="sidebar-icon w-6 h-6 object-contain" />
+       <span class="sidebar-text font-medium">${raid.short}</span>`
+    : `<i class="${raidIcons[raid.id]} sidebar-icon"></i>
+       <span class="sidebar-text font-medium">${raid.short}</span>`;
             btn.onclick = () => switchRaid(raid.id);
             container.appendChild(btn);
 
