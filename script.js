@@ -483,98 +483,45 @@ let scrollSpyBtns = [];
 
 function initScrollSpy() {
     const sidebarContainer = document.getElementById('sidebar-content');
-
-    let scrollSpySections = [];
-    let scrollSpyBtns = [];
-
-    function updateSpyElements() {
-        // 所有機制與招式區塊
-        scrollSpySections = document.querySelectorAll('[id^="mech-"], [id^="pattern-"], [data-menu]');
-        // 對應 sidebar 按鈕
-        scrollSpyBtns = document.querySelectorAll('.submenu-sub, .submenu-btn');
-    }
-
-    updateSpyElements(); // 初始抓取
+    let sections = document.querySelectorAll('[id^="mech-"], [id^="pattern-"], [data-menu]');
+    let buttons = sidebarContainer.querySelectorAll('.submenu-sub, .submenu-btn');
 
     function onScroll() {
-        const scrollPos = window.scrollY || window.pageYOffset;
+        const scrollPos = window.scrollY + 120; // header 偏移
         let currentId = null;
 
-        // 找到當前滾動到的 section
-        scrollSpySections.forEach(section => {
-            const offsetTop = section.getBoundingClientRect().top + window.scrollY - 120; // header 偏移
-            if (scrollPos >= offsetTop) {
-                currentId = section.id || section.dataset.menu;
-            }
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (scrollPos >= sectionTop) currentId = section.id || section.dataset.menu;
         });
 
         if (!currentId) return;
 
-        // 高亮 sidebar
-        scrollSpyBtns.forEach(btn => btn.classList.remove('active'));
-        const activeBtn = document.querySelector(`.submenu-sub[data-target="${currentId}"], .submenu-btn[data-target="${currentId}"]`);
+        buttons.forEach(btn => btn.classList.remove('active'));
+        const activeBtn = sidebarContainer.querySelector(`[data-target="${currentId}"]`);
         if (activeBtn) {
             activeBtn.classList.add('active');
-
-            // 自動 scroll sidebar 使 activeBtn 可見
+            // 自動 scroll sidebar，只在需要時
             const sidebarRect = sidebarContainer.getBoundingClientRect();
             const btnRect = activeBtn.getBoundingClientRect();
-
             if (btnRect.top < sidebarRect.top || btnRect.bottom > sidebarRect.bottom) {
                 sidebarContainer.scrollTo({
-                    top: sidebarContainer.scrollTop + (btnRect.top - sidebarRect.top) - sidebarRect.height / 2 + btnRect.height / 2,
+                    top: sidebarContainer.scrollTop + (btnRect.top - sidebarRect.top - sidebarRect.height / 2 + btnRect.height / 2),
                     behavior: 'smooth'
                 });
             }
         }
     }
 
-    // 🔹 window scroll 時觸發
     window.addEventListener('scroll', onScroll);
 
-    // 🔹 sidebar click scroll 同步高亮
-    sidebarContainer.addEventListener('click', e => {
-        const btn = e.target.closest('[data-target]');
-        if (!btn) return;
-
-        const targetId = btn.dataset.target;
-        const targetEl = document.getElementById(targetId);
-        if (!targetEl) return;
-
-        // 滾動到 section
-        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-        // 高亮按鈕
-        scrollSpyBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        // 手機模式收回 sidebar
-        if (window.innerWidth < 768) {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
-            sidebar?.classList.remove('mobile-open');
-            if (overlay) overlay.style.display = 'none';
-        }
+    // 🔹 如果 sidebar submenu 更新
+    const observer = new MutationObserver(() => {
+        sections = document.querySelectorAll('[id^="mech-"], [id^="pattern-"], [data-menu]');
+        buttons = sidebarContainer.querySelectorAll('.submenu-sub, .submenu-btn');
     });
-
-    // 🔹 MutationObserver：submenu 更新時重新抓取 section 與 btn
-    const observer = new MutationObserver(updateSpyElements);
     observer.observe(sidebarContainer, { childList: true, subtree: true });
-
-    // 🔹 初始化：滾到當前 active 的 submenu
-    setTimeout(() => {
-        const activeSubmenu = document.querySelector('.submenu-sub.active');
-        if (activeSubmenu) {
-            const sidebarRect = sidebarContainer.getBoundingClientRect();
-            const btnRect = activeSubmenu.getBoundingClientRect();
-            sidebarContainer.scrollTo({
-                top: sidebarContainer.scrollTop + (btnRect.top - sidebarRect.top) - sidebarRect.height / 2 + btnRect.height / 2,
-                behavior: 'auto'
-            });
-        }
-    }, 300);
 }
-
 
 
 
