@@ -481,37 +481,54 @@ function renderGateSubmenu(gate, raidId) {
 let scrollSpySections = [];
 let scrollSpyBtns = [];
 
-function initScrollSpy() {
+function initMainBodyScrollSpy() {
+    const mainBody = document.getElementById('main-body');
+    if (!mainBody) return;
+
+    let submenuButtons = [];
+
+    // 取得最新的 submenu 對應 section
     function updateSpyElements() {
-        scrollSpySections = document.querySelectorAll('[id^="mech-"], [id^="pattern-"], [data-menu]');
-        scrollSpyBtns = document.querySelectorAll('.submenu-sub, .submenu-btn');
+        submenuButtons = document.querySelectorAll('.submenu-sub, .submenu-btn');
     }
 
-    updateSpyElements(); // 初始抓取
+    updateSpyElements(); // 初始化
 
-    window.addEventListener('scroll', () => {
-        const scrollPos = window.scrollY || window.pageYOffset;
-        let currentId = null;
+    mainBody.addEventListener('scroll', () => {
+        const scrollTop = mainBody.scrollTop;
+        const containerRect = mainBody.getBoundingClientRect();
 
-        scrollSpySections.forEach(section => {
-            const offsetTop = section.getBoundingClientRect().top + window.scrollY - 100; // 依 header 調整
-            if (scrollPos >= offsetTop) {
-                currentId = section.id || section.dataset.menu;
+        let currentActiveId = null;
+
+        // 每個 section 的位置相對於 scroll container
+        submenuButtons.forEach(btn => {
+            const targetId = btn.dataset.target;
+            if (!targetId) return;
+            const section = document.getElementById(targetId);
+            if (!section) return;
+
+            const sectionRect = section.getBoundingClientRect();
+            const offsetTop = section.offsetTop; // 相對於 container
+            if (scrollTop >= offsetTop - 80) { // 80px header padding 調整
+                currentActiveId = targetId;
             }
         });
 
-        if (currentId) {
-            scrollSpyBtns.forEach(btn => btn.classList.remove('active'));
-            const activeBtn = document.querySelector(`.submenu-sub[data-target="${currentId}"], .submenu-btn[data-target="${currentId}"]`);
-            if (activeBtn) activeBtn.classList.add('active');
+        if (currentActiveId) {
+            submenuButtons.forEach(b => b.classList.remove('active'));
+            const activeBtn = document.querySelector(`.submenu-sub[data-target="${currentActiveId}"], .submenu-btn[data-target="${currentActiveId}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+                // 自動滾動到可視區
+                activeBtn.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+            }
         }
     });
 
-    // 🔹 每次重新渲染 submenu 後呼叫 updateSpyElements()
+    // 每次 submenu 更新時重新抓元素
     const observer = new MutationObserver(updateSpyElements);
     observer.observe(document.getElementById('sidebar-content'), { childList: true, subtree: true });
 }
-
 
 
 
@@ -586,7 +603,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
- initScrollSpy();
+initMainBodyScrollSpy();
   
 
 let isScrolling;
@@ -599,29 +616,8 @@ document.getElementById('main-body').addEventListener('scroll', () => {
     }, 100); // 滾動停止 100ms 移除
 });
 
-  function updateScrollSpy() {
-    const sections = document.querySelectorAll('.submenu-sub');
-    const scrollY = window.scrollY + window.innerHeight; // 計算視窗底部
-    let activeSet = false;
+ 
 
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionBottom = sectionTop + section.offsetHeight;
-
-        if (scrollY >= sectionTop + section.offsetHeight / 2) {
-            document.querySelectorAll('.submenu-sub.active').forEach(el => el.classList.remove('active'));
-            section.classList.add('active');
-            activeSet = true;
-        }
-    });
-
-    // 如果滾到最底部，確保最後一個 active
-    if (!activeSet) {
-        sections[sections.length - 1].classList.add('active');
-    }
-}
-
-window.addEventListener('scroll', updateScrollSpy);
  const activeSubmenu = document.querySelector('.submenu-sub.active');
 if (activeSubmenu) {
     activeSubmenu.scrollIntoView({
