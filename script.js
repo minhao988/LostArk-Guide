@@ -472,52 +472,41 @@ function switchRaid(raidId) {
 
     const isSame = expandedRaidId === raidId;
 
-    // 收合所有 submenu
+    // 先收合所有 submenu
     document.querySelectorAll('.gate-submenu-container').forEach(el => {
         el.classList.add('collapsed');
         el.innerHTML = '';
     });
 
     if (!isSame) {
-        // 展開這個 raid 的 submenu
-        const raid = allRaids[raidId];
-        Object.entries(raid.gates).forEach(([gId, gate]) => {
-            const btn = document.createElement('button');
-            btn.className = 'submenu-btn';
-            btn.innerText = `關卡 G${gId} - ${gate.name}`;
-            btn.onclick = () => switchGate(gId);
-            currentSub.appendChild(btn);
-        });
-
-        currentSub.classList.remove('collapsed');
+        // 展開選中 raid 的 submenu
+        renderGateSubmenu(Object.values(allRaids[raidId].gates)[0], raidId);
         expandedRaidId = raidId;
     } else {
-        // 點同一個 raid => 收合
-        expandedRaidId = null;
+        expandedRaidId = null; // 點同一個 raid => 收合
     }
 
     // 切換 raid 內容
     selectRaid(raidId);
 }
 
-// ================== 渲染 gate submenu (初始或切換) ==================
+// 統一生成 submenu
 function renderGateSubmenu(gate, raidId) {
-    const submenu = document.getElementById(`gate-submenu-${raidId}`);
-    if (!submenu) return;
+    const container = document.getElementById(`gate-submenu-${raidId}`);
+    if (!container) return;
 
-    submenu.innerHTML = ''; // 先清空
+    container.innerHTML = ''; // 先清空
 
     Object.entries(allRaids[raidId].gates).forEach(([gId, g]) => {
         const btn = document.createElement('button');
-        btn.className = 'submenu-btn' + (gId == gate.id ? ' active' : '');
+        btn.className = 'submenu-btn';
+        btn.dataset.target = `gate-content`; // scrollSpy 或後續改成 gate 對應 id
         btn.innerText = `關卡 G${gId} - ${g.name}`;
         btn.onclick = () => switchGate(gId);
-        submenu.appendChild(btn);
+        container.appendChild(btn);
     });
 
-    // 展開 submenu
-    submenu.classList.remove('collapsed');
-    expandedRaidId = raidId;
+    container.classList.remove('collapsed'); // 展開
 }
 
 function initScrollSpy() {
