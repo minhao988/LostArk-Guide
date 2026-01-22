@@ -629,5 +629,9 @@ if (activeSubmenu) {
         behavior: 'smooth' // 平滑滾動
     });
 }
+  if (activeSubmenu && window.innerWidth < 768) {
+    activeSubmenu.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
+  
 
 });
