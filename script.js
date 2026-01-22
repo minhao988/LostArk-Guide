@@ -510,67 +510,59 @@ function renderGateSubmenu(gate, raidId) {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-     initSidebar();
-   expandedRaidId = currentRaidId;
+    initSidebar();
+    expandedRaidId = currentRaidId;
     document.getElementById(`gate-submenu-${currentRaidId}`)?.classList.remove('collapsed');
     selectRaid(currentRaidId);
-  
-      // 手機漢堡
+
     const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
     const menuToggle = document.getElementById('menu-toggle');
-    menuToggle?.addEventListener('click', () => sidebar.classList.toggle('mobile-open'));
-
-    // 桌面收合
     const sidebarToggle = document.getElementById('sidebar-toggle');
-sidebarToggle?.addEventListener('click', () => {
-    if (window.innerWidth >= 768) {
-        sidebar.classList.toggle('sidebar-collapsed');
-        document.querySelector('main')?.classList.toggle('sidebar-collapsed');
-        sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
-            ? '<i class="fas fa-angle-right"></i>'
-            : '<i class="fas fa-angle-left"></i>';
 
-        // 更新分類名稱
-        updateSidebarCategories(sidebar.classList.contains('sidebar-collapsed'));
+    // 🔹 手機版漢堡打開 sidebar
+    menuToggle?.addEventListener('click', () => {
+        sidebar.classList.add('mobile-open');
+        sidebarOverlay.style.display = 'block';
+    });
 
-        // 收回所有 raid submenu
-        document.querySelectorAll('.gate-submenu-container').forEach(el => {
-            if (sidebar.classList.contains('sidebar-collapsed')) {
-                el.classList.add('collapsed');
-            } else if (expandedRaidId === el.id.replace('gate-submenu-', '')) {
-                el.classList.remove('collapsed');
+    // 🔹 點 overlay 關閉 sidebar (手機)
+    sidebarOverlay?.addEventListener('click', () => {
+        sidebar.classList.remove('mobile-open');
+        sidebarOverlay.style.display = 'none';
+    });
+
+    // 🔹 桌面版收合 sidebar
+    sidebarToggle?.addEventListener('click', () => {
+        if (window.innerWidth >= 768) {
+            sidebar.classList.toggle('sidebar-collapsed');
+            document.querySelector('main')?.classList.toggle('sidebar-collapsed');
+            sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
+                ? '<i class="fas fa-angle-right"></i>'
+                : '<i class="fas fa-angle-left"></i>';
+
+            updateSidebarCategories(sidebar.classList.contains('sidebar-collapsed'));
+
+            document.querySelectorAll('.gate-submenu-container').forEach(el => {
+                if (sidebar.classList.contains('sidebar-collapsed')) {
+                    el.classList.add('collapsed');
+                } else if (expandedRaidId === el.id.replace('gate-submenu-', '')) {
+                    el.classList.remove('collapsed');
+                }
+            });
+        }
+    });
+
+    // 🔹 點 sidebar 按鈕選擇
+    document.querySelectorAll('.sidebar-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            if (window.innerWidth < 768) {
+                sidebar.classList.remove('mobile-open');
+                sidebarOverlay.style.display = 'none';
             }
         });
-    } else {
-        sidebar.classList.remove('mobile-open');
-    }
-});
-  
-  document.querySelectorAll('.sidebar-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-
-        // ① 清掉所有 active
-        document.querySelectorAll('.sidebar-btn')
-            .forEach(b => b.classList.remove('active'));
-
-        // ② 当前这个按钮 active
-        btn.classList.add('active');
-
-        // ③ 手机点完关 sidebar
-        if (window.innerWidth < 768) {
-            sidebar.classList.remove('mobile-open');
-        }
     });
-});
-
-
-    // 點手機 overlay 任意地方關閉 sidebar
-    sidebar.addEventListener('click', e => {
-        if (window.innerWidth < 768 && sidebar.classList.contains('mobile-open')) {
-            if (e.target === sidebar) { // 點在空白處
-                sidebar.classList.remove('mobile-open');
-            }
-        }
-    });
-
 });
