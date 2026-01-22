@@ -198,7 +198,7 @@ h2, h3, h4 {
     top: 0;                /* 從頂部開始 */
     left: 0;
     height: 100vh;         /* 撐滿整個視窗 */
-    width: 16rem;
+    width: 18rem;
     background: linear-gradient(180deg, rgba(2,6,23,0.95), rgba(2,6,23,0.85));
     backdrop-filter: blur(8px);
     overflow-y: auto;      /* 可以滾動內部選單 */
@@ -444,7 +444,7 @@ h2, h3, h4 {
 
 
 #main-body {
-    margin-left: 16rem;
+    margin-left: 18rem;
     transition: margin-left 0.3s ease;
 }
 
