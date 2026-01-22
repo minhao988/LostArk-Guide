@@ -199,17 +199,16 @@ function selectRaid(raidId) {
 
 // ================== 切換 gate ==================
 function switchGate(gateId) {
-    const raid = allRaids[currentRaidId];
-    const gate = raid.gates[gateId];
-    if (!gate) return;
+  const raid = allRaids[currentRaidId];
+  const gate = raid.gates[gateId];
+  if (!gate) return;
 
-    // Gate tab active
-    document.querySelectorAll('.gate-btn').forEach(btn => btn.classList.remove('active'));
-    document.getElementById(`gate-tab-${gateId}`)?.classList.add('active');
+  document.querySelectorAll('.gate-btn')
+    .forEach(btn => btn.classList.remove('active'));
+  document.getElementById(`gate-tab-${gateId}`)?.classList.add('active');
 
-    // 渲染 gate content & submenu
-    renderGateContent(gate);
-    renderGateSubmenu(gate, currentRaidId);
+  renderGateContent(gate);
+  renderGateSubmenu(gate, currentRaidId);
 }
 
 function groupRaidsByCategory() {
@@ -297,22 +296,7 @@ function switchRaid(raidId) {
 }
 
 
-function switchGate(gateId) {
-  const raid = allRaids[currentRaidId];
-  const gate = raid.gates[gateId];
-  if (!gate) return;
 
-  // Gate tab active
-  document.querySelectorAll('.gate-btn')
-    .forEach(btn => btn.classList.remove('active'));
-  document.getElementById(`gate-tab-${gateId}`)?.classList.add('active');
-
-  // 渲染 gate 內容
-  renderGateContent(gate);
-
-  // 只渲染當前 gate submenu
-  renderGateSubmenu(gate, currentRaidId);
-}
 
 
 // ================== 渲染 gate 內容 ==================
