@@ -209,24 +209,32 @@ function initSidebar() {
         catTitle.dataset.fullName = category;
         catTitle.innerText = category;
         container.appendChild(catTitle);
-
-       catTitle.addEventListener('click', () => {
-    raids.forEach(raid => {
-        const btn = document.getElementById(`btn-${raid.id}`);
-        const submenu = document.getElementById(`gate-submenu-${raid.id}`);
-        const isCollapsed = submenu.classList.contains('collapsed');
-
-        submenu.classList.toggle('collapsed', !isCollapsed);
-        btn.classList.toggle('active', !isCollapsed);
-
-        if (isCollapsed) { // 剛展開
-            // 等 CSS transition 結束再初始化
-            setTimeout(() => {
-                initScroll(submenu);
-            }, 50); // 50ms 足夠
-        }
-    });
-});
+      
+      catTitle.addEventListener('click', () => {
+          const isCollapsed = document.getElementById('sidebar').classList.contains('collapsed'); // 或其他標記
+      
+          if (isCollapsed) {
+              // Sidebar 縮小 → 只切換 raid，不展開 submenu
+              // 可以選擇切換到第一個 raid
+              if (raids[0]) switchRaid(raids[0].id);
+          } else {
+              // Sidebar 展開 → 展開/收回 submenu
+              raids.forEach(raid => {
+                  const btn = document.getElementById(`btn-${raid.id}`);
+                  const submenu = document.getElementById(`gate-submenu-${raid.id}`);
+                  const isSubCollapsed = submenu.classList.contains('collapsed');
+      
+                  submenu.classList.toggle('collapsed', !isSubCollapsed);
+                  btn.classList.toggle('active', !isSubCollapsed);
+      
+                  if (isSubCollapsed) {
+                      setTimeout(() => {
+                          initScroll(submenu); // 展開後初始化 scroll
+                      }, 50);
+                  }
+              });
+          }
+      });
         // 生成 raid 按鈕
         raids.forEach(raid => {
             const btn = document.createElement('button');
