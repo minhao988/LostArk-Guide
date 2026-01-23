@@ -406,6 +406,21 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
 
 
 
+/* 手機版 header 固定 */
+@media (max-width: 768px) {
+  .md\\:hidden {
+    position: sticky; /* 或 fixed 也可以 */
+    top: 0;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.5); /* 半透明背景 */
+    backdrop-filter: blur(4px);
+  }
+
+  /* 確保內容不會被 header 遮住 */
+  main {
+    padding-top: 3rem; /* 跟 header 高度一致 */
+  }
+}
 
 
 
