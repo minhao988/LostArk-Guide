@@ -404,24 +404,12 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
   padding:3px 6px; border-radius:999px;
 }
 
-
-
-/* 手機版固定 header */
 @media (max-width: 768px) {
-  #mobile-header, .md\:hidden {
-    position: sticky; /* 或 fixed 也可以 */
-    top: 0;
-    z-index: 50; /* 高於 sidebar & 內容 */
-    background-color: rgba(0,0,0,0.5);
-    backdrop-filter: blur(4px);
-    height: 56px; /* 確保 padding 與 border 不被計算錯誤 */
-  }
-
-  /* 主內容 main 距離 header */
   main {
-    padding-top: 56px;
+    padding-top: 56px; /* header 高度 */
   }
 }
+
 
 
 
