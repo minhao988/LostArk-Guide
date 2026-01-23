@@ -224,8 +224,27 @@ function selectRaid(raidId) {
     document.getElementById('raid-desc').innerHTML = raid.desc;
     document.getElementById('mobile-title').innerHTML = raid.short;
     document.getElementById('breadcrumb').innerHTML = raid.short;
-    document.getElementById('main-body').className =
-        raid.theme + (window.innerWidth >= 768 ? ' min-h-screen transition-all duration-500' : ' transition-all duration-500');
+  const mainBody = document.getElementById('main-body');
+if (!mainBody) return;
+
+// 移除舊的 raid theme（只動 theme，不動 layout）
+mainBody.classList.remove(
+  'raid-gradient-final',
+  'raid-gradient-act4',
+  'raid-gradient-serca'
+);
+
+// 加上新的 theme
+mainBody.classList.add(
+  raid.theme,
+  'transition-all',
+  'duration-500'
+);
+
+// 桌面版才需要 min-h-screen
+if (window.innerWidth >= 768) {
+  mainBody.classList.add('min-h-screen');
+}
 
     // 生成 gate tabs
     const tabsContainer = document.getElementById('gate-tabs');
@@ -509,56 +528,6 @@ html += `
 }
 
 
-// function renderGateSubmenu(gate, raidId) {
-//     const container = document.getElementById(`gate-submenu-${raidId}`);
-//     if (!container) return;
-
-//     let html = `<div class="px-4 py-2 text-xs font-bold text-slate-500 uppercase">${gate.name}</div>`;
-
-//     if (gate.mechanics?.length) {
-//         html += `
-//           <div class="submenu-group">
-//             <button class="submenu-btn" data-target="section-mechanics">核心機制</button>
-//             ${gate.mechanics.map((m,i) => `
-//                 <button class="submenu-sub pl-10" data-target="mech-${i}">${m.hp} ${m.title}</button>
-//             `).join('')}
-//           </div>
-//         `;
-//     }
-
-//     if (gate.patterns?.length) {
-//         html += `
-//           <div class="submenu-group mt-2">
-//             <button class="submenu-btn" data-target="section-patterns">招式解析</button>
-//             ${gate.patterns.map((p,i) => `
-//                 <button class="submenu-sub pl-10" data-target="pattern-${i}">${p.name}</button>
-//             `).join('')}
-//           </div>
-//         `;
-//     }
-
-//     container.innerHTML = html;
-
-//     // 綁定 scroll
-//     container.querySelectorAll('[data-target]').forEach(btn => {
-//     btn.onclick = () => {
-//         // 點 submenu 前確保 raid submenu 展開
-//         document.getElementById(`gate-submenu-${raidId}`)?.classList.remove('collapsed');
-//         container.querySelectorAll('.submenu-sub').forEach(b => b.classList.remove('active'));
-//         btn.classList.add('active');
-//         document.getElementById(btn.dataset.target)?.scrollIntoView({ behavior: 'smooth' });
-
-//         // 🔹 手機收回 sidebar + 隱藏 overlay
-//         if (window.innerWidth < 768) {
-//             const sidebar = document.getElementById('sidebar');
-//             const overlay = document.getElementById('sidebar-overlay');
-//             sidebar?.classList.remove('mobile-open');
-//             if (overlay) overlay.style.display = 'none';
-//         }
-//     };
-// });
-// }
-
 function renderGateSubmenu(gate, raidId) {
     const container = document.getElementById(`gate-submenu-${raidId}`);
     if (!container) return;
@@ -766,26 +735,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-    // 🔹 點 sidebar 按鈕選擇
-    // document.querySelectorAll('.sidebar-btn').forEach(btn => {
-    //   btn.addEventListener('click', () => {
-    //     // ① 清掉所有 active
-    //     document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
-    //     btn.classList.add('active');
-    
-    //     const submenuId = btn.dataset.submenu;
-    //     const submenu = document.getElementById(submenuId);
-    
-    //     if (window.innerWidth >= 768) {
-    //       // 桌面版：點按鈕展開 / 收回 submenu
-    //       if (submenu) submenu.classList.toggle('collapsed');
-    //     } else {
-    //       // 手機版：點按鈕 → 收回 sidebar & 隱藏 overlay
-    //       sidebar.classList.remove('mobile-open');
-    //       sidebarOverlay.style.display = 'none';
-    //     }
-    //   });
-    // });
+
  initScrollSpy();
   
 
@@ -800,16 +750,5 @@ document.getElementById('main-body').addEventListener('scroll', () => {
 });
 
 
-//  const activeSubmenu = document.querySelector('.submenu-sub.active');
-// if (activeSubmenu) {
-//     activeSubmenu.scrollIntoView({
-//         block: 'nearest', // 滾動到可見區域，但不強制頂部對齊
-//         behavior: 'smooth' // 平滑滾動
-//     });
-// }
-//   if (activeSubmenu && window.innerWidth < 768) {
-//     activeSubmenu.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-// }
-  
 
 });
