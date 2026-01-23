@@ -174,27 +174,40 @@ function initSidebar() {
         });
 
         // 生成 raid 按鈕 + submenu
-        raids.forEach(raid => {
-            const btn = document.createElement('button');
-            btn.id = `btn-${raid.id}`;
-            btn.className = 'sidebar-btn w-full flex items-center gap-2 px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all';
+     raids.forEach(raid => {
+    const btn = document.createElement('button');
+    btn.id = `btn-${raid.id}`;
+    btn.className = 'sidebar-btn w-full flex items-center gap-2 px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all';
+    btn.innerHTML = raidIcons[raid.id].startsWith('http')
+        ? `<img src="${raidIcons[raid.id]}" class="sidebar-icon w-6 h-6 object-contain" />
+           <span class="sidebar-text font-medium">${raid.short}</span>`
+        : `<i class="${raidIcons[raid.id]} sidebar-icon"></i>
+           <span class="sidebar-text font-medium">${raid.short}</span>`;
+    btn.onclick = () => switchRaid(raid.id);
+    container.appendChild(btn);
 
-            btn.innerHTML = raidIcons[raid.id].startsWith('http')
-                ? `<img src="${raidIcons[raid.id]}" class="sidebar-icon w-6 h-6 object-contain" />
-                   <span class="sidebar-text font-medium">${raid.short}</span>`
-                : `<i class="${raidIcons[raid.id]} sidebar-icon"></i>
-                   <span class="sidebar-text font-medium">${raid.short}</span>`;
+    // 生成空 submenu
+    const submenu = document.createElement('div');
+    submenu.className = 'gate-submenu-container pl-6 collapsed';
+    submenu.id = `gate-submenu-${raid.id}`;
+    container.appendChild(submenu);
 
-            // raid click 也呼叫 switchRaid
-            btn.onclick = () => switchRaid(raid.id);
-            container.appendChild(btn);
+    // 假設 submenu 裡有多個項目
+    raid.submenu?.forEach(sub => {
+        const subBtn = document.createElement('button');
+        subBtn.className = 'submenu-btn w-full px-4 py-2 text-slate-400 hover:text-white hover:bg-white/5';
+        subBtn.innerText = sub.name;
+        subBtn.onclick = () => {
+            switchRaid(raid.id, sub.id); // 切到 raid + submenu
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.add('sidebar-collapsed');
+            }
+            subBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        };
+        submenu.appendChild(subBtn);
+    });
+});
 
-            // submenu 預先生成
-            const submenu = document.createElement('div');
-            submenu.className = 'gate-submenu-container pl-6 collapsed';
-            submenu.id = `gate-submenu-${raid.id}`;
-            container.appendChild(submenu);
-        });
     });
 }
 
@@ -311,64 +324,6 @@ function updateSidebarCategories(sidebarCollapsed) {
     });
 }
 
-
-
-
-
-
-// ================== 切換 raid (展開/收合) ==================
-// function switchRaid(raidId) {
-//     const sidebar = document.getElementById('sidebar');
-//     const isCollapsed = sidebar.classList.contains('sidebar-collapsed');
-
-//     // 如果 sidebar 是 collapsed，永遠不要展 submenu
-//     if (isCollapsed || options.forceNoSubmenu) {
-//         expandedRaidId = null;
-
-//         document.querySelectorAll('.gate-submenu-container').forEach(el => {
-//             el.classList.add('collapsed');
-//             el.innerHTML = '';
-//         });
-
-//         document.querySelectorAll('.sidebar-btn')
-//             .forEach(b => b.classList.remove('active'));
-
-//         document.getElementById(`btn-${raidId}`)?.classList.add('active');
-//         selectRaid(raidId);
-//         return;
-//     }
-//   const currentSub = document.getElementById(`gate-submenu-${raidId}`);
-//   if (!currentSub) return;
-
-//   const isSame = expandedRaidId === raidId;
-
-//   document.querySelectorAll('.gate-submenu-container').forEach(el => {
-//     el.classList.add('collapsed');
-//     el.innerHTML = '';
-//   });
-
-//   document.querySelectorAll('.sidebar-btn')
-//     .forEach(b => b.classList.remove('active'));
-
-//   if (!isSame) {
-//     expandedRaidId = raidId;
-//     currentSub.classList.remove('collapsed');
-//     document.getElementById(`btn-${raidId}`)?.classList.add('active');
-//     selectRaid(raidId);
-//   } else {
-//     expandedRaidId = null;
-//   }
-
-//   // // 📱 手机：点完直接关 sidebar
-//   // if (window.innerWidth < 768) {
-//   //   document.getElementById('sidebar')?.classList.remove('mobile-open');
-//   // }
-
-//   // 📱 手机版：只在 collapseSidebar 為 true 時才收回
-//   if (collapseSidebar && window.innerWidth < 768) {
-//     document.getElementById('sidebar')?.classList.remove('mobile-open');
-//   }
-// }
 
 function switchRaid(raidId) {
     const sidebar = document.getElementById('sidebar');
