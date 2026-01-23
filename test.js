@@ -340,12 +340,71 @@ function updateSidebarCategories(sidebarCollapsed) {
     });
 }
 
-function switchRaid(raidId, options = {}) {
+
+
+
+
+
+// ================== 切換 raid (展開/收合) ==================
+// function switchRaid(raidId) {
+//     const sidebar = document.getElementById('sidebar');
+//     const isCollapsed = sidebar.classList.contains('sidebar-collapsed');
+
+//     // 如果 sidebar 是 collapsed，永遠不要展 submenu
+//     if (isCollapsed || options.forceNoSubmenu) {
+//         expandedRaidId = null;
+
+//         document.querySelectorAll('.gate-submenu-container').forEach(el => {
+//             el.classList.add('collapsed');
+//             el.innerHTML = '';
+//         });
+
+//         document.querySelectorAll('.sidebar-btn')
+//             .forEach(b => b.classList.remove('active'));
+
+//         document.getElementById(`btn-${raidId}`)?.classList.add('active');
+//         selectRaid(raidId);
+//         return;
+//     }
+//   const currentSub = document.getElementById(`gate-submenu-${raidId}`);
+//   if (!currentSub) return;
+
+//   const isSame = expandedRaidId === raidId;
+
+//   document.querySelectorAll('.gate-submenu-container').forEach(el => {
+//     el.classList.add('collapsed');
+//     el.innerHTML = '';
+//   });
+
+//   document.querySelectorAll('.sidebar-btn')
+//     .forEach(b => b.classList.remove('active'));
+
+//   if (!isSame) {
+//     expandedRaidId = raidId;
+//     currentSub.classList.remove('collapsed');
+//     document.getElementById(`btn-${raidId}`)?.classList.add('active');
+//     selectRaid(raidId);
+//   } else {
+//     expandedRaidId = null;
+//   }
+
+//   // // 📱 手机：点完直接关 sidebar
+//   // if (window.innerWidth < 768) {
+//   //   document.getElementById('sidebar')?.classList.remove('mobile-open');
+//   // }
+
+//   // 📱 手机版：只在 collapseSidebar 為 true 時才收回
+//   if (collapseSidebar && window.innerWidth < 768) {
+//     document.getElementById('sidebar')?.classList.remove('mobile-open');
+//   }
+// }
+
+function switchRaid(raidId) {
     const sidebar = document.getElementById('sidebar');
     const isCollapsed = sidebar.classList.contains('sidebar-collapsed');
 
-    // ✅ 安全判斷
-    if (isCollapsed || options.forceNoSubmenu) {
+    // 🔒 桌面收合：只切 raid，不碰 submenu
+    if (isCollapsed) {
         expandedRaidId = null;
 
         document.querySelectorAll('.gate-submenu-container').forEach(el => {
@@ -361,6 +420,7 @@ function switchRaid(raidId, options = {}) {
         return;
     }
 
+    // ===== sidebar 展開 =====
     const currentSub = document.getElementById(`gate-submenu-${raidId}`);
     if (!currentSub) return;
 
@@ -383,65 +443,6 @@ function switchRaid(raidId, options = {}) {
         expandedRaidId = null;
     }
 }
-
-
-
-
-// ================== 切換 raid (展開/收合) ==================
-function switchRaid(raidId) {
-    const sidebar = document.getElementById('sidebar');
-    const isCollapsed = sidebar.classList.contains('sidebar-collapsed');
-
-    // 如果 sidebar 是 collapsed，永遠不要展 submenu
-    if (isCollapsed || options.forceNoSubmenu) {
-        expandedRaidId = null;
-
-        document.querySelectorAll('.gate-submenu-container').forEach(el => {
-            el.classList.add('collapsed');
-            el.innerHTML = '';
-        });
-
-        document.querySelectorAll('.sidebar-btn')
-            .forEach(b => b.classList.remove('active'));
-
-        document.getElementById(`btn-${raidId}`)?.classList.add('active');
-        selectRaid(raidId);
-        return;
-    }
-  const currentSub = document.getElementById(`gate-submenu-${raidId}`);
-  if (!currentSub) return;
-
-  const isSame = expandedRaidId === raidId;
-
-  document.querySelectorAll('.gate-submenu-container').forEach(el => {
-    el.classList.add('collapsed');
-    el.innerHTML = '';
-  });
-
-  document.querySelectorAll('.sidebar-btn')
-    .forEach(b => b.classList.remove('active'));
-
-  if (!isSame) {
-    expandedRaidId = raidId;
-    currentSub.classList.remove('collapsed');
-    document.getElementById(`btn-${raidId}`)?.classList.add('active');
-    selectRaid(raidId);
-  } else {
-    expandedRaidId = null;
-  }
-
-  // // 📱 手机：点完直接关 sidebar
-  // if (window.innerWidth < 768) {
-  //   document.getElementById('sidebar')?.classList.remove('mobile-open');
-  // }
-
-  // 📱 手机版：只在 collapseSidebar 為 true 時才收回
-  if (collapseSidebar && window.innerWidth < 768) {
-    document.getElementById('sidebar')?.classList.remove('mobile-open');
-  }
-}
-
-
 
 
 
