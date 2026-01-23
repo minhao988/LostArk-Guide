@@ -180,11 +180,20 @@ function initSidebar() {
 
     // ✅ 只有展開狀態，才處理 submenu
     if (!isCollapsed) {
-        raids.forEach(raid => {
-            const submenu = document.getElementById(`gate-submenu-${raid.id}`);
-            submenu?.classList.toggle('collapsed');
-        });
+    const isAlreadyActive = expandedRaidId === raidId;
+
+    if (!isAlreadyActive) {
+        expandedRaidId = raidId;
+        document
+          .getElementById(`gate-submenu-${raidId}`)
+          ?.classList.remove('collapsed');
+    } else {
+        expandedRaidId = null;
+        document
+          .getElementById(`gate-submenu-${raidId}`)
+          ?.classList.add('collapsed');
     }
+}
 });
         // 生成 raid 按鈕
         raids.forEach(raid => {
