@@ -405,13 +405,8 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
 }
 
 
-.sidebar.sidebar-collapsed .gate-submenu-container {
-    display: none !important;
-}
 
-.sidebar.sidebar-collapsed .sidebar-category {
-    cursor: default;
-}
+
 
 
 
