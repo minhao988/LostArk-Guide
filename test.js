@@ -684,7 +684,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.getElementById('sidebar');
     const sidebarOverlay = document.getElementById('sidebar-overlay');
     const menuToggle = document.getElementById('menu-toggle');
-    // const sidebarToggle = document.getElementById('sidebar-toggle');
+    const sidebarToggle = document.getElementById('sidebar-toggle');
 
     // 🔹 手機版漢堡打開 sidebar
     menuToggle?.addEventListener('click', () => {
@@ -724,29 +724,22 @@ document.addEventListener('DOMContentLoaded', () => {
 //     }
 // });
 
-const sidebarToggle = document.getElementById('menu-toggle');
 
-sidebarToggle?.addEventListener('click', () => {
-    if (window.innerWidth >= 768) {
-        // 桌面版收合邏輯
+menuToggle?.addEventListener('click', () => {
+    // 手機版
+    if (window.innerWidth < 768) {
+        const isOpen = sidebar.classList.toggle('mobile-open'); // true = 打開, false = 關閉
+        sidebarOverlay.style.display = isOpen ? 'block' : 'none';
+    } else {
+        // 桌面版收合
         sidebar.classList.toggle('sidebar-collapsed');
         document.getElementById('main-body')?.classList.toggle('sidebar-collapsed');
+
         sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
             ? '<i class="fas fa-angle-right"></i>'
             : '<i class="fas fa-angle-left"></i>';
-    } else {
-        // 手機版 toggle
-        const isOpen = sidebar.classList.toggle('mobile-open'); // true = 打開, false = 關閉
-        sidebarOverlay.style.display = isOpen ? 'block' : 'none';
     }
 });
-
-// 點遮罩關閉 sidebar
-sidebarOverlay?.addEventListener('click', () => {
-    sidebar.classList.remove('mobile-open');
-    sidebarOverlay.style.display = 'none';
-});
-
  initScrollSpy();
   
 
