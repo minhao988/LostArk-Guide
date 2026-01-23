@@ -710,30 +710,30 @@ sidebarOverlay?.addEventListener('click', () => {
 });
 
     // 🔹 桌面版收合 sidebar
-//   sidebarToggle?.addEventListener('click', () => {
-//     if (window.innerWidth >= 768) {
-//         // 桌面收合
-//         sidebar.classList.toggle('sidebar-collapsed');
-//         document.getElementById('main-body')?.classList.toggle('sidebar-collapsed');
-//         sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
-//             ? '<i class="fas fa-angle-right"></i>'
-//             : '<i class="fas fa-angle-left"></i>';
+   sidebarToggle?.addEventListener('click', () => {
+     if (window.innerWidth >= 768) {
+         // 桌面收合
+         sidebar.classList.toggle('sidebar-collapsed');
+         document.getElementById('main-body')?.classList.toggle('sidebar-collapsed');
+         sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
+             ? '<i class="fas fa-angle-right"></i>'
+             : '<i class="fas fa-angle-left"></i>';
 
-//         updateSidebarCategories(sidebar.classList.contains('sidebar-collapsed'));
+         updateSidebarCategories(sidebar.classList.contains('sidebar-collapsed'));
 
-//         document.querySelectorAll('.gate-submenu-container').forEach(el => {
-//             if (sidebar.classList.contains('sidebar-collapsed')) {
-//                 el.classList.add('collapsed');
-//             } else if (expandedRaidId === el.id.replace('gate-submenu-', '')) {
-//                 el.classList.remove('collapsed');
-//             }
-//         });
-//     } else {
-//         // 🔹 手機版直接關閉 sidebar + overlay
-//         sidebar.classList.remove('mobile-open');
-//         sidebarOverlay.style.display = 'none';
-//     }
-// });
+         document.querySelectorAll('.gate-submenu-container').forEach(el => {
+            if (sidebar.classList.contains('sidebar-collapsed')) {
+                 el.classList.add('collapsed');
+             } else if (expandedRaidId === el.id.replace('gate-submenu-', '')) {
+                 el.classList.remove('collapsed');
+             }
+         });
+     } else {
+         // 🔹 手機版直接關閉 sidebar + overlay
+         sidebar.classList.remove('mobile-open');
+         sidebarOverlay.style.display = 'none';
+     }
+ });
 
 
 
