@@ -686,17 +686,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.getElementById('menu-toggle');
     const sidebarToggle = document.getElementById('sidebar-toggle');
 
-    // 🔹 手機版漢堡打開 sidebar
-    menuToggle?.addEventListener('click', () => {
-        sidebar.classList.add('mobile-open');
-        sidebarOverlay.style.display = 'block';
-    });
+  // 手機 + 桌面通用
+menuToggle?.addEventListener('click', () => {
+    if (window.innerWidth < 768) {
+        // 手機版漢堡：開關 sidebar
+        const isOpen = sidebar.classList.toggle('mobile-open');
+        sidebarOverlay.style.display = isOpen ? 'block' : 'none';
+    } else {
+        // 桌面版收合
+        sidebar.classList.toggle('sidebar-collapsed');
+        document.getElementById('main-body')?.classList.toggle('sidebar-collapsed');
 
-    // 🔹 點 overlay 關閉 sidebar (手機)
-    sidebarOverlay?.addEventListener('click', () => {
-        sidebar.classList.remove('mobile-open');
-        sidebarOverlay.style.display = 'none';
-    });
+        sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
+            ? '<i class="fas fa-angle-right"></i>'
+            : '<i class="fas fa-angle-left"></i>';
+    }
+});
+
+// overlay 點擊關閉 (手機)
+sidebarOverlay?.addEventListener('click', () => {
+    sidebar.classList.remove('mobile-open');
+    sidebarOverlay.style.display = 'none';
+});
 
     // 🔹 桌面版收合 sidebar
 //   sidebarToggle?.addEventListener('click', () => {
@@ -725,21 +736,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // });
 
 
-menuToggle?.addEventListener('click', () => {
-    // 手機版
-    if (window.innerWidth < 768) {
-        const isOpen = sidebar.classList.toggle('mobile-open'); // true = 打開, false = 關閉
-        sidebarOverlay.style.display = isOpen ? 'block' : 'none';
-    } else {
-        // 桌面版收合
-        sidebar.classList.toggle('sidebar-collapsed');
-        document.getElementById('main-body')?.classList.toggle('sidebar-collapsed');
 
-        sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
-            ? '<i class="fas fa-angle-right"></i>'
-            : '<i class="fas fa-angle-left"></i>';
-    }
-});
  initScrollSpy();
   
 
