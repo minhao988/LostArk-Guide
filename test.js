@@ -598,7 +598,7 @@ function initScrollSpy() {
         const lastSection = scrollSpySections[scrollSpySections.length - 1];
         if (lastSection) {
             const rect = lastSection.getBoundingClientRect();
-            if (rect.top < window.innerHeight) {
+          f (rect.top < window.innerHeight && scrollY > 200) {
                 currentId = lastSection.id || lastSection.dataset.menu;
             }
         }
