@@ -166,34 +166,41 @@ function initSidebar() {
         catTitle.innerText = category;
         container.appendChild(catTitle);
       
-  catTitle.addEventListener('click', () => {
+catTitle.addEventListener('click', () => {
     const sidebar = document.getElementById('sidebar');
     const isCollapsed = sidebar.classList.contains('sidebar-collapsed');
 
-    const raidId = raids[0]?.id; // 或你實際對應的 raid
+    const raidId = raids[0]?.id;
     if (!raidId) return;
 
-    // ✅ 不論展開或收合，先切 raid
-    switchRaid(raidId, {
-        forceNoSubmenu: isCollapsed
+    if (isCollapsed) {
+        // ✅ 收合狀態：只切 raid，不碰 submenu
+        switchRaid(raidId, { forceNoSubmenu: true });
+        return;
+    }
+
+    // ===== 展開狀態 =====
+
+    const submenu = document.getElementById(`gate-submenu-${raidId}`);
+    if (!submenu) return;
+
+    const isOpen = !submenu.classList.contains('collapsed');
+
+    // 先全部收起
+    document.querySelectorAll('.gate-submenu-container').forEach(el => {
+        el.classList.add('collapsed');
     });
 
-    // ✅ 只有展開狀態，才處理 submenu
-    if (!isCollapsed) {
-    const isAlreadyActive = expandedRaidId === raidId;
+    // 切 raid（但不讓它自己動 submenu）
+    switchRaid(raidId, { forceNoSubmenu: true });
 
-    if (!isAlreadyActive) {
+    // 再決定要不要展開
+    if (!isOpen) {
+        submenu.classList.remove('collapsed');
         expandedRaidId = raidId;
-        document
-          .getElementById(`gate-submenu-${raidId}`)
-          ?.classList.remove('collapsed');
     } else {
         expandedRaidId = null;
-        document
-          .getElementById(`gate-submenu-${raidId}`)
-          ?.classList.add('collapsed');
     }
-}
 });
         // 生成 raid 按鈕
         raids.forEach(raid => {
