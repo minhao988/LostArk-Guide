@@ -312,6 +312,25 @@ function updateSidebarCategories(sidebarCollapsed) {
 
 // ================== 切換 raid (展開/收合) ==================
 function switchRaid(raidId) {
+    const sidebar = document.getElementById('sidebar');
+    const isCollapsed = sidebar.classList.contains('sidebar-collapsed');
+
+    // 如果 sidebar 是 collapsed，永遠不要展 submenu
+    if (isCollapsed || options.forceNoSubmenu) {
+        expandedRaidId = null;
+
+        document.querySelectorAll('.gate-submenu-container').forEach(el => {
+            el.classList.add('collapsed');
+            el.innerHTML = '';
+        });
+
+        document.querySelectorAll('.sidebar-btn')
+            .forEach(b => b.classList.remove('active'));
+
+        document.getElementById(`btn-${raidId}`)?.classList.add('active');
+        selectRaid(raidId);
+        return;
+    }
   const currentSub = document.getElementById(`gate-submenu-${raidId}`);
   if (!currentSub) return;
 
