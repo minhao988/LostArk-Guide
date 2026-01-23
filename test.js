@@ -202,7 +202,11 @@ function initSidebar() {
             if (window.innerWidth <= 768) {
                 document.getElementById('sidebar').classList.add('sidebar-collapsed');
             }
-            subBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          if ('scrollBehavior' in document.documentElement.style) {
+    subBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+} else {
+    subBtn.scrollIntoView(true);
+}
         };
         submenu.appendChild(subBtn);
     });
