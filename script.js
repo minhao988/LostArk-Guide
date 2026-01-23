@@ -686,43 +686,59 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.getElementById('menu-toggle');
     const sidebarToggle = document.getElementById('sidebar-toggle');
 
-    // 🔹 手機版漢堡打開 sidebar
-    menuToggle?.addEventListener('click', () => {
-        sidebar.classList.add('mobile-open');
-        sidebarOverlay.style.display = 'block';
-    });
-
-    // 🔹 點 overlay 關閉 sidebar (手機)
-    sidebarOverlay?.addEventListener('click', () => {
-        sidebar.classList.remove('mobile-open');
-        sidebarOverlay.style.display = 'none';
-    });
-
-    // 🔹 桌面版收合 sidebar
-  sidebarToggle?.addEventListener('click', () => {
-    if (window.innerWidth >= 768) {
-        // 桌面收合
+  // 手機 + 桌面通用
+menuToggle?.addEventListener('click', () => {
+    if (window.innerWidth < 768) {
+        // 手機版漢堡：開關 sidebar
+        const isOpen = sidebar.classList.toggle('mobile-open');
+        sidebarOverlay.style.display = isOpen ? 'block' : 'none';
+    } else {
+        // 桌面版收合
         sidebar.classList.toggle('sidebar-collapsed');
         document.getElementById('main-body')?.classList.toggle('sidebar-collapsed');
+
         sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
             ? '<i class="fas fa-angle-right"></i>'
             : '<i class="fas fa-angle-left"></i>';
+    }
+});
 
-        updateSidebarCategories(sidebar.classList.contains('sidebar-collapsed'));
+// overlay 點擊關閉 (手機)
+sidebarOverlay?.addEventListener('click', () => {
+    sidebar.classList.remove('mobile-open');
+    sidebarOverlay.style.display = 'none';
+});
 
+// 🔹 桌面版收合 / 展開 < 按鈕
+sidebarToggle?.addEventListener('click', () => {
+    if (window.innerWidth >= 768) {
+        // 桌面版收合
+        const isCollapsed = sidebar.classList.toggle('sidebar-collapsed');
+        document.getElementById('main-body')?.classList.toggle('sidebar-collapsed');
+
+        // icon 切換
+        sidebarToggle.innerHTML = isCollapsed
+            ? '<i class="fas fa-angle-right"></i>'
+            : '<i class="fas fa-angle-left"></i>';
+
+        // 更新 sidebar 文字（短名 / 全名）
+        updateSidebarCategories(isCollapsed);
+
+        // submenu 處理
         document.querySelectorAll('.gate-submenu-container').forEach(el => {
-            if (sidebar.classList.contains('sidebar-collapsed')) {
+            if (isCollapsed) {
                 el.classList.add('collapsed');
             } else if (expandedRaidId === el.id.replace('gate-submenu-', '')) {
                 el.classList.remove('collapsed');
             }
         });
     } else {
-        // 🔹 手機版直接關閉 sidebar + overlay
+        // 🔹 手機版也能用 < 關掉 sidebar
         sidebar.classList.remove('mobile-open');
         sidebarOverlay.style.display = 'none';
     }
 });
+
 
 
  initScrollSpy();
