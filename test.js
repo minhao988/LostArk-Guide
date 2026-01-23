@@ -684,7 +684,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.getElementById('sidebar');
     const sidebarOverlay = document.getElementById('sidebar-overlay');
     const menuToggle = document.getElementById('menu-toggle');
-    const sidebarToggle = document.getElementById('sidebar-toggle');
+    // const sidebarToggle = document.getElementById('sidebar-toggle');
 
     // 🔹 手機版漢堡打開 sidebar
     menuToggle?.addEventListener('click', () => {
@@ -723,8 +723,7 @@ document.addEventListener('DOMContentLoaded', () => {
 //         sidebarOverlay.style.display = 'none';
 //     }
 // });
-const sidebar = document.getElementById('sidebar');
-const sidebarOverlay = document.getElementById('sidebar-overlay');
+
 const sidebarToggle = document.getElementById('menu-toggle');
 
 sidebarToggle?.addEventListener('click', () => {
