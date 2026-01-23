@@ -146,51 +146,6 @@ function getIcon(type) {
     return icons[type] || '<i class="fas fa-info-circle text-gray-400"></i>';
 }
 
-// ================== 初始化 sidebar ==================
-// function initSidebar() {
-//     const container = document.getElementById('sidebar-content');
-//     if (!container) return;
-
-//     // 先清空
-//     Array.from(container.children).forEach(child => {
-//         if (child.id !== 'gate-submenu') child.remove();
-//     });
-
-//     const groupedRaids = groupRaidsByCategory();
-
-//     Object.entries(groupedRaids).forEach(([category, raids]) => {
-//         // 生成分類標題
-//         let catTitle = document.createElement('div');
-//         catTitle.className = 'sidebar-category px-6 py-2 text-xs font-bold text-slate-500 uppercase';
-//         catTitle.dataset.fullName = category;
-//         catTitle.innerText = category;
-//         container.appendChild(catTitle);
-
-//         // 生成 raid 按鈕
-//         raids.forEach(raid => {
-//             const btn = document.createElement('button');
-//             btn.id = `btn-${raid.id}`;
-//             btn.className = 'sidebar-btn w-full flex items-center gap-2 px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all';
-//             // btn.innerHTML = `
-//             //     <i class="${raidIcons[raid.id] || 'fa-flag'} sidebar-icon"></i>
-//             //     <span class="sidebar-text font-medium">${raid.short}</span>
-//             // `;
-//           btn.innerHTML = raidIcons[raid.id].startsWith('http')
-//     ? `<img src="${raidIcons[raid.id]}" class="sidebar-icon w-6 h-6 object-contain" />
-//        <span class="sidebar-text font-medium">${raid.short}</span>`
-//     : `<i class="${raidIcons[raid.id]} sidebar-icon"></i>
-//        <span class="sidebar-text font-medium">${raid.short}</span>`;
-//             btn.onclick = () => switchRaid(raid.id);
-//             container.appendChild(btn);
-
-//             // 生成空 submenu
-//             const submenu = document.createElement('div');
-//             submenu.className = 'gate-submenu-container pl-6 collapsed';
-//             submenu.id = `gate-submenu-${raid.id}`;
-//             container.appendChild(submenu);
-//         });
-//     });
-// }
 
 function initSidebar() {
     const container = document.getElementById('sidebar-content');
@@ -211,31 +166,26 @@ function initSidebar() {
         catTitle.innerText = category;
         container.appendChild(catTitle);
       
-      catTitle.addEventListener('click', () => {
-          const isCollapsed = document.getElementById('sidebar').classList.contains('collapsed'); // 或其他標記
-      
-          if (isCollapsed) {
-              // Sidebar 縮小 → 只切換 raid，不展開 submenu
-              // 可以選擇切換到第一個 raid
-              if (raids[0]) switchRaid(raids[0].id);
-          } else {
-              // Sidebar 展開 → 展開/收回 submenu
-              raids.forEach(raid => {
-                  const btn = document.getElementById(`btn-${raid.id}`);
-                  const submenu = document.getElementById(`gate-submenu-${raid.id}`);
-                  const isSubCollapsed = submenu.classList.contains('collapsed');
-      
-                  submenu.classList.toggle('collapsed', !isSubCollapsed);
-                  btn.classList.toggle('active', !isSubCollapsed);
-      
-                  if (isSubCollapsed) {
-                      setTimeout(() => {
-                          initScroll(submenu); // 展開後初始化 scroll
-                      }, 50);
-                  }
-              });
-          }
-      });
+   catTitle.addEventListener('click', () => {
+    const sidebar = document.getElementById('sidebar');
+    const isCollapsed = sidebar.classList.contains('sidebar-collapsed');
+
+    if (isCollapsed) {
+        // 桌面縮合：只切 raid，不動 submenu
+        if (raids[0]) switchRaid(raids[0].id, { forceNoSubmenu: true });
+        return;
+    }
+
+    // Sidebar 展開 → 才允許 submenu 行為
+    raids.forEach(raid => {
+        const btn = document.getElementById(`btn-${raid.id}`);
+        const submenu = document.getElementById(`gate-submenu-${raid.id}`);
+        const isSubCollapsed = submenu.classList.contains('collapsed');
+
+        submenu.classList.toggle('collapsed', !isSubCollapsed);
+        btn.classList.toggle('active', !isSubCollapsed);
+    });
+});
         // 生成 raid 按鈕
         raids.forEach(raid => {
             const btn = document.createElement('button');
