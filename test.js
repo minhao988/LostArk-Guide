@@ -659,11 +659,19 @@ function initScrollSpy() {
     });
 
     // 🔹 submenu / gate 變動時自動重新抓 section
-    const observer = new MutationObserver(() => {
+    // const observer = new MutationObserver(() => {
+    //     updateSpyElements();
+    //     onScroll();
+    // });
+
+  let spyTimer;
+const observer = new MutationObserver(() => {
+    clearTimeout(spyTimer);
+    spyTimer = setTimeout(() => {
         updateSpyElements();
         onScroll();
-    });
-
+    }, 50);
+});
     observer.observe(document.getElementById('main-body'), {
         childList: true,
         subtree: true
