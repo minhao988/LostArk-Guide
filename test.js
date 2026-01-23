@@ -166,25 +166,25 @@ function initSidebar() {
         catTitle.innerText = category;
         container.appendChild(catTitle);
       
-   catTitle.addEventListener('click', () => {
+  catTitle.addEventListener('click', () => {
     const sidebar = document.getElementById('sidebar');
     const isCollapsed = sidebar.classList.contains('sidebar-collapsed');
 
-    if (isCollapsed) {
-        // 桌面縮合：只切 raid，不動 submenu
-        if (raids[0]) switchRaid(raids[0].id, { forceNoSubmenu: true });
-        return;
-    }
+    const raidId = raids[0]?.id; // 或你實際對應的 raid
+    if (!raidId) return;
 
-    // Sidebar 展開 → 才允許 submenu 行為
-    raids.forEach(raid => {
-        const btn = document.getElementById(`btn-${raid.id}`);
-        const submenu = document.getElementById(`gate-submenu-${raid.id}`);
-        const isSubCollapsed = submenu.classList.contains('collapsed');
-
-        submenu.classList.toggle('collapsed', !isSubCollapsed);
-        btn.classList.toggle('active', !isSubCollapsed);
+    // ✅ 不論展開或收合，先切 raid
+    switchRaid(raidId, {
+        forceNoSubmenu: isCollapsed
     });
+
+    // ✅ 只有展開狀態，才處理 submenu
+    if (!isCollapsed) {
+        raids.forEach(raid => {
+            const submenu = document.getElementById(`gate-submenu-${raid.id}`);
+            submenu?.classList.toggle('collapsed');
+        });
+    }
 });
         // 生成 raid 按鈕
         raids.forEach(raid => {
