@@ -405,20 +405,6 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
 }
 
 
-.sidebar-category {
-  position: relative;
-  z-index: 5;
-  cursor: pointer;
-  pointer-events: auto;
-}
-
-.gate-submenu-container.collapsed {
-  pointer-events: none;
-}
-.gate-submenu-container:not(.collapsed) {
-  pointer-events: auto;
-}
-
 
 
 
