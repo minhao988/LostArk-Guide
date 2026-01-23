@@ -712,24 +712,30 @@ sidebarOverlay?.addEventListener('click', () => {
 // 🔹 桌面版收合 / 展開 < 按鈕
 sidebarToggle?.addEventListener('click', () => {
     if (window.innerWidth >= 768) {
-        sidebar.classList.toggle('sidebar-collapsed');
+        // 桌面版收合
+        const isCollapsed = sidebar.classList.toggle('sidebar-collapsed');
         document.getElementById('main-body')?.classList.toggle('sidebar-collapsed');
 
-        sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
+        // icon 切換
+        sidebarToggle.innerHTML = isCollapsed
             ? '<i class="fas fa-angle-right"></i>'
             : '<i class="fas fa-angle-left"></i>';
 
-        // 收合 submenu
+        // 更新 sidebar 文字（短名 / 全名）
+        updateSidebarCategories(isCollapsed);
+
+        // submenu 處理
         document.querySelectorAll('.gate-submenu-container').forEach(el => {
-            if (sidebar.classList.contains('sidebar-collapsed')) {
+            if (isCollapsed) {
                 el.classList.add('collapsed');
             } else if (expandedRaidId === el.id.replace('gate-submenu-', '')) {
                 el.classList.remove('collapsed');
             }
         });
-
-       // 更新 category 標題 (可選)
-        updateSidebarCategories(sidebar.classList.contains('sidebar-collapsed'));
+    } else {
+        // 🔹 手機版也能用 < 關掉 sidebar
+        sidebar.classList.remove('mobile-open');
+        sidebarOverlay.style.display = 'none';
     }
 });
 
