@@ -406,21 +406,23 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
 
 
 
-/* 手機版 header 固定 */
+/* 手機版固定 header */
 @media (max-width: 768px) {
-  .md\\:hidden {
+  #mobile-header, .md\:hidden {
     position: sticky; /* 或 fixed 也可以 */
     top: 0;
-    z-index: 20;
-    background-color: rgba(0,0,0,0.5); /* 半透明背景 */
+    z-index: 50; /* 高於 sidebar & 內容 */
+    background-color: rgba(0,0,0,0.5);
     backdrop-filter: blur(4px);
+    height: 56px; /* 確保 padding 與 border 不被計算錯誤 */
   }
 
-  /* 確保內容不會被 header 遮住 */
+  /* 主內容 main 距離 header */
   main {
-    padding-top: 3rem; /* 跟 header 高度一致 */
+    padding-top: 56px;
   }
 }
+
 
 
 
