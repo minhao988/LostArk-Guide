@@ -709,31 +709,29 @@ sidebarOverlay?.addEventListener('click', () => {
     sidebarOverlay.style.display = 'none';
 });
 
-    // 🔹 桌面版收合 sidebar
-   sidebarToggle?.addEventListener('click', () => {
-     if (window.innerWidth >= 768) {
-         // 桌面收合
-         sidebar.classList.toggle('sidebar-collapsed');
-         document.getElementById('main-body')?.classList.toggle('sidebar-collapsed');
-         sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
-             ? '<i class="fas fa-angle-right"></i>'
-             : '<i class="fas fa-angle-left"></i>';
+// 🔹 桌面版收合 / 展開 < 按鈕
+sidebarToggle?.addEventListener('click', () => {
+    if (window.innerWidth >= 768) {
+        sidebar.classList.toggle('sidebar-collapsed');
+        document.getElementById('main-body')?.classList.toggle('sidebar-collapsed');
 
-         updateSidebarCategories(sidebar.classList.contains('sidebar-collapsed'));
+        sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
+            ? '<i class="fas fa-angle-right"></i>'
+            : '<i class="fas fa-angle-left"></i>';
 
-         document.querySelectorAll('.gate-submenu-container').forEach(el => {
+        // 收合 submenu
+        document.querySelectorAll('.gate-submenu-container').forEach(el => {
             if (sidebar.classList.contains('sidebar-collapsed')) {
-                 el.classList.add('collapsed');
-             } else if (expandedRaidId === el.id.replace('gate-submenu-', '')) {
-                 el.classList.remove('collapsed');
-             }
-         });
-     } else {
-         // 🔹 手機版直接關閉 sidebar + overlay
-         sidebar.classList.remove('mobile-open');
-         sidebarOverlay.style.display = 'none';
-     }
- });
+                el.classList.add('collapsed');
+            } else if (expandedRaidId === el.id.replace('gate-submenu-', '')) {
+                el.classList.remove('collapsed');
+            }
+        });
+
+        // // 更新 category 標題 (可選)
+        // updateSidebarCategories(sidebar.classList.contains('sidebar-collapsed'));
+    }
+});
 
 
 
