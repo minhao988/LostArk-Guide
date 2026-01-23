@@ -598,7 +598,7 @@ function initScrollSpy() {
         const lastSection = scrollSpySections[scrollSpySections.length - 1];
         if (lastSection) {
             const rect = lastSection.getBoundingClientRect();
-          f (rect.top < window.innerHeight && scrollY > 200) {
+            if (rect.top < window.innerHeight) {
                 currentId = lastSection.id || lastSection.dataset.menu;
             }
         }
@@ -659,19 +659,11 @@ function initScrollSpy() {
     });
 
     // 🔹 submenu / gate 變動時自動重新抓 section
-    // const observer = new MutationObserver(() => {
-    //     updateSpyElements();
-    //     onScroll();
-    // });
-
-  let spyTimer;
-const observer = new MutationObserver(() => {
-    clearTimeout(spyTimer);
-    spyTimer = setTimeout(() => {
+    const observer = new MutationObserver(() => {
         updateSpyElements();
         onScroll();
-    }, 50);
-});
+    });
+
     observer.observe(document.getElementById('main-body'), {
         childList: true,
         subtree: true
