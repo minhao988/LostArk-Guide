@@ -723,30 +723,29 @@ document.addEventListener('DOMContentLoaded', () => {
 //         sidebarOverlay.style.display = 'none';
 //     }
 // });
+const sidebar = document.getElementById('sidebar');
+const sidebarOverlay = document.getElementById('sidebar-overlay');
+const sidebarToggle = document.getElementById('menu-toggle');
+
 sidebarToggle?.addEventListener('click', () => {
     if (window.innerWidth >= 768) {
-        // 桌面收合
+        // 桌面版收合邏輯
         sidebar.classList.toggle('sidebar-collapsed');
         document.getElementById('main-body')?.classList.toggle('sidebar-collapsed');
         sidebarToggle.innerHTML = sidebar.classList.contains('sidebar-collapsed')
             ? '<i class="fas fa-angle-right"></i>'
             : '<i class="fas fa-angle-left"></i>';
-
-        updateSidebarCategories(sidebar.classList.contains('sidebar-collapsed'));
-
-        document.querySelectorAll('.gate-submenu-container').forEach(el => {
-            if (sidebar.classList.contains('sidebar-collapsed')) {
-                el.classList.add('collapsed');
-            } else if (expandedRaidId === el.id.replace('gate-submenu-', '')) {
-                el.classList.remove('collapsed');
-            }
-        });
     } else {
         // 手機版 toggle
-        const isOpen = sidebar.classList.contains('mobile-open');
-        sidebar.classList.toggle('mobile-open', !isOpen); // 點三就切換開關
-        sidebarOverlay.style.display = !isOpen ? 'block' : 'none';
+        const isOpen = sidebar.classList.toggle('mobile-open'); // true = 打開, false = 關閉
+        sidebarOverlay.style.display = isOpen ? 'block' : 'none';
     }
+});
+
+// 點遮罩關閉 sidebar
+sidebarOverlay?.addEventListener('click', () => {
+    sidebar.classList.remove('mobile-open');
+    sidebarOverlay.style.display = 'none';
 });
 
  initScrollSpy();
