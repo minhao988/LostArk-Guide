@@ -728,8 +728,8 @@ sidebarToggle?.addEventListener('click', () => {
             }
         });
 
-        // // 更新 category 標題 (可選)
-        // updateSidebarCategories(sidebar.classList.contains('sidebar-collapsed'));
+       // 更新 category 標題 (可選)
+        updateSidebarCategories(sidebar.classList.contains('sidebar-collapsed'));
     }
 });
 
