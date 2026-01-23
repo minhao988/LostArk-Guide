@@ -340,7 +340,49 @@ function updateSidebarCategories(sidebarCollapsed) {
     });
 }
 
+function switchRaid(raidId, options = {}) {
+    const sidebar = document.getElementById('sidebar');
+    const isCollapsed = sidebar.classList.contains('sidebar-collapsed');
 
+    // ✅ 安全判斷
+    if (isCollapsed || options.forceNoSubmenu) {
+        expandedRaidId = null;
+
+        document.querySelectorAll('.gate-submenu-container').forEach(el => {
+            el.classList.add('collapsed');
+            el.innerHTML = '';
+        });
+
+        document.querySelectorAll('.sidebar-btn')
+            .forEach(b => b.classList.remove('active'));
+
+        document.getElementById(`btn-${raidId}`)?.classList.add('active');
+        selectRaid(raidId);
+        return;
+    }
+
+    const currentSub = document.getElementById(`gate-submenu-${raidId}`);
+    if (!currentSub) return;
+
+    const isSame = expandedRaidId === raidId;
+
+    document.querySelectorAll('.gate-submenu-container').forEach(el => {
+        el.classList.add('collapsed');
+        el.innerHTML = '';
+    });
+
+    document.querySelectorAll('.sidebar-btn')
+        .forEach(b => b.classList.remove('active'));
+
+    if (!isSame) {
+        expandedRaidId = raidId;
+        currentSub.classList.remove('collapsed');
+        document.getElementById(`btn-${raidId}`)?.classList.add('active');
+        selectRaid(raidId);
+    } else {
+        expandedRaidId = null;
+    }
+}
 
 
 
