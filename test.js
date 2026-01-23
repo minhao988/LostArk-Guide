@@ -151,7 +151,7 @@ function initSidebar() {
     const container = document.getElementById('sidebar-content');
     if (!container) return;
 
-    // 先清空
+    // 清空舊元素，保留 gate-submenu
     Array.from(container.children).forEach(child => {
         if (child.id !== 'gate-submenu') child.remove();
     });
@@ -165,60 +165,31 @@ function initSidebar() {
         catTitle.dataset.fullName = category;
         catTitle.innerText = category;
         container.appendChild(catTitle);
-      
-catTitle.addEventListener('click', () => {
-    const sidebar = document.getElementById('sidebar');
-    const isCollapsed = sidebar.classList.contains('sidebar-collapsed');
 
-    const raidId = raids[0]?.id;
-    if (!raidId) return;
+        // 🔹 category click 只切 raid
+        catTitle.addEventListener('click', () => {
+            const raidId = raids[0]?.id;
+            if (!raidId) return;
+            switchRaid(raidId);
+        });
 
-    if (isCollapsed) {
-        // ✅ 收合狀態：只切 raid，不碰 submenu
-        switchRaid(raidId, { forceNoSubmenu: true });
-        return;
-    }
-
-    // ===== 展開狀態 =====
-
-    const submenu = document.getElementById(`gate-submenu-${raidId}`);
-    if (!submenu) return;
-
-    const isOpen = !submenu.classList.contains('collapsed');
-
-    // 先全部收起
-    document.querySelectorAll('.gate-submenu-container').forEach(el => {
-        el.classList.add('collapsed');
-    });
-
-    // 切 raid（但不讓它自己動 submenu）
-    switchRaid(raidId, { forceNoSubmenu: true });
-
-    // 再決定要不要展開
-    if (!isOpen) {
-        submenu.classList.remove('collapsed');
-        expandedRaidId = raidId;
-    } else {
-        expandedRaidId = null;
-    }
-});
-        // 生成 raid 按鈕
+        // 生成 raid 按鈕 + submenu
         raids.forEach(raid => {
             const btn = document.createElement('button');
             btn.id = `btn-${raid.id}`;
             btn.className = 'sidebar-btn w-full flex items-center gap-2 px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all';
 
-            // 判斷是圖片還是 Font Awesome
             btn.innerHTML = raidIcons[raid.id].startsWith('http')
                 ? `<img src="${raidIcons[raid.id]}" class="sidebar-icon w-6 h-6 object-contain" />
                    <span class="sidebar-text font-medium">${raid.short}</span>`
                 : `<i class="${raidIcons[raid.id]} sidebar-icon"></i>
                    <span class="sidebar-text font-medium">${raid.short}</span>`;
 
+            // raid click 也呼叫 switchRaid
             btn.onclick = () => switchRaid(raid.id);
             container.appendChild(btn);
 
-            // 生成空 submenu
+            // submenu 預先生成
             const submenu = document.createElement('div');
             submenu.className = 'gate-submenu-container pl-6 collapsed';
             submenu.id = `gate-submenu-${raid.id}`;
