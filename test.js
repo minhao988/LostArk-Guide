@@ -486,7 +486,7 @@ ${gate.patterns
       </h4>
     </div>
 
-    <!-- ✅ 新增：包住整個 phase -->
+  
     <div id="phase-${phaseKey}" class="phase-content col-span-full">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
@@ -498,8 +498,37 @@ ${gate.patterns
               ${p.isJustGuard ? 'justguard' : ''} 
               rounded-2xl">
 
-            <!-- 你原本的內容，完全不動 -->
-            ...
+          <div class="relative w-full aspect-video cursor-pointer group bg-black/40 overflow-hidden"
+             data-video="${p.videoId || ''}">
+          <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+            <i class="fab fa-youtube text-6xl text-red-600 opacity-80"></i>
+            <span class="mt-2 video-title text-slate-300">
+              ${p.name} 招式影片
+            </span>
+          </div>
+        </div>
+
+        <div class="p-5 text-[13px] md:text-[14px] lg:text-[15px]">
+          <h4 class="pattern-title flex items-center gap-2">
+            ${p.isDanger ? '<span class="pattern-danger-badge">DANGER</span>' : ''}
+            ${p.isCounter ? '<span class="pattern-counter-badge">COUNTER</span>' : ''}
+            ${p.isJustGuard ? '<span class="pattern-justguard-badge">JUST GUARD</span>' : ''}
+            ${p.name}
+          </h4>
+
+          <p class="text-slate-300 mb-4 min-h-[32px]">
+            ${p.desc}
+          </p>
+
+          <div class="bg-blue-950/30 border border-blue-500/30 rounded-lg p-3">
+            <p class="text-blue-400 font-black uppercase mb-1 text-[11px] md:text-[12px]">
+              應對方案
+            </p>
+            <p class="text-slate-400 italic text-[11px] md:text-[12px]">
+              ${p.tips}
+            </p>
+          </div>
+        </div>
           </div>
         `).join('')}
 
