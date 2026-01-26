@@ -92,8 +92,27 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
 
 /* Pattern text */
 .pattern-card p { color:#cbd5e1; line-height:1.65; }
-.pattern-title { font-size:1.05rem; font-weight:700; color:#e5e7eb; letter-spacing:0.02em; }
-.pattern-title span { background: rgba(250,204,21,0.15); color:#facc15; }
+.pattern-title {
+  font-size: 1.15rem;       /* 稍微大一點 */
+  font-weight: 800;          /* 更粗一些 */
+  color: #f8fafc;            /* 白色更清晰 */
+  letter-spacing: 0.03em;    /* 字距微調 */
+  line-height: 1.3;          /* 行距更舒適 */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;               /* 與徽章之間留空間 */
+  text-shadow: 0 0 4px rgba(0,0,0,0.5); /* 小陰影增加立體感 */
+}
+.pattern-title span {
+  background: rgba(250,204,21,0.25); /* 徽章顏色稍微明亮 */
+  color: #facc15;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
 
 /* ================== Gate 按鈕 ================== */
 .gate-btn {
@@ -525,6 +544,7 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
   opacity: 0;
   pointer-events: none;
 }
+
 
 
 
