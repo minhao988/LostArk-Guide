@@ -49,31 +49,44 @@ const allRaids = {
                      <br>\u2022 記不住就跟隊友走, 記住3次后就躲頭前, 最好還是要學會自己看爲佳。`, videoId: 'Zz-DlbrKizI',  isDanger: true },
                     { name: '8. 雷電風暴', desc: '\u2022 卡傑丟槍在前方地板,接著會出現一堆雷和風暴。 <br>\u2022 玩家們遇到這招規避就好, 吃到有負面debuff就遠離其他人。', tips: '\u2022 不要貪心 debuff有間隔性麻痹和小爆炸圈。',  videoId: 'yXS1O_dnel8', isDanger: true },
                     { name: '9. 浮空炸圈', desc: '\u2022 卡傑浮空並丟下槍, 炸圈從内炸外 全部卡傑墜下來砸頭前270度(高傷)。', tips: '\u2022 直接出去等第一個内圈炸了再回來躲在卡傑的背。',  videoId: 'Qq3E-VVJQkc', isDanger: true },
-                    { name: '10. 凌空墜', desc: '\u2022 卡傑朝隨機一名玩家上鈎再向下俯衝。', tips: '\u2022 此招式只出現在700機制和地下室階段。<br>\u2022 此招式在地下室階段吃滿下俯衝會纍積很多能量槽。', videoId: 'HFkjS7_jvto' },
-                    { name: '11. 上鈎格擋', desc: '\u2022 卡傑上鈎后接格擋。', tips: '\u2022 此招式只出現在700機制 <br>\u2022 繞去背後可以無視格擋。', gif: 'purple_wave.gif', videoId: 'tb-pDiUhzm4' },
-                    { name: '12. 迴旋格擋', desc: '\u2022 卡傑轉槍退後往前投擲迴旋槍, 槍回來插地板格擋。', tips: '\u2022 此招式只出現在700機制 <br><u2022> 看到插地板才面對卡傑格擋',  videoId: 'aDCD1pFK8L4', isDanger: true },
-                    { name: '13. 瞬移格擋', desc: '\u2022 卡傑揮劍瞬移后立刻出格擋。', tips: '\u2022 此招式只出現在700機制。<br>\u2022 看到瞬移先下意識準備格。', videoId: 'AbCdEf12345', isJustGuard: true },
-                    { name: '14. 快速反制', desc: '\u2022 卡傑瞬間出反制 失敗就會往前衝。', tips: '\u2022 此招式只出現在700機制。<br>\u2022 基本在700機制全程留反制技等這個',  videoId: 'AbCdEf12345', isCounter: true },
-                    { name: '15. 退後反制', desc: '\u2022 卡傑退後出反制 失敗就往前戳', tips: '\u2022 此招式只出現在700機制。<br>\u2022 基本在700機制全程留反制技等這個。',  videoId: 'AbCdEf12345',  isCounter: true  },
-                    { name: '16. 内場落雷', desc: '\u2022 卡傑出附近一堆落雷然後直接轉向玩家攻擊。', tips: '\u2022 此招式只出現在700機制。<br>\u2022 基本在700機制全程留反制技等這個',  videoId: 'AbCdEf12345', isDanger: true },
-                    { name: '17. 2連格擋', desc: '\u2022 卡傑選擇一名玩家格擋2次 接著攻擊頭前扇形。', tips: '\u2022 此招式注意自己是不是有debuff負面狀態或者看身上有沒有暗器的標記, 知道是你就不要亂轉乖乖格擋。<br>\u2022 其他人不會格擋就別幫忙 只要有人失敗地上就有火。', videoId: 'ogivioxsS-U', isDanger: true },
-                    { name: '18. 挥刀格挡', desc: '\u2022 卡傑揮刀后蓄力1秒后, 按格擋。', tips: '。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
+                    
+                    { name: '10. 2連格擋', desc: '\u2022 卡傑選擇一名玩家格擋2次 接著攻擊頭前扇形。', tips: '\u2022 此招式注意自己是不是有debuff負面狀態或者看身上有沒有暗器的標記, 知道是你就不要亂轉乖乖格擋。<br>\u2022 其他人不會格擋就別幫忙 只要有人失敗地上就有火。', videoId: 'ogivioxsS-U', isDanger: true },
+                    { name: '11. 挥刀格挡', desc: '\u2022 卡傑揮刀后蓄力1秒后, 按格擋。', tips: '。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
+                    { name: '12. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
+                    { name: '13. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
+                    { name: '14. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
+                    { name: '15. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
+                    { name: '16. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
+                    { name: '17. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
+                    { name: '18. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
                     { name: '19. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
-                    { name: '20. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
-                    { name: '21. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
-                    { name: '22. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
-                    { name: '23. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
-                    { name: '24. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
-                    { name: '25. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
-                    { name: '26. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
-                    { name: '27. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' }
+                    { name: '20. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' }
                   ]},
                   phase700: {
                      
-                    title: '一般階段招式',
+                    title: '700機制招式',
                     list: [
-                           { name: '1. 刀劍', desc: '\u2022 卡傑揮刀 > 前方甩3條綫 > 砸後方分綫 > 砸前後', tips: '\u2022 側擊沒什麽問題 打頭背適當躲避前後', videoId: 'Q4ewwMjSQHI' }
-                      
+                          
+                      { name: '1. 凌空墜', desc: '\u2022 卡傑朝隨機一名玩家上鈎再向下俯衝。', tips: '\u2022 此招式只出現在700機制和地下室階段。<br>\u2022 此招式在地下室階段吃滿下俯衝會纍積很多能量槽。', videoId: 'HFkjS7_jvto' },
+                    { name: '2. 上鈎格擋', desc: '\u2022 卡傑上鈎后接格擋。', tips: '\u2022 此招式只出現在700機制 <br>\u2022 繞去背後可以無視格擋。', gif: 'purple_wave.gif', videoId: 'tb-pDiUhzm4' },
+                    { name: '3. 迴旋格擋', desc: '\u2022 卡傑轉槍退後往前投擲迴旋槍, 槍回來插地板格擋。', tips: '\u2022 此招式只出現在700機制 <br><u2022> 看到插地板才面對卡傑格擋',  videoId: 'aDCD1pFK8L4', isDanger: true },
+                    { name: '4. 瞬移格擋', desc: '\u2022 卡傑揮劍瞬移后立刻出格擋。', tips: '\u2022 此招式只出現在700機制。<br>\u2022 看到瞬移先下意識準備格。', videoId: 'AbCdEf12345', isJustGuard: true },
+                    { name: '5. 快速反制', desc: '\u2022 卡傑瞬間出反制 失敗就會往前衝。', tips: '\u2022 此招式只出現在700機制。<br>\u2022 基本在700機制全程留反制技等這個',  videoId: 'AbCdEf12345', isCounter: true },
+                    { name: '6. 退後反制', desc: '\u2022 卡傑退後出反制 失敗就往前戳', tips: '\u2022 此招式只出現在700機制。<br>\u2022 基本在700機制全程留反制技等這個。',  videoId: 'AbCdEf12345',  isCounter: true  },
+                    { name: '7. 内場落雷', desc: '\u2022 卡傑出附近一堆落雷然後直接轉向玩家攻擊。', tips: '\u2022 此招式只出現在700機制。<br>\u2022 基本在700機制全程留反制技等這個',  videoId: 'AbCdEf12345', isDanger: true }
+                    ]},
+                   basement: {
+                     
+                    title: '地下室招式',
+                    list: [
+                          
+                    { name: '1. 凌空墜', desc: '\u2022 卡傑朝隨機一名玩家上鈎再向下俯衝。', tips: '\u2022 此招式只出現在700機制和地下室階段。<br>\u2022 此招式在地下室階段吃滿下俯衝會纍積很多能量槽。', videoId: 'HFkjS7_jvto' },
+                    { name: '2. 上鈎格擋', desc: '\u2022 卡傑上鈎后接格擋。', tips: '\u2022 此招式只出現在700機制 <br>\u2022 繞去背後可以無視格擋。', gif: 'purple_wave.gif', videoId: 'tb-pDiUhzm4' },
+                    { name: '3. 迴旋格擋', desc: '\u2022 卡傑轉槍退後往前投擲迴旋槍, 槍回來插地板格擋。', tips: '\u2022 此招式只出現在700機制 <br><u2022> 看到插地板才面對卡傑格擋',  videoId: 'aDCD1pFK8L4', isDanger: true },
+                    { name: '4. 瞬移格擋', desc: '\u2022 卡傑揮劍瞬移后立刻出格擋。', tips: '\u2022 此招式只出現在700機制。<br>\u2022 看到瞬移先下意識準備格。', videoId: 'AbCdEf12345', isJustGuard: true },
+                    { name: '5. 快速反制', desc: '\u2022 卡傑瞬間出反制 失敗就會往前衝。', tips: '\u2022 此招式只出現在700機制。<br>\u2022 基本在700機制全程留反制技等這個',  videoId: 'AbCdEf12345', isCounter: true },
+                    { name: '6. 退後反制', desc: '\u2022 卡傑退後出反制 失敗就往前戳', tips: '\u2022 此招式只出現在700機制。<br>\u2022 基本在700機制全程留反制技等這個。',  videoId: 'AbCdEf12345',  isCounter: true  },
+                    { name: '7. 内場落雷', desc: '\u2022 卡傑出附近一堆落雷然後直接轉向玩家攻擊。', tips: '\u2022 此招式只出現在700機制。<br>\u2022 基本在700機制全程留反制技等這個',  videoId: 'AbCdEf12345', isDanger: true }
                     ]}
                   
                   
