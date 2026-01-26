@@ -545,30 +545,32 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
   pointer-events: none;
 }
 
-/* .phase-content {
-  overflow: hidden;
+/* ================== Phase 折叠核心（只管折） ================== */
+.phase-content {
   max-height: 0;
-  transition: max-height 0.35s ease;
-} */
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+}
 
 .phase-content.open {
-  max-height: 5000px; /* 给大一点 */
+  max-height: 5000px; /* 足够大即可 */
+  opacity: 1;
 }
 
-.phase-title .fa-chevron-down.rotate {
-  transform: rotate(180deg);
-}
-
-.phase-content {
-  margin-bottom: 48px;
+/* ================== Phase 视觉样式（给 inner） ================== */
+.phase-content > .grid {
   padding: 24px 0;
+  margin-bottom: 48px;
   border-top: 2px solid rgba(250,204,21,0.15);
 }
 
-.phase-content:first-of-type {
+/* 第一个 phase 不要上边线 */
+.phase-content:first-of-type > .grid {
   border-top: none;
 }
 
+/* ================== Phase Title ================== */
 .phase-title {
   position: relative;
   padding-left: 20px;
@@ -589,27 +591,13 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
   );
 }
 
-/* phase-content 只负责折叠 */
-.phase-content {
-  max-height: 2000px;
-  overflow: hidden;
-  transition: max-height 0.4s ease, opacity 0.3s ease;
-  opacity: 1;
+/* Chevron 旋转 */
+.phase-title i {
+  transition: transform 0.3s ease;
 }
 
-.phase-content.collapsed {
-  max-height: 0;
-  opacity: 0;
+.phase-title i.rotate {
+  transform: rotate(180deg);
 }
-
-/* 👇 真正的视觉样式给 inner */
-.phase-content > .grid {
-  padding: 24px 0;
-  margin-bottom: 48px;
-  border-top: 2px solid rgba(250,204,21,0.15);
-}
-
-
-
 
 
