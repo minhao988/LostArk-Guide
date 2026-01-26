@@ -573,46 +573,29 @@ function renderGateSubmenu(gate, raidId) {
 
     let html = `<div class="px-4 py-2 text-xs font-bold text-slate-500 uppercase">${gate.name}</div>`;
 
-    /* ================= 核心機制 ================= */
+    // Mechanics
     if (gate.mechanics?.length) {
         html += `
-          <div class="submenu-group">
-            <button class="submenu-btn" data-target="section-mechanics">
-              核心機制
-            </button>
-            ${gate.mechanics.map((m, i) => `
-                <button class="submenu-sub pl-10" data-target="mech-${i}">
-                  ${m.hp} ${m.title}
-                </button>
-            `).join('')}
-          </div>
-        `;
+        <div class="submenu-group">
+          <button class="submenu-btn" data-target="section-mechanics">核心機制</button>
+          ${gate.mechanics.map((m,i) => `
+            <button class="submenu-sub" data-target="mech-${i}">${m.hp} ${m.title}</button>
+          `).join('')}
+        </div>`;
     }
 
-    /* ================= 招式解析（Phase 版） ================= */
-    if (gate.patterns && Object.keys(gate.patterns).length) {
-        html += `
-          <div class="submenu-group mt-2">
-            <button class="submenu-btn" data-target="section-patterns">
-              招式解析
-            </button>
-        `;
+    // Patterns 分 phase
+    if (gate.patterns) {
+        html += `<div class="submenu-group mt-2">`;
 
         Object.entries(gate.patterns).forEach(([phaseKey, phase]) => {
             html += `
-              <div class="submenu-phase pl-6 mt-1 text-xs font-bold text-slate-400">
-                ${phase.title}
-              </div>
-            `;
-
-            phase.list.forEach((p, i) => {
-                html += `
-                  <button class="submenu-sub pl-10"
-                          data-target="pattern-${phaseKey}-${i}">
-                    ${p.name}
-                  </button>
-                `;
-            });
+            <button class="submenu-btn phase-toggle">${phase.title}</button>
+            <div class="submenu-phase-container">
+              ${phase.list.map((p,i) => `
+                <button class="submenu-sub" data-target="pattern-${phaseKey}-${i}">${p.name}</button>
+              `).join('')}
+            </div>`;
         });
 
         html += `</div>`;
@@ -620,17 +603,23 @@ function renderGateSubmenu(gate, raidId) {
 
     container.innerHTML = html;
 
-    /* ================= 滾動綁定 ================= */
+    // 綁定 submenu 按鈕滾動
     container.querySelectorAll('[data-target]').forEach(btn => {
         btn.addEventListener('click', () => {
             const targetId = btn.dataset.target;
             const targetEl = document.getElementById(targetId);
             if (targetEl) {
-                targetEl.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
+        });
+    });
+
+    // 綁定 phase toggle 折疊
+    container.querySelectorAll('.phase-toggle').forEach(btn => {
+        const phaseContainer = btn.nextElementSibling;
+        if (!phaseContainer) return;
+        btn.addEventListener('click', () => {
+            phaseContainer.classList.toggle('collapsed');
         });
     });
 }
