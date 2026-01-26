@@ -835,18 +835,15 @@ document.getElementById('main-body').addEventListener('scroll', () => {
     }, 100); // 滾動停止 100ms 移除
 });
 
-document.addEventListener('click', e => {
-  const title = e.target.closest('.phase-title');
-  if (!title) return;
+document.querySelectorAll('.phase-title').forEach(title => {
+  title.addEventListener('click', () => {
+    const id = title.dataset.collapse
+    const content = document.getElementById(id)
+    const icon = title.querySelector('i')
 
-  const targetId = title.dataset.collapse;
-  const content = document.getElementById(targetId);
-  const icon = title.querySelector('.fa-chevron-down');
-
-  if (!content) return;
-
-  content.classList.toggle('open');
-  icon?.classList.toggle('rotate');
-});
+    content.classList.toggle('open')
+    icon.classList.toggle('rotate')
+  })
+})
 
 });
