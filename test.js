@@ -806,6 +806,18 @@ document.getElementById('main-body').addEventListener('scroll', () => {
     }, 100); // 滾動停止 100ms 移除
 });
 
+document.addEventListener('click', e => {
+  const title = e.target.closest('.phase-title');
+  if (!title) return;
 
+  const targetId = title.dataset.collapse;
+  const content = document.getElementById(targetId);
+  const icon = title.querySelector('.fa-chevron-down');
+
+  if (!content) return;
+
+  content.classList.toggle('open');
+  icon?.classList.toggle('rotate');
+});
 
 });
