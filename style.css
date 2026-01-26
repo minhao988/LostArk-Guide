@@ -545,6 +545,19 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
   pointer-events: none;
 }
 
+.phase-content {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s ease;
+}
+
+.phase-content.open {
+  max-height: 5000px; /* 给大一点 */
+}
+
+.phase-title .fa-chevron-down.rotate {
+  transform: rotate(180deg);
+}
 
 
 
