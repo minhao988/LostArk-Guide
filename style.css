@@ -411,6 +411,89 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
 }
 
 
+/* ================== Gate Submenu 改良版 ================== */
+
+/* submenu group */
+.submenu-group {
+  margin-top: 0.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* submenu 主按鈕（section） */
+.submenu-btn {
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #cbd5e1;
+  background: transparent;
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.submenu-btn:hover {
+  color: var(--raid-accent);
+  background: var(--raid-accent-soft);
+  border-left-color: var(--raid-accent);
+}
+.submenu-btn.active {
+  color: var(--raid-accent);
+  font-weight: 800;
+  background: linear-gradient(90deg, var(--raid-accent-soft), transparent);
+  border-left-color: var(--raid-accent);
+}
+
+/* submenu phase 標題 */
+.submenu-phase {
+  font-size: 0.675rem;
+  font-weight: 600;
+  color: #94a3b8;
+  padding: 0.25rem 1.25rem;
+  margin-top: 0.25rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* submenu 子項目（pattern / mechanic） */
+.submenu-sub {
+  width: 100%;
+  text-align: left;
+  padding: 0.35rem 2.5rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #94a3b8;
+  background: transparent;
+  border-left: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.submenu-sub:hover,
+.submenu-sub.active {
+  color: var(--raid-accent);
+  font-weight: 700;
+  border-left-color: var(--raid-accent);
+  background: linear-gradient(90deg, var(--raid-accent-soft), transparent);
+}
+
+/* submenu scroll 美化 */
+.gate-submenu-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.2) transparent;
+}
+.gate-submenu-container::-webkit-scrollbar {
+  width: 6px;
+}
+.gate-submenu-container::-webkit-scrollbar-thumb {
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 3px;
+}
+.gate-submenu-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
 
 
 
