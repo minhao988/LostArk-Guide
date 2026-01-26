@@ -93,7 +93,7 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
 /* Pattern text */
 .pattern-card p { color:#cbd5e1; line-height:1.65; }
 .pattern-title {
-  font-size: 1.5rem;       /* 稍微大一點 */
+  font-size: 1.15rem;       /* 稍微大一點 */
   font-weight: 800;          /* 更粗一些 */
   color: #f8fafc;            /* 白色更清晰 */
   letter-spacing: 0.03em;    /* 字距微調 */
@@ -544,6 +544,7 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
   opacity: 0;
   pointer-events: none;
 }
+
 
 
 
