@@ -575,13 +575,13 @@ function renderGateSubmenu(gate, raidId) {
 
     // Mechanics
     if (gate.mechanics?.length) {
-        html += `
-        <div class="submenu-group">
-          <button class="submenu-btn" data-target="section-mechanics">核心機制</button>
-          ${gate.mechanics.map((m,i) => `
+        html += `<div class="submenu-group">`;
+        html += `<button class="submenu-btn phase-toggle">核心機制</button>`;
+        html += `<div class="submenu-phase-container">`;
+        html += gate.mechanics.map((m,i) => `
             <button class="submenu-sub" data-target="mech-${i}">${m.hp} ${m.title}</button>
-          `).join('')}
-        </div>`;
+        `).join('');
+        html += `</div></div>`;
     }
 
     // Patterns 分 phase
