@@ -513,6 +513,18 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
 }
 
 
+/* submenu phase 收合 */
+.submenu-phase-container {
+  max-height: 1000px;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.2s ease;
+  opacity: 1;
+}
+.submenu-phase-container.collapsed {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
 
 
 
