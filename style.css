@@ -589,6 +589,27 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
   );
 }
 
+/* phase-content 只负责折叠 */
+.phase-content {
+  max-height: 2000px;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+  opacity: 1;
+}
+
+.phase-content.collapsed {
+  max-height: 0;
+  opacity: 0;
+}
+
+/* 👇 真正的视觉样式给 inner */
+.phase-content > .grid {
+  padding: 24px 0;
+  margin-bottom: 48px;
+  border-top: 2px solid rgba(250,204,21,0.15);
+}
+
+
 
 
 
