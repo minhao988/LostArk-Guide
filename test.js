@@ -573,37 +573,63 @@ function renderGateSubmenu(gate, raidId) {
 
     let html = `<div class="px-4 py-2 text-xs font-bold text-slate-500 uppercase">${gate.name}</div>`;
 
+    /* ================= 核心機制 ================= */
     if (gate.mechanics?.length) {
         html += `
           <div class="submenu-group">
-            <button class="submenu-btn" data-target="section-mechanics">核心機制</button>
-            ${gate.mechanics.map((m,i) => `
-                <button class="submenu-sub pl-10" data-target="mech-${i}">${m.hp} ${m.title}</button>
+            <button class="submenu-btn" data-target="section-mechanics">
+              核心機制
+            </button>
+            ${gate.mechanics.map((m, i) => `
+                <button class="submenu-sub pl-10" data-target="mech-${i}">
+                  ${m.hp} ${m.title}
+                </button>
             `).join('')}
           </div>
         `;
     }
 
-    if (gate.patterns?.length) {
+    /* ================= 招式解析（Phase 版） ================= */
+    if (gate.patterns && Object.keys(gate.patterns).length) {
         html += `
           <div class="submenu-group mt-2">
-            <button class="submenu-btn" data-target="section-patterns">招式解析</button>
-            ${gate.patterns.map((p,i) => `
-                <button class="submenu-sub pl-10" data-target="pattern-${i}">${p.name}</button>
-            `).join('')}
-          </div>
+            <button class="submenu-btn" data-target="section-patterns">
+              招式解析
+            </button>
         `;
+
+        Object.entries(gate.patterns).forEach(([phaseKey, phase]) => {
+            html += `
+              <div class="submenu-phase pl-6 mt-1 text-xs font-bold text-slate-400">
+                ${phase.title}
+              </div>
+            `;
+
+            phase.list.forEach((p, i) => {
+                html += `
+                  <button class="submenu-sub pl-10"
+                          data-target="pattern-${phaseKey}-${i}">
+                    ${p.name}
+                  </button>
+                `;
+            });
+        });
+
+        html += `</div>`;
     }
 
     container.innerHTML = html;
 
-    // 綁定 submenu 按鈕滾動
+    /* ================= 滾動綁定 ================= */
     container.querySelectorAll('[data-target]').forEach(btn => {
         btn.addEventListener('click', () => {
             const targetId = btn.dataset.target;
             const targetEl = document.getElementById(targetId);
             if (targetEl) {
-                targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                targetEl.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
             }
         });
     });
