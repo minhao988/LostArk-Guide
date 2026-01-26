@@ -472,7 +472,7 @@ html += `
             </h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 ${gate.patterns
-  ? Object.entries(gate.patterns).map(([phaseKey, phase]) => `
+  ? Object.entries(gate.patterns).map(([phaseKey, phase], idx) => `
 
     <div class="col-span-full">
       <h4 class="phase-title mt-12 mb-6 flex items-center justify-between cursor-pointer
@@ -482,12 +482,12 @@ ${gate.patterns
           <span class="h-6 w-2 bg-yellow-400 rounded"></span>
           ${phase.title}
         </div>
-        <i class="fa-solid fa-chevron-down text-base opacity-80 transition-transform"></i>
+        <i class="fa-solid fa-chevron-down text-base opacity-80 transition-transform
+            ${idx === 0 ? 'rotate' : ''}"></i>
       </h4>
     </div>
 
-  
-    <div id="phase-${phaseKey}" class="phase-content col-span-full">
+    <div id="phase-${phaseKey}" class="phase-content col-span-full ${idx === 0 ? 'open' : 'collapsed'}">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
         ${phase.list.map((p, i) => `
@@ -498,37 +498,38 @@ ${gate.patterns
               ${p.isJustGuard ? 'justguard' : ''} 
               rounded-2xl">
 
-          <div class="relative w-full aspect-video cursor-pointer group bg-black/40 overflow-hidden"
-             data-video="${p.videoId || ''}">
-          <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-            <i class="fab fa-youtube text-6xl text-red-600 opacity-80"></i>
-            <span class="mt-2 video-title text-slate-300">
-              ${p.name} 招式影片
-            </span>
-          </div>
-        </div>
+            <div class="relative w-full aspect-video cursor-pointer group bg-black/40 overflow-hidden"
+                 data-video="${p.videoId || ''}">
+              <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                <i class="fab fa-youtube text-6xl text-red-600 opacity-80"></i>
+                <span class="mt-2 video-title text-slate-300">
+                  ${p.name} 招式影片
+                </span>
+              </div>
+            </div>
 
-        <div class="p-5 text-[13px] md:text-[14px] lg:text-[15px]">
-          <h4 class="pattern-title flex items-center gap-2">
-            ${p.isDanger ? '<span class="pattern-danger-badge">DANGER</span>' : ''}
-            ${p.isCounter ? '<span class="pattern-counter-badge">COUNTER</span>' : ''}
-            ${p.isJustGuard ? '<span class="pattern-justguard-badge">JUST GUARD</span>' : ''}
-            ${p.name}
-          </h4>
+            <div class="p-5 text-[13px] md:text-[14px] lg:text-[15px]">
+              <h4 class="pattern-title flex items-center gap-2">
+                ${p.isDanger ? '<span class="pattern-danger-badge">DANGER</span>' : ''}
+                ${p.isCounter ? '<span class="pattern-counter-badge">COUNTER</span>' : ''}
+                ${p.isJustGuard ? '<span class="pattern-justguard-badge">JUST GUARD</span>' : ''}
+                ${p.name}
+              </h4>
 
-          <p class="text-slate-300 mb-4 min-h-[32px]">
-            ${p.desc}
-          </p>
+              <p class="text-slate-300 mb-4 min-h-[32px]">
+                ${p.desc}
+              </p>
 
-          <div class="bg-blue-950/30 border border-blue-500/30 rounded-lg p-3">
-            <p class="text-blue-400 font-black uppercase mb-1 text-[11px] md:text-[12px]">
-              應對方案
-            </p>
-            <p class="text-slate-400 italic text-[11px] md:text-[12px]">
-              ${p.tips}
-            </p>
-          </div>
-        </div>
+              <div class="bg-blue-950/30 border border-blue-500/30 rounded-lg p-3">
+                <p class="text-blue-400 font-black uppercase mb-1 text-[11px] md:text-[12px]">
+                  應對方案
+                </p>
+                <p class="text-slate-400 italic text-[11px] md:text-[12px]">
+                  ${p.tips}
+                </p>
+              </div>
+            </div>
+
           </div>
         `).join('')}
 
@@ -835,15 +836,27 @@ document.getElementById('main-body').addEventListener('scroll', () => {
     }, 100); // 滾動停止 100ms 移除
 });
 
+
+
 document.querySelectorAll('.phase-title').forEach(title => {
   title.addEventListener('click', () => {
-    const id = title.dataset.collapse
-    const content = document.getElementById(id)
-    const icon = title.querySelector('i')
+    const targetId = title.dataset.collapse;
+    const content = document.getElementById(targetId);
+    if (!content) return;
 
-    content.classList.toggle('open')
-    icon.classList.toggle('rotate')
-  })
-})
+    const chevron = title.querySelector('.fa-chevron-down');
+
+    if (content.classList.contains('open')) {
+      content.classList.remove('open');
+      content.classList.add('collapsed');
+      chevron.classList.remove('rotate');
+    } else {
+      content.classList.add('open');
+      content.classList.remove('collapsed');
+      chevron.classList.add('rotate');
+    }
+  });
+});  
+  
 
 });
