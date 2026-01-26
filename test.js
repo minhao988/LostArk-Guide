@@ -839,24 +839,28 @@ document.getElementById('main-body').addEventListener('scroll', () => {
 
 
 document.querySelectorAll('.phase-title').forEach(title => {
+  const targetId = title.dataset.collapse;
+  const content = document.getElementById(targetId);
+  const chevron = title.querySelector('.fa-chevron-down');
+
+  // 默认展开第一个
+  if (!content.classList.contains('collapsed') && !content.classList.contains('open')) {
+    content.style.maxHeight = content.scrollHeight + 'px';
+    chevron.classList.add('rotate');
+  }
+
   title.addEventListener('click', () => {
-    const targetId = title.dataset.collapse;
-    const content = document.getElementById(targetId);
-    if (!content) return;
-
-    const chevron = title.querySelector('.fa-chevron-down');
-
-    if (content.classList.contains('open')) {
-      content.classList.remove('open');
-      content.classList.add('collapsed');
+    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+      // 收起
+      content.style.maxHeight = '0px';
       chevron.classList.remove('rotate');
     } else {
-      content.classList.add('open');
-      content.classList.remove('collapsed');
+      // 展开
+      content.style.maxHeight = content.scrollHeight + 'px';
       chevron.classList.add('rotate');
     }
   });
-});  
+});
   
 
 });
