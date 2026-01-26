@@ -35,7 +35,10 @@ const allRaids = {
             1: {
                 name: '深淵之主：卡傑羅斯 1門',
                 youtubeId: "y8wsk0oEWWQ",
-                patterns: [
+                patterns: {
+                   normal: {
+                    title: '一般階段招式',
+                    list: [
                     { name: '1. 刀劍', desc: '\u2022 卡傑揮刀 > 前方甩3條綫 > 砸後方分綫 > 砸前後', tips: '\u2022 側擊沒什麽問題 打頭背適當躲避前後', videoId: 'Q4ewwMjSQHI' },
                     { name: '2. 4槍連擊', desc: '\u2022 卡傑往前方射出兩次槍矛 > 往前方丟出大球 > 後續各小地板槍矛', tips: '\u2022 背後安全', isCounter: false, videoId: 'POgWxytwOAA' },
                     { name: '3. 右側甩左', desc: '\u2022 卡傑先往右側位攻擊， 接著攻擊左側270度。', tips: '\u2022 看到卡傑砸了右側后就跑去站右側', videoId: 'ilZzFsW1CII' },
@@ -54,7 +57,7 @@ const allRaids = {
                     { name: '15. 退後反制', desc: '\u2022 卡傑退後出反制 失敗就往前戳', tips: '\u2022 此招式只出現在700機制。<br>\u2022 基本在700機制全程留反制技等這個。',  videoId: 'AbCdEf12345',  isCounter: true  },
                     { name: '16. 内場落雷', desc: '\u2022 卡傑出附近一堆落雷然後直接轉向玩家攻擊。', tips: '\u2022 此招式只出現在700機制。<br>\u2022 基本在700機制全程留反制技等這個',  videoId: 'AbCdEf12345', isDanger: true },
                     { name: '17. 2連格擋', desc: '\u2022 卡傑選擇一名玩家格擋2次 接著攻擊頭前扇形。', tips: '\u2022 此招式注意自己是不是有debuff負面狀態或者看身上有沒有暗器的標記, 知道是你就不要亂轉乖乖格擋。<br>\u2022 其他人不會格擋就別幫忙 只要有人失敗地上就有火。', videoId: 'ogivioxsS-U', isDanger: true },
-                    { name: '18. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
+                    { name: '18. 挥刀格挡', desc: '\u2022 卡傑揮刀后蓄力1秒后, 按格擋。', tips: '。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
                     { name: '19. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
                     { name: '20. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
                     { name: '21. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
@@ -64,7 +67,17 @@ const allRaids = {
                     { name: '25. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
                     { name: '26. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' },
                     { name: '27. 紫圈擴散', desc: 'Boss 拍地產生向外擴散的圓環能量波。', tips: '遵循「內-外-內」的躲避節奏。第一波炸內，第二波炸外。', gif: 'purple_wave.gif', videoId: 'AbCdEf12345' }
-                ],
+                  ]},
+                  phase700: {
+                     
+                    title: '一般階段招式',
+                    list: [
+                           { name: '1. 刀劍', desc: '\u2022 卡傑揮刀 > 前方甩3條綫 > 砸後方分綫 > 砸前後', tips: '\u2022 側擊沒什麽問題 打頭背適當躲避前後', videoId: 'Q4ewwMjSQHI' }
+                      
+                    ]}
+                  
+                  
+                },
                 mechanics: [
                     { hp: '900', title: '抓人', desc: `\u2022 卡傑產生球追蹤附近玩家並抓起來，隨後出現反制。`, details: `\u2022 失敗反制，被抓的玩家們死亡。`, type: 'counter', videoId: 'DZ6vfIyhbIA' },
                     { hp: 'x700', title: '團隊癱瘓', desc: `\u2022 進入700機制會變成1打1的局面 所有玩家要在1分鐘内把卡傑的紫條癱瘓打掉, 最後從沒裂縫延伸位找出並站自己的安全區邊`, details: `\u2022 反制能提升癱瘓值 <br> \u2022 推薦旋風手雷`, type: 'stagger', videoId: 'PVcQhrsAAQs' },
@@ -445,37 +458,61 @@ html += `
                 招式動作解析 (Patterns Guide)
             </h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    ${gate.patterns?.map((p,i) => `
-        <div id="pattern-${i}" class="pattern-card 
-            ${p.isDanger ? 'danger' : ''} 
-            ${p.isCounter ? 'counter' : ''} 
-            ${p.isJustGuard ? 'justguard' : ''} 
-            rounded-2xl">
-            
-            <div class="relative w-full aspect-video cursor-pointer group bg-black/40 overflow-hidden" data-video="${p.videoId || ''}">
-                <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                    <i class="fab fa-youtube text-6xl text-red-600 opacity-80"></i>
-                    <span class="mt-2 video-title text-slate-300">${p.name}招式影片</span>
-                </div>
-            </div>
-            
-            <div class="p-5 text-[13px] md:text-[14px] lg:text-[15px]">
-                <h4 class="pattern-title flex items-center gap-2">
-                    ${p.isDanger ? '<span class="pattern-danger-badge">DANGER</span>' : ''}
-                    ${p.isCounter ? '<span class="pattern-counter-badge">COUNTER</span>' : ''}
-                    ${p.isJustGuard ? '<span class="pattern-justguard-badge">JUST GUARD</span>' : ''}
-                    ${p.name}
-                </h4>
-                
-                <p class="text-slate-300 mb-4 min-h-[32px]">${p.desc}</p>
-                
-                <div class="bg-blue-950/30 border border-blue-500/30 rounded-lg p-3">
-                    <p class="text-blue-400 font-black uppercase mb-1 text-[11px] md:text-[12px]">應對方案</p>
-                    <p class="text-slate-400 italic text-[11px] md:text-[12px]">${p.tips}</p>
-                </div>
-            </div>
+ ${gate.patterns
+  ? Object.entries(gate.patterns).map(([phaseKey, phase]) => `
+    
+    <div class="col-span-full">
+      <h4 class="text-xl font-bold text-slate-200 mt-10 mb-4 flex items-center gap-3">
+        <span class="h-4 w-1 bg-yellow-400 rounded"></span>
+        ${phase.title}
+      </h4>
+    </div>
+
+    ${phase.list.map((p, i) => `
+      <div id="pattern-${phaseKey}-${i}" 
+        class="pattern-card 
+          ${p.isDanger ? 'danger' : ''} 
+          ${p.isCounter ? 'counter' : ''} 
+          ${p.isJustGuard ? 'justguard' : ''} 
+          rounded-2xl">
+
+        <div class="relative w-full aspect-video cursor-pointer group bg-black/40 overflow-hidden"
+             data-video="${p.videoId || ''}">
+          <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+            <i class="fab fa-youtube text-6xl text-red-600 opacity-80"></i>
+            <span class="mt-2 video-title text-slate-300">
+              ${p.name} 招式影片
+            </span>
+          </div>
         </div>
+
+        <div class="p-5 text-[13px] md:text-[14px] lg:text-[15px]">
+          <h4 class="pattern-title flex items-center gap-2">
+            ${p.isDanger ? '<span class="pattern-danger-badge">DANGER</span>' : ''}
+            ${p.isCounter ? '<span class="pattern-counter-badge">COUNTER</span>' : ''}
+            ${p.isJustGuard ? '<span class="pattern-justguard-badge">JUST GUARD</span>' : ''}
+            ${p.name}
+          </h4>
+
+          <p class="text-slate-300 mb-4 min-h-[32px]">
+            ${p.desc}
+          </p>
+
+          <div class="bg-blue-950/30 border border-blue-500/30 rounded-lg p-3">
+            <p class="text-blue-400 font-black uppercase mb-1 text-[11px] md:text-[12px]">
+              應對方案
+            </p>
+            <p class="text-slate-400 italic text-[11px] md:text-[12px]">
+              ${p.tips}
+            </p>
+          </div>
+        </div>
+      </div>
     `).join('')}
+
+  `).join('')
+  : ''
+}
 </div>
         </section>
     `;
