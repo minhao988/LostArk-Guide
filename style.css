@@ -413,11 +413,13 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
 
 /* ================== Gate Submenu 改良版 ================== */
 
-/* submenu group */
+/* submenu group (phase) */
 .submenu-group {
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
   display: flex;
   flex-direction: column;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 0.25rem;
 }
 
 /* submenu 主按鈕（section） */
@@ -428,10 +430,12 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
   font-size: 0.75rem;
   font-weight: 700;
   color: #cbd5e1;
-  background: transparent;
+  background: rgba(15,23,42,0.3);
   border-left: 3px solid transparent;
   cursor: pointer;
   transition: all 0.2s ease;
+  border-radius: 0.25rem;
+  margin-bottom: 0.15rem;
 }
 .submenu-btn:hover {
   color: var(--raid-accent);
@@ -445,7 +449,7 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
   border-left-color: var(--raid-accent);
 }
 
-/* submenu phase 標題 */
+/* submenu phase 標題（小標題） */
 .submenu-phase {
   font-size: 0.675rem;
   font-weight: 600;
@@ -464,10 +468,12 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
   font-size: 0.7rem;
   font-weight: 500;
   color: #94a3b8;
-  background: transparent;
+  background: rgba(15,23,42,0.15);
   border-left: 2px solid transparent;
   cursor: pointer;
   transition: all 0.2s ease;
+  border-radius: 0.25rem;
+  margin-bottom: 0.1rem;
 }
 .submenu-sub:hover,
 .submenu-sub.active {
@@ -479,6 +485,9 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
 
 /* submenu scroll 美化 */
 .gate-submenu-container {
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+  padding-right: 4px;
   scrollbar-width: thin;
   scrollbar-color: rgba(255,255,255,0.2) transparent;
 }
@@ -493,6 +502,15 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
   background: transparent;
 }
 
+/* 手機版調整 */
+@media (max-width: 768px) {
+  .submenu-sub {
+    padding-left: 2rem;
+  }
+  .submenu-btn {
+    padding-left: 1rem;
+  }
+}
 
 
 
