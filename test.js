@@ -403,181 +403,270 @@ function switchRaid(raidId) {
 
 
 // ================== 渲染 gate 內容 ==================
+// function renderGateContent(gate) {
+//     const container = document.getElementById('gate-content');
+//     if (!container) return;
+// // src="https://www.youtube.com/embed/${gate.youtubeId}"
+//   let html = '';
+
+
+// if (gate.youtubeId) {
+//   html += `
+// <div class="main-video rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative mb-8" data-video="${gate.youtubeId}">
+//     <div class="video-overlay absolute inset-0 flex items-center justify-center
+//          bg-slate-900/80 cursor-pointer transition-opacity duration-300 z-10">
+//       <div class="text-center pointer-events-none">
+//         <i class="fab fa-youtube text-6xl text-red-600 mb-4"></i>
+//         <p class="text-slate-200 font-bold">
+//           點擊播放全流程影片
+//         </p>
+//       </div>
+//     </div>
+// </div>
+// `;
+// }
+// html += `
+   
+//         <section id="section-mechanics" data-menu="mechanics">
+//             <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
+//                 <span class="w-1.5 h-8 bg-yellow-500 rounded-full"></span>
+//                 核心機制詳解 (Major Mechanics)
+//             </h3>
+//             <div class="space-y-6">
+//                 ${gate.mechanics?.map((m, i) => `
+//                     <div id="mech-${i}" class="info-card rounded-xl p-6 shadow-lg border-l-4 ${m.type === 'wipe' ? 'border-l-red-600' : 'border-l-yellow-500'} break-words">
+//                         <div class="flex flex-col sm:flex-row gap-4">
+//                             <div class="flex-shrink-0 w-full sm:w-auto">
+//                                 <div class="flex items-center gap-2 mb-2">
+//                                     <div class="text-2xl sm:text-3xl font-black text-yellow-500">${m.hp}</div>
+//                                     <div class="px-2 py-0.5 rounded bg-slate-800 text-[12px] font-bold text-center uppercase tracking-tighter">${m.type}</div>
+//                                 </div>
+//                             </div>
+//                             <div class="flex-1 min-w-0">
+//                                 <div class="flex items-center gap-2 mb-2">
+//                                     ${getIcon(m.type)}
+//                                     <h4 class="text-xl sm:text-2xl font-bold text-slate-100">${m.title}</h4>
+//                                 </div>
+//                                 <p class="text-slate-300 text-sm sm:text-base leading-relaxed break-words mb-4">${m.desc}</p>
+//                                 ${m.details ? `<div class="bg-yellow-950/30 border border-yellow-500/30 rounded-lg p-4 mb-4">
+//                                     <p class="text-yellow-400 font-black uppercase mb-1 text-[11px] sm:text-[12px] tracking-wider">提示</p>
+//                                     <p class="text-slate-300 text-sm leading-relaxed">${m.details}</p>
+//                                 </div>` : ''}
+//                                 ${m.videoId ? `<div class="relative w-full aspect-video sm:w-[520px] lg:w-[640px] sm:h-[292px] lg:h-[360px] cursor-pointer group bg-black/40 overflow-hidden rounded-lg" data-video="${m.videoId}">
+//                                     <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+//                                         <i class="fab fa-youtube text-5xl text-red-600 opacity-90"></i>
+//                                         <span class="mt-2 video-title text-slate-300">${m.title} 機制</span>
+//                                     </div>
+//                                 </div>` : ''}
+//                             </div>
+//                         </div>
+//                     </div>
+//                 `).join('')}
+//             </div>
+//         </section>
+
+//         <section id="section-patterns" data-menu="patterns">
+//             <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
+//                 <span class="section-bar"></span>
+//                 招式動作解析 (Patterns Guide)
+//             </h3>
+//           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+// ${gate.patterns
+//   ? Object.entries(gate.patterns).map(([phaseKey, phase], idx) => `
+
+//     <div class="col-span-full">
+//       <h4 class="phase-title mt-12 mb-6 flex items-center justify-between cursor-pointer
+//                  text-xl md:text-2xl font-extrabold text-yellow-300 tracking-wide"
+//           data-collapse="phase-${phaseKey}">
+//         <div class="flex items-center gap-4">
+//           <span class="h-6 w-2 bg-yellow-400 rounded"></span>
+//           ${phase.title}
+//         </div>
+//         <i class="fa-solid fa-chevron-down text-base opacity-80 transition-transform
+//             ${idx === 0 ? 'rotate' : ''}"></i>
+//       </h4>
+//     </div>
+
+//     <div id="phase-${phaseKey}" class="phase-content col-span-full ${idx === 0 ? 'open' : 'collapsed'}">
+//       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+//         ${phase.list.map((p, i) => `
+//           <div id="pattern-${phaseKey}-${i}"
+//             class="pattern-card 
+//               ${p.isDanger ? 'danger' : ''} 
+//               ${p.isCounter ? 'counter' : ''} 
+//               ${p.isJustGuard ? 'justguard' : ''} 
+//               rounded-2xl">
+
+//             <div class="relative w-full aspect-video cursor-pointer group bg-black/40 overflow-hidden"
+//                  data-video="${p.videoId || ''}">
+//               <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+//                 <i class="fab fa-youtube text-6xl text-red-600 opacity-80"></i>
+//                 <span class="mt-2 video-title text-slate-300">
+//                   ${p.name} 招式影片
+//                 </span>
+//               </div>
+//             </div>
+
+//             <div class="p-5 text-[13px] md:text-[14px] lg:text-[15px]">
+//               <h4 class="pattern-title flex items-center gap-2">
+//                 ${p.isDanger ? '<span class="pattern-danger-badge">DANGER</span>' : ''}
+//                 ${p.isCounter ? '<span class="pattern-counter-badge">COUNTER</span>' : ''}
+//                 ${p.isJustGuard ? '<span class="pattern-justguard-badge">JUST GUARD</span>' : ''}
+//                 ${p.name}
+//               </h4>
+
+//               <p class="text-slate-300 mb-4 min-h-[32px]">
+//                 ${p.desc}
+//               </p>
+
+//               <div class="bg-blue-950/30 border border-blue-500/30 rounded-lg p-3">
+//                 <p class="text-blue-400 font-black uppercase mb-1 text-[11px] md:text-[12px]">
+//                   應對方案
+//                 </p>
+//                 <p class="text-slate-400 italic text-[11px] md:text-[12px]">
+//                   ${p.tips}
+//                 </p>
+//               </div>
+//             </div>
+
+//           </div>
+//         `).join('')}
+
+//       </div>
+//     </div>
+
+//   `).join('')
+//   : ''
+// }
+// </div>
+//         </section>
+//     `;
+
+//     container.innerHTML = html;
+
+//     // 綁定影片點擊
+//     document.querySelectorAll('[data-video]').forEach(el => {
+//         el.addEventListener('click', function() {
+//             const videoId = this.dataset.video;
+//             if (!videoId) return;
+//             const iframe = document.createElement('iframe');
+//             iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;
+//             iframe.className = 'absolute inset-0 w-full h-full';
+//             iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+//             iframe.allowFullscreen = true;
+//             this.innerHTML = '';
+//             this.appendChild(iframe);
+//         });
+//     });
+//     // 主影片點擊播放
+//     document.querySelectorAll('.main-video').forEach(wrapper => {
+//         const overlay = wrapper.querySelector('.video-overlay');
+//         const videoId = wrapper.dataset.video;
+//         if (!videoId) return;
+    
+//         overlay.addEventListener('click', () => {
+//             // 直接把 wrapper 內容換成 iframe
+//             wrapper.innerHTML = `
+//                 <iframe
+//                     src="https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1"
+//                     class="absolute inset-0 w-full h-full"
+//                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+//                     allowfullscreen
+//                 ></iframe>
+//             `;
+//         });
+//     });
+// }
+
 function renderGateContent(gate) {
     const container = document.getElementById('gate-content');
     if (!container) return;
-// src="https://www.youtube.com/embed/${gate.youtubeId}"
-  let html = '';
 
+    let html = '';
 
-if (gate.youtubeId) {
-  html += `
-<div class="main-video rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative mb-8" data-video="${gate.youtubeId}">
-    <div class="video-overlay absolute inset-0 flex items-center justify-center
-         bg-slate-900/80 cursor-pointer transition-opacity duration-300 z-10">
-      <div class="text-center pointer-events-none">
-        <i class="fab fa-youtube text-6xl text-red-600 mb-4"></i>
-        <p class="text-slate-200 font-bold">
-          點擊播放全流程影片
-        </p>
-      </div>
-    </div>
-</div>
-`;
-}
-html += `
-   
-        <section id="section-mechanics" data-menu="mechanics">
-            <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
-                <span class="w-1.5 h-8 bg-yellow-500 rounded-full"></span>
-                核心機制詳解 (Major Mechanics)
-            </h3>
-            <div class="space-y-6">
-                ${gate.mechanics?.map((m, i) => `
-                    <div id="mech-${i}" class="info-card rounded-xl p-6 shadow-lg border-l-4 ${m.type === 'wipe' ? 'border-l-red-600' : 'border-l-yellow-500'} break-words">
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <div class="flex-shrink-0 w-full sm:w-auto">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <div class="text-2xl sm:text-3xl font-black text-yellow-500">${m.hp}</div>
-                                    <div class="px-2 py-0.5 rounded bg-slate-800 text-[12px] font-bold text-center uppercase tracking-tighter">${m.type}</div>
-                                </div>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <div class="flex items-center gap-2 mb-2">
-                                    ${getIcon(m.type)}
-                                    <h4 class="text-xl sm:text-2xl font-bold text-slate-100">${m.title}</h4>
-                                </div>
-                                <p class="text-slate-300 text-sm sm:text-base leading-relaxed break-words mb-4">${m.desc}</p>
-                                ${m.details ? `<div class="bg-yellow-950/30 border border-yellow-500/30 rounded-lg p-4 mb-4">
-                                    <p class="text-yellow-400 font-black uppercase mb-1 text-[11px] sm:text-[12px] tracking-wider">提示</p>
-                                    <p class="text-slate-300 text-sm leading-relaxed">${m.details}</p>
-                                </div>` : ''}
-                                ${m.videoId ? `<div class="relative w-full aspect-video sm:w-[520px] lg:w-[640px] sm:h-[292px] lg:h-[360px] cursor-pointer group bg-black/40 overflow-hidden rounded-lg" data-video="${m.videoId}">
-                                    <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                                        <i class="fab fa-youtube text-5xl text-red-600 opacity-90"></i>
-                                        <span class="mt-2 video-title text-slate-300">${m.title} 機制</span>
+    // ===== 主影片 =====
+    if (gate.youtubeId) {
+        html += `
+        <div class="main-video rounded-2xl overflow-hidden bg-black aspect-video border border-white/10 shadow-2xl relative mb-8" data-video="${gate.youtubeId}">
+            <div class="video-overlay absolute inset-0 flex items-center justify-center
+                 bg-slate-900/80 cursor-pointer transition-opacity duration-300 z-10">
+              <div class="text-center pointer-events-none">
+                <i class="fab fa-youtube text-6xl text-red-600 mb-4"></i>
+                <p class="text-slate-200 font-bold">
+                  點擊播放全流程影片
+                </p>
+              </div>
+            </div>
+        </div>`;
+    }
+
+    // ===== 核心機制 =====
+    if (gate.mechanics?.length) {
+        html += `<section id="section-mechanics">
+                    <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
+                        <span class="w-1.5 h-8 bg-yellow-500 rounded-full"></span>
+                        核心機制
+                    </h3>
+                    <div class="space-y-6">
+                        ${gate.mechanics.map((m, i) => `
+                            <div class="info-card rounded-xl p-6 border-l-4 ${m.type === 'wipe' ? 'border-l-red-600' : 'border-l-yellow-500'}">
+                                <h4 class="font-bold text-lg text-slate-100 mb-2">${m.title}</h4>
+                                <p class="text-slate-300">${m.desc}</p>
+                                ${m.videoId ? `
+                                <div class="relative w-full aspect-video mt-4 cursor-pointer bg-black/40 overflow-hidden rounded-lg" data-video="${m.videoId}">
+                                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                        <i class="fab fa-youtube text-5xl text-red-600 opacity-80"></i>
+                                        <span class="mt-2 text-slate-300">${m.title} 影片</span>
                                     </div>
                                 </div>` : ''}
                             </div>
-                        </div>
+                        `).join('')}
                     </div>
-                `).join('')}
-            </div>
-        </section>
+                 </section>`;
+    }
 
-        <section id="section-patterns" data-menu="patterns">
-            <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
-                <span class="section-bar"></span>
-                招式動作解析 (Patterns Guide)
-            </h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-${gate.patterns
-  ? Object.entries(gate.patterns).map(([phaseKey, phase], idx) => `
+    // ===== 招式動作解析（Patterns） =====
+    if (gate.patterns) {
+        html += `<section id="section-patterns">
+                    <h3 class="text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3">
+                        <span class="w-1.5 h-8 bg-yellow-500 rounded-full"></span>
+                        招式動作解析
+                    </h3>`;
 
-    <div class="col-span-full">
-      <h4 class="phase-title mt-12 mb-6 flex items-center justify-between cursor-pointer
-                 text-xl md:text-2xl font-extrabold text-yellow-300 tracking-wide"
-          data-collapse="phase-${phaseKey}">
-        <div class="flex items-center gap-4">
-          <span class="h-6 w-2 bg-yellow-400 rounded"></span>
-          ${phase.title}
-        </div>
-        <i class="fa-solid fa-chevron-down text-base opacity-80 transition-transform
-            ${idx === 0 ? 'rotate' : ''}"></i>
-      </h4>
-    </div>
+        // 遍歷每個 phase
+        Object.entries(gate.patterns).forEach(([phaseKey, phase], idx) => {
+            const items = phase.list || [];
+            html += `
+            <div class="phase mb-8">
+                <h4 class="phase-title text-xl font-bold text-yellow-300 mb-4 cursor-pointer"
+                    data-collapse="phase-${phaseKey}">
+                    ${phase.title || phaseKey}
+                </h4>
+                <div id="phase-${phaseKey}" class="grid grid-cols-1 md:grid-cols-2 gap-6 ${idx === 0 ? 'open' : 'collapsed'}">
+                    ${items.map((p, i) => `
+                    <div class="pattern-card rounded-2xl border border-white/10 ${p.isDanger ? 'danger' : ''}">
+                        <div class="relative w-full aspect-video cursor-pointer bg-black/40 overflow-hidden" data-video="${p.videoId || ''}">
+                            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                <i class="fab fa-youtube text-6xl text-red-600 opacity-80"></i>
+                                <span class="mt-2 text-slate-300">${p.name} 影片</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h5 class="font-bold text-slate-100">${p.name}</h5>
+                            <p class="text-slate-300 text-sm">${p.desc || ''}</p>
+                        </div>
+                    </div>`).join('')}
+                </div>
+            </div>`;
+        });
 
-    <div id="phase-${phaseKey}" class="phase-content col-span-full ${idx === 0 ? 'open' : 'collapsed'}">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-        ${phase.list.map((p, i) => `
-          <div id="pattern-${phaseKey}-${i}"
-            class="pattern-card 
-              ${p.isDanger ? 'danger' : ''} 
-              ${p.isCounter ? 'counter' : ''} 
-              ${p.isJustGuard ? 'justguard' : ''} 
-              rounded-2xl">
-
-            <div class="relative w-full aspect-video cursor-pointer group bg-black/40 overflow-hidden"
-                 data-video="${p.videoId || ''}">
-              <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                <i class="fab fa-youtube text-6xl text-red-600 opacity-80"></i>
-                <span class="mt-2 video-title text-slate-300">
-                  ${p.name} 招式影片
-                </span>
-              </div>
-            </div>
-
-            <div class="p-5 text-[13px] md:text-[14px] lg:text-[15px]">
-              <h4 class="pattern-title flex items-center gap-2">
-                ${p.isDanger ? '<span class="pattern-danger-badge">DANGER</span>' : ''}
-                ${p.isCounter ? '<span class="pattern-counter-badge">COUNTER</span>' : ''}
-                ${p.isJustGuard ? '<span class="pattern-justguard-badge">JUST GUARD</span>' : ''}
-                ${p.name}
-              </h4>
-
-              <p class="text-slate-300 mb-4 min-h-[32px]">
-                ${p.desc}
-              </p>
-
-              <div class="bg-blue-950/30 border border-blue-500/30 rounded-lg p-3">
-                <p class="text-blue-400 font-black uppercase mb-1 text-[11px] md:text-[12px]">
-                  應對方案
-                </p>
-                <p class="text-slate-400 italic text-[11px] md:text-[12px]">
-                  ${p.tips}
-                </p>
-              </div>
-            </div>
-
-          </div>
-        `).join('')}
-
-      </div>
-    </div>
-
-  `).join('')
-  : ''
-}
-</div>
-        </section>
-    `;
+        html += `</section>`;
+    }
 
     container.innerHTML = html;
-
-    // 綁定影片點擊
-    document.querySelectorAll('[data-video]').forEach(el => {
-        el.addEventListener('click', function() {
-            const videoId = this.dataset.video;
-            if (!videoId) return;
-            const iframe = document.createElement('iframe');
-            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;
-            iframe.className = 'absolute inset-0 w-full h-full';
-            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-            iframe.allowFullscreen = true;
-            this.innerHTML = '';
-            this.appendChild(iframe);
-        });
-    });
-    // 主影片點擊播放
-    document.querySelectorAll('.main-video').forEach(wrapper => {
-        const overlay = wrapper.querySelector('.video-overlay');
-        const videoId = wrapper.dataset.video;
-        if (!videoId) return;
-    
-        overlay.addEventListener('click', () => {
-            // 直接把 wrapper 內容換成 iframe
-            wrapper.innerHTML = `
-                <iframe
-                    src="https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1"
-                    class="absolute inset-0 w-full h-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                ></iframe>
-            `;
-        });
-    });
 }
+
 
 
 function renderGateSubmenu(gate, raidId) {
