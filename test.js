@@ -475,10 +475,14 @@ html += `
   ? Object.entries(gate.patterns).map(([phaseKey, phase]) => `
     
     <div class="col-span-full">
-      <h4 class="text-xl font-bold text-slate-200 mt-10 mb-4 flex items-center gap-3">
-        <span class="h-4 w-1 bg-yellow-400 rounded"></span>
-        ${phase.title}
-      </h4>
+<h4 class="phase-title mt-10 mb-4 flex items-center justify-between cursor-pointer
+           text-base font-semibold text-slate-200 hover:text-yellow-300 transition">
+  <div class="flex items-center gap-3">
+    <span class="h-3 w-1 bg-yellow-400 rounded"></span>
+    ${phase.title}
+  </div>
+  <i class="fa-solid fa-chevron-down text-xs opacity-70"></i>
+</h4>
     </div>
 
     ${phase.list.map((p, i) => `
