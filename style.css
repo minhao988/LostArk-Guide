@@ -546,12 +546,12 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
 }
 
 /* ================== Phase 折叠核心（只管折） ================== */
-.phase-content {
+/* .phase-content {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
   transition: max-height 0.4s ease, opacity 0.3s ease;
-}
+} */
 
 .phase-content.open {
   max-height: 5000px; /* 足够大即可 */
@@ -598,6 +598,17 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
 
 .phase-title i.rotate {
   transform: rotate(180deg);
+}
+
+.phase-content {
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+  opacity: 1;
+}
+
+.phase-content.collapsed {
+  max-height: 0 !important;
+  opacity: 0;
 }
 
 
