@@ -475,13 +475,13 @@ html += `
   ? Object.entries(gate.patterns).map(([phaseKey, phase]) => `
     
     <div class="col-span-full">
-<h4 class="phase-title mt-10 mb-4 flex items-center justify-between cursor-pointer
-           text-base font-semibold text-slate-200 hover:text-yellow-300 transition">
-  <div class="flex items-center gap-3">
-    <span class="h-3 w-1 bg-yellow-400 rounded"></span>
+<h4 class="phase-title mt-12 mb-6 flex items-center justify-between cursor-pointer
+           text-xl md:text-2xl font-extrabold text-yellow-300 tracking-wide">
+  <div class="flex items-center gap-4">
+    <span class="h-6 w-2 bg-yellow-400 rounded"></span>
     ${phase.title}
   </div>
-  <i class="fa-solid fa-chevron-down text-xs opacity-70"></i>
+  <i class="fa-solid fa-chevron-down text-base opacity-80"></i>
 </h4>
     </div>
 
