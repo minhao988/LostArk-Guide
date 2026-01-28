@@ -406,18 +406,21 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
 
 /* ================== Gate Submenu（最终权威版） ================== */
 
+/* 展開狀態（預設） */
 .gate-submenu-container {
-  max-height: calc(100vh - 150px);
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-right: 4px;
-  transition: max-height 0.3s ease, opacity 0.2s ease;
+  max-height: calc(100vh - 200px); /* 不會超出畫面 */
+  overflow-y: auto;               /* 太長就滾動 */
   opacity: 1;
+  pointer-events: auto;
+
+  transition: max-height 0.35s ease,
+              opacity 0.25s ease;
 }
 
-/* 折叠 */
+/* 收起狀態（collapsed） */
 .gate-submenu-container.collapsed {
   max-height: 0;
+  overflow: hidden;
   opacity: 0;
   pointer-events: none;
 }
@@ -439,10 +442,16 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
 }
 
 /* mobile */
+
 @media (max-width: 768px) {
   .gate-submenu-container {
-    max-height: none;
+    max-height: none;       /* 展開後自然延伸 */
     overflow: visible;
+  }
+
+  .gate-submenu-container.collapsed {
+    max-height: 0;
+    overflow: hidden;
   }
 }
 
@@ -542,3 +551,4 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
 .phase-content:first-of-type > .grid {
   border-top: none;
 }
+
