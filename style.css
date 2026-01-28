@@ -526,6 +526,16 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
   .submenu-sub { padding-left: 2rem; }
 }
 
+.submenu-phase-container {
+  max-height: 800px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.submenu-phase-container.collapsed {
+  max-height: 0;
+}
+
 
 /* ================== Phase Content ================== */
 
@@ -551,4 +561,5 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
 .phase-content:first-of-type > .grid {
   border-top: none;
 }
+
 
