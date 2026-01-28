@@ -36,13 +36,21 @@ const allRaids = {
                 name: '深淵之主：卡傑羅斯 1門',
                 youtubeId: "y8wsk0oEWWQ",
                 patterns: {
-                    overall: {
+                    firstmeter: {
                     title: '第一階段 Meter機制',
                     list: [
-                    { name: '1. 反制', desc: '\u2022 卡傑落雷后需求反制, 然後躲掉頭前高傷。', tips: '\u2022 Meter 打頭背適當躲避前後。 <br>\u2022 在TF模式下, 此需求協同反制。',isCounter: true, videoId: 'BAr2CnAFJ2g' },
-                    { name: '2. 鈎鎖黑球', desc: '\u2022 卡傑吸人去頭前格擋。', tips: '\u2022 在頭前抓好時機格擋或者用霸體躲在背後不用格擋。', isCounter: false, videoId: '7Gjtn-2tCXc' },
-                    { name: '3. 十字', desc: '\u2022 卡傑位移隨機瞄準一位揮刀下十字', tips: '\u2022 看到卡傑出這招最安全的方式還是想辦法用空白或霸體免疫擊倒。', videoId: 'L8BbG9KJJSc' }
+                    { name: '1. 反制', desc: '\u2022 卡傑落雷后需求反制, 然後躲掉頭前高傷。', tips: '\u2022 Meter 打頭背適當躲避前後。 <br>\u2022 在TF模式下, 此需求協同反制。',isCounter: true, isDanger: true,videoId: 'BAr2CnAFJ2g' },
+                    { name: '2. 鈎鎖黑球', desc: '\u2022 卡傑吸人去頭前格擋。', tips: '\u2022 在頭前抓好時機格擋或者用霸體躲在背後不用格擋。', isDanger: true, videoId: '7Gjtn-2tCXc' },
+                    { name: '3. 十字', desc: '\u2022 卡傑位移隨機瞄準一位揮刀下十字', tips: '\u2022 看到卡傑出這招最安全的方式還是想辦法用空白或霸體免疫擊倒。', isDanger: true, videoId: 'L8BbG9KJJSc' }
                   ]},
+                     overall: {
+                    title: '綜合機制',
+                    list: [
+                    { name: '1. 星星', desc: '\u2022 每卡傑的槍buff到5層就會出一次星星或者圈圈, 根據圖形去躲避 頭上有黑槍就排火。',tips:' \u2022 星星躲在綫和綫的外面就好。 <br>\u2022 在700内場不會有黑槍排火的情形。',isCounter: false, isDanger: true, videoId: 'WrSQp4Z-GCk' },
+                    { name: '2. 圈圈', desc: '\u2022 每卡傑的槍buff到5層就會出一次星星或者圈圈, 根據圖形去躲避 頭上有黑槍就排火。', tips: '\u2022 圈圈等他炸了内擴外的時候再進去裏面躲就好。<br>\u2022 在700内場不會有黑槍排火的情形。', isCounter: false, isDanger:true, videoId: 'bDJjmog6OJ8' },
+              
+                  ]},
+                  
                    phase1normal: {
                     title: '第一階段招式',
                     list: [
