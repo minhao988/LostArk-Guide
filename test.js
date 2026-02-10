@@ -123,10 +123,10 @@ const allRaids = {
                     { name: '6. 退後反制', desc: '\u2022 卡傑退後出反制 失敗就往前戳', tips: '\u2022 基本在700機制全程留反制技等這個。',  videoId: 'AbCdEf12345',  isCounter: true  },
                     { name: '7. 美杜莎', desc: '\u2022 卡傑舉著球讓每個人脚下都會掉5次攻擊， 結果第五下要按G格擋。', tips: '\u2022 靠近王的是快G，遠的會慢一秒',  videoId: 'AbCdEf12345', isDanger: true }
                    
-                    ]}
+                    ]},
                   
                   
-                },
+                
                 mechanics: [
                     { hp: '900', title: '抓人', desc: `\u2022 卡傑產生球追蹤附近玩家並抓起來，隨後出現反制。`, details: `\u2022 失敗反制，被抓的玩家們死亡。`, type: 'counter', videoId: 'DZ6vfIyhbIA' },
                     { hp: 'x700', title: '團隊癱瘓', desc: `\u2022 進入700機制會變成1打1的局面 所有玩家要在1分鐘内把卡傑的紫條癱瘓打掉, 最後從沒裂縫延伸位找出並站自己的安全區邊`, details: `\u2022 反制能提升癱瘓值 <br> \u2022 推薦旋風手雷`, type: 'stagger', videoId: 'PVcQhrsAAQs' },
