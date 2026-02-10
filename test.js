@@ -111,7 +111,7 @@ const allRaids = {
                     { name: '7. 美杜莎', desc: '\u2022 卡傑舉著球讓每個人脚下都會掉5次攻擊， 結果第五下要按G格擋。', tips: '\u2022 靠近王的是快G，遠的會慢一秒',  videoId: 'AbCdEf12345', isDanger: true }
                    
                     ]},
-                  phase300:
+                  phase300:{
                      title: '第三階段',
                     list: [
                           
@@ -124,7 +124,8 @@ const allRaids = {
                     { name: '7. 美杜莎', desc: '\u2022 卡傑舉著球讓每個人脚下都會掉5次攻擊， 結果第五下要按G格擋。', tips: '\u2022 靠近王的是快G，遠的會慢一秒',  videoId: 'AbCdEf12345', isDanger: true }
                    
                     ]},
-            
+                },
+                
                   
                 
                 mechanics: [
@@ -195,9 +196,15 @@ const allRaids = {
             },
             2: {
                   name: '賽爾卡 2門',
-                  patterns: [
-                      { name: '1. 急流噴射', desc: 'Boss 向隨機玩家噴射高速水柱，帶有強制擊退。', tips: '若背靠地圖邊緣會被推入海中秒殺。', gif: 'water_jet.gif' }
-                  ],
+                  patterns: {
+                    firstmeter: {
+                    title: '第一階段 Meter機制',
+                    list: [
+                    { name: '1. 反制', desc: '\u2022 卡傑落雷后需求反制, 然後躲掉頭前高傷。', tips: '\u2022 Meter 打頭背適當躲避前後。 <br>\u2022 在TF模式下, 此需求協同反制。',isCounter: true, isDanger: true,videoId: 'BAr2CnAFJ2g' },
+                    { name: '2. 鈎鎖黑球', desc: '\u2022 卡傑吸人去頭前格擋。', tips: '\u2022 在頭前抓好時機格擋或者用霸體躲在背後不用格擋。', isDanger: true, videoId: '7Gjtn-2tCXc' },
+                    { name: '3. 十字', desc: '\u2022 卡傑位移隨機瞄準一位揮刀下十字', tips: '\u2022 看到卡傑出這招最安全的方式還是想辦法用空白或霸體免疫擊倒。', isDanger: true, videoId: 'L8BbG9KJJSc' }
+                  ]},
+                  },
                   mechanics: [
                       { hp: '全程', title: '氧氣瓶系統', desc: '氧氣歸零會持續扣血，尋找泡泡點回氧。', type: 'warning' }
                   ]
