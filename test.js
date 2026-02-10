@@ -111,7 +111,7 @@ const allRaids = {
                     { name: '7. 美杜莎', desc: '\u2022 卡傑舉著球讓每個人脚下都會掉5次攻擊， 結果第五下要按G格擋。', tips: '\u2022 靠近王的是快G，遠的會慢一秒',  videoId: 'AbCdEf12345', isDanger: true }
                    
                     ]},
-                  phase 300:
+                  phase300:
                      title: '第三階段',
                     list: [
                           
@@ -124,7 +124,7 @@ const allRaids = {
                     { name: '7. 美杜莎', desc: '\u2022 卡傑舉著球讓每個人脚下都會掉5次攻擊， 結果第五下要按G格擋。', tips: '\u2022 靠近王的是快G，遠的會慢一秒',  videoId: 'AbCdEf12345', isDanger: true }
                    
                     ]},
-                  
+            
                   
                 
                 mechanics: [
