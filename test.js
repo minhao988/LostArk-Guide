@@ -107,7 +107,7 @@ const allRaids = {
                     { name: '3. 抓人', desc: '\u2022 跟第一階段抓人一樣 只是前置從落雷變成十字。', tips: '\u2022 看到十字就不要站頭前',  videoId: '6_0n1JwB_WI' },
                     { name: '4. 高舉丟槍', desc: '\u2022 卡傑高舉劍丟槍出現pizza攻擊，最後會挑隨機一名玩家射鐳射 。', tips: '\u2022 下意識集合貼背然後等王轉過來直接離開。', videoId: 'M6ZI2CLXgQ0'},
                     { name: '5. 限傷', desc: '\u2022 卡傑放槍在背後出現綫會擊倒你，第一個綫條過後需求協同反制，接著要在幾秒内把盾打掉。', tips: '\u2022 地上的綫很痛請務必躲避。',  videoId: '73E1sjZ0KI8', isCounter: true },
-                    { name: '6. Pizza', desc: '\u2022 卡傑丟槍去中間自轉 躲pizza就好 最後需要兩次反制', tips: '\u2022 卡傑會在這個讓部分玩家出現減速debuff，如果有了盡量排火。',  videoId: 'Vq1Cp-TSsFI',  isCounter: true  },
+                    { name: '6. Pizza', desc: '\u2022 卡傑丟槍去中間自轉 躲pizza就好 最後需要兩次反制然後躲内圈。', tips: '\u2022 卡傑會在這個讓部分玩家出現減速debuff，如果有了盡量排火。',  videoId: 'Vq1Cp-TSsFI',  isCounter: true  },
                     { name: '7. 美杜莎', desc: '\u2022 卡傑舉著球讓每個人脚下都會掉5次攻擊， 結果第五下要按G格擋。', tips: '\u2022 靠近王的是快G，遠的會慢一秒',  videoId: 'AbCdEf12345', isDanger: true }
                    
                     ]},
