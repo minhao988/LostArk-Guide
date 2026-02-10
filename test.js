@@ -115,11 +115,22 @@ const allRaids = {
             2: {
                 name: '大惡魔：卡傑羅斯 2門',
                 youtubeId: "99ZhXs-SAx0", 
-                patterns: [
-                    { name: '1. 魔皇紅黑波', desc: 'Boss 手中出現紅/黑兩種能量旋渦。', tips: '紅內安全，黑外安全。觀察 Boss 腳下旋轉的光環顏色。', gif: 'red_black.gif' },
-                    { name: '2. 魔箭雨', desc: 'Boss 向天空射箭，隨後場地落下大量帶有「眩暈」效果的箭矢。', tips: '地面的紅圈會預告落點，箭雨有兩波，第一波結束後不要立刻回位。', gif: 'demon_rain.gif' },
-                    { name: '3. 抓人連打', desc: 'Boss 伸出手向前抓取。若抓到玩家，會進行連續重摔。', tips: '看到 Boss 手向後蓄力並發出黑煙時，立刻向側邊位移。被抓者需要隊友給予癱瘓。', gif: 'grab_slam.gif' }
-                ],
+                patterns: {
+                    firstmeter: {
+                    title: '第一階段 Meter機制',
+                    list: [
+                    { name: '1. 反制', desc: '\u2022 卡傑落雷后需求反制, 然後躲掉頭前高傷。', tips: '\u2022 Meter 打頭背適當躲避前後。 <br>\u2022 在TF模式下, 此需求協同反制。',isCounter: true, isDanger: true,videoId: 'BAr2CnAFJ2g' },
+                    { name: '2. 鈎鎖黑球', desc: '\u2022 卡傑吸人去頭前格擋。', tips: '\u2022 在頭前抓好時機格擋或者用霸體躲在背後不用格擋。', isDanger: true, videoId: '7Gjtn-2tCXc' },
+                    { name: '3. 十字', desc: '\u2022 卡傑位移隨機瞄準一位揮刀下十字', tips: '\u2022 看到卡傑出這招最安全的方式還是想辦法用空白或霸體免疫擊倒。', isDanger: true, videoId: 'L8BbG9KJJSc' }
+                  ]},
+                     overall: {
+                    title: '綜合機制',
+                    list: [
+                    { name: '1. 星星', desc: '\u2022 每卡傑的槍buff到5層就會出一次星星或者圈圈, 根據圖形去躲避 頭上有黑槍就排火。',tips:' \u2022 星星躲在綫和綫的外面就好。 <br>\u2022 在700内場不會有黑槍排火的情形。',isCounter: false, isDanger: true, videoId: 'WrSQp4Z-GCk' },
+                    { name: '2. 圈圈', desc: '\u2022 每卡傑的槍buff到5層就會出一次星星或者圈圈, 根據圖形去躲避 頭上有黑槍就排火。', tips: '\u2022 圈圈等他炸了内擴外的時候再進去裏面躲就好。<br>\u2022 在700内場不會有黑槍排火的情形。', isCounter: false, isDanger:true, videoId: 'bDJjmog6OJ8' }
+              
+                  ]},
+                },
                 mechanics: [
                     { hp: 'x350', title: '反制風暴', desc: '全體 8 人必須在 6 點鐘位置站成一排進行連續 5 次完美反制。', type: 'wipe' }
                 ]
