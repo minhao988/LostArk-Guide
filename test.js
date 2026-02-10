@@ -31,7 +31,7 @@ const allRaids = {
                     { name: '2. 圈圈', desc: '\u2022 每卡傑的槍buff到5層就會出一次星星或者圈圈, 根據圖形去躲避 頭上有黑槍就排火。', tips: '\u2022 圈圈等他炸了内擴外的時候再進去裏面躲就好。<br>\u2022 在700内場不會有黑槍排火的情形。', isCounter: false, isDanger:true, videoId: 'bDJjmog6OJ8' }
               
                   ]},
-                ],
+                },
                 mechanics: [
                     { hp: 'x360', title: '與我共舞', desc: '根據 Boss 翅膀顏色選擇對應門進入。', type: 'mech' }
                 ]
@@ -174,7 +174,7 @@ const allRaids = {
                     { name: '2. 圈圈', desc: '\u2022 每卡傑的槍buff到5層就會出一次星星或者圈圈, 根據圖形去躲避 頭上有黑槍就排火。', tips: '\u2022 圈圈等他炸了内擴外的時候再進去裏面躲就好。<br>\u2022 在700内場不會有黑槍排火的情形。', isCounter: false, isDanger:true, videoId: 'bDJjmog6OJ8' }
               
                   ]},
-                ],
+                 },
                 mechanics: [
                     { hp: '全程', title: '氧氣瓶系統', desc: '氧氣歸零會持續扣血，尋找泡泡點回氧。', type: 'warning' }
                 ]
