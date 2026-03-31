@@ -37,7 +37,9 @@ header {
 
 
 /* 標題/圖示高亮 */
-h2, h3, h4 { color: var(--raid-accent, #fff); }
+h2, h3, h4:not(.pattern-title) { 
+  color: var(--raid-accent, #fff); 
+}
 .sidebar-icon { color: var(--raid-accent, #fff); }
 
 /* Theme 主題顏色變化 */
