@@ -353,15 +353,15 @@ if (window.innerWidth >= 768) {
 }
 
 function applyTheme(theme) {
-  const app = document.getElementById('app')
+  const app = document.getElementById('app');
 
   app.classList.remove(
     'theme-act4',
     'theme-final',
     'theme-serca'
-  )
+  );
 
-  app.classList.add(raid.theme)
+  app.classList.add(theme);
 }
 // ================== 切換 gate ==================
 function switchGate(gateId) {
