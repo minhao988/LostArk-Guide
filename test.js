@@ -216,7 +216,7 @@ const allRaids = {
     }
 };
 
-let currentRaidId = 'final_day';
+let currentRaidId = 'act4';
 let expandedRaidId = null; // 記錄目前展開的 raid submenu
 
 function getIcon(type) {
