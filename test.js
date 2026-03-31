@@ -328,17 +328,16 @@ function selectRaid(raidId) {
 if (!mainBody) return;
 
 // 移除舊的 raid theme（只動 theme，不動 layout）
-mainBody.classList.remove(
-  'theme-act4',
-  'theme-final',
-  'theme-serca'
-);
+const app = document.getElementById('app')
 
-mainBody.classList.add(
-  raid.theme,
-  'transition-all',
-  'duration-500'
-);
+  app.classList.remove(
+    'theme-act4',
+    'theme-final',
+    'theme-serca'
+  )
+
+  app.classList.add(theme)
+  
 
 // 桌面版才需要 min-h-screen
 if (window.innerWidth >= 768) {
@@ -363,6 +362,17 @@ if (window.innerWidth >= 768) {
     switchGate(Object.keys(raid.gates)[0]);
 }
 
+function applyTheme(theme) {
+  const app = document.getElementById('app')
+
+  app.classList.remove(
+    'theme-act4',
+    'theme-final',
+    'theme-serca'
+  )
+
+  app.classList.add(theme)
+}
 // ================== 切換 gate ==================
 function switchGate(gateId) {
   const raid = allRaids[currentRaidId];
