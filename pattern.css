@@ -1,0 +1,113 @@
+/* ================== Danger ================== */
+.pattern-card.danger {
+  animation: dangerPulse 2s infinite ease-in-out;
+}
+
+@keyframes dangerPulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(239,68,68,0.4),
+                0 10px 40px rgba(127,29,29,0.6);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(239,68,68,0.8),
+                0 20px 60px rgba(127,29,29,0.9);
+  }
+}
+
+.pattern-card.danger::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 20%,
+    rgba(239,68,68,0.25),
+    transparent 80%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.pattern-card.danger:hover::after {
+  opacity: 1;
+  animation: dangerSweep 1.2s linear;
+}
+
+@keyframes dangerSweep {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+
+/* ================== Counter ================== */
+.pattern-card.counter {
+  position: relative;
+  overflow: hidden;
+}
+
+.pattern-card.counter::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(34,211,238,0.4),
+    transparent
+  );
+  opacity: 0;
+}
+
+.pattern-card.counter:hover::after {
+  opacity: 1;
+  animation: counterFlow 1s linear infinite;
+}
+
+@keyframes counterFlow {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+/* ================== Just Guard ================== */
+.pattern-card.justguard {
+  position: relative;
+}
+
+.pattern-card.justguard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(250,204,21,0.25),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.pattern-card.justguard:hover::after {
+  opacity: 1;
+  animation: guardFlash 0.8s ease-out;
+}
+
+@keyframes guardFlash {
+  0% { opacity: 0; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.1); }
+  100% { opacity: 0; transform: scale(1); }
+}
+
+/* ================== Pattern Title ================== */
+
+.pattern-card.danger .pattern-title {
+  text-shadow: 0 0 8px rgba(239,68,68,0.8);
+}
+
+.pattern-card.counter .pattern-title {
+  text-shadow: 0 0 8px rgba(34,211,238,0.8);
+}
+
+.pattern-card.justguard .pattern-title {
+  text-shadow: 0 0 8px rgba(250,204,21,0.8);
+}
+
