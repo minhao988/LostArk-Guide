@@ -329,12 +329,11 @@ if (!mainBody) return;
 
 // 移除舊的 raid theme（只動 theme，不動 layout）
 mainBody.classList.remove(
-  'raid-gradient-final',
-  'raid-gradient-act4',
-  'raid-gradient-serca'
+  'theme-act4',
+  'theme-final',
+  'theme-serca'
 );
 
-// 加上新的 theme
 mainBody.classList.add(
   raid.theme,
   'transition-all',
