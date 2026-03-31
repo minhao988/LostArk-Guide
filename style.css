@@ -99,7 +99,7 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
 }
 .pattern-title span {
   background: rgba(250,204,21,0.25); /* 徽章顏色稍微明亮 */
-  color: #facc15;
+  color: var(--raid-accent); 
   font-size: 0.65rem;
   font-weight: 700;
   padding: 2px 6px;
@@ -167,7 +167,7 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
     background: transparent;
 }
 .sidebar-btn:hover { background-color: rgba(255,255,255,0.05); color: #fff; }
-.sidebar-btn.active { color: var(--raid-accent, #facc15); background-color: rgba(250,204,21,0.12); }
+.sidebar-btn.active { color: var(--raid-accent); background-color: rgba(250,204,21,0.12); }
 
 /* Icon */
 .sidebar-icon {
@@ -284,7 +284,7 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
   position:absolute;
   left:0; top:0;
   width:4px; height:100%;
-  background: linear-gradient(to bottom, #ef4444, rgba(239,68,68,0.2), transparent);
+  background: linear-gradient(to bottom, var(--raid-accent), rgba(239,68,68,0.2), transparent);
   border-radius:2px 0 0 2px;
 }
 
@@ -334,7 +334,7 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
   position:absolute;
   left:0; top:0;
   width:4px; height:100%;
-  background: linear-gradient(to bottom, #22d3ee, rgba(34,211,238,0.2), transparent);
+  background: linear-gradient(to bottom, var(--raid-accent), rgba(34,211,238,0.2), transparent);
   border-radius:2px 0 0 2px;
 }
 
@@ -380,7 +380,7 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
   position:absolute;
   left:0; top:0;
   width:4px; height:100%;
-  background: linear-gradient(to bottom, #facc15, rgba(250,204,21,0.2), transparent);
+  background: linear-gradient(to bottom, var(--raid-accent), rgba(250,204,21,0.2), transparent);
   border-radius:2px 0 0 2px;
 }
 .pattern-card.justguard:hover {
@@ -390,7 +390,7 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
 .pattern-card.justguard .pattern-title { color:#fef3c7; }
 .pattern-justguard-badge {
   font-size:10px; font-weight:900; letter-spacing:0.08em;
-  color:#facc15;
+  color:var(--raid-accent);
   background:rgba(250,204,21,0.25);
   border:1px solid rgba(250,204,21,0.5);
   padding:3px 6px; border-radius:999px;
