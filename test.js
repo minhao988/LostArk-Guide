@@ -327,17 +327,7 @@ function selectRaid(raidId) {
   const mainBody = document.getElementById('main-body');
 if (!mainBody) return;
 
-// 移除舊的 raid theme（只動 theme，不動 layout）
-const app = document.getElementById('app')
-
-  app.classList.remove(
-    'theme-act4',
-    'theme-final',
-    'theme-serca'
-  )
-
-  app.classList.add(theme)
-  
+applyTheme(raid.theme);
 
 // 桌面版才需要 min-h-screen
 if (window.innerWidth >= 768) {
@@ -371,7 +361,7 @@ function applyTheme(theme) {
     'theme-serca'
   )
 
-  app.classList.add(theme)
+  app.classList.add(raid.theme)
 }
 // ================== 切換 gate ==================
 function switchGate(gateId) {
