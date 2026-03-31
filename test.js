@@ -12,7 +12,7 @@ const allRaids = {
         short: '四幕：毀滅堡壘',
         category: '卡傑羅斯討伐',
         desc: '第四幕是8人終局副本並携帶極具挑戰性的雙門遭遇戰，首領分別是Echidna初魅（第一道門）和Armoche阿莫什（第二道門）。<br> 裝備門檻（普通 1700，困難 1720），機制包含需求格擋、破壞、協同格擋以及特定的站位方式來克服破壞性的死亡。',
-        theme: 'raid-gradient-act4',
+        theme: 'theme-act4',
         gates: {
             1: {
                 name: 'Echidna初魅 1門',
@@ -43,7 +43,7 @@ const allRaids = {
         short: '終幕： 終結之日',
         category: '卡傑羅斯討伐',
         desc: '終幕將會跟深淵大惡魔卡傑羅斯的最後決戰，首領在1-2門都是卡傑羅斯。<br> 裝備門檻（普通 1710，困難 1730, TF 1740）機制包含前面所有看過學過並需要學以致用。',
-        theme: 'raid-gradient-final',
+        theme: 'theme-final',
         gates: {
             1: {
                 name: '深淵之主：卡傑羅斯 1門',
@@ -173,7 +173,7 @@ const allRaids = {
         short: '絕望女巫：賽爾卡',
         category: '暗影襲擊系列',
         desc: '女巫描述待定，僅確認爲塞克利亞的牧師角色',
-        theme: 'raid-gradient-serca',
+        theme: 'theme-serca',
         gates: {
             1: {
                 name: '賽爾卡 1門',
