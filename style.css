@@ -46,19 +46,19 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
   --raid-accent: #ef4444;
   --raid-accent-soft: rgba(239,68,68,0.15);
   --raid-accent-border: rgba(239,68,68,0.35);
-  background: linear-gradient(135deg, #450a0a 0%, #000 100%);
+
 }
 .raid-gradient-act4 {
   --raid-accent: #6366f1;
   --raid-accent-soft: rgba(99,102,241,0.15);
   --raid-accent-border: rgba(99,102,241,0.35);
-  background: linear-gradient(135deg, #1e1b4b 0%, #000 100%);
+
 }
 .raid-gradient-serca {
   --raid-accent: #22d3ee;
   --raid-accent-soft: rgba(34,211,238,0.15);
   --raid-accent-border: rgba(34,211,238,0.35);
-  background: linear-gradient(135deg, #064e3b 0%, #020617 100%);
+
 }
 
 /* 自訂滾動條 */
