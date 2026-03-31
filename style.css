@@ -3,6 +3,10 @@
   --raid-accent: #facc15;   
   --raid-accent-soft: rgba(250,204,21,0.15);
   --raid-accent-border: rgba(250,204,21,0.35);
+
+  --primary: #3b82f6;
+  --text: #f1f5f9;
+
 }
 
 body {
