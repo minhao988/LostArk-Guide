@@ -30,35 +30,29 @@ header {
   border-left: 3px solid var(--raid-accent-border, rgba(255,255,255,0.3));
 }
 
-/* gate-tab 当前 active */
-.gate-btn.active {
-  background-color: var(--raid-accent-soft, rgba(255,255,255,0.05));
-  color: var(--raid-accent, #fff);
-  border: 1px solid var(--raid-accent-border, rgba(255,255,255,0.3));
-}
+
 
 /* 標題/圖示高亮 */
 h2, h3, h4 { color: var(--raid-accent, #fff); }
 .sidebar-icon { color: var(--raid-accent, #fff); }
 
-/* Raid 顏色背景 */
-.raid-gradient-final {
-  --raid-accent: #ef4444;
-  --raid-accent-soft: rgba(239,68,68,0.15);
-  --raid-accent-border: rgba(239,68,68,0.35);
-
-}
-.raid-gradient-act4 {
+/* Theme 主題顏色變化 */
+.theme-act4 {
   --raid-accent: #6366f1;
   --raid-accent-soft: rgba(99,102,241,0.15);
   --raid-accent-border: rgba(99,102,241,0.35);
-
 }
-.raid-gradient-serca {
+
+.theme-final {
+  --raid-accent: #ef4444;
+  --raid-accent-soft: rgba(239,68,68,0.15);
+  --raid-accent-border: rgba(239,68,68,0.35);
+}
+
+.theme-serca {
   --raid-accent: #22d3ee;
   --raid-accent-soft: rgba(34,211,238,0.15);
   --raid-accent-border: rgba(34,211,238,0.35);
-
 }
 
 /* 自訂滾動條 */
@@ -124,7 +118,11 @@ h2, h3, h4 { color: var(--raid-accent, #fff); }
   padding:0.4rem 0.8rem;
 }
 .gate-btn:hover { background-color:rgba(255,255,255,0.1); color:#fff; }
-.gate-btn.active { background-color:#facc15; color:#000; border-color:#facc15; }
+.gate-btn.active {
+  background-color: var(--raid-accent);
+  color: #000;
+  border-color: var(--raid-accent);
+}
 
 /* ================== Raid 標題 & 介紹 ================== */
 #raid-title { font-size:0.8rem; font-weight:800; line-height:1.2; }
