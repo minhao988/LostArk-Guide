@@ -122,7 +122,7 @@ const allRaids = {
                     { name: '3. 上挑', desc: '\u2022 卡傑上挑接2刀划外劍氣, 地板還會出現星圖攻擊。', tips: '\u2022 看到上挑最好遠離或霸體',  videoId: 'dIkgsSYNVUM', isDanger: true },
                     { name: '4. 傳送', desc: '\u2022 卡傑浮空丟矛產生一堆炸圈消失, 出現在隨機一名玩家脚下。', tips: '\u2022 小地圖可提前知道出現位置。', videoId: 'xVplv6Or0i0' },
                     { name: '5. 藍翅膀', desc: '\u2022 卡傑後面甩出藍翅膀。',tips: '',  videoId: 'CvtokVC9EzA' },
-                    { name: '6. 後條十字', desc: '\u2022 卡傑后挑浮空, 接著下來十字',tips: '',  videoId: 'W_LHcZJ8PE0' },
+                    { name: '6. 後挑十字', desc: '\u2022 卡傑後挑浮空, 接著下來十字',tips: '',  videoId: 'W_LHcZJ8PE0' },
                     { name: '7. 癱瘓', desc: '\u2022 卡傑舉矛往下丟 出現直綫攻擊並出現癱瘓 癱瘓成功后躲左測避免被擊飛。',tips: '', videoId: 'd7WFg9mTnE8' },
                     { name: '8. 格擋', desc: '\u2022 卡傑面對其中一名玩家暴露黃光(格擋)戳並傳送在那名玩家後背扇形擊飛, 沒格擋成功會出現激光。',tips: '', videoId: '8UmdeuHWq-M'}
                    
