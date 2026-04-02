@@ -124,7 +124,7 @@ const allRaids = {
                     { name: '5. 藍翅膀', desc: '\u2022 卡傑後面甩出藍翅膀。',tips: '',  videoId: 'CvtokVC9EzA' },
                     { name: '6. 後條十字', desc: '\u2022 卡傑后挑浮空, 接著下來十字',tips: '',  videoId: 'W_LHcZJ8PE0' },
                     { name: '7. 癱瘓', desc: '\u2022 卡傑舉矛往下丟 出現直綫攻擊並出現癱瘓 癱瘓成功后躲左測避免被擊飛。',tips: '', videoId: 'd7WFg9mTnE8' },
-                    { name: '8. 格擋', desc: '\u2022 卡傑面對其中一名玩家暴露黃光(格擋)戳並傳送在那名玩家後背扇形擊飛, 沒格擋成功會出現激光。',tips: '', videoId: 're7kHzdgvfQ'}
+                    { name: '8. 格擋', desc: '\u2022 卡傑面對其中一名玩家暴露黃光(格擋)戳並傳送在那名玩家後背扇形擊飛, 沒格擋成功會出現激光。',tips: '', videoId: '8UmdeuHWq-M'}
                    
                     ]},
                 },
