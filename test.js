@@ -172,7 +172,7 @@ const allRaids = {
         title: '絕望女巫：賽爾卡',
         short: '絕望女巫：賽爾卡',
         category: '暗影襲擊系列',
-        desc: '女巫描述待定，僅確認爲塞克利亞的牧師角色',
+        desc: '塞克利亞的牧師, 在絕望之際被暗影逮到機會附身',
         theme: 'theme-serca',
         gates: {
             1: {
@@ -198,7 +198,7 @@ const allRaids = {
                 ]
             },
             2: {
-                  name: '賽爾卡 2門',
+                  name: '暗影烏鴉 2門',
                   patterns: {
                     firstmeter: {
                     title: '第一階段 Meter機制',
