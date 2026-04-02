@@ -103,7 +103,7 @@ const allRaids = {
                     list: [
                           
                     { name: '1. 凌空墜', desc: '\u2022 卡傑朝隨機一名玩家上鈎再向下俯衝。', tips: '\u2022 此招式只出現在700機制和地下室階段。<br>\u2022 此招式在地下室階段吃滿下俯衝會纍積很多能量槽。', videoId: 'HFkjS7_jvto' },
-                       { name: '2. 生球', desc: '\u2022 卡傑生球往上鈎往前划外危險。', tips: '\u2022 拉球千萬不要拉在王脚下。', videoId: 'ustF5KiyR4U' },
+                       { name: '2. 生球', desc: '\u2022 卡傑生球往上鈎往前划外劍氣。', tips: '\u2022 拉球千萬不要拉在王脚下。', videoId: 'ustF5KiyR4U' },
                     { name: '3. 抓人', desc: '\u2022 跟第一階段抓人一樣 只是前置從落雷變成十字。', tips: '\u2022 看到十字就不要站頭前',  videoId: '6_0n1JwB_WI' },
                     { name: '4. 高舉丟槍', desc: '\u2022 卡傑高舉劍丟槍出現pizza攻擊，最後會挑隨機一名玩家射鐳射 。', tips: '\u2022 下意識集合貼背然後等王轉過來直接離開。', videoId: 'M6ZI2CLXgQ0'},
                     { name: '5. 協同DPS', desc: '\u2022 卡傑放槍在背後出現綫會擊倒你，第一個綫條過後需求協同反制，接著要在幾秒内把盾破掉。', tips: '\u2022 地上的綫很痛請務必躲避, 失敗就金人。',  videoId: '73E1sjZ0KI8', isCounter: true },
@@ -117,14 +117,14 @@ const allRaids = {
                      title: '第三階段',
                     list: [
                           
-                    { name: '1. 凌空墜', desc: '\u2022 卡傑朝隨機一名玩家上鈎再向下俯衝。', tips: '\u2022 此招式只出現在700機制和地下室階段。<br>\u2022 此招式在地下室階段吃滿下俯衝會纍積很多能量槽。', videoId: 'HFkjS7_jvto' },
-                       { name: '2. 上鈎格擋', desc: '\u2022 卡傑上鈎后接格擋。', tips: '\u2022 繞去背後可以無視格擋。', gif: 'purple_wave.gif', videoId: 'tb-pDiUhzm4' },
-                    { name: '3. 迴旋格擋', desc: '\u2022 卡傑轉槍退後往前投擲迴旋槍, 槍回來插地板格擋。', tips: '\u2022 看到插地板才面對卡傑格擋',  videoId: 'aDCD1pFK8L4', isDanger: true },
-                    { name: '4. 瞬移格擋', desc: '\u2022 卡傑揮劍瞬移后立刻出格擋。', tips: '\u2022 看到瞬移先下意識準備格。', videoId: 'AbCdEf12345', isJustGuard: true },
-                    { name: '5. 快速反制', desc: '\u2022 卡傑瞬間出反制 失敗就會往前衝。', tips: '\u2022 基本在700機制全程留反制技等這個',  videoId: 'AbCdEf12345', isCounter: true },
-                    { name: '6. 退後反制', desc: '\u2022 卡傑退後出反制 失敗就往前戳', tips: '\u2022 基本在700機制全程留反制技等這個。',  videoId: 'AbCdEf12345',  isCounter: true  },
-                    { name: '7. 美杜莎', desc: '\u2022 卡傑舉著球讓每個人脚下都會掉5次攻擊， 結果第五下要按G格擋。', tips: '\u2022 靠近王的是快G，遠的會慢一秒',  videoId: 'W4RpEnajJBc', isDanger: true },
-                      { name: '8. 火焰', desc: '\u2022 貼著卡傑邊吃火消debuff邊打癱瘓，途中會有格擋。', tips: '',  videoId: 're7kHzdgvfQ', isDanger: true }
+                    { name: '1. 刹雅', desc: '\u2022 卡傑朝隨機一名玩家揮空氣刀10次, 最後一次攻擊範圍比較大, 隨後其他剛揮出去的劍氣收尾 。', videoId: 'BcRxyziGtFw' },
+                    { name: '2. 火風捲', desc: '\u2022 卡傑插地出現很多風圈把人捲起來, 接著他會退後朝一名玩家攻擊前方', tips: '\u2022 看到就立刻遠離, 這招蠻痛的。', videoId: 'vlefWZqtg_c', isDanger: true },
+                    { name: '3. 上挑', desc: '\u2022 卡傑上挑接2刀划外劍氣, 地板還會出現星圖攻擊。', tips: '\u2022 看到上挑最好遠離或霸體',  videoId: 'dIkgsSYNVUM', isDanger: true },
+                    { name: '4. 傳送', desc: '\u2022 卡傑浮空丟矛產生一堆炸圈消失, 出現在隨機一名玩家脚下。', tips: '\u2022 小地圖可提前知道出現位置。', videoId: 'xVplv6Or0i0' },
+                    { name: '5. 藍翅膀', desc: '\u2022 卡傑後面甩出藍翅膀。',  videoId: 'CvtokVC9EzA' },
+                    { name: '6. 後條十字', desc: '\u2022 卡傑后挑浮空, 接著下來十字',  videoId: 'W_LHcZJ8PE0' },
+                    { name: '7. 癱瘓', desc: '\u2022 卡傑舉矛往下丟 出現直綫攻擊並出現癱瘓 癱瘓成功后躲左測避免被擊飛。', videoId: 'd7WFg9mTnE8' },
+                    { name: '8. 格擋', desc: '\u2022 卡傑面對其中一名玩家暴露黃光(格擋)戳並傳送在那名玩家後背扇形擊飛, 沒格擋成功會出現激光。', videoId: 're7kHzdgvfQ'}
                    
                     ]},
                 },
