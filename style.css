@@ -479,7 +479,7 @@ h2, h3, h4:not(.pattern-title) {
 
 /* Phase 标题 */
 .submenu-phase {
-  font-size: 0.675rem;
+  font-size: 0.975rem;
   font-weight: 600;
   color: #94a3b8;
   padding: 0.25rem 1.25rem;
@@ -515,7 +515,7 @@ h2, h3, h4:not(.pattern-title) {
   width: 100%;
   text-align: left;
   padding: 0.35rem 2.5rem;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: #94a3b8;
   background: rgba(15,23,42,0.15);
   border-left: 2px solid transparent;
