@@ -1,21 +1,55 @@
 {
-  "site": {
-    "title": "失落方舟副本攻略站",
-    "welcome": "選擇副本查看詳細攻略"
+  "act4": {
+    "title": "卡傑羅斯系列 四幕：毀滅堡壘",
+    "short": "四幕：毀滅堡壘",
+    "category": "卡傑羅斯討伐",
+    "desc": "第四幕是8人終局副本並攜帶極具挑戰性的雙門遭遇戰，首領分別是Echidna初魅（第一道門）和Armoche阿莫什（第二道門）。裝備門檻（普通1700，困難1720）。"
   },
-  "menu": {
-    "home": "首頁",
-    "raid": "副本攻略",
-    "setting": "設定"
+
+  "act4.gate1": {
+    "name": "Echidna初魅 1門"
   },
-  "raid": {
-    "act4": {
-      "title": "四幕：毀滅堡壘",
-      "desc": "第四幕是8人終局副本，首領為 Echidna 與 Armoche。"
-    },
-    "final_day": {
-      "title": "終幕：終結之日",
-      "desc": "與卡傑羅斯的最終決戰。"
-    }
+
+  "act4.gate1.firstmeter": {
+    "title": "第一階段 Meter機制"
+  },
+
+  "act4.gate1.firstmeter.pattern1": {
+    "name": "1. 反制",
+    "desc": "卡傑落雷後需要反制，然後躲掉頭前高傷。",
+    "tips": "Meter 打頭背適當躲避前後。在TF模式需協同反制。"
+  },
+
+  "act4.gate1.firstmeter.pattern2": {
+    "name": "2. 鈎鎖黑球",
+    "desc": "卡傑吸人去頭前格擋。",
+    "tips": "抓準時機格擋或用霸體繞背。"
+  },
+
+  "act4.gate1.firstmeter.pattern3": {
+    "name": "3. 十字",
+    "desc": "卡傑位移後對玩家劈出十字攻擊。",
+    "tips": "建議使用位移或霸體技能避免擊倒。"
+  },
+
+  "act4.gate1.overall": {
+    "title": "綜合機制"
+  },
+
+  "act4.gate1.overall.pattern1": {
+    "name": "1. 星星",
+    "desc": "槍buff到5層後出現星星或圈圈，依圖形躲避。",
+    "tips": "星星躲在線與線之間外側。"
+  },
+
+  "act4.gate1.overall.pattern2": {
+    "name": "2. 圈圈",
+    "desc": "槍buff到5層後出現圈圈。",
+    "tips": "等內爆後再進入安全區。"
+  },
+
+  "act4.gate1.mech1": {
+    "title": "與我共舞",
+    "desc": "根據Boss翅膀顏色選擇門進入。"
   }
 }
