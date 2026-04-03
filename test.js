@@ -8,7 +8,10 @@ const raidIcons = {
 
 const allRaids = {
       act4: {
-       key: t('act4.title'),
+         title: '卡傑羅斯系列 4幕',
+        short: '4幕',
+        category: '卡傑羅斯討伐',
+        desc: '4幕將再次面對Echidna, 她將測試各位玩家水平有沒有資格挑戰卡傑羅斯，隨後玩家會遇到一位古代督軍, 請冒險家們不懈努力一切代價戰勝。<br> 裝備門檻（普通 1700，困難 1720) 只有通過4幕才能去終幕。',
         theme: 'theme-act4',
         gates: {
             1: {
