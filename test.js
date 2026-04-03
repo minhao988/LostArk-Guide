@@ -8,10 +8,7 @@ const raidIcons = {
 
 const allRaids = {
       act4: {
-        title: '卡傑羅斯系列 四幕：毀滅堡壘',
-        short: '四幕：毀滅堡壘',
-        category: '卡傑羅斯討伐',
-        desc: '第四幕是8人終局副本並携帶極具挑戰性的雙門遭遇戰，首領分別是Echidna初魅（第一道門）和Armoche阿莫什（第二道門）。<br> 裝備門檻（普通 1700，困難 1720），機制包含需求格擋、破壞、協同格擋以及特定的站位方式來克服破壞性的死亡。',
+       key: 'act4',
         theme: 'theme-act4',
         gates: {
             1: {
