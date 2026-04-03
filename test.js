@@ -8,7 +8,7 @@ const raidIcons = {
 
 const allRaids = {
       act4: {
-       key: t'act4.title',
+       key: t('act4.title'),
         theme: 'theme-act4',
         gates: {
             1: {
