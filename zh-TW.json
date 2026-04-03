@@ -51,5 +51,56 @@
   "act4.gate1.mech1": {
     "title": "與我共舞",
     "desc": "根據Boss翅膀顏色選擇門進入。"
+  },
+  "final_day": {
+    "title": "卡傑羅斯系列 終幕：終結之日",
+    "short": "終幕： 終結之日",
+    "category": "卡傑羅斯討伐",
+    "desc": "終幕將會跟深淵大惡魔卡傑羅斯的最後決戰，首領在1-2門都是卡傑羅斯。<br> 裝備門檻（普通 1710，困難 1730, TF 1740）機制包含前面所有看過學過並需要學以致用。"
+  },
+   "final_day.gate1": {
+    "name": "深淵之主：卡傑羅斯 1門"
+  },
+   "final_day.gate1.firstmeter": {
+    "title": "第一階段 Meter機制"
+  },
+
+  "final_day.gate1.firstmeter.pattern1": {
+    "name": "1. 反制",
+    "desc": "卡傑落雷後需要反制，然後躲掉頭前高傷。",
+    "tips": "Meter 打頭背適當躲避前後。在TF模式需協同反制。"
+  },
+
+  "final_day.gate1.firstmeter.pattern2": {
+    "name": "2. 鈎鎖黑球",
+    "desc": "卡傑吸人去頭前格擋。",
+    "tips": "抓準時機格擋或用霸體繞背。"
+  },
+
+  "final_day.gate1.firstmeter.pattern3": {
+    "name": "3. 十字",
+    "desc": "卡傑位移後對玩家劈出十字攻擊。",
+    "tips": "建議使用位移或霸體技能避免擊倒。"
+  },
+
+  "final_day.gate1.overall": {
+    "title": "綜合機制"
+  },
+
+  "final_day.gate1.overall.pattern1": {
+    "name": "1. 星星",
+    "desc": "槍buff到5層後出現星星或圈圈，依圖形躲避。",
+    "tips": "星星躲在線與線之間外側。"
+  },
+
+  "final_day.gate1.overall.pattern2": {
+    "name": "2. 圈圈",
+    "desc": "槍buff到5層後出現圈圈。",
+    "tips": "等內爆後再進入安全區。"
+  },
+
+  "final_day.gate1.phase1normal": {
+    "title": "第一階段招式",
+
   }
 }
