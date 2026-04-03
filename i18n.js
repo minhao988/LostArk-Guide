@@ -10,7 +10,7 @@ async function loadLanguage(lang) {
     if (cache[lang]) {
       langData = cache[lang];
     } else {
-      const res = await fetch(`${lang}.json`);
+      const res = await fetch(`/${lang}.json`);
       const data = await res.json();
       cache[lang] = data;
       langData = data;
@@ -18,7 +18,7 @@ async function loadLanguage(lang) {
 
     // ✅ fallback (默认 zh-TW)
     if (!fallbackData || Object.keys(fallbackData).length === 0) {
-      const res = await fetch(`zh-TW.json`);
+      const res = await fetch(`/zh-TW.json`);
       fallbackData = await res.json();
     }
 
