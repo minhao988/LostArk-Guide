@@ -1,0 +1,18 @@
+{
+  "act4": {
+    "title": "卡杰罗斯系列 四幕：毁灭堡垒",
+    "short": "四幕：毁灭堡垒",
+    "category": "卡杰罗斯讨伐",
+    "desc": "第四幕是8人终局副本，并包含高难度双门战斗。"
+  },
+
+  "act4.gate1": {
+    "name": "Echidna初魅 1门"
+  },
+
+  "act4.gate1.firstmeter.pattern1": {
+    "name": "1. 反制",
+    "desc": "卡杰落雷后需要反制。",
+    "tips": "注意站位并协调反制。"
+  }
+}
