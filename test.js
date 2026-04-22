@@ -325,7 +325,6 @@ function applyTheme(theme) {
   const app = document.getElementById('app');
 
   app.classList.remove(
-    'theme-act4',
     'theme-final',
     'theme-serca'
   );
