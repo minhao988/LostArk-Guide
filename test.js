@@ -1,7 +1,6 @@
 
 const raidIcons = {
   final_day: 'https://raw.githubusercontent.com/minhao988/LostArk-Guide/main/kazeros.jpg',
-  act4: 'fa-solid fa-skull',
   serca: 'fa-solid fa-water'
 };
 
