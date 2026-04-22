@@ -132,7 +132,10 @@ const allRaids = {
                   ]},
                 },
                 mechanics: [
-                    { hp: 'x350', title: '反制風暴', desc: '全體 8 人必須在 6 點鐘位置站成一排進行連續 5 次完美反制。', type: 'wipe' }
+                    { hp: '2-1 x950', title: '接劍', desc: '隨機一名被抓去接劍', type: 'mech',videoId: 'BAr2CnAFJ2g' },
+                  { hp: '2-1 x900', title: '泡澡', desc: '根據隊伍安排決定丟爍亮雷免疫 繼續打輸出 後面就去3/9破壞石墻 如果前面破了3那後面就破9 破完后卡傑回到中間 打輸出輔助要保 最後净化去外躲圈再進來',  details: `\u2022 盡可能多看影片全流程 這個很長`, type: 'mech',videoId: 'BAr2CnAFJ2g' },
+                  { hp: '2-1 x900后', title: '困難限定-黑洞', desc: '900后到一個時間點他會出黑洞，標準玩家拉卡傑去裂縫反方向位置拉遠。躲開藍綫后，傑會再過去標記玩家抓取，然後再癱瘓躲避pizza就好。', type: 'mech',videoId: 'BAr2CnAFJ2g' },
+                  { hp: '2-1 x750前', title: '癱瘓', desc: '卡傑回到中間需求癱瘓。第一次破掉的話，出的秒殺紅圈不會很大出去外面躲避就好。如果沒破掉，第二次癱瘓后絕對要趕快跑最外面躲避。', type: 'wipe',videoId: 'BAr2CnAFJ2g' }
                 ]
             }
         }
